@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ED HERBST on Ed Herbst</title>
+    <link>http://edherbst.net/</link>
+    <description>Recent content in ED HERBST on Ed Herbst</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://edherbst.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bias in Local Projections</title>
+      <link>http://edherbst.net/research/bias-in-local-projections/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 -0500</pubDate>
+      
+      <guid>http://edherbst.net/research/bias-in-local-projections/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Online Estimation of DSGE Models</title>
+      <link>http://edherbst.net/research/online-estimation-of-dsge-models/</link>
+      <pubDate>Sun, 21 Jul 2019 00:00:00 -0400</pubDate>
+      
+      <guid>http://edherbst.net/research/online-estimation-of-dsge-models/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
+      <link>http://edherbst.net/research/woodford/</link>
+      <pubDate>Fri, 15 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/woodford/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forward Guidance with Bayesian Learning and Estimation</title>
+      <link>http://edherbst.net/research/learning/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tempered Particle Filtering</title>
+      <link>http://edherbst.net/research/tpf/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/tpf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MONETARY POLICY, REAL ACTIVITY, AND CREDIT SPREADS: EVIDENCE FROM BAYESIAN PROXY SVARS </title>
+      <link>http://edherbst.net/research/bpsvar/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/bpsvar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ESTIMATING (MARKOV-SWITCHING) VARS WITHOUT GIBBS SAMPLING</title>
+      <link>http://edherbst.net/research/smc-var/</link>
+      <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/smc-var/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>THE EMPIRICAL IMPLICATIONS OF THE INTEREST-RATE LOWER BOUND</title>
+      <link>http://edherbst.net/research/zlb/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/zlb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BAYESIAN ESTIMATION OF DSGE MODELS</title>
+      <link>http://edherbst.net/research/bayes-book/</link>
+      <pubDate>Fri, 25 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/bayes-book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EFFECTIVE MONETARY POLICY STRATEGIES IN NEW KEYNESIAN MODELS</title>
+      <link>http://edherbst.net/research/sticky-information/</link>
+      <pubDate>Mon, 01 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/sticky-information/</guid>
+      <description>See also discussions by Mark Gertler and Lars Svensson.
+Note the Macro Annual is not peer-reviewed.</description>
+    </item>
+    
+    <item>
+      <title>USING THE &#34;CHANDRASEKHAR RECURSIONS&#34; FOR LIKELIHOOD EVALUATION OF DSGE MODELS</title>
+      <link>http://edherbst.net/research/chandrasekhar-recursions/</link>
+      <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/chandrasekhar-recursions/</guid>
+      <description>In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System.</description>
+    </item>
+    
+    <item>
+      <title>SEQUENTIAL MONTE CARLO SAMPLING FOR DSGE MODELS</title>
+      <link>http://edherbst.net/research/smc-dsge/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/smc-dsge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EVALUATING DSGE MODEL FORECASTS OF COMOVEMENTS</title>
+      <link>http://edherbst.net/research/dsge-forecasting/</link>
+      <pubDate>Thu, 19 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/dsge-forecasting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://edherbst.net/research/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/research/software/</guid>
+      <description>Title: Software Coauthor: Version: Date: 2016-01-06 url: software/ save_as: software/index.html
+Python Packages Template: bayes_book
+  dsge &amp;ndash; a small python package for solving DSGE models. More information here
+  smc &amp;ndash; a small python package using Sequential Monte Carlo methods to estimate Bayesian models.
+Installation. For linux/mac users, at the command line type:
+pip install http://edherbst.net/bookmaterials/dsge-0.0.2.tar.gz
+For windows users, use
+pip install http://edherbst.net/bookmaterials/dsge-0.0.2.zip
+  </description>
+    </item>
+    
+    <item>
+      <title>Particle Filters</title>
+      <link>http://edherbst.net/teaching/lecture-particle-filters/particle-filters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://edherbst.net/teaching/lecture-particle-filters/particle-filters/</guid>
+      <description>Introduction  From Linear to Nonlinear (DSGE) Models     While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear. {{{NEWLINE}}}    One can add certain features that generate more pronounced nonlinearities:    stochastic volatility;    markov switching coefficients;    asymmetric adjustment costs;    occasionally binding constraints.     From Linear to Nonlinear (DSGE) Models     Linear DSGE model leads to \begin{eqnarray*} y_t &amp;amp;=&amp;amp; Ψ_0(θ) + Ψ_1(θ)t + Ψ_2(θ) s_t + u_t, \quad u_t ∼ N(0,Σ_u) ,</description>
+    </item>
+    
+  </channel>
+</rss>

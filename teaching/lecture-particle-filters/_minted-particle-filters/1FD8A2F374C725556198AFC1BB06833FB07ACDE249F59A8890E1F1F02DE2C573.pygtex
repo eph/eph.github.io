@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{scipy.stats} \PYG{k+kn}{import} \PYG{n}{norm}
+\PYG{n}{M} \PYG{o}{=} \PYG{l+m+mi}{1000}
+\PYG{n}{st\PYGZus{}1} \PYG{o}{=} \PYG{n}{norm}\PYG{o}{.}\PYG{n}{rvs}\PYG{p}{(}\PYG{n}{size}\PYG{o}{=}\PYG{n}{M}\PYG{p}{,} \PYG{n}{loc}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{Wt\PYGZus{}1} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{ones}\PYG{p}{((}\PYG{n}{M}\PYG{p}{))}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Filtered Mean [t\PYGZhy{}1]:\PYGZsq{}}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{st\PYGZus{}1} \PYG{o}{*} \PYG{n}{Wt\PYGZus{}1}\PYG{p}{))}
+
+\PYG{n}{ax}\PYG{o}{=}\PYG{n}{p}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{n}{st\PYGZus{}1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{kind}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}hist\PYGZsq{}}\PYG{p}{,}\PYG{n}{normed}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}\PYG{c+c1}{\PYGZsh{}, linewidth=3)}
+
+\PYG{c+c1}{\PYGZsh{} the truth}
+\PYG{n}{grid} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linspace}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{1000}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{grid}\PYG{p}{,} \PYG{n}{norm}\PYG{o}{.}\PYG{n}{pdf}\PYG{p}{(}\PYG{n}{grid}\PYG{p}{,}\PYG{n}{loc}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{linewidth}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}black\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{([}\PYG{l+s+s1}{\PYGZsq{}truth\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}particles\PYGZsq{}}\PYG{p}{])}
+\end{Verbatim}
