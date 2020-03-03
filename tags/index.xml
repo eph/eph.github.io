@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ed Herbst</title>
-    <link>http://edherbst.net/tags/</link>
+    <link>https://edherbst.net/tags/</link>
     <description>Recent content in Tags on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://edherbst.net/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://edherbst.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>teaching on Ed Herbst</title>
-    <link>http://edherbst.net/teaching/</link>
+    <link>https://edherbst.net/teaching/</link>
     <description>Recent content in teaching on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://edherbst.net/teaching/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://edherbst.net/teaching/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Particle Filters</title>
-      <link>http://edherbst.net/teaching/lecture-particle-filters/particle-filters/</link>
+      <link>https://edherbst.net/teaching/lecture-particle-filters/particle-filters/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://edherbst.net/teaching/lecture-particle-filters/particle-filters/</guid>
+      <guid>https://edherbst.net/teaching/lecture-particle-filters/particle-filters/</guid>
       <description>Introduction  From Linear to Nonlinear (DSGE) Models     While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear. {{{NEWLINE}}}    One can add certain features that generate more pronounced nonlinearities:    stochastic volatility;    markov switching coefficients;    asymmetric adjustment costs;    occasionally binding constraints.     From Linear to Nonlinear (DSGE) Models     Linear DSGE model leads to \begin{eqnarray*} y_t &amp;amp;=&amp;amp; Ψ_0(θ) + Ψ_1(θ)t + Ψ_2(θ) s_t + u_t, \quad u_t ∼ N(0,Σ_u) ,</description>
     </item>
     
