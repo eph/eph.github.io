@@ -152,7 +152,13 @@ pip install http://edherbst.net/bookmaterials/dsge-0.0.2.zip
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/teaching/lecture-particle-filters/particle-filters/</guid>
-      <description>Introduction  From Linear to Nonlinear (DSGE) Models     While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear. {{{NEWLINE}}}    One can add certain features that generate more pronounced nonlinearities:    stochastic volatility;    markov switching coefficients;    asymmetric adjustment costs;    occasionally binding constraints.     From Linear to Nonlinear (DSGE) Models     Linear DSGE model leads to \begin{eqnarray*} y_t &amp;amp;=&amp;amp; Ψ_0(θ) + Ψ_1(θ)t + Ψ_2(θ) s_t + u_t, \quad u_t ∼ N(0,Σ_u) ,</description>
+      <description>Introduction  From Linear to Nonlinear (DSGE) Models    While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear. {{{NEWLINE}}}
+  One can add certain features that generate more pronounced nonlinearities:
+  stochastic volatility;
+  markov switching coefficients;
+  asymmetric adjustment costs;
+  occasionally binding constraints.
+      From Linear to Nonlinear (DSGE) Models    Linear DSGE model leads to \begin{eqnarray*} y_t &amp;amp;=&amp;amp; Ψ_0(θ) + Ψ_1(θ)t + Ψ_2(θ) s_t + u_t, \quad u_t ∼ N(0,Σ_u) ,</description>
     </item>
     
   </channel>

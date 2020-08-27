@@ -421,6 +421,8 @@
         
           <li><a href="https://edherbst.net/teaching">teaching</a></li>
         
+          <li><a href="https://edherbst.net/etc">et cetera</a></li>
+        
       </ul>
     </section>
 
@@ -432,75 +434,71 @@
 
   <div class="entry-content">
     
+<div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
 Introduction
 </h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
 From Linear to Nonlinear (DSGE) Models
 </h3>
+<div id="outline-text-headline-2" class="outline-text-3">
 <ul>
 <li>
-<p>
-While DSGE models are inherently nonlinear, the nonlinearities are often
+<p>While DSGE models are inherently nonlinear, the nonlinearities are often
 small and decision rules are approximately linear.
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-One can add certain features that generate more pronounced nonlinearities:
-</p>
+<p>One can add certain features that generate more pronounced nonlinearities:</p>
 <ul>
 <li>
-<p>
-stochastic volatility;
-</p>
+<p>stochastic volatility;</p>
 </li>
 <li>
-<p>
-markov switching coefficients;
-</p>
+<p>markov switching coefficients;</p>
 </li>
 <li>
-<p>
-asymmetric adjustment costs;
-</p>
+<p>asymmetric adjustment costs;</p>
 </li>
 <li>
-<p>
-occasionally binding constraints.
-</p>
+<p>occasionally binding constraints.</p>
 </li>
 </ul>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
 <h3 id="headline-3">
 From Linear to Nonlinear (DSGE) Models
 </h3>
+<div id="outline-text-headline-3" class="outline-text-3">
 <ul>
 <li>
-<p>
-Linear DSGE model leads to
+<p>Linear DSGE model leads to
 \begin{eqnarray*}
         y_t &amp;=&amp; Ψ_0(θ) + Ψ_1(θ)t + Ψ_2(θ) s_t + u_t, \quad u_t ∼ N(0,Σ_u) ,<br>
         s_t &amp;=&amp; Φ_1(θ)s<sub>t-1</sub> + Φ_ε(θ) ε_t, \quad ε_t ∼ N(0,Σ_ε). 
 \end{eqnarray*}
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Nonlinear DSGE model leads to
+<p>Nonlinear DSGE model leads to
 \begin{eqnarray*}
         y_t &amp;=&amp; Ψ(s_t,t; θ) + u_t, \quad u_t ∼ F_u(⋅;θ) \label{eq_nlssnonlinear} <br>
         s_t &amp;=&amp; Φ(s<sub>t-1</sub>,ε_t; θ), \quad ε_t ∼ F_ε(⋅;θ). 
-\end{eqnarray*}
-</p>
+\end{eqnarray*}</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
 <h3 id="headline-4">
 Some nonlinear models in macro
 </h3>
+<div id="outline-text-headline-4" class="outline-text-3">
 <p>
    cite:Gust_2017: estimates a nonlinear DSGE subject to the zero lower bound. 
    {{{NEWLINE}}}
@@ -510,90 +508,79 @@ Some nonlinear models in macro
    {{{NEWLINE}}}
    Key question: how to estimate model using likelihood techniques?
    {{{NEWLINE}}}
-   Cannot use Kalman filter – instead use a <strong>particle filter</strong>.
-</p>
+   Cannot use Kalman filter – instead use a <strong>particle filter</strong>.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
 <h3 id="headline-5">
 Particle Filters
 </h3>
-<p>
-There are many particle filters…
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>There are many particle filters…
    {{{NEWLINE}}}
    We will focus on three types:
-   {{{NEWLINE}}}
-</p>
+   {{{NEWLINE}}}</p>
 <ol>
 <li>
-<p>
-Bootstrap PF
-</p>
+<p>Bootstrap PF</p>
 </li>
 <li>
-<p>
-A generic PF
-</p>
+<p>A generic PF</p>
 </li>
 <li>
-<p>
-A conditionally-optimal PF
-</p>
+<p>A conditionally-optimal PF</p>
 </li>
 </ol>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
 <h3 id="headline-6">
 Filtering - General Idea
 </h3>
-<p>
-State-space representation of nonlinear DSGE model
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>State-space representation of nonlinear DSGE model
      \begin{eqnarray*}
      \mbox{Measurement Eq.}   &amp;:&amp; y_t = Ψ(s_t,t; θ) + u_t, \quad u_t ∼ F_u(⋅;θ) \label{eq_nlssnonlinear} <br>
      \mbox{State Transition}  &amp;:&amp; s_t = Φ(s<sub>t-1</sub>,ε_t; θ), \quad ε_t ∼ F_ε(⋅;θ). 
      \end{eqnarray*}		
    Likelihood function: $p(Y_{1:T}|\theta) = \prod_{t=1}^T {\color{red} p(y_t |Y_{1:t-1},\theta)}$
    {{{NEWLINE}}}
-   A <span style="text-decoration: underline;">filter</span> generates a sequence of conditional distributions $s_t|Y_{1:t}$. 
-</p>
+   A <span style="text-decoration: underline;">filter</span> generates a sequence of conditional distributions $s_t|Y_{1:t}$. </p>
 <ol>
 <li>
-<p>
-Initialization at time $t-1$: $p( s_{t-1} |Y_{1:t-1}, \theta )$
-</p>
+<p>Initialization at time $t-1$: $p( s_{t-1} |Y_{1:t-1}, \theta )$</p>
 </li>
 <li>
-<p>
-Forecasting $t$ given $t-1$:
-</p>
+<p>Forecasting $t$ given $t-1$:</p>
 </li>
 </ol>
 <ul>
 <li>
-<p>
-Transition equation:	$p(s_{t}|Y_{1:t-1},\theta ) = \int p(s_{t}|s_{t-1}, Y_{1:t-1} , \theta	) p (s_{t-1} |Y_{1:t-1} , \theta ) ds_{t-1}$
-</p>
+<p>Transition equation:	$p(s_{t}|Y_{1:t-1},\theta ) = \int p(s_{t}|s_{t-1}, Y_{1:t-1} , \theta	) p (s_{t-1} |Y_{1:t-1} , \theta ) ds_{t-1}$</p>
 </li>
 <li>
-<p>
-Measurement equation: ${\color{red} p(y_{t}|Y_{1:t-1},\theta )} = \int p(y_{t}|s_{t}, Y_{1:t-1} , \theta  ) p(s_{t} | Y_{1:t-1} , \theta ) ds_{t}$
-</p>
+<p>Measurement equation: ${\color{red} p(y_{t}|Y_{1:t-1},\theta )} = \int p(y_{t}|s_{t}, Y_{1:t-1} , \theta  ) p(s_{t} | Y_{1:t-1} , \theta ) ds_{t}$</p>
 <ol>
 <li>
-<p>
-Updating with Bayes theorem. Once $y_{t}$ becomes available:
+<p>Updating with Bayes theorem. Once $y_{t}$ becomes available:
 \[
 p(s_{t}| Y_{1:t} , \theta  ) = p(s_{t} | y_{t},Y_{1:t-1} , \theta )
 = \frac{ p(y_{t}|s_{t},Y_{1:t-1} , \theta ) p(s_{t} |Y_{1:t-1} , \theta )}{ p(y_{t}|Y_{1:t-1}, \theta )}
-\]
-</p>
+\]</p>
 </li>
 </ol>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
 <h3 id="headline-7">
 Bootstrap Particle Filter
 </h3>
-<p>
-\begin{enumerate}
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>\begin{enumerate}
   \item {\bf Initialization.} Draw the initial particles from the distribution $s_0^j \stackrel{iid}{\sim} p(s_0)$
-  and set $W_0^j=1$, $j=1,\ldots,M$.
-</p>
+  and set $W_0^j=1$, $j=1,\ldots,M$.</p>
 <p>
   \item {\bf Recursion.} For $t=1,\ldots,T$:
   \begin{enumerate}
@@ -606,19 +593,19 @@ Bootstrap Particle Filter
    \be
    \hat{h}<sub>t,M</sub> = \frac{1}{M} ∑<sub>j=1</sub>^M h(~{s}_t^j)W<sub>t-1</sub>^j.
    \label{eq_pfhtt1}
-   \ee
-</p>
+   \ee</p>
 <p>
-  \end{enumerate}
-</p>
+  \end{enumerate}</p>
 <p>
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
 <h3 id="headline-8">
 Bootstrap Particle Filter
 </h3>
-<p>
-\begin{enumerate}
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>\begin{enumerate}
   \item {\bf Initialization.} 
   \item {\bf Recursion.} For $t=1,\ldots,T$:
   \begin{enumerate}
@@ -641,15 +628,16 @@ Bootstrap Particle Filter
    where $n$ here denotes the dimension of $y_t$.
   \end{enumerate}
  \end{enumerate}
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
 <h3 id="headline-9">
 Bootstrap Particle Filter
 </h3>
-<p>
-\begin{enumerate}
-  \item {\bf Initialization.} 
-</p>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>\begin{enumerate}
+  \item {\bf Initialization.} </p>
 <p>
   \item {\bf Recursion.} For $t=1,\ldots,T$:
   \begin{enumerate}
@@ -669,13 +657,15 @@ Bootstrap Particle Filter
    \ee
   \end{enumerate}		
  \end{enumerate}		
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
 <h3 id="headline-10">
 Bootstrap Particle Filter
 </h3>
-<p>
-\begin{enumerate}
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>\begin{enumerate}
   \item {\bf Initialization.} 
   \item {\bf Recursion.} For $t=1,\ldots,T$:
   \begin{enumerate}
@@ -691,16 +681,17 @@ Bootstrap Particle Filter
    \bar{h}_{t,M} = \frac{1}{M} \sum_{j=1}^M h(s_t^j)W_{t}^j.
    \label{eq_pfhtt}
    \ee
-  \end{enumerate}
-</p>
+  \end{enumerate}</p>
 <p>
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
 <h3 id="headline-11">
 Likelihood Approximation
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>\begin{itemize}
   \item The approximation of the {\color{red} log likelihood function}
   is given by
   \be
@@ -708,24 +699,28 @@ Likelihood Approximation
   \ee
   \item One can show that the approximation of the {\color{blue} likelihood function is unbiased}.
   \spitem This implies that the approximation of the {\color{red} log likelihood function is downward biased.}
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
 <h3 id="headline-12">
 The Role of Measurement Errors
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-12" class="outline-text-3">
+<p>\begin{itemize}
   \spitem Measurement errors may not be intrinsic to DSGE model.
   \spitem Bootstrap filter needs non-degenerate $p(y_t|s_t,\theta)$ for incremental weights to be well defined.
   \spitem Decreasing the measurement error variance $\Sigma_u$, holding everything else fixed, increases
           the variance of the particle weights, and reduces the accuracy of Monte Carlo approximation.
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
 <h3 id="headline-13">
 An empirical introduction to BSPF
 </h3>
-<p>
-Let&#39;s check the BSPF on a linear process
+<div id="outline-text-headline-13" class="outline-text-3">
+<p>Let&#39;s check the BSPF on a linear process
    \begin{eqnarray*}
    s_t &amp;=&amp; ρ s<sub>t-1</sub> + σ<sub>e</sub> ε_t, \quad ε_t∼ N(0,1) <br>
    y_t &amp;=&amp; 2 s_t + σ_u u_t, \quad u_t ∼ N(0,1)
@@ -736,14 +731,15 @@ Let&#39;s check the BSPF on a linear process
    {{{NEWLINE}}}
    $\sigma_{e} = 0.1$
    {{{NEWLINE}}}
-   We are going to go through one iteration as the particle filter, with $M = 1000$ particles.
-</p>
+   We are going to go through one iteration as the particle filter, with $M = 1000$ particles.</p>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-3">
 <h3 id="headline-14">
 Initialization 
 </h3>
-<p>
-To obtain draws from $s_0$, we draw 1000 particles from a $N(1,1)$. 
-</p>
+<div id="outline-text-headline-14" class="outline-text-3">
+<p>To obtain draws from $s_0$, we draw 1000 particles from a $N(1,1)$. </p>
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  %matplotlib inline 
 
@@ -764,15 +760,15 @@ To obtain draws from $s_0$, we draw 1000 particles from a $N(1,1)$.
   ax.plot(grid, norm.pdf(grid,loc=1), linewidth=3, color=&#39;black&#39;)
   ax.legend([&#39;truth&#39;,&#39;particles&#39;]);</code></pre></div>
 </div>
-<p>
-<img src="initialization.png" alt="initialization.png" title="initialization.png" />
-</p>
+<p><img src="initialization.png" alt="initialization.png" title="initialization.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-3">
 <h3 id="headline-15">
 Forecasting $s_1$
 </h3>
-<p>
-For each of the 1000 particles, we simulate from $s_1^i = \rho s_0^i + \sigma_e e^i$ with $e^i \sim N(0,1)$.
-</p>
+<div id="outline-text-headline-15" class="outline-text-3">
+<p>For each of the 1000 particles, we simulate from $s_1^i = \rho s_0^i + \sigma_e e^i$ with $e^i \sim N(0,1)$.</p>
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  rho, sigeps = 0.8, 0.1
 
@@ -786,14 +782,15 @@ For each of the 1000 particles, we simulate from $s_1^i = \rho s_0^i + \sigma_e 
   ax.plot(grid, norm.pdf(grid,loc=true_loc, scale=np.sqrt(true_sig)), linewidth=3, color=&#39;black&#39;)
   ax.legend([&#39;truth&#39;, &#39;particles&#39;])</code></pre></div>
 </div>
-<p>
-<img src="forecast.png" alt="forecast.png" title="forecast.png" />
-</p>
+<p><img src="forecast.png" alt="forecast.png" title="forecast.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-3">
 <h3 id="headline-16">
 Updating $s_1$
 </h3>
-<p>
-Now it&#39;s time to reweight the particles based on the how well they
+<div id="outline-text-headline-16" class="outline-text-3">
+<p>Now it&#39;s time to reweight the particles based on the how well they
    actually predicted $y_1$.
    {{{NEWLINE}}}
    To predict $y_1$, we simply multiply $s_t^i$ by 2. 
@@ -802,11 +799,14 @@ Now it&#39;s time to reweight the particles based on the how well they
    {{{NEWLINE}}}
    $y_1 = 0.2, \quad \sigma_u \in\{0.05, 0.3, 0.5\}$
    {{{NEWLINE}}}
-   If the ME is very small, the only particles that make very accurate predictions are worthwhile.
-</p>
+   If the ME is very small, the only particles that make very accurate predictions are worthwhile.</p>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-3">
 <h3 id="headline-17">
 Predicting $y_1$
 </h3>
+<div id="outline-text-headline-17" class="outline-text-3">
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  # yt = 2 * st + sigu * ut (ut ~ N(0,1))
   sigu = 0.3
@@ -824,12 +824,14 @@ Predicting $y_1$
   ax.set_ylim(0,.5)
   ax.legend([&#39;truth&#39;,r&#39;$\sigma_u=0.05$&#39;,r&#39;$\sigma_u=0.3$&#39;, r&#39;$\sigma_u=0.5$&#39;,&#39;particles&#39;])</code></pre></div>
 </div>
-<p>
-<img src="updated.png" alt="updated.png" title="updated.png" />
-</p>
+<p><img src="updated.png" alt="updated.png" title="updated.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-3">
 <h3 id="headline-18">
 Updated $s_1, \sigma_u = 0.3$
 </h3>
+<div id="outline-text-headline-18" class="outline-text-3">
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.3
 
@@ -852,12 +854,14 @@ Updated $s_1, \sigma_u = 0.3$
   ax.set_xlim(-2,4)
   ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(1,1.00));</code></pre></div>
 </div>
-<p>
-<img src="updated2.png" alt="updated2.png" title="updated2.png" />
-</p>
+<p><img src="updated2.png" alt="updated2.png" title="updated2.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-19" class="outline-3">
 <h3 id="headline-19">
 Updated $s_1, \sigma_u = 0.5$
 </h3>
+<div id="outline-text-headline-19" class="outline-text-3">
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.5
 
@@ -880,12 +884,14 @@ Updated $s_1, \sigma_u = 0.5$
   ax.set_xlim(-2,4)
   ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(1,0.8));</code></pre></div>
 </div>
-<p>
-<img src="updated2big.png" alt="updated2big.png" title="updated2big.png" />
-</p>
+<p><img src="updated2big.png" alt="updated2big.png" title="updated2big.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-20" class="outline-3">
 <h3 id="headline-20">
 Updated $s_1, \sigma_u = 0.05$
 </h3>
+<div id="outline-text-headline-20" class="outline-text-3">
 <div class="src src-ipython">
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.05
 
@@ -908,14 +914,15 @@ Updated $s_1, \sigma_u = 0.05$
   ax.set_xlim(-0.5,0.5)
   ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(-0.48,5));</code></pre></div>
 </div>
-<p>
-<img src="updated2small.png" alt="updated2small.png" title="updated2small.png" />
-</p>
+<p><img src="updated2small.png" alt="updated2small.png" title="updated2small.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-21" class="outline-3">
 <h3 id="headline-21">
 Generic Particle Filter
 </h3>
-<p>
-\begin{enumerate}
+<div id="outline-text-headline-21" class="outline-text-3">
+<p>\begin{enumerate}
  \item {\bf Initialization.} Same as BS PF		
  \item {\bf Recursion.} For $t=1,\ldots,T$:
  \begin{enumerate}
@@ -931,8 +938,7 @@ Generic Particle Filter
   \label{eq_generalpfhtt1}
   \ee
   \item {\bf Forecasting $y_t$.} Define the incremental weights
-  $\tilde{w}^j_t = p(y_t|\tilde{s}^j_t,\theta) {\color{blue} \omega_t^j}$.
-</p>
+  $\tilde{w}^j_t = p(y_t|\tilde{s}^j_t,\theta) {\color{blue} \omega_t^j}$.</p>
 <p>
   The predictive density $p(y_t|Y_{1:t-1},\theta)$
   can be approximated by
@@ -941,17 +947,18 @@ Generic Particle Filter
   \ee
   \item {\bf Updating.} Same as BS PF		
   \item {\bf Selection.} Same as BS PF		
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
 <p>
  \item {\bf Likelihood Approximation.} Same as BS PF		
-\end{enumerate}
-</p>
+\end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-22" class="outline-3">
 <h3 id="headline-22">
 Asymptotics
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-22" class="outline-text-3">
+<p>\begin{itemize}
   \item The convergence results can be established recursively, starting from the assumption
   \begin{eqnarray*}
    \bar{h}<sub>t-1,M</sub> &amp;\stackrel{a.s.}{\longrightarrow}&amp; \mathbb{E}[h(s<sub>t-1</sub>)|Y<sub>1:t-1</sub>], <br>
@@ -962,26 +969,24 @@ Asymptotics
   \begin{eqnarray}
   ≤fteqn{\hat{h}<sub>t,M</sub> - \mathbb{E}[h(s_t)|Y<sub>1:t-1</sub>]}  \label{eq_pfdecomphtt1} <br>
   &amp;=&amp; \frac{1}{M} ∑<sub>j=1</sub>^M  ≤ft( h(~{s}_t^j) - \mathbb{E}_{p(⋅|s<sub>t-1</sub>^j)}[h] \right) W<sub>t-1</sub>^j \nonumber <br>
-  &amp; &amp; + \frac{1}{M} ∑<sub>j=1</sub>^M  ≤ft( \mathbb{E}_{p(⋅|s<sub>t-1</sub>^j)}[h] W<sub>t-1</sub>^j
-</p>
+  &amp; &amp; + \frac{1}{M} ∑<sub>j=1</sub>^M  ≤ft( \mathbb{E}_{p(⋅|s<sub>t-1</sub>^j)}[h] W<sub>t-1</sub>^j</p>
 <ul>
 <li>
-<p>
-\mathbb{E}[h(s_t)|Y<sub>1:t-1</sub>] \right)  \nonumber \\
-</p>
+<p>\mathbb{E}[h(s_t)|Y<sub>1:t-1</sub>] \right)  \nonumber \\</p>
 </li>
 </ul>
-<p>
-&amp;=&amp; I + II, \nonumber
+<p>&amp;=&amp; I + II, \nonumber
   \end{eqnarray}
   \item Both $I$ and $II$ converge to zero (and potentially satisfy CLT).
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-23" class="outline-3">
 <h3 id="headline-23">
 Asymptotics
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-23" class="outline-text-3">
+<p>\begin{itemize}
   \item Updating step approximates
   \be\hspace{-0.4in}
   \mathbb{E}[h(s_t)|Y_{1:t}]
@@ -1003,13 +1008,15 @@ Asymptotics
   \tilde{\Omega}_t(h) = \hat{\Omega}_t \big( v_t(s_t) ( h(s_t) - \mathbb{E}[h(s_t)|Y_{1:t}] )\big). \nonumber
   \end{eqnarray}
   \item Distribution of particle weights matters for accuracy! $\Longrightarrow$ Resampling!
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-24" class="outline-3">
 <h3 id="headline-24">
 Adapting the Generic PF
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-24" class="outline-text-3">
+<p>\begin{itemize}
   \spitem Conditionally-optimal importance distribution:
           \[
              g_t(\tilde{s}_t|s^j_{t-1}) = p(\tilde{s}_t|y_t,s_{t-1}^j).
@@ -1024,13 +1031,15 @@ Adapting the Generic PF
   s_t &amp;=&amp; \Phi_0(m_t) + \Phi_1(m_t)s_{t-1} + \Phi_\epsilon(m_t) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon), \nonumber
   \end{eqnarray*}
   where $m_t$ follows a discrete Markov-switching process.
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-25" class="outline-3">
 <h3 id="headline-25">
 More on Conditionally-Linear Models
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-25" class="outline-text-3">
+<p>\begin{itemize}
   \item State-space representation is linear conditional on $m_t$.
         \spitem Write
 \be
@@ -1050,13 +1059,15 @@ $P_{t|t}(m)_t$ are sufficient statistics for the conditional distribution of $s_
 &amp;\approx&amp;
 \frac{1}{M} \sum_{j=1}^M \left[ \int h(m_{t}^j,s_{t}^j) p_N\big(s_t|\bar{s}_{t|t}^j,P_{t|t}^j \big) ds_t \right] W_t^j. \nonumber
 \end{eqnarray}
-\end{itemize}
-</p>
+\end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-26" class="outline-3">
 <h3 id="headline-26">
 More on Conditionally-Linear Models
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-26" class="outline-text-3">
+<p>\begin{itemize}
   \item We used Rao-Blackwellization to reduce variance:
   \begin{eqnarray*}
 \mathbb{V}[h(s_t,m_t)] &amp;=&amp; \mathbb{E} \big[ \mathbb{V}[h(s_t,m_t)|m_t] \big] + \mathbb{V} \big[ \mathbb{E}[h(s_t,m_t)|m_t] \big]\\&amp; \ge&amp; \mathbb{V} \big[ \mathbb{E}[h(s_t,m_t)|m_t] \big] 
@@ -1077,14 +1088,15 @@ forecasting step can be used to compute:
 \end{array}
 \label{eq_pfforeccondlinear}
 \ee
-\end{itemize}
-</p>
+\end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-27" class="outline-3">
 <h3 id="headline-27">
 More on Conditionally-Linear Models
 </h3>
-<p>
-\begin{itemize}
-</p>
+<div id="outline-text-headline-27" class="outline-text-3">
+<p>\begin{itemize}</p>
 <p>
 \item Then,
 \begin{eqnarray}
@@ -1106,15 +1118,16 @@ to update the information about $s_t$ in view of the current observation $y_t$:
 \end{array}
 \label{eq_pfupdatecondlinear}
 \ee
-\end{itemize}
-</p>
+\end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-28" class="outline-3">
 <h3 id="headline-28">
 Particle Filter For Conditionally Linear Models
 </h3>
-<p>
-\begin{enumerate}
-  \item {\bf Initialization.} 
-</p>
+<div id="outline-text-headline-28" class="outline-text-3">
+<p>\begin{enumerate}
+  \item {\bf Initialization.} </p>
 <p>
   \item {\bf Recursion.} For $t=1,\ldots,T$:
   \begin{enumerate}
@@ -1138,13 +1151,15 @@ Particle Filter For Conditionally Linear Models
    \item {\bf Selection.} 
   \end{enumerate}
  \end{enumerate}
- \end{enumerate}
-</p>
+ \end{enumerate}</p>
+</div>
+</div>
+<div id="outline-container-headline-29" class="outline-3">
 <h3 id="headline-29">
 Nonlinear and Partially Deterministic State Transitions
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-29" class="outline-text-3">
+<p>\begin{itemize}
   \spitem Example:
   \[
   s_{1,t} = \Phi_1(s_{t-1},\epsilon_t), \quad s_{2,t} = \Phi_2(s_{t-1}), \quad \epsilon_t \sim N(0,1).
@@ -1169,13 +1184,15 @@ Nonlinear and Partially Deterministic State Transitions
   = \frac{ p^\epsilon(\tilde{\epsilon}_t^j)}{g_t^\epsilon(\tilde{\epsilon}^j_t|s^j_{t-1})}.
   \label{eq_pfomegaepsilon}
   \]		
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-30" class="outline-3">
 <h3 id="headline-30">
 Degenerate Measurement Error Distributions
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-30" class="outline-text-3">
+<p>\begin{itemize}
   \item  Our discussion of the conditionally-optimal
   importance distribution suggests that in the absence of measurement
   errors, one has to solve the system of equations
@@ -1192,24 +1209,28 @@ Degenerate Measurement Error Distributions
   \item Difficulty: one has to find all solutions to a nonlinear system of equations.
   \spitem While resampling duplicates particles, the duplicated particles do not mutate, which
   can lead to a degeneracy. 
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-31" class="outline-3">
 <h3 id="headline-31">
 Next Steps
 </h3>
-<p>
-\begin{itemize}
+<div id="outline-text-headline-31" class="outline-text-3">
+<p>\begin{itemize}
   \spitem We will now apply PFs to linearized DSGE models.
   \spitem This allows us to compare the Monte Carlo approximation to the ``truth.&#39;&#39;
   \spitem Small-scale New Keynesian DSGE model
   \spitem Smets-Wouters model
- \end{itemize}
-</p>
+ \end{itemize}</p>
+</div>
+</div>
+<div id="outline-container-headline-32" class="outline-3">
 <h3 id="headline-32">
 Illustration 1: Small-Scale DSGE Model
 </h3>
-<p>
-Parameter Values For Likelihood Evaluation
+<div id="outline-text-headline-32" class="outline-text-3">
+<p>Parameter Values For Likelihood Evaluation
   \begin{center}
    \begin{tabular}{lcclcc} \hline\hline
     Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$ &amp; Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$  \\ \hline
@@ -1221,39 +1242,45 @@ Parameter Values For Likelihood Evaluation
     $\sigma_r$           &amp;  0.19 &amp;  0.20 &amp; $\sigma_g$           &amp;  0.65 &amp;  0.58 \\
     $\sigma_z$           &amp;  0.24 &amp;  0.29 &amp; $\ln p(Y|\theta)$    &amp; -306.5 &amp; -313.4 \\ \hline
    \end{tabular}
-  \end{center}
-</p>
+  \end{center}</p>
+</div>
+</div>
+<div id="outline-container-headline-33" class="outline-3">
 <h3 id="headline-33">
 Likelihood Approximation
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-33" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ vs. $\ln p(y_t|Y_{1:t-1},\theta^m)$ \\
    \includegraphics[width=3.2in]{dsge1_me_paramax_lnpy.pdf} 
   \end{tabular}
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: The results depicted in the figure are based on a single run
- of the bootstrap PF (dashed, $M=40,000$), the conditionally-optimal PF (dotted, $M=400$), and the Kalman filter (solid).
-</p>
+ of the bootstrap PF (dashed, $M=40,000$), the conditionally-optimal PF (dotted, $M=400$), and the Kalman filter (solid).</p>
+</div>
+</div>
+<div id="outline-container-headline-34" class="outline-3">
 <h3 id="headline-34">
 Filtered State
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-34" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    $\widehat{\mathbb{E}}[\hat{g}_t|Y_{1:t},\theta^m]$ vs. $\mathbb{E}[\hat{g}_t|Y_{1:t},\theta^m]$\\
    \includegraphics[width=3.2in]{dsge1_me_paramax_ghat.pdf}
   \end{tabular}
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: The results depicted in the figure are based on a single run
- of the bootstrap PF (dashed, $M=40,000$), the conditionally-optimal PF (dotted, $M=400$), and the Kalman filter (solid).
-</p>
+ of the bootstrap PF (dashed, $M=40,000$), the conditionally-optimal PF (dotted, $M=400$), and the Kalman filter (solid).</p>
+</div>
+</div>
+<div id="outline-container-headline-35" class="outline-3">
 <h3 id="headline-35">
 Distribution of Log-Likelihood Approximation Errors}
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-35" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    Bootstrap PF: $\theta^m$ vs. $\theta^l$ \\
    \includegraphics[width=3in]{dsge1_me_bootstrap_lnlhbias.pdf}
@@ -1261,13 +1288,15 @@ Distribution of Log-Likelihood Approximation Errors}
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: Density estimate of $\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta)- \ln p(Y_{1:T}|\theta)$
  based on $N_{run}=100$ runs of the PF. Solid line is $\theta = \theta^m$; dashed line is $\theta = \theta^l$ 
- ($M=40,000$).
-</p>
+ ($M=40,000$).</p>
+</div>
+</div>
+<div id="outline-container-headline-36" class="outline-3">
 <h3 id="headline-36">
 Distribution of Log-Likelihood Approximation Errors}
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-36" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    $\theta^m$: Bootstrap vs. Cond. Opt. PF \\
    \includegraphics[width=3in]{dsge1_me_paramax_lnlhbias.pdf} \\
@@ -1276,13 +1305,15 @@ Distribution of Log-Likelihood Approximation Errors}
  <span style="text-decoration: underline;">Notes</span>: Density estimate of $\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta)- \ln p(Y_{1:T}|\theta)$
  based on $N_{run}=100$ runs of the PF. Solid line is bootstrap particle filter
  ($M=40,000$); dotted line is conditionally optimal particle filter
- ($M=400$).
-</p>
+ ($M=400$).</p>
+</div>
+</div>
+<div id="outline-container-headline-37" class="outline-3">
 <h3 id="headline-37">
 Summary Statistics for Particle Filters
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-37" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{lrrr} \\ \hline \hline
    &amp; Bootstrap &amp; Cond. Opt. &amp; Auxiliary \\ \hline
    Number of Particles $M$ &amp; 40,000 &amp; 400 &amp; 40,000 \\
@@ -1300,13 +1331,15 @@ Summary Statistics for Particle Filters
  <span style="text-decoration: underline;">Notes</span>: $\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta) - \ln p(Y_{1:T}|\theta)$
  and $\hat{\Delta}_2 = \exp[ \ln \hat{p}(Y_{1:T}|\theta) - \ln
  p(Y_{1:T}|\theta) ] - 1$. Results
- are based on $N_{run}=100$ runs of the particle filters.
-</p>
+ are based on $N_{run}=100$ runs of the particle filters.</p>
+</div>
+</div>
+<div id="outline-container-headline-38" class="outline-3">
 <h3 id="headline-38">
 Great Recession and Beyond
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-38" class="outline-text-3">
+<p>\begin{center}
    \begin{tabular}{c}
     Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\
     \includegraphics[width=3in]{dsge1_me_great_recession_lnpy.pdf} 
@@ -1316,13 +1349,15 @@ Great Recession and Beyond
   filter. Dashed lines correspond to bootstrap particle filter
   ($M=40,000$) and dotted lines correspond to
   conditionally-optimal particle filter ($M=400$). Results are
-  based on $N_{run}=100$ runs of the filters.
-</p>
+  based on $N_{run}=100$ runs of the filters.</p>
+</div>
+</div>
+<div id="outline-container-headline-39" class="outline-3">
 <h3 id="headline-39">
 Great Recession and Beyond
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-39" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
             Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\
    \includegraphics[width=2.9in]{dsge1_me_post_great_recession_lnpy.pdf} 
@@ -1332,13 +1367,15 @@ Great Recession and Beyond
  filter. Dashed lines correspond to bootstrap particle filter
  ($M=40,000$) and dotted lines correspond to
  conditionally-optimal particle filter ($M=400$). Results are
- based on $N_{run}=100$ runs of the filters.
-</p>
+ based on $N_{run}=100$ runs of the filters.</p>
+</div>
+</div>
+<div id="outline-container-headline-40" class="outline-3">
 <h3 id="headline-40">
 Great Recession and Beyond
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-40" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
             Log Standard Dev of Log-Likelihood Increments \\
             \includegraphics[width=3in]{dsge1_me_great_recession_lnpy_lnstd.pdf} 
@@ -1348,13 +1385,15 @@ Great Recession and Beyond
  filter. Dashed lines correspond to bootstrap particle filter
  ($M=40,000$) and dotted lines correspond to
  conditionally-optimal particle filter ($M=400$). Results are
- based on $N_{run}=100$ runs of the filters.
-</p>
+ based on $N_{run}=100$ runs of the filters.</p>
+</div>
+</div>
+<div id="outline-container-headline-41" class="outline-3">
 <h3 id="headline-41">
 SW Model: Distr. of Log-Likelihood Approximation Errors
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-41" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    BS ($M=40,000$) versus CO ($M=4,000$) \\
    \includegraphics[width=3in]{sw_me_paramax_lnlhbias.pdf}
@@ -1362,13 +1401,15 @@ SW Model: Distr. of Log-Likelihood Approximation Errors
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: Density estimates of $\hat{\Delta}_1 = \ln \hat{p}(Y|\theta)- \ln p(Y|\theta)$ based on $N_{run}=100$.
  Solid densities summarize results for the bootstrap (BS) particle filter;
- dashed densities summarize results for the conditionally-optimal (CO) particle filter.
-</p>
+ dashed densities summarize results for the conditionally-optimal (CO) particle filter.</p>
+</div>
+</div>
+<div id="outline-container-headline-42" class="outline-3">
 <h3 id="headline-42">
 SW Model: Distr. of Log-Likelihood Approximation Errors
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-42" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{c}
    BS ($M=400,000$) versus CO ($M=4,000$) \\
    \includegraphics[width=3in]{sw_me_paramax_bs_lnlhbias.pdf}
@@ -1376,13 +1417,15 @@ SW Model: Distr. of Log-Likelihood Approximation Errors
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: Density estimates of $\hat{\Delta}_1 = \ln \hat{p}(Y|\theta)- \ln p(Y|\theta)$ based on $N_{run}=100$.
  Solid densities summarize results for the bootstrap (BS) particle filter;
- dashed densities summarize results for the conditionally-optimal (CO) particle filter.
-</p>
+ dashed densities summarize results for the conditionally-optimal (CO) particle filter.</p>
+</div>
+</div>
+<div id="outline-container-headline-43" class="outline-3">
 <h3 id="headline-43">
 SW Model: Summary Statistics for Particle Filters
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-43" class="outline-text-3">
+<p>\begin{center}
   \begin{tabular}{lrrrr} \\ \hline \hline
    &amp; \multicolumn{2}{c}{Bootstrap} &amp; \multicolumn{2}{c}{Cond. Opt.} \\ \hline
    Number of Particles $M$ &amp; 40,000 &amp; 400,000 &amp; 4,000 &amp; 40,000 \\
@@ -1399,51 +1442,50 @@ SW Model: Summary Statistics for Particle Filters
  \end{center}
  <span style="text-decoration: underline;">Notes</span>: $\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta) - \ln p(Y_{1:T}|\theta)$
  and $\hat{\Delta}_2 = \exp[ \ln \hat{p}(Y_{1:T}|\theta) - \ln
- p(Y_{1:T}|\theta) ] - 1$. Results are based on $N_{run}=100$. 
-</p>
+ p(Y_{1:T}|\theta) ] - 1$. Results are based on $N_{run}=100$. </p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-44" class="outline-2">
 <h2 id="headline-44">
 Tempered Particle Filtering
 </h2>
+<div id="outline-text-headline-44" class="outline-text-2">
+<div id="outline-container-headline-45" class="outline-3">
 <h3 id="headline-45">
 Tempered Particle Filter
 </h3>
+<div id="outline-text-headline-45" class="outline-text-3">
 <ul>
 <li>
-<p>
-Use sequence of distributions between the forecast and updated state distributions.
-</p>
+<p>Use sequence of distributions between the forecast and updated state distributions.</p>
 </li>
 </ul>
-<p>
-{{{NEWLINE}}}			
-</p>
+<p>{{{NEWLINE}}}			</p>
 <ul>
 <li>
-<p>
-Candidates? Well, <em>the PF will work arbitrarily well when $\Sigma_{u}\rightarrow\infty$.</em>
-</p>
+<p>Candidates? Well, <em>the PF will work arbitrarily well when $\Sigma_{u}\rightarrow\infty$.</em></p>
 </li>
 </ul>
-<p>
-{{{NEWLINE}}}			
-</p>
+<p>{{{NEWLINE}}}			</p>
 <ul>
 <li>
-<p>
-<strong>Reduce measurement error variance from an inflated initial level</strong>
-$\Sigma_u(\theta)/{\color{blue}\phi_1}$ to the nominal level $\Sigma_u(\theta)$.
-</p>
+<p><strong>Reduce measurement error variance from an inflated initial level</strong>
+$\Sigma_u(\theta)/{\color{blue}\phi_1}$ to the nominal level $\Sigma_u(\theta)$.</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-46" class="outline-3">
 <h3 id="headline-46">
 The Key Idea
 </h3>
+<div id="outline-text-headline-46" class="outline-text-3">
 <ul>
 <li>
-<p>
-Define
- \begin{eqnarray*} p_n(y_t|s_t,θ) &amp;∝to&amp; {\color{blue}ɸ_n<sup>d/2</sup>}
-</p>
+<p>Define
+ \begin{eqnarray*} p_n(y_t|s_t,θ) &amp;∝to&amp; {\color{blue}ɸ_n<sup>d/2</sup>}</p>
 <table>
 <tbody>
 <tr>
@@ -1452,18 +1494,15 @@ Define
 </tr>
 </tbody>
 </table>
-<p>
-&amp;&amp; × {\color{blue}ɸ_n} Σ_u<sup>-1</sup>(θ)(y_t - Ψ(s_t,t;θ)) \bigg\},
+<p>&amp;&amp; × {\color{blue}ɸ_n} Σ_u<sup>-1</sup>(θ)(y_t - Ψ(s_t,t;θ)) \bigg\},
  \end{eqnarray*}
  where:
  \[
  {\color{blue} \phi_1 &lt; \phi_2 &lt; \ldots &lt; \phi_{N_\phi} = 1}.
- \]
-</p>
+ \]</p>
 </li>
 <li>
-<p>
-<strong>Bridge posteriors given $s_{t-1}$:</strong>
+<p><strong>Bridge posteriors given $s_{t-1}$:</strong>
  \[
  p_n(s_t|y_t,s_{t-1},\theta)
    \propto p_n(y_t|s_t,\theta) p(s_t|s_{t-1},\theta).
@@ -1471,98 +1510,88 @@ Define
  \item <strong>bridge posteriors given $Y_{1:t-1}$:</strong>
  \[
  p_n(s_t|Y_{1:t})= \int p_n(s_t|y_t,s_{t-1},\theta) p(s_{t-1}|Y_{1:t-1}) ds_{t-1}.
- \]
-</p>
+ \]</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-47" class="outline-3">
 <h3 id="headline-47">
 Algorithm Overview
 </h3>
+<div id="outline-text-headline-47" class="outline-text-3">
 <ul>
 <li>
-<p>
-For each $t$ we start with the BS-PF iteration by simulating the state-transition equation forward.
-{{{NEWLINE}}}
-</p>
+<p>For each $t$ we start with the BS-PF iteration by simulating the state-transition equation forward.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Incremental weights are obtained based on <strong>inflated measurement error variance</strong> $\Sigma_u/{\color{blue}\phi_1}$.
-{{{NEWLINE}}}
-</p>
+<p>Incremental weights are obtained based on <strong>inflated measurement error variance</strong> $\Sigma_u/{\color{blue}\phi_1}$.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-<em>Then we start the tempering iterations</em>…
-{{{NEWLINE}}}
-</p>
+<p><em>Then we start the tempering iterations</em>…
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-After the tempering iterations are completed we proceed to $t+1$…
-</p>
+<p>After the tempering iterations are completed we proceed to $t+1$…</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-48" class="outline-3">
 <h3 id="headline-48">
 Overview}
 </h3>
+<div id="outline-text-headline-48" class="outline-text-3">
 <ul>
 <li>
-<p>
-If $N_{\phi} = 1$, this collapses to the Bootstrap particle filter.
-{{{NEWLINE}}}
-</p>
+<p>If $N_{\phi} = 1$, this collapses to the Bootstrap particle filter.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-For each time period $t$, we embed a ``static&#39;&#39; SMC sampler used for parameter estimation
-Iterate over $n=1,\ldots,N_\phi$:
-</p>
+<p>For each time period $t$, we embed a ``static&#39;&#39; SMC sampler used for parameter estimation
+Iterate over $n=1,\ldots,N_\phi$:</p>
 <ul>
 <li>
-<p>
-<strong>Correction step</strong>:  change particle weights (importance sampling)
-</p>
+<p><strong>Correction step</strong>:  change particle weights (importance sampling)</p>
 </li>
 <li>
-<p>
-<strong>Selection step</strong>: equalize particle weights (resampling of particles)
-</p>
+<p><strong>Selection step</strong>: equalize particle weights (resampling of particles)</p>
 </li>
 <li>
-<p>
-<strong>Mutation step</strong>: change particle values (based on Markov transition kernel generated with Metropolis-Hastings algorithm)
-</p>
+<p><strong>Mutation step</strong>: change particle values (based on Markov transition kernel generated with Metropolis-Hastings algorithm)</p>
 </li>
 <li>
-<p>
-Each step approximates the same $\int h(s_t) p_n(s_{t}|Y_{1:t},\theta) ds_t$.
-</p>
+<p>Each step approximates the same $\int h(s_t) p_n(s_{t}|Y_{1:t},\theta) ds_t$.</p>
 </li>
 </ul>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-49" class="outline-3">
 <h3 id="headline-49">
 An Illustration: $p_n(s_t|Y_{1:t})$, $n=1,\ldots,N_\phi$.
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-49" class="outline-text-3">
+<p>\begin{center}
   \includegraphics[width=4in]{phi_evolution.pdf}
- \end{center}
-</p>
+ \end{center}</p>
+</div>
+</div>
+<div id="outline-container-headline-50" class="outline-3">
 <h3 id="headline-50">
 Choice of $\phi_n$
 </h3>
+<div id="outline-text-headline-50" class="outline-text-3">
 <ul>
 <li>
-<p>
-Based on Geweke and Frischknecht (2014).
-{{{NEWLINE}}}
-</p>
+<p>Based on Geweke and Frischknecht (2014).
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Express post-correction inefficiency ratio as
+<p>Express post-correction inefficiency ratio as
 \[
         \mbox{InEff}(\phi_n)
         =  \frac{\frac{1}{M} \sum_{j=1}^M \exp [ -2(\phi_n-\phi_{n-1}) e_{j,t}] }{ \left(\frac{1}{M} \sum_{j=1}^M  \exp [ -(\phi_n-\phi_{n-1}) e_{j,t}] \right)^2}
@@ -1572,23 +1601,21 @@ where
   e_{j,t} = \frac{1}{2} (y_t - \Psi(s_t^{j,n-1},t;\theta))&#39; \Sigma_u^{-1}(y_t -
   \Psi(s_t^{j,n-1},t;\theta)).
 \]
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Pick target ratio $r^*$ and solve equation $\mbox{InEff}(\phi_n^*) = r^*$ for $\phi_n^*$.
-</p>
+<p>Pick target ratio $r^*$ and solve equation $\mbox{InEff}(\phi_n^*) = r^*$ for $\phi_n^*$.</p>
 </li>
 </ul>
-<p>
-\end{frame}
-</p>
+<p>\end{frame}</p>
+</div>
+</div>
+<div id="outline-container-headline-51" class="outline-3">
 <h3 id="headline-51">
 Small-Scale Model: PF Summary Statistics
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-51" class="outline-text-3">
+<p>\begin{center}
  \begin{tabular}{l@{\hspace{1cm}}r@{\hspace{1cm}}rrrr}												    \\ \hline \hline
   &amp; BSPF	 &amp; \multicolumn{4}{c}{TPF} \\ \hline
   Number of Particles $M$		 &amp; 40k &amp; 4k	    &amp; 4k	  &amp; 40k		&amp; 40k	       \\
@@ -1604,215 +1631,187 @@ Small-Scale Model: PF Summary Statistics
   $T^{-1}\sum_{t=1}^{T}N_{\phi,t}$       &amp; 1.0  &amp; 4.4 &amp; 3.3     &amp; 4.4 &amp; 3.3	       \\
   Average Run Time (s)		 &amp; 1.6 &amp; 0.4 &amp; 0.3 &amp; 3.7     &amp; 2.9		      \\ \hline
  \end{tabular}
-\end{center}
-</p>
+\end{center}</p>
+</div>
+</div>
+<div id="outline-container-headline-52" class="outline-3">
 <h3 id="headline-52">
 Embedding PF Likelihoods into Posterior Samplers
 </h3>
+<div id="outline-text-headline-52" class="outline-text-3">
 <ul>
 <li>
-<p>
-Likelihood functions for nonlinear DSGE models can be approximated by the PF.
-{{{NEWLINE}}}
-</p>
+<p>Likelihood functions for nonlinear DSGE models can be approximated by the PF.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-We will now embed the likelihood approximation into a posterior sampler:
+<p>We will now embed the likelihood approximation into a posterior sampler:
 PFMH Algorithm (a special case of PMCMC).
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-The book also discusses $SMC^2$.
-</p>
+<p>The book also discusses $SMC^2$.</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-53" class="outline-3">
 <h3 id="headline-53">
 Embedding PF Likelihoods into Posterior Samplers}
 </h3>
+<div id="outline-text-headline-53" class="outline-text-3">
 <ul>
 <li>
-<p>
-$\{ p(Y|\theta), p(\theta|Y), p(Y) \}$, which are related according to:
-</p>
+<p>$\{ p(Y|\theta), p(\theta|Y), p(Y) \}$, which are related according to:</p>
 </li>
 </ul>
-<p>
-\[
+<p>\[
    p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta
-   \]
-</p>
+   \]</p>
 <ul>
 <li>
-<p>
-$\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}$, which are related according to:
-</p>
+<p>$\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}$, which are related according to:</p>
 </li>
 </ul>
-<p>
-\[
+<p>\[
    \hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta.
-   \]
-</p>
+   \]</p>
 <ul>
 <li>
-<p>
-Surprising result (Andrieu, Docet, and Holenstein, 2010): under certain conditions we can replace $p(Y|\theta)$ by $\hat{p}(Y|\theta)$ and still obtain draws from $p(\theta|Y)$.
-</p>
+<p>Surprising result (Andrieu, Docet, and Holenstein, 2010): under certain conditions we can replace $p(Y|\theta)$ by $\hat{p}(Y|\theta)$ and still obtain draws from $p(\theta|Y)$.</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-54" class="outline-3">
 <h3 id="headline-54">
 PFMH Algorithm
 </h3>
-<p>
-For $i=1$ to $N$:
-</p>
+<div id="outline-text-headline-54" class="outline-text-3">
+<p>For $i=1$ to $N$:</p>
 <ol>
 <li>
-<p>
-Draw $\vartheta$ from a density $q(\vartheta|\theta^{i-1})$.
-{{{NEWLINE}}}
-</p>
+<p>Draw $\vartheta$ from a density $q(\vartheta|\theta^{i-1})$.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Set $\theta^i = \vartheta$ with probability
+<p>Set $\theta^i = \vartheta$ with probability
 \[
 \alpha(\vartheta | \theta^{i-1} ) = \min \left\{ 1, \;
 \frac{ \hat{p}(Y| \vartheta )p(\vartheta) / q(\vartheta | \theta^{i-1}) }{
         \hat{p}(Y|\theta^{i-1}) p(\theta^{i-1})	 / q(\theta^{i-1} | \vartheta) } \right\}
 \]
-and $\theta^{i} = \theta^{i-1}$ otherwise. The likelihood approximation $\hat{p}(Y|\vartheta)$ is computed using a particle filter.
-</p>
+and $\theta^{i} = \theta^{i-1}$ otherwise. The likelihood approximation $\hat{p}(Y|\vartheta)$ is computed using a particle filter.</p>
 </li>
 </ol>
+</div>
+</div>
+<div id="outline-container-headline-55" class="outline-3">
 <h3 id="headline-55">
 Why Does the PFMH Work?
 </h3>
+<div id="outline-text-headline-55" class="outline-text-3">
 <ul>
 <li>
-<p>
-At each iteration the filter generates draws $\tilde{s}_t^j$ from the proposal distribution $g_t(\cdot|s_{t-1}^j)$.
-{{{NEWLINE}}}
-</p>
+<p>At each iteration the filter generates draws $\tilde{s}_t^j$ from the proposal distribution $g_t(\cdot|s_{t-1}^j)$.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Let $\tilde{S}_t = \big( \tilde{s}_t^1,\ldots,\tilde{s}_t^M \big)&#39;$ and denote the entire sequence of draws by $\tilde{S}_{1:T}^{1:M}$.
-{{{NEWLINE}}}
-</p>
+<p>Let $\tilde{S}_t = \big( \tilde{s}_t^1,\ldots,\tilde{s}_t^M \big)&#39;$ and denote the entire sequence of draws by $\tilde{S}_{1:T}^{1:M}$.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Selection step: define a random variable $A_t^j$ that contains this ancestry information.  For instance, suppose that during the resampling particle $j=1$ was assigned the value $\tilde{s}_t^{10}$ then $A_t^1=10$. Let $A_t = \big( A_t^1, \ldots, A_t^N \big)$ and use $A_{1:T}$ to denote the sequence of $A_t$&#39;s.
-{{{NEWLINE}}}
-</p>
+<p>Selection step: define a random variable $A_t^j$ that contains this ancestry information.  For instance, suppose that during the resampling particle $j=1$ was assigned the value $\tilde{s}_t^{10}$ then $A_t^1=10$. Let $A_t = \big( A_t^1, \ldots, A_t^N \big)$ and use $A_{1:T}$ to denote the sequence of $A_t$&#39;s.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-PFMH operates on an enlarged probability space: $\theta$, $\tilde{S}_{1:T}$ and $A_{1:T}$.
-</p>
+<p>PFMH operates on an enlarged probability space: $\theta$, $\tilde{S}_{1:T}$ and $A_{1:T}$.</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-56" class="outline-3">
 <h3 id="headline-56">
 Why Does the PFMH Work?
 </h3>
+<div id="outline-text-headline-56" class="outline-text-3">
 <ul>
 <li>
-<p>
-Use $U_{1:T}$ to denote random vectors for $\tilde{S}_{1:T}$ and $A_{1:T}$. $U_{1:T}$ is an array of $iid$ uniform random numbers.
-{{{NEWLINE}}}
-</p>
+<p>Use $U_{1:T}$ to denote random vectors for $\tilde{S}_{1:T}$ and $A_{1:T}$. $U_{1:T}$ is an array of $iid$ uniform random numbers.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-The transformation of $U_{1:T}$ into $(\tilde{S}_{1:T},A_{1:T})$ typically depends on $\theta$ and $Y_{1:T}$, because the proposal distribution $g_t(\tilde{s}_t|s_{t-1}^j)$ depends both on the current observation $y_t$ as well as the parameter vector $\theta$.
-{{{NEWLINE}}}
-</p>
+<p>The transformation of $U_{1:T}$ into $(\tilde{S}_{1:T},A_{1:T})$ typically depends on $\theta$ and $Y_{1:T}$, because the proposal distribution $g_t(\tilde{s}_t|s_{t-1}^j)$ depends both on the current observation $y_t$ as well as the parameter vector $\theta$.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-E.g., implementation of conditionally-optimal PF  requires sampling from a $N(\bar{s}_{t|t}^j,P_{t|t})$ distribution for each particle $j$. Can be done using a prob integral transform of uniform random variables.
-{{{NEWLINE}}}
-</p>
+<p>E.g., implementation of conditionally-optimal PF  requires sampling from a $N(\bar{s}_{t|t}^j,P_{t|t})$ distribution for each particle $j$. Can be done using a prob integral transform of uniform random variables.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-We can express the particle filter approximation of the likelihood function as
-</p>
+<p>We can express the particle filter approximation of the likelihood function as</p>
 </li>
 </ul>
-<p>
-\[
+<p>\[
  \hat{p}(Y_{1:T}|\theta) = g(Y_{1:T}|\theta,U_{1:T}).
  \]
  where
  \[
  U_{1:T} \sim p(U_{1:T}) = \prod_{t=1}^T p(U_t).
- \]
-</p>
+ \]</p>
+</div>
+</div>
+<div id="outline-container-headline-57" class="outline-3">
 <h3 id="headline-57">
 Why Does the PFMH Work?
 </h3>
+<div id="outline-text-headline-57" class="outline-text-3">
 <ul>
 <li>
-<p>
-Define the joint distribution
+<p>Define the joint distribution
 \[
 p_g\big( Y_{1:T},\theta,U_{1:T} \big) = g(Y_{1:T}|\theta,U_{1:T}) p\big(U_{1:T} \big) p(\theta).
-\]
-</p>
+\]</p>
 </li>
 <li>
-<p>
-The PFMH algorithm samples from the joint posterior
+<p>The PFMH algorithm samples from the joint posterior
  \[
  p_g\big( \theta, U_{1:T} | Y_{1:T} \big) \propto g(Y|\theta,U_{1:T}) p\big(U_{1:T} \big) p(\theta)
  \]
  and discards the draws of $\big( U_{1:T} \big)$.
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-For this procedure to be valid, it needs to be the case that PF approximation is unbiased:
+<p>For this procedure to be valid, it needs to be the case that PF approximation is unbiased:
 \[
 \mathbb{E}[\hat{p}(Y_{1:T}|\theta)]
 = \int g(Y_{1:T}|\theta,U_{1:T})p\big(U_{1:T} \big) d\theta
 = p(Y_{1:T}|\theta).
-\]
-</p>
+\]</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-58" class="outline-3">
 <h3 id="headline-58">
 Why Does the PFMH Work?
 </h3>
+<div id="outline-text-headline-58" class="outline-text-3">
 <ul>
 <li>
-<p>
-We can express acceptance probability directly in terms of $\hat{p}(Y_{1:T}|\theta)$.
-</p>
+<p>We can express acceptance probability directly in terms of $\hat{p}(Y_{1:T}|\theta)$.</p>
 </li>
 <li>
-<p>
-Need to generate a proposed draw for both $\theta$ and $U_{1:T}$: $\vartheta$ and $U_{1:T}^*$.
-</p>
+<p>Need to generate a proposed draw for both $\theta$ and $U_{1:T}$: $\vartheta$ and $U_{1:T}^*$.</p>
 </li>
 <li>
-<p>
-The proposal distribution for $(\vartheta,U_{1:T}^*)$ in the MH algorithm is given by $q(\vartheta|\theta^{(i-1)}) p(U_{1:T}^*)$.
-</p>
+<p>The proposal distribution for $(\vartheta,U_{1:T}^*)$ in the MH algorithm is given by $q(\vartheta|\theta^{(i-1)}) p(U_{1:T}^*)$.</p>
 </li>
 <li>
-<p>
-No need to keep track of the draws $(U_{1:T}^*)$.
-</p>
+<p>No need to keep track of the draws $(U_{1:T}^*)$.</p>
 </li>
 <li>
-<p>
-MH acceptance probability:
+<p>MH acceptance probability:
 \begin{eqnarray*}
  α(ϑ|θ<sup>i-1</sup>)
  &amp;=&amp;
@@ -1822,54 +1821,54 @@ MH acceptance probability:
  &amp;=&amp;	    min \; ≤ft\{ 1,
  \frac{	\hat{p}(Y|ϑ)p(ϑ) \big/ q(ϑ|θ<sup>(i-1)</sup>)  }{
 \hat{p}(Y|θ<sup>(i-1)</sup>)p(θ<sup>(i-1)</sup>) \big/ q(θ<sup>(i-1)</sup>|ϑ) } \right\}. 
-\end{eqnarray*}
-</p>
+\end{eqnarray*}</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-59" class="outline-3">
 <h3 id="headline-59">
 Small-Scale DSGE: Accuracy of MH Approximations
 </h3>
+<div id="outline-text-headline-59" class="outline-text-3">
 <ul>
 <li>
-<p>
-Results are based on $N_{run}=20$ runs of the PF-RWMH-V algorithm.
-{{{NEWLINE}}}
-</p>
+<p>Results are based on $N_{run}=20$ runs of the PF-RWMH-V algorithm.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-Each run of the algorithm generates $N=100,000$ draws and the first $N_0=50,000$ are discarded.
-{{{NEWLINE}}}
-</p>
+<p>Each run of the algorithm generates $N=100,000$ draws and the first $N_0=50,000$ are discarded.
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-The likelihood function is computed with the Kalman filter (KF), bootstrap particle filter (BS-PF, $M=40,000$) or conditionally-optimal particle filter (CO-PF, $M=400$).
-{{{NEWLINE}}}
-</p>
+<p>The likelihood function is computed with the Kalman filter (KF), bootstrap particle filter (BS-PF, $M=40,000$) or conditionally-optimal particle filter (CO-PF, $M=400$).
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-``Pooled&#39;&#39; means that we are pooling the draws from the $N_{run}=20$ runs to compute posterior statistics.
-</p>
+<p>``Pooled&#39;&#39; means that we are pooling the draws from the $N_{run}=20$ runs to compute posterior statistics.</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-60" class="outline-3">
 <h3 id="headline-60">
 Autocorrelation of PFMH Draws
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-60" class="outline-text-3">
+<p>\begin{center}
   \includegraphics[width=3in]{dsge1_me_pmcmc_acf.pdf}
  \end{center}
  <em>Notes</em>: The figure depicts autocorrelation functions computed from the
  output of the 1 Block RWMH-V algorithm based on the Kalman filter (solid), the conditionally-optimal
- particle filter (dashed) and the bootstrap particle filter (solid with dots).
-</p>
+ particle filter (dashed) and the bootstrap particle filter (solid with dots).</p>
+</div>
+</div>
+<div id="outline-container-headline-61" class="outline-3">
 <h3 id="headline-61">
 Small-Scale DSGE: Accuracy of MH Approximations
 </h3>
-<p>
-\begin{center}
+<div id="outline-text-headline-61" class="outline-text-3">
+<p>\begin{center}
   \scalebox{0.75}{
    \begin{tabular}{lccccccccc} \hline \hline
     &amp; \multicolumn{3}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{3}{c}{Inefficiency Factors} &amp; \multicolumn{3}{c}{Std Dev of Means} \\
@@ -1890,37 +1889,46 @@ Small-Scale DSGE: Accuracy of MH Approximations
     $\ln \hat p(Y)$ &amp;    -357.14 &amp; -357.17 &amp; -358.32  &amp; &amp; &amp; &amp; 0.040 &amp; 0.038 &amp; 0.949 \\ \hline
    \end{tabular}
   }
- \end{center}
-</p>
+ \end{center}</p>
+</div>
+</div>
+<div id="outline-container-headline-62" class="outline-3">
 <h3 id="headline-62">
 Computational Considerations
 </h3>
+<div id="outline-text-headline-62" class="outline-text-3">
 <ul>
 <li>
-<p>
-We implement the PFMH algorithm on a single machine, utilizing up to
+<p>We implement the PFMH algorithm on a single machine, utilizing up to
 twelve cores.
-{{{NEWLINE}}}
-</p>
+{{{NEWLINE}}}</p>
 </li>
 <li>
-<p>
-For the small-scale DSGE model it takes	 30:20:33 [hh:mm:ss]
+<p>For the small-scale DSGE model it takes	 30:20:33 [hh:mm:ss]
 hours to generate 100,000 parameter draws using the bootstrap PF with
 40,000 particles.  Under the conditionally-optimal filter we only use
-400 particles, which reduces the run time to 00:39:20 minutes.
-</p>
+400 particles, which reduces the run time to 00:39:20 minutes.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-63" class="outline-2">
 <h2 id="headline-63">
 Bibliography
 </h2>
+<div id="outline-text-headline-63" class="outline-text-2">
+<div id="outline-container-headline-64" class="outline-3">
 <h3 id="headline-64">
 References
 </h3>
-<p>
-<a href="bibliography:../../../../ref/ref.bib">bibliography:../../../../ref/ref.bib</a>
-</p>
+<div id="outline-text-headline-64" class="outline-text-3">
+<p><a href="bibliography:../../../../ref/ref.bib">bibliography:../../../../ref/ref.bib</a></p>
+</div>
+</div>
+</div>
+</div>
 
   </div>
 
