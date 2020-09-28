@@ -412,6 +412,30 @@
     
         <atom:link href="https://edherbst.net/research/index.xml" rel="self" type="application/rss+xml" />
     
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   </head>
 
   <body>
@@ -441,23 +465,6 @@
             
             <div class="unit-100">
               <ul class="compact fa-ul">
-	        
-                <li><i class="fa-li fa fa-file-o fa-fw" style="color:#03396c;font-size:80%;padding-top:6px;"></i> ONLINE ESTIMATION OF DSGE MODELS 
-                  
-                  
-		  available as <a href="https://www.federalreserve.gov/econres/feds/online-estimation-of-dsge-models.htm">FEDS 2020-023</a>
-                  
-		  
-		  <br>
-		  <small>with: Michael Cai (Northwestern), Marco Del Negro (FRB New York), Ethan Matlin (FRB New York), Reca Sarfati (FRB New York), and Frank Schorfheide (Penn)</small>
-                       
-		  
-		  <br>
-		  <small>code: available on <a href="https://github.com/FRBNY-DSGE/Replication-of-Online-Estimation-of-DSGE-Models">github</a></small>
-                       
-		       
-                </li>
-                <br />
 	        
                 <li><i class="fa-li fa fa-file-o fa-fw" style="color:#03396c;font-size:80%;padding-top:6px;"></i> BIAS IN LOCAL PROJECTIONS 
                   
@@ -515,7 +522,41 @@
             <div class="unit-100"> 
               <ul class="compact fa-ul">
 	        
-                <li><i class="fa-li fa  fa-file  fa-fw" style="color:#03396c;font-size:80%;padding-top:6px;"></i> TEMPERED PARTICLE FILTERING, <em>Journal of Econometrics</em>, in press
+                <li><i class="fa-li fa  fa-file  fa-fw" style="color:#03396c;font-size:80%;padding-top:6px;"></i> ONLINE ESTIMATION OF DSGE MODELS, <em>The Econometrics Journal</em>, accepted for publication.
+		  
+		  <a href="http://doi.org/https://doi.org/10.1093/ectj/utaa029">pdf</a>
+		  
+		  
+		  <br>
+		  <small>with: Michael Cai (Northwestern), Marco Del Negro (FRB New York), Ethan Matlin (FRB New York), Reca Sarfati (FRB New York), and Frank Schorfheide (Penn)</small>
+                  
+		       
+
+		  
+		  <br>
+		  <small>code: available on <a href="https://github.com/FRBNY-DSGE/Replication-of-Online-Estimation-of-DSGE-Models">github</a></small>
+                       
+		  
+		  <br>
+		  <small>previously: <a href="https://www.federalreserve.gov/econres/feds/online-estimation-of-dsge-models.htm">FEDS 2020-023</a></small>
+                       
+                  
+                  
+                </li>
+		<br />
+	        
+              </ul>              
+            </div>	
+          </div>
+          
+          <div class="units-row">
+            
+            
+            
+            <div class="unit-100"> 
+              <ul class="compact fa-ul">
+	        
+                <li><i class="fa-li fa  fa-file  fa-fw" style="color:#03396c;font-size:80%;padding-top:6px;"></i> TEMPERED PARTICLE FILTERING, <em>Journal of Econometrics</em>, 210(1), May, 26-44, 2019.
 		  
 		  <a href="http://doi.org/https://doi.org/10.1016/j.jeconom.2018.11.003">pdf</a>
 		  
