@@ -34,10 +34,18 @@
             <div class="logo terminal-prompt">
               
               
-              <a href="https://edherbst.net/" class="no-style ">Ed Herbst</a>:~# 
+              <a href="https://edherbst.net/" class="no-style site-name">Ed Herbst</a>:~# 
               <a href='https://edherbst.net/research'>research</a>/<a href='https://edherbst.net/research/chandrasekhar-recursions'>chandrasekhar-recursions</a>/</div></header>
           <nav class="terminal-menu">
             <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
                 
             </ul>
           </nav>
@@ -48,6 +56,25 @@
         
 <h1>USING THE &#34;CHANDRASEKHAR RECURSIONS&#34; FOR LIKELIHOOD EVALUATION OF DSGE MODELS</h1>
 <p>In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System. We show that DSGE models are ideally suited for the use of these recursions, which work best when the number of states is much greater than the number of observables. In several examples, we show that there are substantial benefits to using the recursions, with likelihood evaluation up to five times faster. This gain is especially pronounced in light of the trivial implementation costs—no model modification is required. Moreover, the algorithm is complementary with other approaches.</p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
         <div class="footer">
