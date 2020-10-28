@@ -196,11 +196,11 @@ figure {
             minmax(calc(var(--page-width) / 4), 1fr));
 }
 
-.terminal-prompt::after {
-    -webkit-animation: cursor 1s infinite;
-    animation: cursor 1s infinite;
-    width: 10px;
-}
+ .terminal-prompt::after { 
+     /* -webkit-animation: cursor 1s infinite;  */
+     /* animation: cursor 1s infinite;  */
+     width: 0px; 
+ } 
 
 .terminal-prompt::before {
     content: none;
