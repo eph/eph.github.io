@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="A Crash Course In Bayesian Inference" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/" /><meta property="article:published_time" content="2020-10-27T10:02:53-04:00" />
+
+
+
+<meta name="twitter:title" content="A Crash Course In Bayesian Inference"/>
+<meta name="twitter:description" content="Introduction Modes of Interence  Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed  Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta&#43;1 \} = \frac{1}{2} \] Consider the following confidence set"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="https://edherbst.net/" class="no-style ">Ed Herbst</a>:~# 
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference'>01-a-crash-course-in-bayesian-inference</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>A Crash Course In Bayesian Inference</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="modes-of-interence">Modes of Interence</h3>
+<ul>
+<li>Previously, we focussed on frequentist inference (repeated sampling prodecures)</li>
+<li>measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental</li>
+<li>However, many statisticians and econometricians believed that
+post-experimental reasoning should be used to assess inference
+procedures</li>
+<li>wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Suppose \(Y_1\) and \(Y_2\) are independently and identically
+distributed and
+\[
+P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad
+P_\theta \{ Y_i = \theta+1 \} = \frac{1}{2}
+\]
+Consider the following confidence set</p>
+<p>\begin{eqnarray*}
+C(Y_1,Y_2) = \left\{
+\begin{array}{lcl}
+\frac{1}{2}(Y_1+Y_2) &amp; \mbox{if} &amp; Y_1 \not= Y_2 \\\<br>
+Y_1 - 1              &amp; \mbox{if} &amp; Y_1 = Y_2
+\end{array} \right.
+\end{eqnarray*}</p>
+<p>From a pre-experimental perspective \(C(Y_1,Y_2)\) is a 75% confidence interval.</p>
+<p>However, from a post-experimental perspective, we are a ``100% confident'' that \(C(Y_1,Y_2)\) contains the``true'' \(\theta\) if \(Y_1 \not= Y_2\), whereas we are only
+``50% percent'' confident if \(Y_1 = Y_2\).</p>
+<h3 id="some-principles">Some Principles</h3>
+<p>Does it make sense to report a pre-experimental
+measure of accuracy, when it is known to be misleading
+after seeing the data?</p>
+<p><strong>Conditionality Principle:</strong> If an experiment is selected by some
+random mechanism independent of the unknown parameter \(\theta\),
+then only the experiment actually performed is relevant.</p>
+<p>Most also agree with</p>
+<p><strong>Sufficiency Principle:</strong> Consider an
+experiment to determine the value of an unknown parameter \(\theta\)
+and suppose that \({\cal S}(\cdot)\) is a sufficient statistic. If
+\({\cal S}(Y_1)={\cal S}(Y_2)\) then \(Y_1\) and \(Y_2\) contain the same
+evidence with respect to \(\theta\).</p>
+<h3 id="likelihood-principle">Likelihood Principle</h3>
+<p>The combination of the quite reasonable <strong>Conditionality Principle</strong> and
+the <strong>Sufficiency Principle</strong> lead to the more controversial
+<strong>Likelihood Principle</strong> (see discussion in Robert (1994)).</p>
+<p><strong>Likelihood Principle:</strong> All the information about an unknown
+parameter \(\theta\) obtainable from an experiment is contained in
+the likelihood function of \(\theta\) given the data. Two likelihood
+functions for \(\theta\) (from the same or different experiments)
+contain the same information about \(\theta\) if they are
+proportional to another.</p>
+<p>Frequentist maximum-likelihood estimation and inference typically violates the LP!</p>
+<p><strong>Bayesian</strong> methods do not</p>
+<h3 id="bayesian-models">Bayesian Models</h3>
+<p>A Bayesian model consists of:</p>
+<ul>
+<li>
+<p>parametric probability distribution for the data, which we will
+characterize by the density \(p(Y^T|\theta)\)</p>
+</li>
+<li>
+<p><strong>prior distribution</strong> \(p(\theta)\).</p>
+</li>
+</ul>
+<p>The density \(p(Y^T|\theta)\) interpreted as a function of \(\theta\)
+with fixed \(Y^T\) is the <strong>likelihood function.</strong></p>
+<p>The <strong>posterior distribution</strong> of the parameter \(\theta\), that is,
+the conditional distribution of \(\theta\) given \(Y_T\), can be
+obtained through Bayes theorem:</p>
+<p>\begin{eqnarray*}
+p(\theta|Y^T) = \frac{ p(Y^T|\theta) p(\theta)}{ \int p(Y^T|\theta) p(\theta) d\theta}
+\end{eqnarray*}</p>
+<h3 id="bayesian-models-continued">Bayesian Models continued</h3>
+<ul>
+<li>
+<p>can interpret this formula as an inversion of probabilities.</p>
+</li>
+<li>
+<p>think of the parameter \(\theta\) as ``cause'' and the data \(Y^T\) as ``effect''</p>
+</li>
+<li>
+<p>formula allows the calculation of the probability of a particular ``cause'' given the observed ``effect'' based on</p>
+</li>
+</ul>
+<p>the probability of the ``effect'' given the possible ``causes''</p>
+<p>Unlike in the frequentist framework, the parameter \(\theta\) is regarded as a random variable.</p>
+<p>This does, however, not imply that Bayesians consider parameters
+to be determined in a random experiment.</p>
+<p>The calculus of probability is used to characterize the state of knowledge</p>
+<h3 id="elephant-in-room">Elephant in Room</h3>
+<p>Any inference in a Bayesian framework is to some extent sensitive
+to the choice of prior distribution \(p(\theta)\).</p>
+<p>The prior reflects the initial state of mind of an individual and is therefore ``subjective''</p>
+<p>Many econometricians believe that the result of a scientific inquiry should not depend on the subjective
+beliefs and very sceptical of Bayesian methods.</p>
+<p>But all analysis involves some subjective choices!</p>
+<h2 id="introduction-to-bayesian-statistics">Introduction to Bayesian Statistics</h2>
+<h3 id="introduction-to-bayesian-statistics">Introduction to Bayesian Statistics</h3>
+<ul>
+<li>
+<p>denote the sample space by \({\cal Y}\) with elements \(Y^T\).</p>
+</li>
+<li>
+<p>Probability distribution \(P\) will be defined on the product space \(\Theta \otimes {\cal Y}\).</p>
+</li>
+<li>
+<p>The conditional distribution of \(\theta\) given \(Y^T\) is denoted by \(P_{Y^T}\)</p>
+</li>
+<li>
+<p>\(P_\theta\) denotes the conditional distribution of \(Y^T\) given \(\theta\)</p>
+</li>
+</ul>
+<h3 id="an-example">An Example</h3>
+<p>The parameter space is \(\Theta = \{ 0,1\}\),</p>
+<p>the sample space is \({\cal Y}=\{0,1,2,3,4\}\).</p>
+<p>\begin{center}
+\begin{tabular}{l|ccccc}
+&amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 \ \hline
+$P_{\theta=0}(Y)$ &amp; .75 &amp; .140 &amp; .04 &amp; .037 &amp; .033 \\\<br>
+$P_{\theta=1}(Y)$ &amp; .70 &amp; .251 &amp; .04 &amp; .005 &amp; .004
+\end{tabular}
+\end{center}</p>
+<p>Suppose we consider \(\theta = 0\) and \(\theta=1\) as equally
+likely a priori. Moreover, suppose that the observed
+value is \(Y=1\). The marginal probability of \(Y=1\) is</p>
+<p>\begin{eqnarray}
+\lefteqn{ P \{ Y=1|\theta=0 \} P\{\theta=0\} +P \{ Y=1|\theta=1 \} P\{\theta=1\} } \nonumber \\\<br>
+&amp;=&amp; 0.140 \cdot 0.5 + 0.251 \cdot 0.5 = 0.1955
+\end{eqnarray}</p>
+<h3 id="example-continued">Example, Continued</h3>
+<p>The posterior probabilities for \(\theta\) being zero or one
+are</p>
+<p>\begin{eqnarray*}
+P \{ \theta=0|Y=1 \} &amp;=&amp; \frac{ P \{Y=1|\theta=0 \} P\{ \theta = 0\} }{ P \{Y=1\} }
+= \frac{0.07}{0.1955} = 0.358 \\\<br>
+P \{ \theta=1|Y=1 \} &amp;=&amp; \frac{ P\{Y=1|\theta=1 \} P\{ \theta = 1\} }{ P \{Y=1\} }
+= \frac{0.1255}{0.1955} = 0.642
+\end{eqnarray*}</p>
+<p>Thus, the observation \(Y=1\) provides evidence in favor of \(\theta = 1\).</p>
+<h3 id="example-2">Example 2</h3>
+<p>Consider the linear regression model:</p>
+<p>\begin{eqnarray}
+y_t = x_t'\theta + u_t, \quad u_t \sim iid{\cal N}(0,1),
+\end{eqnarray}</p>
+<p>which can be written in matrix form as \(Y = X\theta + U\).
+We assume that \(X&rsquo;X/T \stackrel{p}{\longrightarrow} Q_{XX}\)
+and \(X&rsquo;Y \stackrel{p}{\longrightarrow} Q_{XY} = Q_{XX} \theta\).
+The dimension of \(\theta\) is \(k\).
+The likelihood function is of
+the form</p>
+<p>\begin{eqnarray}
+p(Y|X,\theta) = (2\pi)^{-T/2} \exp \left\{ Y - X\theta)'(Y-X\theta) \right\}.
+\end{eqnarray}</p>
+<p>Suppose the prior distribution is of the form</p>
+<p>\begin{eqnarray}
+\theta \sim {\cal N} \bigg(0_{k \times 1},\tau^2 {\cal I}_{k \times k} \bigg)
+\end{eqnarray}</p>
+<p>with density</p>
+<p>\begin{eqnarray}
+p(\theta) = (2 \pi \tau^2 )^{-k/2} \exp \left\{ - \frac{1}{2 \tau^2} \theta' \theta \right\}
+\end{eqnarray}</p>
+<p>For small values of \(\tau\) the prior concentrates near zero, whereas for larger values
+of \(\tau\) it is more diffuse.</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>According to Bayes Theorem the posterior
+distribution of \(\theta\) is proportional to the product of prior density and likelihood function</p>
+<p>\begin{eqnarray}
+p(\theta | Y,X) \propto p(\theta) p(Y|X,\theta).
+\end{eqnarray}</p>
+<p>The right-hand-side is given by</p>
+<p>\begin{eqnarray}
+\lefteqn{p(\theta) p(Y|X,\theta)} \nonumber \\\<br>
+&amp;\propto&amp; (2\pi)^{-\frac{T+k}{2}} \tau^{-k}
+\exp \bigg\{ -\frac{1}{2}[ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta' X&rsquo;X \theta \nonumber \\\<br>
+&amp;-&amp; \tau^{-2} \theta'\theta ] \bigg\}.
+\end{eqnarray}</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>The exponential term can be rewritten as follows</p>
+<p>\begin{eqnarray}
+\lefteqn{ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta' X&rsquo;X \theta - \tau^{-2} \theta'\theta } \nonumber \\\<br>
+&amp;=&amp; Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta + \theta'(X&rsquo;X + \tau^{-2} {\cal I}) \theta \\\<br>
+&amp;=&amp; \bigg( \theta - (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \bigg)'
+\bigg(X&rsquo;X + \tau^{-2} {\cal I} \bigg) \nonumber \\\<br>
+&amp;&amp;    \bigg( \theta - (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \bigg) \nonumber \\\<br>
+&amp;&amp;  + Y&rsquo;Y - Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1}X&rsquo;Y \nonumber.
+\end{eqnarray}</p>
+<p>Thus, the exponential term is a quadratic function of \(\theta\).</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>The exponential term is a quadratic function of \(\theta\). This information
+suffices to deduce that the posterior distribution of \(\theta\) must be
+a multivariate normal distribution</p>
+<p>\begin{eqnarray}
+\theta |Y,X \sim {\cal N}( \tilde{\theta}_T, \tilde{V}_T )
+\end{eqnarray}</p>
+<p>with mean and covariance</p>
+<p>\begin{eqnarray}
+\tilde{\theta}_T &amp;=&amp; (X&rsquo;X + \tau^{-2}{\cal I})^{-1} X&rsquo;Y \\\<br>
+\tilde{V}_T      &amp;=&amp; (X&rsquo;X + \tau^{-2}{\cal I})^{-1}.
+\end{eqnarray}</p>
+<p>The maximum likelihood estimator for this problem is \(\hat{\theta}_{mle} = (X&rsquo;X)^{-1}X&rsquo;Y\)
+and its asymptotic (frequentist) sampling variance is \(T^{-1} Q_{XX}^{-1}\).</p>
+<ul>
+<li>
+<p>Assumption that both likelihood function and prior are Gaussian made
+the derivation of the posterior simple.</p>
+</li>
+<li>
+<p>The pair of prior and likelihood is called <strong>conjugate</strong></p>
+</li>
+<li>
+<p>leads to a posterior distribution that is from the same family</p>
+</li>
+</ul>
+<h3 id="takeaway">Takeaway</h3>
+<p>As \(\tau \longrightarrow \infty\) the prior becomes more and more diffuse and the posterior distribution becomes more similar
+to the sampling distribution of \(\hat{\theta}_{mle}|\theta\):</p>
+<p>\begin{eqnarray}
+\theta | Y,X \stackrel{approx}{\sim} {\cal N} \bigg( \hat{\theta}_{mle}, (X&rsquo;X)^{-1} \bigg).
+\end{eqnarray}</p>
+<p>If \(\tau \longrightarrow 0\) the prior becomes <strong>dogmatic</strong> and the sample information is dominated by the prior information. The posterior converges to a point mass that concentrates at \(\theta = 0\).</p>
+<p>In large samples (fixed \(\tau\), \(T \longrightarrow \infty\)) the effect of the prior becomes negligibleand the sample information dominates</p>
+<p>\begin{eqnarray}
+\theta |Y,X \stackrel{approx}{\sim} {\cal N} \bigg( \hat{\theta}_{mle}, T^{-1} Q_{XX}^{-1} \bigg). \quad \Box
+\end{eqnarray}</p>
+<h3 id="estimation-and-inference">Estimation and Inference</h3>
+<ul>
+<li>
+<p>In principle, all the information with respect to \(\theta\) is
+summarized in the posterior \(p(\theta|Y)\) and we could simply
+report the posterior density to our audience.</p>
+</li>
+<li>
+<p>However, in many situations our audience prefers results in terms
+of point estimates and confidence intervals, rather than in terms
+of a probability density.</p>
+</li>
+<li>
+<p>we might be interested to answer questions of the form: do the
+data favor model \({\cal M}_1\) or \({\cal M}_2\)?</p>
+</li>
+</ul>
+<p>Adopt a <strong>decision theoretic approach</strong></p>
+<h3 id="decision-theoretic-approach">Decision Theoretic Approach</h3>
+<p>decision rule \(\delta(Y^T)\) that maps observations into decisions, and a loss function \(L(\theta,\delta)\)
+according to which the decisions are evaluated.</p>
+<p>\begin{eqnarray}
+\delta(Y^T) &amp;:&amp; {\cal Y} \mapsto {\cal D} \\\<br>
+L(\theta,\delta) &amp;:&amp; \Theta \otimes {\cal D} \mapsto R^+
+\end{eqnarray}</p>
+<p>\({\cal D}\) denotes the decision space.</p>
+<p>The goal is to find decisions that minimize the posterior expected loss \(E_{Y^T} [ L(\theta, \delta(Y^T)) ]\).</p>
+<p>The expectation is taken conditional on the data \(x\), and integrates out the parameter \(\theta\).</p>
+<h2 id="point-estimation">Point Estimation</h2>
+<h3 id="point-estimation">Point Estimation</h3>
+<p>the goal is to construct a point estimate \(\delta(Y^T)\) of
+\(\theta\).  It involves two steps:</p>
+<ul>
+<li>Find the posterior \(p(\theta|Y^T)\).</li>
+<li>Determine the optimal decision \(\delta(Y^T)\).</li>
+</ul>
+<p>The optimal decision depends on the loss function \(L(\theta,\delta(Y^T))\).</p>
+<h3 id="example-1-continued">Example 1, Continued</h3>
+<p>Consider the zero-one loss function</p>
+<p>\begin{eqnarray}
+L(\theta,\delta) = \left\{
+\begin{array}{l@{\quad}l}
+0 &amp; \delta = \theta \\\<br>
+1 &amp; \delta \not= \theta
+\end{array}
+\right\}.
+\end{eqnarray}</p>
+<p>The posterior expected loss is  \(E_Y[L(\theta,\delta)] = 1 - E_Y \{\theta = \delta\}\)
+The optimal decision rule is</p>
+<p>\begin{eqnarray}
+\delta = \mbox{argmax}_{\theta' \in \Theta} ; P_Y \{ \theta = \theta'\}
+\end{eqnarray}</p>
+<p>the point estimator under the zero-one loss is equal
+to the parameter value that has the highest posterior probability. We showed
+that</p>
+<p>\begin{eqnarray}
+P \{\theta = 0 |Y=1 \} &amp;=&amp; 0.358 \\\<br>
+P \{\theta = 1 |Y=1 \} &amp;=&amp; 0.642
+\end{eqnarray}</p>
+<p>Thus \(\delta(Y=1) = 1\).</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>The quadratic loss function is of
+the form \(L(\theta,\delta) = (\theta - \delta)^2\)</p>
+<p>The optimal decision rule is obtained by minimizing</p>
+<p>\begin{eqnarray}
+\min_{\delta \in {\cal D}} ; E_{Y^T} [(\theta - \delta)^2]
+\end{eqnarray}</p>
+<p>It can be easily verified that the solution to the minimization problem is of the form
+\(\delta(Y^T) = E_{Y^T} [\theta]\).</p>
+<p>Thus, the posterior mean \(\tilde{\theta}_T\) is the optimal point predictor under quadratic loss.</p>
+<h3 id="asymptotically">Asymptotically</h3>
+<p>Suppose data are generated from the model \(y_t = x_t'\theta_0 + u_t\).
+Asymptotically the Bayes estimator converges to the ``true'' parameter \(\theta_0\)</p>
+<p>\begin{eqnarray}
+\tilde{\theta}_T
+&amp;=&amp; (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \\\<br>
+&amp;=&amp; \theta_0 + \bigg( \frac{1}{T} X&rsquo;X + \frac{1}{\tau^2 T}{\cal I} \bigg)^{-1} \bigg( \frac{1}{T} X&rsquo;U \bigg) \nonumber \\\<br>
+&amp;\stackrel{p}{\longrightarrow} &amp; \theta_0 \nonumber
+\end{eqnarray}</p>
+<p>The disagreement between two Bayesians who have different priors
+will asymptotically vanish. \(\Box\)</p>
+<h2 id="testing-theory">Testing Theory</h2>
+<h3 id="testing-theory">Testing Theory</h3>
+<p>Consider the hypothesis test of
+\(H_0: \theta \in \Theta_0\) versus \(H_1: \theta \in \Theta_1\) where \(\Theta_1 = \Theta / \Theta_0\).</p>
+<p>Hypothesis testing can be interpreted as estimating the value of the indicator
+function \(\{\theta \in \Theta_0\}\).</p>
+<p>Consider the loss function</p>
+<p>\begin{eqnarray}
+L(\theta,\delta) = \left\{
+\begin{array}{l@{\quad}l@{\quad}l}
+0   &amp; \delta = \{\theta \in \Theta_0\} &amp; \mbox{correct decision}\\\<br>
+a_0 &amp; \delta = 0, ; \theta \in \Theta_0 &amp; \mbox{Type 1 error} \\\<br>
+a_1 &amp; \delta = 1, ; \theta \in \Theta_1 &amp; \mbox{Type 2 error}
+\end{array}
+\right.
+\end{eqnarray}</p>
+<p>Note that the parameters \(a_1\) and \(a_2\) are part of the econometricians
+preferences.</p>
+<h3 id="optimal-decision-rule">Optimal Decision Rule</h3>
+<p>\begin{eqnarray}
+\delta(Y^T) = \left\{
+\begin{array}{l@{\quad}l}
+1 &amp; P_{Y^T}\{\theta \in \Theta_0\} \ge a_1/(a_0+a_1) \\\<br>
+0 &amp; \mbox{otherwise}
+\end{array}
+\right.
+\end{eqnarray}</p>
+<p>The expected loss is</p>
+<p>\begin{eqnarray*}
+E_{Y^T} L(\theta,\delta)
+= \{\delta =0\} a_0 P_{Y^T}\{\theta \in \Theta_0\} + \{\delta=1\} a_1 [1-P_{Y^T}\{\theta \in \Theta_0\}]
+\end{eqnarray*}</p>
+<p>Thus, one should accept the hypothesis \(\theta \in \Theta_0\) (choose \(\delta=1\)) if</p>
+<p>\begin{eqnarray}
+a_1 P_{Y^T} \{ \theta \in \Theta_1 \}
+= a_1 [1- P_{Y^T} \{\theta \in \Theta_0\}] \le a_0 P_{Y^T}\{\theta \in \Theta_0\}
+\end{eqnarray}</p>
+<h3 id="bayes-factors">Bayes Factors</h3>
+<p><strong>Bayes Factors:</strong> ratio of posterior probabilities and prior probabilities in favor of that
+hypothesis:</p>
+<p>\begin{eqnarray}
+B(Y^T) = \frac{\mbox{Posterior Odds}}{\mbox{Prior Odds}}
+= \frac{ P_{Y^T}\{\theta \in \Theta_0\} / P_{Y^T}\{\theta \in \Theta_1\} }{P\{\theta \in \Theta_0\}/ P\{\theta \in \Theta_1\} }
+\end{eqnarray}</p>
+<h3 id="example-1-continued">Example 1, Continued</h3>
+<p>Suppose the observed value of \(Y\) is \(2\). Note that</p>
+<p>\begin{eqnarray}
+P_{\theta=0} \{Y \ge 2\} &amp; = &amp; 0.110 \\\<br>
+P_{\theta=1} \{Y \ge 2\} &amp; = &amp; 0.049
+\end{eqnarray}</p>
+<p>The frequentist interpretation of this result would be
+that there is significant evidence against \(H_0:\theta=1\)
+at the 5 percent level.</p>
+<p>Frequentist rejections are based on unlikely events that did
+not occur!!</p>
+<p>The Bayesian answers in terms of posterior odds is</p>
+<p>\begin{eqnarray}
+\frac{ P_{Y=2} \{\theta = 0\} }{ P_{Y=2}\{\theta=1\} } = 1
+\end{eqnarray}</p>
+<p>and in terms of the Bayes Factor \(B(Y)=1\).
+\(Y=2\) does not favor one versus the other model.</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>Suppose we only have one regressor
+\(k=1\).</p>
+<p>Consider the hypothesis  \(H_0: \theta &lt; 0\) versus \(H_1: \theta \ge 0\). Then,</p>
+<p>\begin{eqnarray}
+P_{Y^T}\{\theta &lt; 0 \}
+= P \left\{ \frac{\theta - \tilde{\theta}_T}{\sqrt{\tilde{V}_T}} &lt; - \frac{\tilde{\theta}_T}{\sqrt{\tilde{V}_T}} \right\}
+= \Phi \bigg( - \tilde{\theta}_T / \sqrt{ \tilde{V}_T } \bigg)
+\end{eqnarray}</p>
+<p>where \(\Phi(\cdot)\) denotes the cdf of a \({\cal N}(0,1)\).
+Suppose that \(a_0=a_1=1\)</p>
+<p>\(H_0\) is accepted if</p>
+<p>\begin{eqnarray}
+\Phi \bigg( - \tilde{\theta}_T / \sqrt{ \tilde{V}_T } \bigg) \ge 1/2 \quad \mbox{or} \quad \tilde{\theta}_T  &lt; 0
+\end{eqnarray}</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>Suppose that \(y_t = x_t \theta_0 + u_t\). Note that</p>
+<p>\begin{eqnarray}
+\frac{\tilde{\theta}_T}{ \sqrt{ \tilde{V}_T } }
+&amp;=&amp; \sqrt{( \frac{1}{\tau^2} + \sum x_t^2 )^{-1} }\sum x_t y_t \\\<br>
+&amp;=&amp; \sqrt{T} \theta_0 \frac{ \frac{1}{T} \sum x_t^2 }{ \sqrt{ \frac{1}{T} \sum x_t^2 + \frac{1}{\tau^2 T} } }
++ \frac{ \frac{1}{\sqrt{T}} \sum x_t u_t }{ \sqrt{ \frac{1}{T} \sum x_t^2 + \frac{1}{\tau^2 T} } }
+\end{eqnarray}</p>
+<p>\(\tilde{\theta}_T / \sqrt{ \tilde{V}_T }\) diverges to \(+ \infty\) if
+\(\theta_0 &gt; 0\) and \(P_{Y^T} \{ \theta &lt; 0 \}\) converges to zero.</p>
+<p>Vice versa,
+if \(\theta_0 &lt; 0\) then  \(\tilde{\theta}_T / \sqrt{ \tilde{V}_T }\) diverges
+to \(- \infty\) and \(P_{Y^T} \{ \theta &lt; 0 \}\) converges to one.</p>
+<p>Thus for almost all values of \(\theta_0\) (except \(\theta_0=0\)) the Bayesian test
+will provide the correct answer asymptotically.</p>
+<h3 id="point-hypotheses">Point Hypotheses</h3>
+<p>Suppose in the context of Example~2
+we would like to test \(H_0:\theta=0\) versus \(H_0:\theta \not= 0\).</p>
+<p>Since \(P\{\theta=0\}=0\) it follows that \(P_{Y^T}\{\theta=0\}=0\) and the null hypothesis
+is never accepted!</p>
+<p>This observations raises the question: are point hypotheses realistic?</p>
+<p>Only, if one is willing to place positive probability \(\lambda\) on the event that the
+null hypothesis is true.</p>
+<h3 id="a-modification-of-the-prior">A modification of the prior</h3>
+<p>Consider the modified prior
+\[
+p^*(\theta) = \lambda \Delta[ \{\theta=0\}] + (1-\lambda) p(\theta)
+\]
+where \(\Delta[ \{\theta=0\}]\) is a point mass or dirac function.</p>
+<p>The marginal density of \(Y^T\) can be derived as follows</p>
+<p>\begin{eqnarray*}
+\int p(Y^T|\theta)p^*(\theta) d\theta
+&amp; = &amp;  \lambda \int p(Y^T|\theta) \Delta [ \{\theta = 0\}] d\theta \nonumber \ &amp;&amp; +
+(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\<br>
+&amp; = &amp;  \lambda \int p(Y^T|0) \Delta [\{\theta = 0\} ] d\theta \nonumber \ &amp;&amp; +
+(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\<br>
+&amp; = &amp;  \lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta
+\end{eqnarray*}</p>
+<h3 id="evidence-for--theta-0">Evidence for \(\theta=0\)</h3>
+<p>The posterior probability of \(\theta=0\) is given by
+{\tiny</p>
+<p>\begin{eqnarray}
+P_{Y^T}\{\theta=0\}
+&amp;=&amp; \lim_{\epsilon \longrightarrow 0} ; P_{Y^T} \{ 0 \le \theta \le \epsilon \} \label{eq_pTth0} \\\<br>
+&amp;=&amp; \lim_{\epsilon \longrightarrow 0} ;
+\frac{ \lambda \int_0^\epsilon p(Y^T|\theta) \Delta[\{\theta = 0\}] d \theta
++ (1 - \lambda) \int_0^\epsilon p(Y^T|\theta)p(\theta) d\theta }{
+\lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta)p(\theta)d\theta} \nonumber \\\<br>
+&amp;=&amp; \frac{ \lambda p(Y^T| 0) }{
+\lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta)p(\theta)d\theta}.
+\end{eqnarray}</p>
+<p>}</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>Assume that \(\lambda = 1/2\).
+In order to obtain the posterior probability that \(\theta = 0\) we
+have to evaluate</p>
+<p>\begin{eqnarray}
+p(Y|X,\theta=0) = (2 \pi)^{-T/2} \exp \left\{ -\frac{1}{2} Y&rsquo;Y \right\}
+\end{eqnarray}</p>
+<p>and calculate the marginal data density</p>
+<p>\begin{eqnarray}
+p(Y|X) = \int p(Y|X,\theta) p(\theta) d\theta.
+\end{eqnarray}</p>
+<p>Typically, this is a pain!  However, since everything is normal here, we can show:</p>
+<p>\begin{eqnarray}
+p(Y|X)
+&amp;=&amp; (2 \pi)^{-T/2} \tau^{-k} | X&rsquo;X + \tau^{-2} |^{-1/2} \nonumber \\\<br>
+&amp;&amp; \times \exp \left\{ - \frac{1}{2}[ Y&rsquo;Y - Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y ] \right\}
+. \nonumber
+\end{eqnarray}</p>
+<h3 id="posterior-odds">Posterior Odds</h3>
+<p>the posterior odds ratio in favor of the null hypothesis is given by</p>
+<p>\begin{eqnarray}
+\frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} }
+= \tau^{k} | X&rsquo;X + \tau^{-2} |^{1/2} \nonumber \\\<br>
+\times \exp \left\{ - \frac{1}{2}[ Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y ] \right\}
+\end{eqnarray}</p>
+<p>Taking logs and standardizing the sums by \(T^{-1}\) yields</p>
+<p>\begin{eqnarray*}
+\ln \left[ \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} } \right]
+&amp;=&amp; - \frac{T}{2} \bigg( \frac{1}{T} \sum x_t y_t \bigg)'
+\bigg( \frac{1}{T} \sum x_t x_t' + \frac{1}{\tau^2 T} \bigg)^{-1} \nonumber \\\</p>
+<p>&amp;&amp; \times         \bigg( \frac{1}{T} \sum x_t y_t \bigg)
+&amp;&amp; + \frac{k}{2} \ln T</p>
+<ul>
+<li>\frac{1}{2} \ln \bigg| \frac{1}{T} \sum x_t x_t' + \frac{1}{\tau^2 T} \bigg| + k \ln \tau
+\end{eqnarray*}</li>
+</ul>
+<h3 id="assessing-posterior-odds">Assessing Posterior Odds</h3>
+<p>Assume that Data Were Generated from \(y_t = x_t'\theta_0 + u_t\).</p>
+<p>\begin{eqnarray}
+\lefteqn{ Y&rsquo;X(X&rsquo;X +\tau^{-2})^{-1} X&rsquo;Y } \nonumber \\\<br>
+&amp;=&amp; \theta_0' X&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\<br>
+&amp;&amp; + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + \theta_0&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\<br>
+&amp;=&amp; T \theta_0' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \theta_0
++ \sqrt{T} 2 \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)' \theta_0 \nonumber \\\<br>
+&amp;&amp;+ \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)</p>
+<ul>
+<li>O_p(1). \nonumber
+\end{eqnarray}</li>
+</ul>
+<h3 id="asymptotics">Asymptotics</h3>
+<p>If the null hypothesis is satisfied \(\theta_0 = 0\) then</p>
+<p>\begin{eqnarray}
+\ln \left[ \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} } \right]
+= \frac{k}{2} \ln T + small \longrightarrow + \infty.
+\end{eqnarray}</p>
+<p>That is, the posterior odds in favor of the null hypothesis converge to infinity
+and the posterior probability of \(\theta = 0\) converges to one.</p>
+<p>On the other hand, if the alternative hypothesis is true \(\theta_0 \not=0\)
+then</p>
+<p>\begin{eqnarray}
+\ln \left[ \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} } \right]
+=  -\frac{T}{2} \theta_0' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \theta_0  + small \longrightarrow - \infty. \nonumber
+\end{eqnarray}</p>
+<p>and the posterior odds converge to zero, which implies that the posterior probability
+of the null hypothesis being true converges to zero.</p>
+<h3 id="summing-up">Summing up</h3>
+<p>Bayesian test is consistent in the following sense.</p>
+<ul>
+<li>
+<p>If the null hypothesis is ``true'' then the posterior probability
+of \(H_0\) converges in probability to one as \(T \longrightarrow\infty\).</p>
+</li>
+<li>
+<p>If the null hypothesis is false then the posterior probability of \(H_0\) tends to zero</p>
+</li>
+</ul>
+<p>Thus, asymptotically the Bayesian test procedure has no ``Type 1'' error.</p>
+<h3 id="understanding-this">Understanding this</h3>
+<p>consider the marginal data density \(p(Y|X)\) in Example~2.
+The terms that asymptotically dominate are</p>
+<p>\begin{eqnarray}
+\ln p(Y|X)
+&amp;=&amp; - \frac{T}{2} \ln (2\pi) - \frac{1}{2} (Y&rsquo;Y - Y&rsquo;X(X&rsquo;X)^{-1} X&rsquo;Y) - \frac{k}{2} \ln T + small \\\<br>
+&amp;=&amp; \ln p(Y|X,\hat{\theta}_{mle}) - \frac{k}{2} \ln T + small \nonumber \\\<br>
+&amp;=&amp; \mbox{maximized likelihood function} - \mbox{penalty}.
+\end{eqnarray}</p>
+<p>The marginal data density has the form of a penalized likelihood function.</p>
+<p>The maximized likelihood function captures the goodness-of-fit of the regression
+model in which \(\theta\) is freely estimated.</p>
+<p>The second term penalizes the dimensionality to avoid overfitting the data.</p>
+<h2 id="confidence-sets">Confidence Sets</h2>
+<h3 id="confidence-sets">Confidence Sets</h3>
+<p>The frequentist definition is that \(C_{Y^T} \subseteq \Theta\) is an \(\alpha\) confidence
+region if</p>
+<p>\begin{eqnarray}
+P_\theta \{\theta \in C_{Y^T}\} \ge 1 -\alpha  \quad \forall \theta \in \Theta
+\end{eqnarray}</p>
+<p>A Bayesian confidence set is defined as follows. \(C_{Y^T} \subseteq \Theta\) is \(\alpha\) credible
+if</p>
+<p>\begin{eqnarray}
+P_{Y^T} \{\theta \in C_{Y^T}\} \ge 1 - \alpha
+\end{eqnarray}</p>
+<p>A highest posterior density region (HPD) is of the form</p>
+<p>\begin{eqnarray}
+C_{Y^T} = \{ \theta: p(\theta |Y^T) \ge k_\alpha \}
+\end{eqnarray}</p>
+<p>where \(k_\alpha\) is the largest bound such that
+\[
+P_{Y^T} \{\theta \in C_{Y^T} \} \ge 1 -\alpha
+\]
+The HPD regions have the smallest size among all \(\alpha\) credible
+regions of the parameter space \(\Theta\).</p>
+<h3 id="example-2-continued">Example 2, Continued</h3>
+<p>The Bayesian highest posterior density region with coverage \(1-\alpha\) for \(\theta_j\) is of the form
+\[
+C_{Y^T} = \left[ \tilde{\theta}_{T,j} - z_{crit} [ \tilde{V}_T]^{1/2}_{jj}
+\le \theta_j \le \tilde{\theta}_{T,j} + z_{crit} [ \tilde{V}_T]^{1/2}_{jj} \right]
+\]
+where \([ \tilde{V}_T]_{jj}\) is the \(j\)&lsquo;th diagonal element of \(\tilde{V}_T\),
+and \(z_{crit}\) is the \(\alpha/2\) critical value of a \({\cal N}(0,1)\).</p>
+<p>In the Gaussian linear
+regression model the Bayesian
+interval is very similar to the classical confidence interval, but its statistical interpretation
+is quite different. \(\Box\)</p>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ed Herbst</title>
+    <link>https://edherbst.net/teaching/bank-of-colombia-smc/</link>
+    <description>Recent content on Ed Herbst</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Oct 2020 12:27:17 -0400</lastBuildDate><atom:link href="https://edherbst.net/teaching/bank-of-colombia-smc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advanced Monte Carlo for Macroeconometrics 
+ewline Part 1: Theory</title>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/</link>
+      <pubDate>Tue, 27 Oct 2020 12:27:17 -0400</pubDate>
+      
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/</guid>
+      <description>Abstract The goal of this course is to understand Bayesian methods used in macroeconometrics with an emphasis on the estimation of Dynamic Stochastic General Equilibrium (DSGE) models. The course will cover posterior simulation from linear and nonlinear DSGE models. We&amp;rsquo;ll start will linear(ized) models and cover the Kalman filter, importance sampling, Markov chain monte carlo (MCMC), the Metropolis-Hastings (MH) algorithm, and Sequential Monte Carlo (SMC) for static parameters. Next, we will cover the estimation of nonlinear models via the particle filter using either (particle) Markov chain monte carlo (PMCMC) or SMC\(^2\).</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Advanced Monte Carlo for Macroeconometrics 
+ewline Part 1: Theory" />
+<meta property="og:description" content="syllabus" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/" /><meta property="article:published_time" content="2020-10-27T12:27:17-04:00" />
+
+
+
+<meta name="twitter:title" content="Advanced Monte Carlo for Macroeconometrics 
+ewline Part 1: Theory"/>
+<meta name="twitter:description" content="syllabus"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="https://edherbst.net/" class="no-style ">Ed Herbst</a>:~# 
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Advanced Monte Carlo for Macroeconometrics 
+ewline Part 1: Theory</h1>
+<h2 id="abstract">Abstract</h2>
+<p>The goal of this course is to understand Bayesian methods used in
+macroeconometrics with an emphasis on the estimation of Dynamic
+Stochastic General Equilibrium (DSGE) models.  The course will cover
+posterior simulation from linear and nonlinear DSGE models.  We&rsquo;ll
+start will linear(ized) models and cover the Kalman filter,
+importance sampling, Markov chain monte carlo (MCMC), the
+Metropolis-Hastings (MH) algorithm, and Sequential Monte Carlo (SMC)
+for static parameters.  Next, we will cover the estimation of
+nonlinear models via the particle filter using either (particle)
+Markov chain monte carlo (PMCMC) or SMC\(^2\).  Finally, we&rsquo;ll
+discuss piecewise linear models.  Where possible, we&rsquo;ll establish
+high level theoretical results for the various methodologies
+including laws of large numbers, central limit theorems, and
+unbiasedness properties.  (Part 2 will cover practical
+implementation.)</p>
+<h2 id="some-background">Some Background</h2>
+<p>The course will be taught via internet lectures.  I&rsquo;ll distribute
+slides before each one and hopefully technology will cooperate.
+The material draws from my academic research, especially monograph
+with Frank Schorfheide, and courses taught at Georgetown and Indiana
+Universities.  The material should be self-contained on the slides,
+but I&rsquo;ve added background readings and academic papers to each of
+the lectures.</p>
+<h2 id="computation">Computation</h2>
+<p>Macroeconometrics is an intensely computational field.  It is
+important to be proficient in at least one interpeted programming
+language popular in economics.  While the first part of the course
+we&rsquo;ll mainly focuse on theory, some of concepts are best illustrated
+using simulation, so expect some demos.  I&rsquo;ll talk more about this
+on the first day.</p>
+<p>&lt;/home/eherbst/Dropbox/ref/ref.bib&gt;</p>
+<h2 id="tentative--calendar">(Tentative) Calendar</h2>
+<h3 id="lecture-1-hello-welcome-to-bayesian-inference">Lecture 1: Hello, Welcome to Bayesian inference</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-09 Mon 10:00]–[2020-11-09 Mon 12:00]</span></span></p>
+<p><em>Slides</em>: <a href="lectures/01-a-crash-course-in-bayesian-inference">A Crash Course</a></p>
+<p><em>Topics</em>: Introduction, decision theory, prior, posterior, credible
+sets, hypothesis testing.</p>
+<p><em>Some background readings</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup>; <sup id="44d12abf40296f09e07ba995b9251652"><a href="#Robert1994" title="Christian Robert, The Bayesian Choice, Springer-Verlag (1994).">Robert1994</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="cd3f69618dcc6d9364bf871e24567141"><a href="#Schorfheide2008a" title="@Inbook{Schorfheide2008a,
+author=Schorfheide, Frank,
+editor=Durlauf, Steven N.
+and Blume, Lawrence E.,
+title=Bayesian methods in macroeconometrics,
+bookTitle=The New Palgrave Dictionary of Economics: Volume 1 -- 8,
+year=2008,
+publisher=Palgrave Macmillan UK,
+address=London,
+pages=402--406,
+abstract=Macroeconometrics encompasses a large variety of probability models for macroeconomic time series as well as estimation and inference procedures to study the determinants of economic growth, to examine the sources of business cycle fluctuations, to understand the propagation of shocks, to generate forecasts, and to predict the effects of economic policy changes. Bayesian methods are a collection of inference procedures that permit researchers to combine initial information about models and their parameters with sample information in a logically coherent manner by use of Bayes' theorem. Both prior and post-data information is represented by probability distributions.,
+isbn=978-1-349-58802-2,
+doi=10.1007/978-1-349-58802-2_109,
+url=https://doi.org/10.1007/978-1-349-58802-2_109
+}">Schorfheide2008a</a></sup></li>
+<li><sup id="7a749df2f041b0d5bf83c3091037f85e"><a href="#delnegroschorfheide2010" title="@INCOLLECTION{delnegroschorfheide2010,
+author = {Del Negro, Marco and Schorfheide, Frank},
+title = {Bayesian Macroeconometrics},
+booktitle = {Handbook of Bayesian Econometrics},
+publisher = {Oxford University Press},
+year = {2011},
+editor = {Herman van Dijk and Gary Koop and John Geweke},
+pages = {293-389},
+owner = {schorf},
+timestamp = {2010.06.25}
+}">delnegroschorfheide2010</a></sup></li>
+</ul>
+<h3 id="lecture-2--linear--bayesian-dsge-models">Lecture 2: (Linear) Bayesian DSGE Models</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-10 Tue 10:00]–[2020-11-10 Tue 12:00]</span></span></p>
+<p><em>Topics</em>: State space models, the kalman filter, prior
+specification, prior and posterior predictive checks, linear
+rational expectations, impulse response functions, variance decompositions</p>
+<p><em>Some background readings</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="44a5cfd4aac55ac2b563d69becd9f5ad"><a href="#Sims2002" title="Sims, Solving Linear Rational Expectations Models, {Computational Economics}, v(), 1-20 (2002).">Sims2002</a></sup></li>
+<li><sup id="188111b01398a8806c0a2b9d9be3fd1c"><a href="#An2007b" title="An \&amp; Frank Schorfheide, Bayesian Analysis of DSGE Models, {Econometric Reviews}, v(2-4), 113-172 (2007).">An2007b</a></sup></li>
+</ul>
+<h3 id="lecture-3-monte-carlo-simulation">Lecture 3: Monte Carlo Simulation</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-11 Wed 10:00]–[2020-11-11 Wed 12:00]</span></span></p>
+<p><em>Topics</em>: approximation of moments via posterior simulation, monte
+carlo methods, rejection sampling, particle systems, importance
+sampling, variance reduction, effective sample size</p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="aa638b39999ab5704a9c4308b2fb7e69"><a href="#KloekVanDijk" title="Kloek \&amp; van Dijk, Bayesian Estimates of Equation System Parameters: An Application of Integration by Monte Carlo, {Econometrica}, v(1), 1--19 (1978).">KloekVanDijk</a></sup></li>
+<li><sup id="f26c5482124067ac084d605918d80221"><a href="#Geweke_1989" title="Geweke, Bayesian Inference in Econometric Models Using Monte  Carlo Integration, {Econometrica}, v(6), 1317 (1989).">Geweke_1989</a></sup></li>
+</ul>
+<h3 id="lecture-4-markov-chain-monte-carlo-simulation">Lecture 4: Markov Chain Monte Carlo Simulation</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-11 Wed 02:00] </span></span> <em>Topics</em>: markov chain basics, the
+Metropolis-Hastings (MH) algorithm, random walk, parameter blocking</p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="a50677fe8b96e99056f5de85b8e1fdf7"><a href="#Chib1995a" title="Chib \&amp; Greenberg, Understanding the Metropolis-Hastings Algorithm, {The American Statistician}, v(), 327-335 (1995).">Chib1995a</a></sup></li>
+<li><sup id="fe9f6a8e67ee0865974179a18505e65b"><a href="#ChibR08" title="Chib \&amp; Srikanth Ramamurthy, Tailored Randomized Block MCMC Methods with Application to DSGE Models, {Journal of Econometrics}, v(1), 19-38 (2010).">ChibR08</a></sup></li>
+</ul>
+<h3 id="lecture-5-importance-sampling-on-steriods-sequential-monte-carlo">Lecture 5: Importance Sampling on Steriods: Sequential Monte Carlo</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-12 Thu 10:00]</span></span></p>
+<p><em>Topics</em>: sequential monte carlo, correction-selection-mutation,
+transition kernels, tempering, generalized tempering</p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="9991c2070855dd210acd2f314d514ba5"><a href="#Chopin2004a" title="Nicolas Chopin, A Sequential Particle Filter for Static Models, {Biometrika}, v(3), 539-551 (2004).">Chopin2004a</a></sup></li>
+<li><sup id="fb1a726de44cc316249793cb229f4457"><a href="#Herbst_2014" title="Herbst \&amp; Schorfheide, Sequential Monte Carlo Sampling for DSGE Models, {Journal of Applied Econometrics}, v(7), 1073 1098 (2014).">Herbst_2014</a></sup></li>
+<li><sup id="a4cb2fbb52b3fbd91c1b02bee160fa20"><a href="#Cai_2019" title="Cai, Del Negro, Herbst, , Matlin, Sarfati, Schorfheide \&amp; Frank, Online Estimation of DSGE Models, {SSRN Electronic Journal}, v(), (2019).">Cai_2019</a></sup></li>
+</ul>
+<h3 id="lecture-6-estimating-a-linear-dsge-model">Lecture 6: Estimating a Linear DSGE Model</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-13 Fri 10:00]</span></span></p>
+<p><em>Topics</em>: bimodality, model selection, variance decomposition,
+impulse response, effective number of draws, chain length.</p>
+<p><em>Some background reading</em>:  <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="0d8b307a60fe1d0ae3cf2a838eca7a27"><a href="#Smets2007" title="Smets \&amp; Wouters, Shocks and Frictions in US Business Cycles: A Bayesian DSGE Approach, {American Economic Review}, v(), 586-608 (2007).">Smets2007</a></sup></li>
+<li><sup id="2446052d54b7083da2aa6e5f0472839d"><a href="#Schmitt-Grohe2008" title="Schmitt-Groh\'e \&amp; Uribe, What's News in Business Cycles?, {Econometrica}, v(), 2733-2764 (2012).">Schmitt-Grohe2008</a></sup></li>
+</ul>
+<h3 id="lecture-7-nonlinear-dsge-models">Lecture 7: Nonlinear DSGE Models</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-13 Fri 02:00]</span></span></p>
+<p><em>Topics:</em> global approximation methods, perturbation methods,
+stochastic volatility, Markov switching, asymmetries, occasionally
+binding constraints</p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup>; <sup id="17aaab7006d5fb00f4df4734c7ecc061"><a href="#JuddBOOK" title="Kenneth Judd, Numerical Methods in Economics, The MIT Press (1998).">JuddBOOK</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="fd709478b3c27866339020943ed1cd0a"><a href="#Fern_ndez_Villaverde_2016" title="Fernandez-Villaverde, Rubio-Ramirez, \&amp; Schorfheide, Solution and Estimation Methods for DSGE Models, {Handbook of Macroeconomics}, v(), 527 724 (2016).">Fern_ndez_Villaverde_2016</a></sup></li>
+<li><sup id="cf957e0282929912550a024f81bc0976"><a href="#Schorfheide2005b" title="Schorfheide, Learning and Monetary Policy Shifts, {Review of Economic Dynamics}, v(2), 392-419 (2005).">Schorfheide2005b</a></sup></li>
+<li><sup id="d9f86da9d68227c998b4cf1066d8028d"><a href="#Bora_an_Aruoba_2017" title="Aruoba, Cuba-Borda, \&amp; Schorfheide, Macroeconomic Dynamics Near the ZLB: A Tale of Two  Countries, {The Review of Economic Studies}, v(1), 87 118 (2018).">Bora_an_Aruoba_2017</a></sup></li>
+</ul>
+<h3 id="lecture-8-the-particle-filter">Lecture 8: The Particle Filter</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-17 Tue 10:00]</span></span></p>
+<p><em>Topics</em>: nonlinear filtering, unbiasedness, bootstrap particle
+filter, auxiliary particle filter, conditionally-optimal particle
+filter, particle impoverishment, degeneracy, deterministic filters,
+tempering.</p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="43597e98c0729a4ad93a29223c4d1a8f"><a href="#Gordon_1993" title="Gordon, Salmond \&amp; Smith, Novel approach to nonlinear/non-Gaussian Bayesian  state estimation, {IEE Proceedings F Radar and Signal Processing}, v(2), 107 (1993).">Gordon_1993</a></sup></li>
+<li><sup id="25e8317959ce21a76636d8ce5c312822"><a href="#Pitt_2001" title="Pitt \&amp; Shephard, Auxiliary Variable Based Particle Filters, {Sequential Monte Carlo Methods in Practice}, v(), 273 293 (2001).">Pitt_2001</a></sup></li>
+<li><sup id="a470a3dc448ff6c30ef3d17ae7b5c57a"><a href="#Malik_2011" title="Malik \&amp; Pitt, Particle filters for continuous likelihood  evaluation and maximisation, {Journal of Econometrics}, v(2), 190 209 (2011).">Malik_2011</a></sup></li>
+<li><sup id="db2330978f653f41cac0e7266979736f"><a href="#Herbst_2019" title="Herbst \&amp; Schorfheide, Tempered particle filtering, {Journal of Econometrics}, v(1), 26 44 (2019).">Herbst_2019</a></sup></li>
+</ul>
+<h3 id="lecture-9-bayesian-estimation-of-nonlinear-models">Lecture 9: Bayesian Estimation of Nonlinear Models</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-18 Wed 10:00]</span></span></p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="f57c2145055ae0e99ad50d275ac54bc5"><a href="#Fernandez-Villaverde2007a" title="Fern\'andez-Villaverde \&amp; Rubio-Ram\'irez, Estimating Macroeconomic Models: A Likelihood Approach, {Review of Economic Studies}, v(4), 1059-1087 (2007).">Fernandez-Villaverde2007a</a></sup></li>
+<li><sup id="bdbeaec8ecb4a8ea982e4ad765654ea6"><a href="#Andrieu_2010" title="Andrieu, Doucet, \&amp; Holenstein, Particle Markov chain Monte Carlo methods, {Journal of the Royal Statistical Society: Series B
+(Statistical Methodology)}, v(3), 269 342 (2010).">Andrieu_2010</a></sup></li>
+<li><sup id="b2889ae66f0a236c79091ac408ccf828"><a href="#Pitt2012" title="Pitt, Silva, Giordani \&amp; Kohn, {On some properties of Markov chain Monte Carlo simulation methods based on the particle filter}, {Journal of Econometrics}, v(2), 134-151 (2012).">Pitt2012</a></sup></li>
+<li><sup id="f96243f22295b8d14b1640a268a6e625"><a href="#Gust_2017" title="Gust, Herbst, , L&#243;pez-Salido \&amp; Smith, The Empirical Implications of the Interest-Rate  Lower Bound, {American Economic Review}, v(7), 1971 2006 (2017).">Gust_2017</a></sup></li>
+</ul>
+<h3 id="lecture-10-smc-2">Lecture 10: SMC^2</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-18 Wed 02:00]</span></span></p>
+<p><em>Some background reading</em>: <sup id="f275eaf93510eb80c8e1a928b194e45f"><a href="#HerbstSchorfheide2015" title="Edward Herbst \&amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).">HerbstSchorfheide2015</a></sup></p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="3933b45027280d62fba58e1d66b6964e"><a href="#ChopinJacobPapas2012" title="Chopin, Jacob \&amp; Papaspiliopoulos, $SMC^2$: An Efficient Algorithm for Sequential Analysis of State-Space  Models, {arXiv:1101.1528}, v(), (2012).">ChopinJacobPapas2012</a></sup></li>
+</ul>
+<h3 id="lecture-11-piecewise-linear-model">Lecture 11: Piecewise Linear Model</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-18 Wed 10:00]</span></span></p>
+<h3 id="lecture-12-the-next-frontier-in-estimation">Lecture 12: The Next Frontier in Estimation (?)</h3>
+<p><span class="timestamp-wrapper"><span class="timestamp">[2020-11-19 Thu 10:00]</span></span>
+<em>Topics</em>: hamiltonian dynamics, Rao-Blackwellization, automatic differentiation</p>
+<p><em>A few related papers</em>:</p>
+<ul>
+<li><sup id="8772595cedb044c45ffaf491de7c8f91"><a href="#Neal_2011" title="Neal, MCMC Using Hamiltonian Dynamics, {Handbook of Markov Chain Monte Carlo}, v(), (2011).">Neal_2011</a></sup></li>
+<li><sup id="ac0fe04d1a062168775549b7715c78d0"><a href="#Hoffman_Gelman_2014" title="Hoffman \&amp; Gelman, The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo, {Journal of Machine Learning Research}, v(), 1351-1381 (2014).">Hoffman_Gelman_2014</a></sup></li>
+</ul>
+<h1 id="bibliography">Bibliography</h1>
+<p><a id="HerbstSchorfheide2015"></a>[HerbstSchorfheide2015] Edward Herbst &amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015). <a href="#f275eaf93510eb80c8e1a928b194e45f">↩</a></p>
+<p><a id="Robert1994"></a>[Robert1994] Christian Robert, The Bayesian Choice, Springer-Verlag (1994). <a href="#44d12abf40296f09e07ba995b9251652">↩</a></p>
+<p><a id="Schorfheide2008a"></a>[Schorfheide2008a] @InbookSchorfheide2008a,
+author=&ldquo;Schorfheide, Frank&rdquo;,
+editor=&ldquo;Durlauf, Steven N.
+and Blume, Lawrence E.&rdquo;,
+title=&ldquo;Bayesian methods in macroeconometrics&rdquo;,
+bookTitle=&ldquo;The New Palgrave Dictionary of Economics: Volume 1 - 8&rdquo;,
+year=&ldquo;2008&rdquo;,
+publisher=&ldquo;Palgrave Macmillan UK&rdquo;,
+address=&ldquo;London&rdquo;,
+pages=&ldquo;402-406&rdquo;,
+abstract=&ldquo;Macroeconometrics encompasses a large variety of probability models for macroeconomic time series as well as estimation and inference procedures to study the determinants of economic growth, to examine the sources of business cycle fluctuations, to understand the propagation of shocks, to generate forecasts, and to predict the effects of economic policy changes. Bayesian methods are a collection of inference procedures that permit researchers to combine initial information about models and their parameters with sample information in a logically coherent manner by use of Bayes' theorem. Both prior and post-data information is represented by probability distributions.&rdquo;,
+isbn=&ldquo;978-1-349-58802-2&rdquo;,
+doi=&ldquo;10.1007/978-1-349-58802-2_109&rdquo;,
+url=&ldquo;<a href="https://doi.org/10.1007/978-1-349-58802-2_109%22">https://doi.org/10.1007/978-1-349-58802-2_109&quot;</a>
+<a href="#cd3f69618dcc6d9364bf871e24567141">↩</a></p>
+<p><a id="delnegroschorfheide2010"></a>[delnegroschorfheide2010] @INCOLLECTIONdelnegroschorfheide2010,
+author = Del Negro, Marco and Schorfheide, Frank,
+title = Bayesian Macroeconometrics,
+booktitle = Handbook of Bayesian Econometrics,
+publisher = Oxford University Press,
+year = 2011,
+editor = Herman van Dijk and Gary Koop and John Geweke,
+pages = 293-389,
+owner = schorf,
+timestamp = 2010.06.25
+<a href="#7a749df2f041b0d5bf83c3091037f85e">↩</a></p>
+<p><a id="Sims2002"></a>[Sims2002] Sims, Solving Linear Rational Expectations Models, <i>Computational Economics</i>, <b>20</b>, 1-20 (2002). <a href="#44a5cfd4aac55ac2b563d69becd9f5ad">↩</a></p>
+<p><a id="An2007b"></a>[An2007b] An &amp; Frank Schorfheide, Bayesian Analysis of DSGE Models, <i>Econometric Reviews</i>, <b>26(2-4)</b>, 113-172 (2007). <a href="http://dx.doi.org/10.1080/07474930701220071">doi</a>. <a href="#188111b01398a8806c0a2b9d9be3fd1c">↩</a></p>
+<p><a id="KloekVanDijk"></a>[KloekVanDijk] Kloek &amp; van Dijk, Bayesian Estimates of Equation System Parameters: An Application of Integration by Monte Carlo, <i>Econometrica</i>, <b>46(1)</b>, 1-19 (1978). <a href="http://www.jstor.org/stable/1913641">link</a>. <a href="#aa638b39999ab5704a9c4308b2fb7e69">↩</a></p>
+<p><a id="Geweke_1989"></a>[Geweke_1989] Geweke, Bayesian Inference in Econometric Models Using Monte  Carlo Integration, <i>Econometrica</i>, <b>57(6)</b>, 1317 (1989). <a href="http://dx.doi.org/10.2307/1913710">link</a>. <a href="http://dx.doi.org/10.2307/1913710">doi</a>. <a href="#f26c5482124067ac084d605918d80221">↩</a></p>
+<p><a id="Chib1995a"></a>[Chib1995a] Chib &amp; Greenberg, Understanding the Metropolis-Hastings Algorithm, <i>The American Statistician</i>, <b>49</b>, 327-335 (1995). <a href="#a50677fe8b96e99056f5de85b8e1fdf7">↩</a></p>
+<p><a id="ChibR08"></a>[ChibR08] Chib &amp; Srikanth Ramamurthy, Tailored Randomized Block MCMC Methods with Application to DSGE Models, <i>Journal of Econometrics</i>, <b>155(1)</b>, 19-38 (2010). <a href="#fe9f6a8e67ee0865974179a18505e65b">↩</a></p>
+<p><a id="Chopin2004a"></a>[Chopin2004a] Nicolas Chopin, A Sequential Particle Filter for Static Models, <i>Biometrika</i>, <b>89(3)</b>, 539-551 (2004). <a href="#9991c2070855dd210acd2f314d514ba5">↩</a></p>
+<p><a id="Herbst_2014"></a>[Herbst_2014] Herbst &amp; Schorfheide, Sequential Monte Carlo Sampling for DSGE Models, <i>Journal of Applied Econometrics</i>, <b>29(7)</b>, 1073 1098 (2014). <a href="http://dx.doi.org/10.1002/jae.2397">link</a>. <a href="http://dx.doi.org/10.1002/jae.2397">doi</a>. <a href="#fb1a726de44cc316249793cb229f4457">↩</a></p>
+<p><a id="Cai_2019"></a>[Cai_2019] Cai, Del Negro, Herbst, , Matlin, Sarfati, Schorfheide &amp; Frank, Online Estimation of DSGE Models, <i>SSRN Electronic Journal</i>,  (2019). <a href="http://dx.doi.org/10.2139/ssrn.3432452">link</a>. <a href="http://dx.doi.org/10.2139/ssrn.3432452">doi</a>. <a href="#a4cb2fbb52b3fbd91c1b02bee160fa20">↩</a></p>
+<p><a id="Smets2007"></a>[Smets2007] Smets &amp; Wouters, Shocks and Frictions in US Business Cycles: A Bayesian DSGE Approach, <i>American Economic Review</i>, <b>97</b>, 586-608 (2007). <a href="#0d8b307a60fe1d0ae3cf2a838eca7a27">↩</a></p>
+<p><a id="Schmitt-Grohe2008"></a>[Schmitt-Grohe2008] Schmitt-Groh'e &amp; Uribe, What&rsquo;s News in Business Cycles?, <i>Econometrica</i>, <b>80</b>, 2733-2764 (2012). <a href="#2446052d54b7083da2aa6e5f0472839d">↩</a></p>
+<p><a id="JuddBOOK"></a>[JuddBOOK] Kenneth Judd, Numerical Methods in Economics, The MIT Press (1998). <a href="#17aaab7006d5fb00f4df4734c7ecc061">↩</a></p>
+<p><a id="Fern_ndez_Villaverde_2016"></a>[Fern_ndez_Villaverde_2016] Fernandez-Villaverde, Rubio-Ramirez, &amp; Schorfheide, Solution and Estimation Methods for DSGE Models, <i>Handbook of Macroeconomics</i>,  527 724 (2016). <a href="http://dx.doi.org/10.1016/bs.hesmac.2016.03.006">link</a>. <a href="http://dx.doi.org/10.1016/bs.hesmac.2016.03.006">doi</a>. <a href="#fd709478b3c27866339020943ed1cd0a">↩</a></p>
+<p><a id="Schorfheide2005b"></a>[Schorfheide2005b] Schorfheide, Learning and Monetary Policy Shifts, <i>Review of Economic Dynamics</i>, <b>8(2)</b>, 392-419 (2005). <a href="#cf957e0282929912550a024f81bc0976">↩</a></p>
+<p><a id="Bora_an_Aruoba_2017"></a>[Bora_an_Aruoba_2017] Aruoba, Cuba-Borda, &amp; Schorfheide, Macroeconomic Dynamics Near the ZLB: A Tale of Two  Countries, <i>The Review of Economic Studies</i>, <b>85(1)</b>, 87 118 (2018). <a href="http://dx.doi.org/10.1093/restud/rdx027">link</a>. <a href="http://dx.doi.org/10.1093/restud/rdx027">doi</a>. <a href="#d9f86da9d68227c998b4cf1066d8028d">↩</a></p>
+<p><a id="Gordon_1993"></a>[Gordon_1993] Gordon, Salmond &amp; Smith, Novel approach to nonlinear/non-Gaussian Bayesian  state estimation, <i>IEE Proceedings F Radar and Signal Processing</i>, <b>140(2)</b>, 107 (1993). <a href="http://dx.doi.org/10.1049/ip-f-2.1993.0015">link</a>. <a href="http://dx.doi.org/10.1049/ip-f-2.1993.0015">doi</a>. <a href="#43597e98c0729a4ad93a29223c4d1a8f">↩</a></p>
+<p><a id="Pitt_2001"></a>[Pitt_2001] Pitt &amp; Shephard, Auxiliary Variable Based Particle Filters, <i>Sequential Monte Carlo Methods in Practice</i>,  273 293 (2001). <a href="http://dx.doi.org/10.1007/978-1-4757-3437-9_13">link</a>. <a href="http://dx.doi.org/10.1007/978-1-4757-3437-9_13">doi</a>. <a href="#25e8317959ce21a76636d8ce5c312822">↩</a></p>
+<p><a id="Malik_2011"></a>[Malik_2011] Malik &amp; Pitt, Particle filters for continuous likelihood  evaluation and maximisation, <i>Journal of Econometrics</i>, <b>165(2)</b>, 190 209 (2011). <a href="http://dx.doi.org/10.1016/j.jeconom.2011.07.006">link</a>. <a href="http://dx.doi.org/10.1016/j.jeconom.2011.07.006">doi</a>. <a href="#a470a3dc448ff6c30ef3d17ae7b5c57a">↩</a></p>
+<p><a id="Herbst_2019"></a>[Herbst_2019] Herbst &amp; Schorfheide, Tempered particle filtering, <i>Journal of Econometrics</i>, <b>210(1)</b>, 26 44 (2019). <a href="http://dx.doi.org/10.1016/j.jeconom.2018.11.003">link</a>. <a href="http://dx.doi.org/10.1016/j.jeconom.2018.11.003">doi</a>. <a href="#db2330978f653f41cac0e7266979736f">↩</a></p>
+<p><a id="Fernandez-Villaverde2007a"></a>[Fernandez-Villaverde2007a] Fern'andez-Villaverde &amp; Rubio-Ram'irez, Estimating Macroeconomic Models: A Likelihood Approach, <i>Review of Economic Studies</i>, <b>74(4)</b>, 1059-1087 (2007). <a href="#f57c2145055ae0e99ad50d275ac54bc5">↩</a></p>
+<p><a id="Andrieu_2010"></a>[Andrieu_2010] Andrieu, Doucet, &amp; Holenstein, Particle Markov chain Monte Carlo methods, <i>Journal of the Royal Statistical Society: Series B
+(Statistical Methodology)</i>, <b>72(3)</b>, 269 342 (2010). <a href="http://dx.doi.org/10.1111/j.1467-9868.2009.00736.x">link</a>. <a href="http://dx.doi.org/10.1111/j.1467-9868.2009.00736.x">doi</a>. <a href="#bdbeaec8ecb4a8ea982e4ad765654ea6">↩</a></p>
+<p><a id="Pitt2012"></a>[Pitt2012] Pitt, Silva, Giordani &amp; Kohn, On some properties of Markov chain Monte Carlo simulation methods based on the particle filter, <i>Journal of Econometrics</i>, <b>171(2)</b>, 134-151 (2012). <a href="https://ideas.repec.org/a/eee/econom/v171y2012i2p134-151.html">link</a>. <a href="http://dx.doi.org/10.1016/j.jeconom.2012.06">doi</a>. <a href="#b2889ae66f0a236c79091ac408ccf828">↩</a></p>
+<p><a id="Gust_2017"></a>[Gust_2017] Gust, Herbst, , López-Salido &amp; Smith, The Empirical Implications of the Interest-Rate  Lower Bound, <i>American Economic Review</i>, <b>107(7)</b>, 1971 2006 (2017). <a href="http://dx.doi.org/10.1257/aer.20121437">link</a>. <a href="http://dx.doi.org/10.1257/aer.20121437">doi</a>. <a href="#f96243f22295b8d14b1640a268a6e625">↩</a></p>
+<p><a id="ChopinJacobPapas2012"></a>[ChopinJacobPapas2012] Chopin, Jacob &amp; Papaspiliopoulos, $SMC^2$: An Efficient Algorithm for Sequential Analysis of State-Space  Models, <i>arXiv:1101.1528</i>,  (2012). <a href="#3933b45027280d62fba58e1d66b6964e">↩</a></p>
+<p><a id="Neal_2011"></a>[Neal_2011] Neal, MCMC Using Hamiltonian Dynamics, <i>Handbook of Markov Chain Monte Carlo</i>,  (2011). <a href="http://dx.doi.org/10.1201/b10905-6">link</a>. <a href="http://dx.doi.org/10.1201/b10905-6">doi</a>. <a href="#8772595cedb044c45ffaf491de7c8f91">↩</a></p>
+<p><a id="Hoffman_Gelman_2014"></a>[Hoffman_Gelman_2014] Hoffman &amp; Gelman, The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo, <i>Journal of Machine Learning Research</i>, <b>15</b>, 1351-1381 (2014). <a href="#ac0fe04d1a062168775549b7715c78d0">↩</a></p>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>
