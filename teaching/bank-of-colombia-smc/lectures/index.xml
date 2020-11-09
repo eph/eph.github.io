@@ -6,23 +6,24 @@
     <description>Recent content on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Oct 2020 10:02:53 -0400</lastBuildDate><atom:link href="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Oct 2020 21:06:35 -0400</lastBuildDate><atom:link href="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>A Crash Course In Bayesian Inference</title>
-      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</link>
-      <pubDate>Tue, 27 Oct 2020 10:02:53 -0400</pubDate>
-      
-      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</guid>
-      <description>Introduction Modes of Interence  Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed  Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta+1 \} = \frac{1}{2} \] Consider the following confidence set</description>
-    </item>
-    
-    <item>
-      <title>Introduction</title>
+      <title>Introduction Bayes 6: (Linear) State Space Models</title>
       <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</link>
-      <pubDate>Tue, 27 Oct 2020 10:02:42 -0400</pubDate>
+      <pubDate>Tue, 27 Oct 2020 21:06:35 -0400</pubDate>
       
       <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</guid>
       <description>Intro Background  Textbook treatments: woodford_2003, Gali2008  Key empirical papers: ireland2004, christiano2005, Smets2007, An2007b,  Frequentist estimation: Harvey1991, Hamilton,  Bayesian estimation: HerbstSchorfheide2015  A DSGE Model Small-Scale DSGE Model  Intermediate and final goods producers  Households  Monetary and fiscal policy  Exogenous processes  Equilibrium Relationships  Final Goods Producers  Perfectly competitive firms combine a continuum of intermediate goods: \[ Y_t = \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}}.</description>
+    </item>
+    
+    <item>
+      <title>A Crash Course In Bayesian Inference</title>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</link>
+      <pubDate>Tue, 27 Oct 2020 19:22:48 -0400</pubDate>
+      
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</guid>
+      <description>Introduction These notes are available as slides and a Jupyter notebook.
+Modes of Inference  Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed  Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta+1 \} = \frac{1}{2} \] Consider the following confidence set</description>
     </item>
     
     <item>

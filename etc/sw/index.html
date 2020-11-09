@@ -62,7 +62,7 @@ A Replication First we start by importing some standard libraries.
         
 <h1>Stock and Watson (2007) in pymc3 and Stan</h1>
 <p><em>This file is available as Jupyter Notebook</em>.</p>
-<p>The <sup id="751475a24881d3cf8ff77e5dc432fc83"><a href="#STOCK_2007" title="Stock \&amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, {Journal of Money, Credit and Banking}, v(), 3–33 (2007).">STOCK_2007</a></sup> model inflation as an unobserved components
+<p>The <sup id="751475a24881d3cf8ff77e5dc432fc83"><a href="#STOCK_2007" title="Stock \&amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, {Journal of Money, Credit and Banking}, v(), 3 33 (2007).">STOCK_2007</a></sup> model inflation as an unobserved components
 models:</p>
 <p>\begin{eqnarray}
 \pi_t &amp;=&amp; \tau_t + \eta_t \\\<br>
@@ -73,74 +73,74 @@ distributed with mean 0 and variances \(\sigma_\eta^2\) and
 \(\sigma_\epsilon^2\).</p>
 <h2 id="a-replication">A Replication</h2>
 <p>First we start by importing some standard libraries.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#666">%</span>matplotlib inline
-<span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">matplotlib.pyplot</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">plt</span>
-<span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">np</span>
-<span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pandas</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">p</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as p
 </code></pre></div><p>Next we get the data used and plot it.</p>
 <figure>
     <img src="https://edherbst.net/ox-hugo/0877b3a1f8ff225d7686ac63f7450e3a7e6c5a87.png"
-         alt="Figure 1: It&amp;rsquo;s a figure"/> <figcaption>
-            <p>Figure 1: <strong>It&rsquo;s a figure</strong></p>
+         alt="Figure 1: Inflation Data"/> <figcaption>
+            <p>Figure 1: Inflation Data</p>
         </figcaption>
 </figure>
 
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pymc3</span> <span style="color:#a2f;font-weight:bold">import</span> Model, Normal, InverseGamma, sample
-<span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pymc3.distributions.timeseries</span> <span style="color:#a2f;font-weight:bold">import</span> GaussianRandomWalk
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">from pymc3 import Model, Normal, InverseGamma, sample
+from pymc3.distributions.timeseries import GaussianRandomWalk
 
-<span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pymc3</span> <span style="color:#a2f;font-weight:bold">import</span> Uniform, Deterministic
-<span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pymc3.math</span> <span style="color:#a2f;font-weight:bold">import</span> exp, sqrt
+from pymc3 import Uniform, Deterministic
+from pymc3.math import exp, sqrt
 
-y <span style="color:#666">=</span> sw_infl[<span style="color:#b44">&#39;1953&#39;</span>:<span style="color:#b44">&#39;2004&#39;</span>]<span style="color:#666">.</span>values<span style="color:#666">.</span>flatten()
+y = sw_infl[&#39;1953&#39;:&#39;2004&#39;].values.flatten()
 
-<span style="color:#a2f;font-weight:bold">with</span> Model() <span style="color:#a2f;font-weight:bold">as</span> ucsv_model:
+with Model() as ucsv_model:
 
-    gamma <span style="color:#666">=</span> <span style="color:#666">0.2</span>
-    ln_sigma2_eps <span style="color:#666">=</span> GaussianRandomWalk(<span style="color:#b44">&#39;ln_sigma2_eps&#39;</span>, sd<span style="color:#666">=</span>gamma, shape<span style="color:#666">=</span><span style="color:#a2f">len</span>(y)<span style="color:#666">-</span><span style="color:#666">1</span>)
-    ln_sigma2_eta <span style="color:#666">=</span> GaussianRandomWalk(<span style="color:#b44">&#39;ln_sigma2_eta&#39;</span>, sd<span style="color:#666">=</span>gamma, shape<span style="color:#666">=</span><span style="color:#a2f">len</span>(y))
+    gamma = 0.2
+    ln_sigma2_eps = GaussianRandomWalk(&#39;ln_sigma2_eps&#39;, sd=gamma, shape=len(y)-1)
+    ln_sigma2_eta = GaussianRandomWalk(&#39;ln_sigma2_eta&#39;, sd=gamma, shape=len(y))
 
-    sigma_eps <span style="color:#666">=</span> Deterministic(<span style="color:#b44">&#39;sigma_eps&#39;</span>, exp(<span style="color:#666">0.5</span><span style="color:#666">*</span>ln_sigma2_eps))
-    tau <span style="color:#666">=</span> GaussianRandomWalk(<span style="color:#b44">&#39;tau&#39;</span>, sd<span style="color:#666">=</span>sigma_eps, shape<span style="color:#666">=</span><span style="color:#a2f">len</span>(y))
+    sigma_eps = Deterministic(&#39;sigma_eps&#39;, exp(0.5*ln_sigma2_eps))
+    tau = GaussianRandomWalk(&#39;tau&#39;, sd=sigma_eps, shape=len(y))
 
-    sigma_eta <span style="color:#666">=</span> Deterministic(<span style="color:#b44">&#39;sigma_eta&#39;</span>, exp(<span style="color:#666">0.5</span><span style="color:#666">*</span>ln_sigma2_eta))
-    pinf <span style="color:#666">=</span> Normal(<span style="color:#b44">&#39;pi&#39;</span>,mu<span style="color:#666">=</span>tau, sd<span style="color:#666">=</span>sigma_eta, observed<span style="color:#666">=</span>y)
+    sigma_eta = Deterministic(&#39;sigma_eta&#39;, exp(0.5*ln_sigma2_eta))
+    pinf = Normal(&#39;pi&#39;,mu=tau, sd=sigma_eta, observed=y)
 
-    temp <span style="color:#666">=</span> Deterministic(<span style="color:#b44">&#39;temp&#39;</span>, sigma_eta[<span style="color:#666">1</span>:]<span style="color:#666">**</span><span style="color:#666">2</span><span style="color:#666">/</span>(sigma_eps<span style="color:#666">**</span><span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">*</span>sigma_eta[<span style="color:#666">1</span>:]<span style="color:#666">**</span><span style="color:#666">2</span>))
-    theta <span style="color:#666">=</span> Deterministic(<span style="color:#b44">&#39;theta&#39;</span>, (<span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">+</span> sqrt(<span style="color:#666">1</span><span style="color:#666">-</span><span style="color:#666">4</span><span style="color:#666">*</span>temp<span style="color:#666">*</span>temp)) <span style="color:#666">/</span>(<span style="color:#666">-</span><span style="color:#666">2</span><span style="color:#666">*</span>temp))
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">with</span> ucsv_model:
-    trace <span style="color:#666">=</span> sample(<span style="color:#666">2000</span>)
+    temp = Deterministic(&#39;temp&#39;, sigma_eta[1:]**2/(sigma_eps**2 + 2*sigma_eta[1:]**2))
+    theta = Deterministic(&#39;theta&#39;, (-1 + sqrt(1-4*temp*temp)) /(-2*temp))
+</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">with ucsv_model:
+    trace = sample(2000)
 
-sigma_eps_df <span style="color:#666">=</span> p<span style="color:#666">.</span>DataFrame(trace[<span style="color:#b44">&#39;sigma_eps&#39;</span>],columns<span style="color:#666">=</span>sw_infl[<span style="color:#b44">&#39;1953Q2&#39;</span>:<span style="color:#b44">&#39;2004&#39;</span>]<span style="color:#666">.</span>index)
-sigma_eta_df <span style="color:#666">=</span> p<span style="color:#666">.</span>DataFrame(trace[<span style="color:#b44">&#39;sigma_eta&#39;</span>],columns<span style="color:#666">=</span>sw_infl[<span style="color:#b44">&#39;1953&#39;</span>:<span style="color:#b44">&#39;2004&#39;</span>]<span style="color:#666">.</span>index)
-theta_df <span style="color:#666">=</span> p<span style="color:#666">.</span>DataFrame(trace[<span style="color:#b44">&#39;theta&#39;</span>],columns<span style="color:#666">=</span>sw_infl[<span style="color:#b44">&#39;1953Q2&#39;</span>:<span style="color:#b44">&#39;2004&#39;</span>]<span style="color:#666">.</span>index)
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">sw_figure2</span>(sigma_eps, sigma_eta, theta):
-    fig,ax <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(nrows<span style="color:#666">=</span><span style="color:#666">3</span>, sharex<span style="color:#666">=</span>True)
+sigma_eps_df = p.DataFrame(trace[&#39;sigma_eps&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
+sigma_eta_df = p.DataFrame(trace[&#39;sigma_eta&#39;],columns=sw_infl[&#39;1953&#39;:&#39;2004&#39;].index)
+theta_df = p.DataFrame(trace[&#39;theta&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
+</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def sw_figure2(sigma_eps, sigma_eta, theta):
+    fig,ax = plt.subplots(nrows=3, sharex=True)
 
-    <span style="color:#a2f;font-weight:bold">for</span> i, para <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">enumerate</span>([sigma_eps, sigma_eta, theta]):
+    for i, para in enumerate([sigma_eps, sigma_eta, theta]):
 
-        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> <span style="color:#666">2</span>:
-            ylim <span style="color:#666">=</span> (<span style="color:#666">0</span>,<span style="color:#666">2</span>)
-        <span style="color:#a2f;font-weight:bold">else</span>:
-            ylim <span style="color:#666">=</span> (<span style="color:#666">0</span>,<span style="color:#666">1</span>)
+        if i &lt; 2:
+            ylim = (0,2)
+        else:
+            ylim = (0,1)
 
-        para<span style="color:#666">.</span>median()<span style="color:#666">.</span>plot(ax<span style="color:#666">=</span>ax[i], color<span style="color:#666">=</span><span style="color:#b44">&#39;black&#39;</span>, ylim<span style="color:#666">=</span>ylim)
-        para<span style="color:#666">.</span>quantile([<span style="color:#666">0.16</span>,<span style="color:#666">0.84</span>])<span style="color:#666">.</span>T<span style="color:#666">.</span>plot(ax<span style="color:#666">=</span>ax[i], color<span style="color:#666">=</span><span style="color:#b44">&#39;black&#39;</span>,
-                                          linestyle<span style="color:#666">=</span><span style="color:#b44">&#39;dashed&#39;</span>, legend<span style="color:#666">=</span>False)
+        para.median().plot(ax=ax[i], color=&#39;black&#39;, ylim=ylim)
+        para.quantile([0.16,0.84]).T.plot(ax=ax[i], color=&#39;black&#39;,
+                                          linestyle=&#39;dashed&#39;, legend=False)
 
-    plt<span style="color:#666">.</span>tight_layout()
-    fig<span style="color:#666">.</span>set_size_inches(<span style="color:#666">3</span>,<span style="color:#666">9</span>)
+    plt.tight_layout()
+    fig.set_size_inches(3,9)
 
 sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
 </code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 NameErrorTraceback (most recent call last)
-&lt;ipython-input-57-16860f4ca04e&gt; in &lt;module&gt;
+&lt;ipython-input-8-16860f4ca04e&gt; in &lt;module&gt;
      16     fig.set_size_inches(3,9)
      17
 ---&gt; 18 sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
 
 NameError: name &#39;sigma_eps_df&#39; is not defined
 </code></pre></div><h1 id="bibliography">Bibliography</h1>
-<p><a id="STOCK_2007"></a>[STOCK_2007] Stock &amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, <i>Journal of Money, Credit and Banking</i>, <b>39</b>, 3–33 (2007). <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">link</a>. <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">doi</a>. <a href="#751475a24881d3cf8ff77e5dc432fc83">↩</a></p>
+<p><a id="STOCK_2007"></a>[STOCK_2007] Stock &amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, <i>Journal of Money, Credit and Banking</i>, <b>39</b>, 3 33 (2007). <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">link</a>. <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">doi</a>. <a href="#751475a24881d3cf8ff77e5dc432fc83">↩</a></p>
 
 
 
