@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Sequential Monte Carlo" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/" /><meta property="article:published_time" content="2020-12-11T09:45:51-05:00" />
+
+
+
+<meta name="twitter:title" content="Sequential Monte Carlo"/>
+<meta name="twitter:description" content="Introduction MCMC: What works and what doesn&rsquo;t, Simple Model   State-space representation:
+\begin{align} y_t = [\begin{array}{cc} 1 &amp; 1 \end{array} ] s_t, \quad s_t = \left[ \begin{array}{cc} {\color{blue} \phi_1} &amp; 0 \ {\color{blue} \phi_3} &amp; {\color{blue} \phi_2} \end{array} \right] s_{t-1} &#43; \left[ \begin{array}{c} 1 \ 0 \end{array} \right] \epsilon_t. \label{eq_exss} \end{align}
+  The state-space model can be re-written as ARMA(2,1) process \[ (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t = (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L) \epsilon_t."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo'>05-sequential-monte-carlo</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Sequential Monte Carlo</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="mcmc-what-works-and-what-doesn-t-simple-model">MCMC: What works and what doesn&rsquo;t, Simple Model</h3>
+<ul>
+<li>
+<p>State-space representation:</p>
+<p>\begin{align}
+y_t = [\begin{array}{cc} 1 &amp; 1 \end{array} ] s_t, \quad
+s_t = \left[ \begin{array}{cc} {\color{blue} \phi_1} &amp; 0 \ {\color{blue} \phi_3} &amp; {\color{blue} \phi_2} \end{array} \right] s_{t-1}
++ \left[ \begin{array}{c} 1 \ 0 \end{array} \right] \epsilon_t.
+\label{eq_exss}
+\end{align}</p>
+</li>
+<li>
+<p>The state-space model can be re-written as ARMA(2,1) process
+\[
+(1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t
+= (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L)  \epsilon_t.
+\]</p>
+</li>
+<li>
+<p>Relationship between state-space parameters \({\color{blue} \phi}\) and structural parameters \({\color{red} \theta}\):
+\[
+{\color{blue} \phi_1} = {\color{red} \theta_1^2}, \quad
+{\color{blue} \phi_2} = {\color{red} (1-\theta_1^2) }, \quad
+{\color{blue} \phi_3 - \phi_2} = {\color{red}  - \theta_1 \theta_2 }.
+\]</p>
+</li>
+</ul>
+<h3 id="stylized-example">Stylized Example</h3>
+<p>\begin{beamerboxesrounded}{Model}
+Reduced form:
+$   (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t
+= (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L)  \epsilon_t. $</p>
+<p>\vspace*{0.5cm}</p>
+<p>Relationship of ${\color{blue} \phi}$ and ${\color{red} \theta}$:
+$   {\color{blue} \phi_1} = {\color{red} \theta_1^2}, \quad
+{\color{blue} \phi_2} = {\color{red} (1-\theta_1^2) }, \quad
+{\color{blue} \phi_3 - \phi_2} = {\color{red}  - \theta_1 \theta_2 }.
+$
+\end{beamerboxesrounded}</p>
+<ul>
+<li><em>Local</em> identification problem arises as \({\color{red} \theta_1} \longrightarrow 0\).
+<br></li>
+<li><em>Global</em> identification problem \(p(Y|\theta) = p(Y|\tilde{\theta})\):
+\[
+{\color{red} \theta_1^2} = \rho, \quad {\color{red} (1-\theta_1^2) } = {\color{red}  \theta_1 \theta_2 }
+\]
+versus
+\[
+{\color{red} \tilde{\theta}_1^2} = 1-\rho, \quad {\color{red} \tilde{\theta}_1^2 } = {\color{red}  \tilde{\theta}_1 \tilde{\theta}_2 }
+\]</li>
+</ul>
+<h3 id="stylized-example-likelihood-fcn-100-obs">Stylized Example: Likelihood Fcn 100 Obs</h3>
+<p>Reduced form:
+\(   (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t
+= (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L)  \epsilon_t. \)
+<br>
+Relationship of \({\color{blue} \phi}\) and \({\color{red} \theta}\):
+\(   {\color{blue} \phi_1} = {\color{red} \theta_1^2}, \quad
+{\color{blue} \phi_2} = {\color{red} (1-\theta_1^2) }, \quad
+{\color{blue} \phi_3 - \phi_2} = {\color{red}  - \theta_1 \theta_2 }.
+\)</p>
+<p>\begin{center}
+\includegraphics[width=2in]{static/ss_weakid}
+\end{center}</p>
+<h3 id="stylized-example-likelihood-fcn-500-obs">Stylized Example: Likelihood Fcn 500 Obs</h3>
+<p>Reduced form:
+\(  (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t
+= (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L)  \epsilon_t. \)
+<br>
+Relationship of \({\color{blue} \phi}\) and \({\color{red} \theta}\):
+\(   {\color{blue} \phi_1} = {\color{red} \theta_1^2}, \quad
+{\color{blue} \phi_2} = {\color{red} (1-\theta_1^2) }, \quad
+{\color{blue} \phi_3 - \phi_2} = {\color{red}  - \theta_1 \theta_2 }.
+\)</p>
+<p>\begin{center}
+\includegraphics[width=2in]{static/ss_noglobalid5.pdf}
+\end{center}</p>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li>
+<p>Posterior expectations can be approximated by Monte Carlo averages.</p>
+</li>
+<li>
+<p>If we have draws from \(\{ \theta^i\}_{i=1}^N\) from \(p(\theta|Y)\), then (under some regularity conditions)
+\[
+\frac{1}{N} \sum_{i=1}^N h(\theta^i) \stackrel{a.s.}{\longrightarrow} \mathbb{E}[h(\theta)|Y].
+\]</p>
+</li>
+<li>
+<p>``Standard'' approach in DSGE model literature (Schorfheide, 2000; Otrok, 2001): use Markov chain Monte Carlo (MCMC) methods to
+generate a sequence of serially correlated draws  \(\{ \theta^i\}_{i=1}^N\).</p>
+</li>
+<li>
+<p>Unfortunately, ``standard'' MCMC can be quite inaccurate, especially in medium and large-scale DSGE models:</p>
+<ul>
+<li>disentangling importance of internal versus external propagation mechanism;</li>
+<li>determining the relative importance of shocks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li>Previously: Modify MCMC algorithms to overcome weaknesses: blocking of parameters; tailoring of (mixture) proposal
+densities
+<ul>
+<li><sup id="87e1693038551a6c2db2065f5e25e86a"><a href="#Kohn2010" title="Kohn, Giordani \&amp; Strid, Adaptive Hybrid Metropolis-Hastings Samplers for DSGE Models, {Working Paper}, v(), (2010).">Kohn2010</a></sup></li>
+<li><sup id="fe9f6a8e67ee0865974179a18505e65b"><a href="#ChibR08" title="Chib \&amp; Srikanth Ramamurthy, Tailored Randomized Block MCMC Methods with Application to DSGE Models, {Journal of Econometrics}, v(1), 19-38 (2010).">ChibR08</a></sup></li>
+<li><sup id="2d0b5fdf39187ff4809cdc2d2e9a89e8"><a href="#curdia_reis2010" title="Curdia \&amp; Reis, Correlated Disturbances and U.S. Business Cycles, {Manuscript, Columbia University and FRB New York}, v(), (2010).">curdia_reis2010</a></sup></li>
+<li><sup id="f0bf34bf7a73baecfd3880b949614383"><a href="#Herbst2011a" title="@unpublished{Herbst2011a,
+author = {Ed Herbst},
+title = {Gradient and Hessian-based MCMC for DSGE Models},
+note= {Unpublished Manuscript, Federal Reserve Board},
+year = {2012}
+}">Herbst2011a</a></sup></li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>Now, we use sequential Monte Carlo (SMC) (more precisely, sequential importance sampling) instead:
+<ul>
+<li>Better suited to handle irregular and multimodal posteriors
+associated with large DSGE models.</li>
+<li>Algorithms can be easily parallelized.</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>SMC = Importance Sampling on Steriods. We build on
+<ul>
+<li>Theoretical work: <sup id="9991c2070855dd210acd2f314d514ba5"><a href="#Chopin2004a" title="Nicolas Chopin, A Sequential Particle Filter for Static Models, {Biometrika}, v(3), 539-551 (2004).">Chopin2004a</a></sup>; <sup id="c8a70cccbef69c9b38f65b7ad39b3897"><a href="#DelMoraletal2006" title="Del Moral, Doucet \&amp; Jasra, Sequential Monte Carlo Samplers, {Journal of the Royal Statistical Society, Series B}, v(Part 3), 411-436 (2006).">DelMoraletal2006</a></sup></li>
+<li>Applied work: <sup id="76824fe8808eaa33af4b9ed4f545cfc2"><a href="#Creal2007" title="Drew Creal, Sequential Monte Carlo Samplers for Bayesian DSGE Models, {Unpublished Manuscript, Vrije Universitiet}, v(), (2007).">Creal2007</a></sup>; <sup id="f9acbc7f1f092b7cdf88f19ebbb03856"><a href="#DurhamGeweke2011" title="Durham \&amp; Geweke, Massively Parallel Sequential Monte Carlo Bayesian Inference, {Unpublished Manuscript}, v(), (2011).">DurhamGeweke2011</a></sup></li>
+</ul>
+</li>
+</ul>
+<h3 id="review-importance-sampling">Review &ndash; Importance Sampling</h3>
+<p>If \(\theta^i\)&rsquo;s are draws from \(g(\cdot)\) then
+\[
+\mathbb{E}_\pi[h]
+\approx \frac{  \frac{1}{N} \sum_{i=1}^N h(\theta^i) w(\theta^i)}{
+\frac{1}{N} \sum_{i=1}^N w(\theta^i) }, \quad
+w(\theta) = \frac{f(\theta)}{g(\theta)}.
+\]</p>
+<p>\begin{center}
+\includegraphics[width=4in]{static/is.pdf}
+\end{center}</p>
+<h3 id="from-importance-sampling-to-sequential-importance-sampling">From Importance Sampling to Sequential Importance Sampling</h3>
+<ul>
+<li>In general, it&rsquo;s hard to construct a good proposal density \(g(\theta)\),</li>
+<li>especially if the posterior has several peaks and valleys.</li>
+<li>Idea - Part 1: it might be easier to find a proposal density
+for
+\[
+\pi_n(\theta) = \frac{[p(Y|\theta)]^{\phi_n} p(\theta)}{\int [p(Y|\theta)]^{\phi_n} p(\theta) d\theta} = \frac{f_n(\theta)}{Z_n}.
+\]
+at least if \(\phi_n\) is close to zero.</li>
+<li>Idea - Part 2: We can try to turn a proposal density for \(\pi_n\) into a proposal density for \(\pi_{n+1}\)
+and iterate, letting \(\phi_n \longrightarrow \phi_N = 1\).</li>
+</ul>
+<h3 id="illustration">Illustration:</h3>
+<ul>
+<li>
+<p>Our state-space model:
+\[
+y_t = [1~ 1]s_t, \quad s_t = \left[\begin{array}{cc}\theta^2_1 &amp; 0 \ (1-\theta_1^2) - \theta_1 \theta_2 &amp;
+(1-\theta_1^2)\end{array}\right]s_{t-1} + \left[\begin{array}{c} 1 \\\<br>
+0\end{array}\right]\epsilon_t.
+\]</p>
+</li>
+<li>
+<p>Innovation: \(\epsilon_t \sim iid N(0,1)\).</p>
+</li>
+<li>
+<p>Prior: uniform on the square \(0\le \theta_1 \le 1\) and \(0 \le \theta_2 \le 1\).</p>
+</li>
+<li>
+<p>Simulate \(T = 200\) observations</p>
+</li>
+</ul>
+<p>given \(\theta = [0.45, 0.45]'\), which is observationally equivalent to \(\theta =
+[0.89, 0.22]'\)</p>
+<h3 id="illustration-tempered-posteriors-of--theta-1">Illustration: Tempered Posteriors of \(\theta_1\)</h3>
+<p>\includegraphics[width=.8\linewidth]{static/smc_ss_density.pdf}
+\[
+\pi_n(\theta) = \frac{{\color{blue}[p(Y|\theta)]^{\phi_n}} p(\theta)}{\int {\color{blue}[p(Y|\theta)]^{\phi_n}} p(\theta) d\theta} = \frac{f_n(\theta)}{Z_n}, \quad \phi_n = \left( \frac{n}{N_\phi} \right)^\lambda
+\]</p>
+<h3 id="illustration-posterior-draws">Illustration: Posterior Draws</h3>
+<p>\begin{center}
+\includegraphics[width=4in]{static/smc_ss_contour.pdf}
+\end{center}</p>
+<h3 id="smc-algorithm-a-graphical-illustration">SMC Algorithm: A Graphical Illustration</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/smc_evolution_of_particles.pdf} 	\end{center}</p>
+<ul>
+<li>
+<p>\(\pi_n(\theta)\) is represented by a swarm of particles \(\{ \theta_n^i,W_n^i \}_{i=1}^N\):</p>
+<p>\[
+\bar{h}_{n,N} = \frac{1}{N} \sum_{i=1}^N W_n^i h(\theta_n^i) \stackrel{a.s.}{\longrightarrow} \mathbb{E}_{\pi_n}[h(\theta_n)].
+\]</p>
+</li>
+<li>
+<p>C is Correction; S is Selection; and M is Mutation.</p>
+</li>
+</ul>
+<h3 id="smc-algorithm">SMC Algorithm</h3>
+<ol>
+<li><strong>Initialization.</strong> (\(\phi_{0} = 0\)).
+Draw the initial particles from the prior: \(\theta^{i}_{1} \stackrel{iid}{\sim} p(\theta)\) and
+\(W^{i}_{1} = 1\), \(i = 1, \ldots, N\).</li>
+<li><strong>Recursion.</strong> For \(n = 1, \ldots, N_{\phi}\),
+<ol>
+<li>
+<p><strong>Correction.</strong>  Reweight the particles from stage \(n-1\) by defining
+the incremental weights</p>
+<p>\begin{equation}
+\tilde w_{n}^{i} = [p(Y|\theta^{i}_{n-1})]^{\phi_{n} - \phi_{n-1}}
+\label{eq_smcdeftildew}
+\end{equation}</p>
+<p>and the normalized weights</p>
+<p>\begin{equation}
+\tilde{W}^{i}_{n} = \frac{\tilde w_n^{i} W^{i}_{n-1}}{\frac{1}{N} \sum_{i=1}^N \tilde w_n^{i} W^{i}_{n-1}}, \quad
+i = 1,\ldots,N.
+\end{equation}</p>
+<p>An approximation of \(\mathbb{E}_{\pi_n}[h(\theta)]\) is given by</p>
+<p>\begin{equation}
+\tilde{h}_{n,N} = \frac{1}{N} \sum_{i=1}^N \tilde W_n^{i} h(\theta_{n-1}^i).
+\label{eq_deftildeh}
+\end{equation}</p>
+</li>
+<li>
+<p><strong>Selection.</strong></p>
+</li>
+<li>
+<p><strong>Mutation.</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="smc-algorithm">SMC Algorithm</h3>
+<ol>
+<li>Initialization.</li>
+<li>Recursion. For \(n = 1, \ldots, N_{\phi}\),
+<ol>
+<li>
+<p><strong>Correction.</strong></p>
+</li>
+<li>
+<p><strong>Selection.</strong> (Optional Resampling)}
+Let \(\{ \hat{\theta} \}_{i=1}^N\) denote \(N\) \(iid\) draws from a multinomial distribution
+characterized by support points and weights \(\{\theta_{n-1}^i,\tilde{W}_n^i \}_{i=1}^N\)
+and set \(W_n^i=1\).<br /></p>
+<p>An approximation of \(\mathbb{E}_{\pi_n}[h(\theta)]\) is given by</p>
+<p>\begin{equation}
+\hat{h}_{n,N} = \frac{1}{N} \sum_{i=1}^N W^i_n h(\hat{\theta}_{n}^i).
+\label{eq_defhath}
+\end{equation}</p>
+</li>
+<li>
+<p><strong>Mutation.</strong> Propagate the particles \(\{ \hat{\theta}_i,W_n^i \}\) via \(N_{MH}\)
+steps of a MH algorithm with transition density \(\theta_n^i \sim K_n(\theta_n| \hat{\theta}_n^i; \zeta_n)\)
+and stationary distribution \(\pi_n(\theta)\).
+An approximation of \(\mathbb{E}_{\pi_n}[h(\theta)]\) is given by</p>
+<p>\begin{equation}
+\bar{h}_{n,N} = \frac{1}{N} \sum_{i=1}^N h(\theta_{n}^i) W^i_n.
+\label{eq_defbarh}
+\end{equation}</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="remarks">Remarks</h3>
+<ul>
+<li>
+<p>Correction Step:</p>
+<ul>
+<li>reweight particles from iteration \(n-1\) to create importance sampling approximation of \(\mathbb{E}_{\pi_n}[h(\theta)]\)</li>
+</ul>
+</li>
+<li>
+<p>Selection Step: the resampling of the particles</p>
+<ul>
+<li>(good) equalizes the particle weights and thereby increases accuracy of subsequent importance sampling approximations;</li>
+<li>(not good) adds a bit of noise to the MC approximation.</li>
+</ul>
+</li>
+<li>
+<p>Mutation Step:</p>
+<ul>
+<li>adapts particles to posterior \(\pi_n(\theta)\);</li>
+<li>imagine we don&rsquo;t do it: then we would be using draws from prior \(p(\theta)\) to approximate posterior \(\pi(\theta)\), which can&rsquo;t be good!</li>
+</ul>
+</li>
+</ul>
+<h3 id="theoretical-properties">Theoretical Properties</h3>
+<ul>
+<li>
+<p>Goal: strong law of large numbers (SLLN) and central limit theorem (CLT)
+as \(N \longrightarrow \infty\) for every iteration \(n=1,\ldots,N_\phi\).</p>
+</li>
+<li>
+<p>Regularity conditions:</p>
+<ul>
+<li>proper prior;</li>
+<li>bounded likelihood function;</li>
+<li>\(2+\delta\) posterior moments of \(h(\theta)\).</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>
+<p>Idea of proof (Chopin, 2004): proceed recursively</p>
+<ul>
+<li>Initialization: SLLN and CLT for \(iid\) random variables because we sample from prior.</li>
+<li>Assume that \(n-1\) approximation (with normalized weights) yields</li>
+</ul>
+<p>\[
+\sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N h(\theta_{n-1}^i) W_{n-1}^i - \mathbb{E}_{\pi_{n-1}}[h(\theta)] \right)
+\Longrightarrow N\big(0,\Omega_{n-1}(h)\big)
+\]</p>
+<ul>
+<li>Show that</li>
+</ul>
+<p>\[
+\sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N h(\theta_{n}^i) W_{n}^i - \mathbb{E}_{\pi_{n}}[h(\theta)] \right)
+\Longrightarrow N\big(0,\Omega_{n}(h)\big)
+\]</p>
+</li>
+</ul>
+<h3 id="theoretical-properties-correction-step">Theoretical Properties: Correction Step</h3>
+<ul>
+<li>
+<p>Suppose that the \(n-1\) approximation (with normalized weights) yields
+\[
+\sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N h(\theta_{n-1}^i) W_{n-1}^i - \mathbb{E}_{\pi_{n-1}}[h(\theta)] \right)
+\Longrightarrow N\big(0,\Omega_{n-1}(h)\big)
+\]</p>
+</li>
+<li>
+<p>Then</p>
+<p>\begin{eqnarray*}
+\hspace{-0.70in}
+\sqrt{N} \left( \frac{ \frac{1}{N} \sum_{i=1}^N h(\theta_{n-1}^i)
+{\color{red} [p(Y|\theta_{n-1}^i)]^{\phi_n - \phi_{n-1}} } W_{n-1}^i}{
+\frac{1}{N} \sum_{i=1}^N {\color{red} [p(Y|\theta_{n-1}^i)]^{\phi_n - \phi_{n-1}} } W_{n-1}^i} - \mathbb{E}_{\pi_{n}}[h(\theta)] \right)
+\Longrightarrow&amp; N\big(0, \tilde{\Omega}_n(h) \big)
+\end{eqnarray*}</p>
+<p>where
+\[
+\hspace{-0.5in}
+\tilde{\Omega}_n(h) = \Omega_{n-1}\big( {\color{red} v_{n-1}(\theta)} (h- \mathbb{E}_{\pi_n}[h] ) \big) \quad
+{\color{red} v_{n-1}(\theta) = [p(Y|\theta)]^{\phi_n - \phi_{n-1}} \frac{Z_{n-1}}{Z_n} }
+\]</p>
+</li>
+<li>
+<p>This step relies on likelihood evaluations from iteration \(n-1\) that are
+already stored in memory.</p>
+</li>
+</ul>
+<h3 id="theoretical-properties-selection-resampling">Theoretical Properties: Selection / Resampling</h3>
+<ul>
+<li>After resampling by drawing from iid multinomial distribution we obtain
+\[
+\sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N h(\hat{\theta}_i) W_n^i - \mathbb{E}_{\pi_n}[h] \right) \Longrightarrow N \big( 0, \hat{\Omega}(h) \big),
+\]
+where
+\[
+\hat{\Omega}_n(h) = \tilde{\Omega}(h) + {\color{red} \mathbb{V}_{\pi_n}[h]}
+\]</li>
+<li>Disadvantage of resampling: it  adds noise.</li>
+<li>Advantage of resampling: it equalizes the particle weights, reducing the variance
+of \({\color{blue} v_{n}(\theta)}\) in \(\tilde{\Omega}_{n+1}(h) = \Omega_{n}\big( {\color{blue} v_{n}(\theta)} (h- \mathbb{E}_{\pi_{n+1}}[h] )\).</li>
+</ul>
+<h3 id="theoretical-properties-mutation">Theoretical Properties: Mutation</h3>
+<ul>
+<li>
+<p>We are using the Markov transition kernel \(K_n(\theta|\hat{\theta})\) to
+transform draws  $\hat{\theta}_n^i$ into draws  $θ_n^i$.</p>
+</li>
+<li>
+<p>To preserve the distribution of the  \(\hat{\theta}_n^i\)&rsquo;s it has to be the case that
+\[
+{\color{blue} \pi_n(\theta)} = \int K_n(\theta|\hat{\theta}) {\color{red} \pi_n(\hat{\theta})} d \hat{\theta}.
+\]</p>
+</li>
+<li>
+<p>It can be shown that the overall asymptotic variance after the mutation is the sum of</p>
+<ul>
+<li>the variance of the approximation of the conditional mean \(\mathbb{E}_{K_n(\cdot|\theta_{n-1})}[h(\theta)]\)
+which is given by
+\[
+\hat{\Omega} \big(\mathbb{E}_{K_n(\cdot|\theta_{n-1})}[h(\theta)]\big);
+\]</li>
+<li>a weighted average of the conditional variance \(\mathbb{V}_{K_n(\cdot|\theta_{n-1})}[h(\theta)]\):
+\[
+\int W_{n-1}(\theta_{n-1}) v_{n-1}(\theta_{n-1}) \mathbb{V}_{K_n(\cdot|\theta_{n-1})}[h(\theta)] \pi_{n-1}(\theta_{n-1}).
+\]</li>
+</ul>
+</li>
+<li>
+<p>This step is <em>embarassingly parallelizable</em>, well
+designed for single instruction, multiple data (SIMD) processing.</p>
+</li>
+</ul>
+<h3 id="more-on-transition-kernel-in-mutation-step">More on Transition Kernel in Mutation Step</h3>
+<ul>
+<li>
+<p>Transition kernel \(K_n(\theta|\hat{\theta}_{n-1};\zeta_n)\):
+generated by running \(M\) steps of a Metropolis-Hastings algorithm.</p>
+</li>
+<li>
+<p>Lessons from DSGE model MCMC:</p>
+<ul>
+<li>blocking of parameters can reduces persistence of Markov chain;</li>
+<li>mixture proposal density avoids ``getting stuck.''</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>
+<p>Blocking: Partition the parameter vector \(\theta_n\)
+into \(N_{blocks}\) equally sized blocks, denoted by \(\theta_{n,b}\),
+\(b=1,\ldots,N_{blocks}\). (We generate the blocks for \(n=1,\ldots,N_\phi\)
+randomly prior to running the SMC algorithm.)</p>
+</li>
+<li>
+<p>Example: random walk proposal density:</p>
+<p>\begin{eqnarray*}
+\vartheta_b | (\theta^i_{n,b,m-1}, \theta^i_{n,-b,m}, \Sigma^*_{n,b})
+&amp;\sim&amp; {\color{blue} N \bigg( \theta^i_{n,b,m-1}, c_n^2 \Sigma^*_{n,b} \bigg)}.
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="adaptive-choice-of--zeta-n--sigma-n-c-n">Adaptive Choice of \(\zeta_n = (\Sigma_n^*,c_n)\)</h3>
+<ul>
+<li>Infeasible adaption:
+<ul>
+<li>
+<p>Let \(\Sigma_n^*=\mathbb{V}_{\pi_n}[\theta]\).</p>
+</li>
+<li>
+<p>Adjust scaling factor according to
+\[
+c_{n} = c_{n-1} f \big( 1-R_{n-1}(\zeta_{n-1}) \big),
+\]
+where \(R_{n-1}(\cdot)\) is population rejection rate from iteration \(n-1\) and
+\[
+f(x) = 0.95 + 0.10 \frac{e^{16(x - 0.25)}}{1 + e^{16(x - 0.25)}}.
+\]</p>
+</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>Feasible adaption &ndash; use output from stage \(n-1\) to replace \(\zeta_n\) by \(\hat{\zeta}_n\):
+<ul>
+<li>Use particle approximations of \(\mathbb{E}_{\pi_n}[\theta]\) and \(\mathbb{V}_{\pi_n}[\theta]\)
+based on \(\{\theta_{n-1}^i,\tilde{W}_n^i \}_{i=1}^N\).</li>
+<li>Use actual rejection rate from stage \(n-1\) to
+calculate \(\hat{c}_{n} = \hat{c}_{n-1} f \big( \hat{R}_{n-1}(\hat{\zeta}_{n-1}) \big)\).</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>Result: under suitable regularity conditions replacing \(\zeta_n\) by \(\hat{\zeta}_n\)
+where \(\sqrt{n}(\hat{\zeta}_n - \zeta_n) = O_p(1)\) does not affect the asymptotic variance
+of the MC approximation.</li>
+</ul>
+<h3 id="adaption-of-smc-algorithm-for-stylized-state-space-model">Adaption of SMC Algorithm for Stylized State-Space Model</h3>
+<p>\begin{center}
+\includegraphics[width=2in]{static/smc_ss.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The dashed line in the top panel indicates the target acceptance rate of 0.25.</p>
+<h3 id="convergence-of-smc-approximation-for-stylized-state-space-model">Convergence of SMC Approximation for Stylized State-Space Model</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/smc_clt_nphi100.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The figure shows \(N \mathbb{V}[\bar\theta_j]\)
+for each parameter as a function of the number of particles \(N\). \(\mathbb{V}[\bar\theta_j]\)
+is computed based on \(N_{run}=1,000\) runs of the SMC algorithm with \(N_\phi=100\). The width
+of the bands is \((2\cdot 1.96) \sqrt{3/N_{run}} (N \mathbb{V}[\bar\theta_j])\).</p>
+<h3 id="more-on-resampling">More on Resampling</h3>
+<ul>
+<li>So far, we have used <em>multinomial resampling</em>. It&rsquo;s fairly intuitive and it is straightforward to
+obtain a CLT.</li>
+<li>But: <em>multinominal resampling is not particularly efficient</em>.</li>
+<li>The book contains a section on alternative resampling schemes (<em>stratified resampling</em>, <em>residual resampling</em>&hellip;)</li>
+<li>These alternative techniques are designed to achieve a variance reduction.</li>
+<li>Most resampling algorithms are not parallelizable because they rely on the normalized particle weights.</li>
+</ul>
+<h3 id="running-time-it-s-all-about-mutation">Running Time &ndash; It&rsquo;s all about Mutation</h3>
+<ul>
+<li>The most time consuming part of (any of) these algorithms, is
+<strong>evaluating the likelihood function,</strong> which occurs in the
+mutation step.</li>
+<li>But each particle is <em>mutated independently</em> of the other
+particles.</li>
+<li>This is extremely easy to parallelize.</li>
+</ul>
+<p>How I do it &ndash; distributed memory parallelization in <code>Fortran</code></p>
+<ul>
+<li>Use Message Passing Interface (MPI) to scatter particles across
+many processors (CPUs).</li>
+<li>Execute mutuation across processors.</li>
+<li>Use MPI to gather the newly mutated particles.</li>
+</ul>
+<p>Could be better with more programming.</p>
+<h3 id=""></h3>
+<h3 id="how-well-does-this-work">How well does this work?</h3>
+<ul>
+<li>
+<p>The extent to which HPC can help us is determined by the amount of algorithm that can be executed in parallel vs. serial.
+<br></p>
+</li>
+<li>
+<p>Suppose a fraction \(B\in[0,1]\) must executed in serial fashion for a particular algorithm.
+<br></p>
+</li>
+<li>
+<p><strong>Amdahls Law</strong>: Theoretical gain from using \(N\) processors in an algorithm is given by:
+\[
+R(N) = B + \frac{1}{N}(1-B)
+\]</p>
+</li>
+<li>
+<p>Question: What is \(B\) for our SMC algorithm?</p>
+<p>Answer: about 0.1!</p>
+</li>
+</ul>
+<h3 id="gains-from-parallelization">Gains from Parallelization</h3>
+<p>\includegraphics[width=4.5in]{static/amdahls_law}</p>
+<h3 id="application-1-small-scale-new-keynesian-model">Application 1: Small Scale New Keynesian Model</h3>
+<ul>
+<li>We will take a look at the effect of various tuning choices on accuracy:
+<ul>
+<li>Tempering schedule \(\lambda\): \(\lambda=1\) is linear, \(\lambda &gt; 1\) is convex.
+<br></li>
+<li>Number of stages \(N_\phi\) versus number of particles \(N\).
+<br></li>
+<li>Number of blocks in mutation step versus number of particles.</li>
+</ul>
+</li>
+</ul>
+<h3 id="effect-of--lambda--on-inefficiency-factors--mbox-ineff-n-bar-theta">Effect of \(\lambda\) on Inefficiency Factors \(\mbox{InEff}_N[\bar{\theta}]\)</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/smc_lambda.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The figure depicts hairs of \(\mbox{InEff}_N[\bar{\theta}]\) as function
+of \(\lambda\). The inefficiency factors are computed based
+on \(N_{run}=50\) runs of the SMC algorithm. Each hair corresponds to a DSGE model parameter.</p>
+<h3 id="number-of-stages--n-phi--vs-number-of-particles--n">Number of Stages \(N_{\phi}\) vs Number of Particles \(N\)</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/smc_nphi_vs_npart.pdf}
+\end{center}</p>
+<p><em>Notes:</em> Plot of \(\mathbb{V}[\bar{\theta}] / \mathbb{V}_\pi[\theta]\) for a
+specific configuration of the SMC algorithm. The inefficiency factors are computed based
+on \(N_{run}=50\) runs of the SMC algorithm. \(N_{blocks}=1\), \(\lambda=2\), \(N_{MH}=1\).</p>
+<h3 id="number-of-blocks--n-blocks--in-mutation-step-vs-number-of-particles--n">Number of blocks \(N_{blocks}\) in Mutation Step vs Number of Particles \(N\)</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/smc_nblocks_vs_npart.pdf}
+\end{center}</p>
+<p><em>Notes:</em> Plot of \(\mathbb{V}[\bar{\theta}] / \mathbb{V}_\pi[\theta]\) for a
+specific configuration of the SMC algorithm. The inefficiency factors are computed based
+on \(N_{run}=50\) runs of the SMC algorithm. \(N_{\phi}=100\), \(\lambda=2\), \(N_{MH}=1\).</p>
+<h3 id="a-few-words-on-posterior-model-probabilities">A Few Words on Posterior Model Probabilities</h3>
+<ul>
+<li>Posterior model probabilities
+\[
+\pi_{i,T} = \frac{ \pi_{i,0} p(Y_{1:T}|{\cal M}_i)}{ \sum_{j=1}^M \pi_{j,0} p(Y_{1:T}|{\cal M}_j)}
+\]
+where
+\[
+p(Y_{1:T}|{\cal M}_i) = \int p(Y_{1:T}|\theta_{(i)}, {\cal M}_i) p(\theta_{(i)}|{\cal M}_i) d\theta_{(i)}
+\]</li>
+<li>For any model:
+\[
+\ln p(Y_{1:T}|{\cal M}_i)
+= \sum_{t=1}^T \ln \int p(y_t |\theta_{(i)}, Y_{1:t-1}, {\cal M}_i) p(\theta_{(i)}|Y_{1:t-1},{\cal M}_i) d\theta_{(i)}
+\]</li>
+<li>Marginal data density \(p(Y_{1:T}|{\cal M}_i)\) arises as a by-product of SMC.</li>
+</ul>
+<h3 id="marginal-likelihood-approximation">Marginal Likelihood Approximation</h3>
+<ul>
+<li>
+<p>Recall \(\tilde{w}^i_n = [p(Y|\theta_{n-1}^i)]^{\phi_n-\phi_{n-1}}\).</p>
+</li>
+<li>
+<p>Then</p>
+<p>\begin{eqnarray*}
+\frac{1}{N} \sum_{i=1}^N \tilde{w}^i_n W_{n-1}^i
+&amp;\approx&amp; \int [p(Y|\theta)]^{\phi_n-\phi_{n-1} }
+\frac{ p^{\phi_{n-1}}(Y|\theta) p(\theta)}{\int p^{\phi_{n-1}}(Y|\theta) p(\theta)d\theta} d\theta \\\<br>
+&amp;=&amp; \frac{ \int p(Y|\theta)^{\phi_n} p(\theta) d\theta}{\int p(Y|\theta)^{\phi_{n-1}} p(\theta) d\theta }
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Thus,
+\[
+\prod_{n=1}^{N_\phi} \left(\frac{1}{N} \sum_{i=1}^N \tilde{w}^i_n W_{n-1}^i \right)
+\approx \int p(Y|\theta)p(\theta)d\theta .
+\]</p>
+</li>
+</ul>
+<h3 id="smc-marginal-data-density-estimates">SMC Marginal Data Density Estimates</h3>
+<p>\begin{center}
+\begin{tabular}{l@{\hspace*{0.5cm}}cc@{\hspace*{0.5cm}}cc}
+\hline\hline
+&amp; \multicolumn{2}{c}{$N_{\phi}=100$} &amp;	\multicolumn{2}{c}{$N_{\phi}=400$} \\\<br>
+$N$	  &amp; Mean($\ln \hat p(Y)$)    &amp; SD($\ln \hat p(Y)$)  &amp; Mean($\ln \hat p(Y)$)    &amp; SD($\ln \hat p(Y)$)\ \hline
+500   &amp; -352.19 &amp;   (3.18)  &amp; -346.12 &amp; (0.20) \\\<br>
+1,000 &amp; -349.19 &amp;   (1.98)  &amp; -346.17 &amp; (0.14) \\\<br>
+2,000 &amp; -348.57 &amp;   (1.65)  &amp; -346.16 &amp; (0.12) \\\<br>
+4,000 &amp; -347.74 &amp;   (0.92)  &amp; -346.16 &amp; (0.07) \\\<br>
+\hline
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Table shows mean and standard deviation of log marginal data density estimates
+as a function of the number of particles \(N\) computed over \(N_{run}=50\) runs of the SMC sampler with
+\(N_{blocks}=4\), \(\lambda=2\), and \(N_{MH}=1\).</p>
+<h2 id="generalized-data-tempering">Generalized Data Tempering</h2>
+<h3 id="different-kinds-of-tempering">Different Kinds of Tempering</h3>
+<p>\begin{align}
+\mbox{\color{red}{Likelihood Tempering:} } p_n(Y|\theta) = [p(Y|\theta)]^{\phi_n}, \quad \phi_n \uparrow 1.
+\label{eq:tempering.lh}
+\end{align}</p>
+<ul>
+<li>
+<p>Can easily control how &ldquo;close&rdquo; consecutive posteriors are to one another.</p>
+</li>
+<li>
+<p>Need to pick \(\phi_n\) (though we have some experience).</p>
+</li>
+</ul>
+<p>\begin{align}
+\mbox{\color{blue}{Data Tempering:} } p_n(Y|\theta) = p(y_{1: \lfloor \phi_n T \rfloor}), \quad \phi_n \uparrow 1.
+\label{eq:tempering.data}
+\end{align}</p>
+<ul>
+<li>
+<p>Arguably more natural for time series application.</p>
+</li>
+<li>
+<p>Typically produces mores inefficient samples of \(\theta\).</p>
+</li>
+</ul>
+<p><sup id="a4cb2fbb52b3fbd91c1b02bee160fa20"><a href="#Cai_2019" title="Cai, Del Negro, Herbst, , Matlin, Sarfati, Schorfheide \&amp; Frank, Online Estimation of DSGE Models, {SSRN Electronic Journal}, v(), (2019).">Cai_2019</a></sup> generalize <em>both</em> likelihood and data tempering!</p>
+<h3 id="generalized-data-tempering">Generalized Data Tempering</h3>
+<p>Imagine one has draws from the posterior</p>
+<p>\begin{equation}
+\tilde{\pi}(\theta) \propto \tilde{p}(\tilde{Y}|\theta) p(\theta),
+\end{equation}</p>
+<p>where the posterior \(\tilde{\pi}(\theta)\) differs from the posterior \(\pi(\theta)\) because of:</p>
+<ol>
+<li>The sample (\(Y\) versus \(\tilde{Y}\)), or,</li>
+<li>the model (\(p(Y|\theta)\) versus \(\tilde{p}(\tilde{Y}|\theta)\)), or,</li>
+<li>of both</li>
+</ol>
+<p>Define the stage-\(n\) likelihood function:</p>
+<p>\begin{equation}
+p_n(Y|\theta) = [p(Y|\theta)]^{\phi_n}[\tilde{p}(\tilde{Y}|\theta)]^{1-\phi_n}, \quad \phi_n \uparrow 1.
+\label{eq:tempering.general}
+\end{equation}</p>
+<p>\color{red}{Generalized Data Tempering}: SMC that use this likelihood.</p>
+<h3 id="some-comments">Some Comments</h3>
+<p>\[p_n(Y|\theta) = [p(Y|\theta)]^{\phi_n}[\tilde{p}(\tilde{Y}|\theta)]^{1-\phi_n} \]</p>
+<ol>
+<li>
+<p>With \(\tilde{p}(\cdot)=1\):  identical to likelihood tempering.</p>
+</li>
+<li>
+<p>With \(\tilde{p}(\cdot) = p(\cdot)\),\(Y=y_{1: \lfloor \phi_m T
+\rfloor}\), and \(\tilde{Y}=y_{1: \lfloor \phi_{m-1} T \rfloor}\),</p>
+<p>generalizes data tempering by allowing for a gradual transition between \(y_{1:   \lfloor \phi_{m-1} T \rfloor}\) and \(y_{1: \lfloor \phi_m T
+\rfloor}\).</p>
+</li>
+<li>
+<p>By allowing \(Y\) to differ from \(\tilde{Y}\): incorporate data revisions between time \(\lfloor \phi_{m-1} T \rfloor\) and \(\lfloor \phi_m T \rfloor\).</p>
+</li>
+<li>
+<p>\(p(\cdot) \ne \tilde p(\cdot)\): one can transition between the posterior distribution of two models with the same parameters.</p>
+</li>
+</ol>
+<h3 id="evergreen-problem-how-to-pick-tuning-parameters">Evergreen Problem: How to Pick Tuning Parameters:</h3>
+<p>The SMC algorithm have a number of tuning parameters:</p>
+<ol>
+<li>\textcolor{gray}{Number of Particles $N$: cite:Chopin2004a provides a CLT for Monte Carlo averages in $N$.}</li>
+<li>\textcolor{gray}{Hyperparameters determining mutation phase. }</li>
+<li>\(\mbox{\textcolor{blue}{The number of stages, $N_{\phi}$ and the schedule $\{\phi_n\}_{n=1}^N$ }}\).</li>
+</ol>
+<p>This paper: choose \(\phi_n\) <strong>adaptively</strong>, with no fixed \(N_{\phi}\).</p>
+<p><em>Key idea:</em> choose \(\phi_n\) to target a desired level \(\widehat{ESS}_n^*\).</p>
+<p>the closer the desired \(\widehat{ESS}_n^*\) to the previous
+\(\widehat{ESS}_{n-1}\), the smaller the increment \(\phi_n - \phi_{n-1}\)</p>
+<h3 id="an-implementation-of-this">An implementation of this</h3>
+<p>\begin{align*}
+w^i(\phi) = [p(Y|\theta^i_{n-1})]^{\phi - \phi_{n-1}}, \quad
+W^i(\phi) = \frac{w^i(\phi) W^i_{n-1}}{\frac{1}{N}\sum\limits_{i=1}^N w^i(\phi) W^i_{n-1}}, \\\<br>
+\widehat{ESS}(\phi) = N \big/ \left( \frac{1}{N} \sum_{i=1}^N ({W}_n^i(\phi))^2\right)
+\end{align*}</p>
+<p>We will choose \(\phi\) to target a desired level of ESS:</p>
+<p>\begin{align}
+f(\phi) = \widehat{ESS}(\phi) - \alpha \widehat{ESS}_{n-1} = 0,
+\label{eq:adaptive.alpha}
+\end{align}</p>
+<p>where \(\alpha\) (\(\le 1\)) is a tuning constant:</p>
+<ul>
+<li>everything about the tempering is summarized in \(\alpha\)</li>
+<li>closer \(\alpha\) is to 1, the smaller the desired ESS reduction</li>
+<li>No fixed runtime!</li>
+</ul>
+<h3 id="assessing--alpha--dot">Assessing \(\alpha\).</h3>
+<p>In time-honored tradition of macroeconometrics, let&rsquo;s estimate the <sup id="0d8b307a60fe1d0ae3cf2a838eca7a27"><a href="#Smets2007" title="Smets \&amp; Wouters, Shocks and Frictions in US Business Cycles: A Bayesian DSGE Approach, {American Economic Review}, v(), 586-608 (2007).">Smets2007</a></sup> model.</p>
+<p>Compare the accuracy (and precision) of SMC algorithm versus the speed:</p>
+<ul>
+<li>
+<p>\(\alpha\in \{0.9, 0.95, 0.97, 0.98\}\).</p>
+</li>
+<li>
+<p>Fixed tempering schedule, \(N_{\phi} = 500\), from <sup id="fb1a726de44cc316249793cb229f4457"><a href="#Herbst_2014" title="Herbst \&amp; Schorfheide, Sequential Monte Carlo Sampling for DSGE Models, {Journal of Applied Econometrics}, v(7), 1073 1098 (2014).">Herbst_2014</a></sup>.</p>
+</li>
+<li>
+<p>Measure of accuracy: <em>std of log MDD</em>, computed across 50 runs of SMC algorithm.</p>
+</li>
+<li>
+<p>measure of speed: <em>average</em> runtime across these runs</p>
+</li>
+</ul>
+<h3 id="trade-off-between-runtime-and-accuracy">Trade-Off Between Runtime and Accuracy</h3>
+<p>&lt;/figure_1_StdVsTime.pdf&gt;</p>
+<h3 id="tempering-schedules">Tempering Schedules</h3>
+<p>&lt;/figure_2_tempering_scheds_all.pdf&gt;</p>
+<h3 id="some-comments">Some Comments</h3>
+<ul>
+<li>
+<p>Time-accuracy curve is convex:</p>
+<ul>
+<li>\(\alpha = 0.90\) \(\rightarrow\) \(\alpha = 0.95\) generates a drastic increase in accuracy, while doubling runtime.</li>
+<li>\(\alpha = 0.97\) \(\rightarrow\) \(\alpha = 0.98\) not much increase in accuracy, with substantial increase in runtime.</li>
+</ul>
+</li>
+<li>
+<p>Fixed schedule is slightly inefficient.</p>
+</li>
+<li>
+<p>All of the adaptive schedules are convex.</p>
+</li>
+<li>
+<p>Very little information (relative to fixed schedule) are added to likelihood function initially.</p>
+</li>
+<li>
+<p>Towards the end, a lot of information is added.</p>
+</li>
+</ul>
+<h3 id="illustration-of-generalized-data-tempering">Illustration of Generalized Data Tempering</h3>
+<p>Scenario 1:</p>
+<ul>
+<li>partition the sample into two subsamples: \(t=1,\ldots,T_1\) and
+\(t=T_1+1,\ldots,T\)</li>
+<li>allow for data revisions by the
+statistical agencies between periods \(T_1+1\) and \(T\).</li>
+<li>Assume that the second part of the sample becomes available
+after the model has been estimated on the first part of the
+sample using the data vintage available at the time,
+\(\tilde{y}_{1:T_1}\).</li>
+<li>In period \(T\) we already have a swarm of particles \(\{\theta_{T_1}^i, W_{T_1}^i\}_{i=1}^N\) that approximates the posterior
+\[
+p(\theta|\tilde{y}_{1:T_1}) \propto p(\tilde{y}_{1:T_1}|\theta) p(\theta).
+\]</li>
+</ul>
+<h3 id="more-details">More Details</h3>
+<p>Let \(Y=y_{1:T}\) and \(\tilde{Y}=\tilde{y}_{1:T_1}\), define the stage \((n)\) posterior:
+\[
+\pi_{n}(\theta) = \frac{p(y_{1:T} | \theta)^{\phi_{n}} p(\tilde{y}_{1:T_1} | \theta)^{1-\phi_{n}} p(\theta) }{\int p(y_{1:T} | \theta)^{\phi_{n}} p(\tilde{y}_{1:T_1} | \theta)^{1-\phi_{n}}p(\theta) d\theta}. \label{eq:lttpost_2}
+\]
+The incremental weights are given by
+\[
+\tilde{w}^i_{n}(\theta) =  p(y_{1:T} | \theta)^{\phi_{n}-\phi_{n-1}} p(\tilde{y}_{1:T_1} | \theta)^{\phi_{n-1}-\phi_{n}}
+\]
+Define the <strong>Conditional Marginal Data Density (CMDD)</strong></p>
+<p>\begin{align}
+\text{CMDD}_{2|1} =\prod_{n=1}^{N_\phi} \left( \frac{1}{N} \sum\limits_{i=1}^{N} \tilde{w}^i_{(n)} W^i_{(n-1)} \right)
+\label{eq:CMDD1}
+\end{align}</p>
+<p>Thus:</p>
+<p>\begin{align}
+\text{CMDD}_{2|1} \approx \frac{\int p(y_{1:T} | \theta) p(\theta) d\theta}{\int  p(\tilde{y}_{1:T_1} | \theta)	 p(\theta) d\theta} = \frac{ p(y_{1:T})}{p(\tilde{y}_{1:T_1})}. \label{eq:CMDD2}
+\end{align}</p>
+<h3 id="an-experiment">An experiment</h3>
+<ul>
+<li>We assume that the DSGE model has been estimated using likelihood
+tempering based on the sample \(y_{1:T_1}\), where \(t=1\)
+corresponds to 1966:Q4 and \(t=T_1\) corresponds to 2007:Q1.</li>
+<li>The second sample, \(y_{T_1+1:T}\), starts in 2007:Q2 and ends in 2016:Q3.</li>
+<li>Compare two estimates of MDD
+<ul>
+<li><strong>Full Sample Likelihood:</strong> likelihood-tempering-based estimates using the full sample.</li>
+<li><strong>GDT:</strong> \(\log p(y_{1:T_1}) + \log CMDD_{2|1}\).</li>
+</ul>
+</li>
+<li>Arguably stacked against GDT!</li>
+</ul>
+<h3 id="trade-off-between-runtime-and-accuracy">Trade-Off Between Runtime and Accuracy</h3>
+<p>&lt;/figure_3_all_StdVsTime.pdf&gt;</p>
+<h2 id="references">References</h2>
+<h3 id="references">References</h3>
+<h1 id="bibliography">Bibliography</h1>
+<p><a id="Kohn2010"></a>[Kohn2010] Kohn, Giordani &amp; Strid, Adaptive Hybrid Metropolis-Hastings Samplers for DSGE Models, <i>Working Paper</i>,  (2010). <a href="#87e1693038551a6c2db2065f5e25e86a">↩</a></p>
+<p><a id="ChibR08"></a>[ChibR08] Chib &amp; Srikanth Ramamurthy, Tailored Randomized Block MCMC Methods with Application to DSGE Models, <i>Journal of Econometrics</i>, <b>155(1)</b>, 19-38 (2010). <a href="#fe9f6a8e67ee0865974179a18505e65b">↩</a></p>
+<p><a id="curdia_reis2010"></a>[curdia_reis2010] Curdia &amp; Reis, Correlated Disturbances and U.S. Business Cycles, <i>Manuscript, Columbia University and FRB New York</i>,  (2010). <a href="#2d0b5fdf39187ff4809cdc2d2e9a89e8">↩</a></p>
+<p><a id="Herbst2011a"></a>[Herbst2011a] @unpublishedHerbst2011a,
+author = Ed Herbst,
+title = Gradient and Hessian-based MCMC for DSGE Models,
+note= Unpublished Manuscript, Federal Reserve Board,
+year = 2012
+<a href="#f0bf34bf7a73baecfd3880b949614383">↩</a></p>
+<p><a id="Chopin2004a"></a>[Chopin2004a] Nicolas Chopin, A Sequential Particle Filter for Static Models, <i>Biometrika</i>, <b>89(3)</b>, 539-551 (2004). <a href="#9991c2070855dd210acd2f314d514ba5">↩</a></p>
+<p><a id="DelMoraletal2006"></a>[DelMoraletal2006] Del Moral, Doucet &amp; Jasra, Sequential Monte Carlo Samplers, <i>Journal of the Royal Statistical Society, Series B</i>, <b>68(Part 3)</b>, 411-436 (2006). <a href="#c8a70cccbef69c9b38f65b7ad39b3897">↩</a></p>
+<p><a id="Creal2007"></a>[Creal2007] Drew Creal, Sequential Monte Carlo Samplers for Bayesian DSGE Models, <i>Unpublished Manuscript, Vrije Universitiet</i>,  (2007). <a href="#76824fe8808eaa33af4b9ed4f545cfc2">↩</a></p>
+<p><a id="DurhamGeweke2011"></a>[DurhamGeweke2011] Durham &amp; Geweke, Massively Parallel Sequential Monte Carlo Bayesian Inference, <i>Unpublished Manuscript</i>,  (2011). <a href="#f9acbc7f1f092b7cdf88f19ebbb03856">↩</a></p>
+<p><a id="Cai_2019"></a>[Cai_2019] Cai, Del Negro, Herbst, , Matlin, Sarfati, Schorfheide &amp; Frank, Online Estimation of DSGE Models, <i>SSRN Electronic Journal</i>,  (2019). <a href="http://dx.doi.org/10.2139/ssrn.3432452">link</a>. <a href="http://dx.doi.org/10.2139/ssrn.3432452">doi</a>. <a href="#a4cb2fbb52b3fbd91c1b02bee160fa20">↩</a></p>
+<p><a id="Smets2007"></a>[Smets2007] Smets &amp; Wouters, Shocks and Frictions in US Business Cycles: A Bayesian DSGE Approach, <i>American Economic Review</i>, <b>97</b>, 586-608 (2007). <a href="#0d8b307a60fe1d0ae3cf2a838eca7a27">↩</a></p>
+<p><a id="Herbst_2014"></a>[Herbst_2014] Herbst &amp; Schorfheide, Sequential Monte Carlo Sampling for DSGE Models, <i>Journal of Applied Econometrics</i>, <b>29(7)</b>, 1073 1098 (2014). <a href="http://dx.doi.org/10.1002/jae.2397">link</a>. <a href="http://dx.doi.org/10.1002/jae.2397">doi</a>. <a href="#fb1a726de44cc316249793cb229f4457">↩</a></p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

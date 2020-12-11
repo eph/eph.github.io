@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Particle MCMC and SMC^2" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/" /><meta property="article:published_time" content="2020-12-11T09:47:02-05:00" />
+
+
+
+<meta name="twitter:title" content="Particle MCMC and SMC^2"/>
+<meta name="twitter:description" content="Introduction Embedding PF Likelihoods into Posterior Samplers  Likelihood functions for nonlinear DSGE models can be approximated by the PF.  We will now embed the likelihood approximation into a posterior sampler: PFMH Algorithm (a special case of PMCMC).   Embedding PF Likelihoods into Posterior Samplers  Distinguish between:  \(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to: \[ p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta \] \(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to: \[ \hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared'>08-pmcmc-and-smc-squared</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Particle MCMC and SMC^2</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="embedding-pf-likelihoods-into-posterior-samplers">Embedding PF Likelihoods into Posterior Samplers</h3>
+<ul>
+<li>Likelihood functions for nonlinear DSGE models can be approximated by the PF.
+<br></li>
+<li>We will now embed the likelihood approximation into a posterior sampler:
+PFMH Algorithm (a special case of PMCMC).
+<br></li>
+</ul>
+<h3 id="embedding-pf-likelihoods-into-posterior-samplers">Embedding PF Likelihoods into Posterior Samplers</h3>
+<ul>
+<li>Distinguish between:
+<ul>
+<li>\(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to:
+\[
+p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta
+\]</li>
+<li>\(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to:
+\[
+\hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta.
+\]</li>
+</ul>
+</li>
+<li>Surprising result from <sup id="bdbeaec8ecb4a8ea982e4ad765654ea6"><a href="#Andrieu_2010" title="Andrieu, Doucet, \&amp; Holenstein, Particle Markov chain Monte Carlo methods, {Journal of the Royal Statistical Society: Series B
+(Statistical Methodology)}, v(3), 269 342 (2010).">Andrieu_2010</a></sup>: under certain conditions we can replace \(p(Y|\theta)\) by \(\hat{p}(Y|\theta)\) and still obtain draws from \(p(\theta|Y)\).</li>
+</ul>
+<h3 id="pfmh-algorithm">PFMH Algorithm</h3>
+<p>For \(i=1\) to \(N\):</p>
+<ol>
+<li>
+<p>Draw \(\vartheta\) from a density \(q(\vartheta|\theta^{i-1})\).</p>
+</li>
+<li>
+<p>Set \(\theta^i = \vartheta\) with probability
+\[
+\alpha(\vartheta | \theta^{i-1} ) = \min \left\{ 1, ;
+\frac{ \hat{p}(Y| \vartheta )p(\vartheta) / q(\vartheta | \theta^{i-1}) }{
+\hat{p}(Y|\theta^{i-1}) p(\theta^{i-1})  / q(\theta^{i-1} | \vartheta) } \right\}
+\]
+and \(\theta^{i} = \theta^{i-1}\) otherwise. The likelihood approximation \(\hat{p}(Y|\vartheta)\)
+is computed using a particle filter.</p>
+</li>
+</ol>
+<h3 id="why-does-the-pfmh-work">Why Does the PFMH Work?</h3>
+<ul>
+<li>At each iteration the filter generates draws \(\tilde{s}_t^j\) from the proposal distribution \(g_t(\cdot|s_{t-1}^j)\).
+<br></li>
+<li>Let \(\tilde{S}_t = \big( \tilde{s}_t^1,\ldots,\tilde{s}_t^M \big)'\) and denote the entire sequence
+of draws by \(\tilde{S}_{1:T}^{1:M}\).
+<br></li>
+<li>Selection step: define a random variable \(A_t^j\) that contains this ancestry information.
+For instance, suppose that during the resampling particle \(j=1\) was assigned the value \(\tilde{s}_t^{10}\)
+then \(A_t^1=10\). Let \(A_t = \big( A_t^1, \ldots, A_t^N \big)\) and use \(A_{1:T}\) to denote the sequence of \(A_t\)&rsquo;s.
+<br></li>
+<li>PFMH operates on an enlarged probability space: \(\theta\), \(\tilde{S}_{1:T}\) and \(A_{1:T}\).</li>
+</ul>
+<h3 id="why-does-the-pfmh-work">Why Does the PFMH Work?</h3>
+<ul>
+<li>Use \(U_{1:T}\) to denote random vectors
+for \(\tilde{S}_{1:T}\) and \(A_{1:T}\). \(U_{1:T}\) is an array of \(iid\) uniform random numbers.</li>
+<li>The transformation of \(U_{1:T}\) into
+\((\tilde{S}_{1:T},A_{1:T})\) typically depends on \(\theta\) and \(Y_{1:T}\), because the proposal
+distribution \(g_t(\tilde{s}_t|s_{t-1}^j)\) depends both
+on the current observation \(y_t\) as well as the parameter vector \(\theta\).</li>
+<li>E.g., implementation of conditionally-optimal PF  requires
+sampling from a \(N(\bar{s}_{t|t}^j,P_{t|t})\) distribution for each particle \(j\).
+Can be done using a prob integral transform of uniform random variables.</li>
+<li>We can express the particle filter approximation of the likelihood function as
+\[
+\hat{p}(Y_{1:T}|\theta) = g(Y_{1:T}|\theta,U_{1:T}).
+\]
+where
+\[
+U_{1:T} \sim p(U_{1:T}) = \prod_{t=1}^T p(U_t).
+\]</li>
+</ul>
+<h3 id="why-does-the-pfmh-work">Why Does the PFMH Work?</h3>
+<p>\begin{itemize}
+\spitem Define the joint distribution
+\[
+p_g\big( Y_{1:T},\theta,U_{1:T} \big) = g(Y_{1:T}|\theta,U_{1:T}) p\big(U_{1:T} \big) p(\theta).
+\]
+\item The PFMH algorithm samples from the joint posterior
+\[
+p_g\big( \theta, U_{1:T} | Y_{1:T} \big) \propto g(Y|\theta,U_{1:T}) p\big(U_{1:T} \big) p(\theta)
+\]
+and discards the draws of $\big( U_{1:T} \big)$.
+\spitem For this procedure to be valid, it needs to be the case that PF approximation is unbiased:
+\[
+\mathbb{E}[\hat{p}(Y_{1:T}|\theta)]
+= \int g(Y_{1:T}|\theta,U_{1:T})p\big(U_{1:T} \big) dU_{1:T}
+= p(Y_{1:T}|\theta).
+\]
+\end{itemize}</p>
+<h3 id="why-does-the-pfmh-work">Why Does the PFMH Work?</h3>
+<ul>
+<li>
+<p>We can express acceptance probability directly in terms of \(\hat{p}(Y_{1:T}|\theta)\).</p>
+</li>
+<li>
+<p>Need to generate a proposed draw for both \(\theta\) and \(U_{1:T}\): \(\vartheta\) and \(U_{1:T}^*\).</p>
+</li>
+<li>
+<p>The proposal distribution for \((\vartheta,U_{1:T}^*)\) in the MH
+algorithm is given by \(q(\vartheta|\theta^{(i-1)}) p(U_{1:T}^*)\).</p>
+</li>
+<li>
+<p>No need to keep track of the draws \((U_{1:T}^*)\).</p>
+</li>
+<li>
+<p>MH acceptance probability:</p>
+<p>\begin{eqnarray*}
+\alpha(\vartheta|\theta^{i-1})
+&amp;=&amp;
+\min ; \left\{ 1,
+\frac{ \frac{ g(Y|\vartheta,U^*)p(U^*) p(\vartheta)}{ q(\vartheta|\theta^{(i-1)}) p(U^*) } }{
+\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\<br>
+&amp;=&amp;         \min ; \left\{ 1,
+\frac{  \hat{p}(Y|\vartheta)p(\vartheta) \big/ q(\vartheta|\theta^{(i-1)})  }{
+\hat{p}(Y|\theta^{(i-1)})p(\theta^{(i-1)}) \big/ q(\theta^{(i-1)}|\vartheta) } \right\}.
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="small-scale-dsge-accuracy-of-mh-approximations">Small-Scale DSGE: Accuracy of MH Approximations</h3>
+<ul>
+<li>Results are based on \(N_{run}=20\) runs of the PF-RWMH-V algorithm.
+<br></li>
+<li>Each run of the algorithm generates \(N=100,000\) draws and the first
+\(N_0=50,000\) are discarded.
+<br></li>
+<li>The likelihood function is computed with the Kalman filter (KF),
+bootstrap particle filter (BS-PF, \(M=40,000\)) or
+conditionally-optimal particle filter (CO-PF, \(M=400\)).
+<br></li>
+<li>``Pooled'' means that we are pooling the draws from the \(N_{run}=20\)
+runs to compute posterior statistics.</li>
+</ul>
+<h3 id="autocorrelation-of-pfmh-draws">Autocorrelation of PFMH Draws</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/dsge1_me_pmcmc_acf.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The figure depicts autocorrelation functions computed from
+the output of the 1 Block RWMH-V algorithm based on the Kalman filter
+(solid), the conditionally-optimal particle filter (dashed) and the
+bootstrap particle filter (solid with dots).</p>
+<h3 id="small-scale-dsge-accuracy-of-mh-approximations">Small-Scale DSGE: Accuracy of MH Approximations</h3>
+<p>\small</p>
+<p>\begin{center}
+\scalebox{0.75}{
+\begin{tabular}{lccccccccc} \hline \hline
+&amp; \multicolumn{3}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{3}{c}{Inefficiency Factors} &amp; \multicolumn{3}{c}{Std Dev of Means} \\\<br>
+&amp; KF    &amp;  CO-PF&amp;  BS-PF     &amp; KF        &amp;  CO-PF &amp;  BS-PF     &amp; KF        &amp;  CO-PF &amp;  BS-PF     \ \hline
+$\tau$             &amp;   2.63 &amp;  2.62 &amp;  2.64  &amp;    66.17 &amp;  126.76 &amp; 1360.22  &amp;  0.020 &amp; 0.028 &amp; 0.091 \\\<br>
+$\kappa$           &amp;   0.82 &amp;  0.81 &amp;  0.82  &amp;   128.00 &amp;   97.11 &amp; 1887.37  &amp;  0.007 &amp; 0.006 &amp; 0.026 \\\<br>
+$\psi_1$           &amp;   1.88 &amp;  1.88 &amp;  1.87  &amp;   113.46 &amp;  159.53 &amp;  749.22  &amp;  0.011 &amp; 0.013 &amp; 0.029 \\\<br>
+$\psi_2$           &amp;   0.64 &amp;  0.64 &amp;  0.63  &amp;    61.28 &amp;   56.10 &amp;  681.85  &amp;  0.011 &amp; 0.010 &amp; 0.036 \\\<br>
+$\rho_r$           &amp;   0.75 &amp;  0.75 &amp;  0.75  &amp;   108.46 &amp;  134.01 &amp; 1535.34  &amp;  0.002 &amp; 0.002 &amp; 0.007 \\\<br>
+$\rho_g$           &amp;   0.98 &amp;  0.98 &amp;  0.98  &amp;    94.10 &amp;   88.48 &amp; 1613.77  &amp;  0.001 &amp; 0.001 &amp; 0.002 \\\<br>
+$\rho_z$           &amp;   0.88 &amp;  0.88 &amp;  0.88  &amp;   124.24 &amp;  118.74 &amp; 1518.66  &amp;  0.001 &amp; 0.001 &amp; 0.005 \\\<br>
+$r^{(A)}$          &amp;   0.44 &amp;  0.44 &amp;  0.44  &amp;   148.46 &amp;  151.81 &amp; 1115.74  &amp;  0.016 &amp; 0.016 &amp; 0.044 \\\<br>
+$\pi^{(A)}$        &amp;   3.32 &amp;  3.33 &amp;  3.32  &amp;   152.08 &amp;  141.62 &amp; 1057.90  &amp;  0.017 &amp; 0.016 &amp; 0.045 \\\<br>
+$\gamma^{(Q)}$     &amp;   0.59 &amp;  0.59 &amp;  0.59  &amp;   106.68 &amp;  142.37 &amp;  899.34  &amp;  0.006 &amp; 0.007 &amp; 0.018 \\\<br>
+$\sigma_r$         &amp;   0.24 &amp;  0.24 &amp;  0.24  &amp;    35.21 &amp;  179.15 &amp; 1105.99  &amp;  0.001 &amp; 0.002 &amp; 0.004 \\\<br>
+$\sigma_g$         &amp;   0.68 &amp;  0.68 &amp;  0.67  &amp;    98.22 &amp;   64.18 &amp; 1490.81  &amp;  0.003 &amp; 0.002 &amp; 0.011 \\\<br>
+$\sigma_z$         &amp;   0.32 &amp;  0.32 &amp;  0.32  &amp;    84.77 &amp;   61.55 &amp;  575.90  &amp;  0.001 &amp; 0.001 &amp; 0.003 \\\<br>
+$\ln \hat p(Y)$ &amp;    -357.14 &amp; -357.17 &amp; -358.32  &amp; &amp; &amp; &amp; 0.040 &amp; 0.038 &amp; 0.949 \ \hline
+\end{tabular}
+}
+\end{center}</p>
+<h3 id="sw-model-accuracy-of-mh-approximations">SW Model: Accuracy of MH Approximations</h3>
+<ul>
+<li>Results are based on \(N_{run}=20\) runs of the PF-RWMH-V algorithm.
+<br></li>
+<li>Each run of the algorithm generates \(N=10,000\)
+draws.
+<br></li>
+<li>The likelihood function is computed with the Kalman filter (KF) or
+conditionally-optimal particle filter (CO-PF).
+<br></li>
+<li>``Pooled'' means that we are pooling the draws from the \(N_{run}=20\)
+runs to compute posterior statistics. The CO-PF uses \(M=40,000\)
+particles to compute the likelihood.</li>
+</ul>
+<h3 id="sw-model-accuracy-of-mh-approximations">SW Model: Accuracy of MH Approximations</h3>
+<p>\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc} \hline \hline
+&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\<br>
+&amp; KF    &amp;  CO-PF      &amp; KF       &amp;  CO-PF     &amp; KF     &amp;  CO-PF    \ \hline
+$(100\beta^{-1}-1)$ &amp;  0.14 &amp;  0.14     &amp;   172.58 &amp; 3732.90    &amp;  0.007 &amp; 0.034 \\\<br>
+$\bar\pi          $ &amp;  0.73 &amp;  0.74     &amp;   185.99 &amp; 4343.83    &amp;  0.016 &amp; 0.079 \\\<br>
+$\bar l           $ &amp;  0.51 &amp;  0.37     &amp;   174.39 &amp; 3133.89    &amp;  0.130 &amp; 0.552 \\\<br>
+$\alpha           $ &amp;  0.19 &amp;  0.20     &amp;   149.77 &amp; 5244.47    &amp;  0.003 &amp; 0.015 \\\<br>
+$\sigma_c         $ &amp;  1.49 &amp;  1.45     &amp;    86.27 &amp; 3557.81    &amp;  0.013 &amp; 0.086 \\\<br>
+$\Phi             $ &amp;  1.47 &amp;  1.45     &amp;   134.34 &amp; 4930.55    &amp;  0.009 &amp; 0.056 \\\<br>
+$\varphi          $ &amp;  5.34 &amp;  5.35     &amp;   138.54 &amp; 3210.16    &amp;  0.131 &amp; 0.628 \\\<br>
+$h                $ &amp;  0.70 &amp;  0.72     &amp;   277.64 &amp; 3058.26    &amp;  0.008 &amp; 0.027 \\\<br>
+$\xi_w            $ &amp;  0.75 &amp;  0.75     &amp;   343.89 &amp; 2594.43    &amp;  0.012 &amp; 0.034 \\\<br>
+$\sigma_l         $ &amp;  2.28 &amp;  2.31     &amp;   162.09 &amp; 4426.89    &amp;  0.091 &amp; 0.477 \\\<br>
+$\xi_p            $ &amp;  0.72 &amp;  0.72     &amp;   182.47 &amp; 6777.88    &amp;  0.008 &amp; 0.051 \\\<br>
+$\iota_w          $ &amp;  0.54 &amp;  0.53     &amp;   241.80 &amp; 4984.35    &amp;  0.016 &amp; 0.073 \\\<br>
+$\iota_p          $ &amp;  0.48 &amp;  0.50     &amp;   205.27 &amp; 5487.34    &amp;  0.015 &amp; 0.078 \\\<br>
+$\psi             $ &amp;  0.45 &amp;  0.44     &amp;   248.15 &amp; 3598.14    &amp;  0.020 &amp; 0.078 \\\<br>
+$r_{\pi}          $ &amp;  2.09 &amp;  2.09     &amp;    98.32 &amp; 3302.07    &amp;  0.020 &amp; 0.116 \\\<br>
+$\rho             $ &amp;  0.80 &amp;  0.80     &amp;   241.63 &amp; 4896.54    &amp;  0.006 &amp; 0.025 \\\<br>
+$r_y              $ &amp;  0.13 &amp;  0.13     &amp;   243.85 &amp; 4755.65    &amp;  0.005 &amp; 0.023 \\\<br>
+$r_{\Delta y}     $ &amp;  0.21 &amp;  0.21   &amp;   101.94 &amp; 5324.19    &amp;  0.003 &amp; 0.022   \\\<br>
+\hline
+\end{tabular}
+}
+\end{center}</p>
+<h3 id="sw-model-accuracy-of-mh-approximations">SW Model: Accuracy of MH Approximations</h3>
+<p>\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc} \hline \hline
+&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\<br>
+&amp; KF    &amp;  CO-PF      &amp; KF       &amp;  CO-PF     &amp; KF     &amp;  CO-PF    \ \hline
+$\rho_a           $ &amp;  0.96 &amp;  0.96    &amp;   153.46 &amp; 1358.87  &amp;  0.002 &amp; 0.005  \\\<br>
+$\rho_b           $ &amp;  0.22 &amp;  0.21    &amp;   325.98 &amp; 4468.10  &amp;  0.018 &amp; 0.068  \\\<br>
+$\rho_g           $ &amp;  0.97 &amp;  0.97    &amp;    57.08 &amp; 2687.56  &amp;  0.002 &amp; 0.011  \\\<br>
+$\rho_i           $ &amp;  0.71 &amp;  0.70    &amp;   219.11 &amp; 4735.33  &amp;  0.009 &amp; 0.044  \\\<br>
+$\rho_r           $ &amp;  0.54 &amp;  0.54    &amp;   194.73 &amp; 4184.04  &amp;  0.020 &amp; 0.094  \\\<br>
+$\rho_p           $ &amp;  0.80 &amp;  0.81    &amp;   338.69 &amp; 2527.79  &amp;  0.022 &amp; 0.061  \\\<br>
+$\rho_w           $ &amp;  0.94 &amp;  0.94    &amp;   135.83 &amp; 4851.01  &amp;  0.003 &amp; 0.019  \\\<br>
+$\rho_{ga}        $ &amp;  0.41 &amp;  0.37    &amp;   196.38 &amp; 5621.86  &amp;  0.025 &amp; 0.133 \\\<br>
+$\mu_p            $ &amp;  0.66 &amp;  0.66    &amp;   300.29 &amp; 3552.33  &amp;  0.025 &amp; 0.087  \\\<br>
+$\mu_w            $ &amp;  0.82 &amp;  0.81    &amp;   218.43 &amp; 5074.31  &amp;  0.011 &amp; 0.052  \\\<br>
+$\sigma_a         $ &amp;  0.34 &amp;  0.34    &amp;   128.00 &amp; 5096.75  &amp;  0.005 &amp; 0.034  \\\<br>
+$\sigma_b         $ &amp;  0.24 &amp;  0.24    &amp;   186.13 &amp; 3494.71  &amp;  0.004 &amp; 0.016  \\\<br>
+$\sigma_g         $ &amp;  0.51 &amp;  0.49    &amp;   208.14 &amp; 2945.02  &amp;  0.006 &amp; 0.021  \\\<br>
+$\sigma_i         $ &amp;  0.43 &amp;  0.44    &amp;   115.42 &amp; 6093.72  &amp;  0.006 &amp; 0.043  \\\<br>
+$\sigma_r         $ &amp;  0.14 &amp;  0.14    &amp;   193.37 &amp; 3408.01  &amp;  0.004 &amp; 0.016  \\\<br>
+$\sigma_p         $ &amp;  0.13 &amp;  0.13    &amp;   194.22 &amp; 4587.76  &amp;  0.003 &amp; 0.013  \\\<br>
+$\sigma_w         $ &amp;  0.22 &amp;  0.22    &amp;   211.80 &amp; 2256.19  &amp;  0.004 &amp; 0.012  \\\<br>
+$\ln \hat p(Y)$ &amp;    -964 &amp; -1018    &amp;  &amp; &amp;   0.298 &amp; 9.139   \\\<br>
+\hline
+\end{tabular}
+}
+\end{center}</p>
+<h3 id="computational-considerations">Computational Considerations</h3>
+<ul>
+<li>We implement the PFMH algorithm on a single machine, utilizing up to
+twelve cores.
+<br></li>
+<li>For the small-scale DSGE model it takes  30:20:33 [hh:mm:ss]
+hours to generate 100,000 parameter draws using the bootstrap PF with
+40,000 particles.  Under the conditionally-optimal filter we only use
+400 particles, which reduces the run time to 00:39:20 minutes.
+<br></li>
+<li>For the SW model it took 05:14:20:00 [dd:hh:mm:ss] days to generate 10,000 draws using
+the conditionally-optimal PF with 40,000 particles.</li>
+</ul>
+<h3 id="smc--2">SMC\(^2\)</h3>
+<ul>
+<li>
+<p>We will construct an \(SMC^2\) algorithm to estimate a DSGE model:</p>
+<ul>
+<li>we use SMC for inference about the static parameter \(\theta\);</li>
+<li>we use SMC to obtain a particle filter approximation of the likelihood function.</li>
+</ul>
+<p>and document its accuracy.
+<br></p>
+</li>
+<li>
+<p>Rather than delving straight into the \(SMC^2\) algorithm we proceed in a step-wise manner:</p>
+<ul>
+<li>discuss how SMC can be used for inference about \(\theta\) in models in which the likelihood
+function can be evaluated with the Kalman filter;
+conduct simulation experiments to document the  accuracy of SMC approximation
+of posterior moments;</li>
+<li>review how particle filters can be used to construct a Monte Carlo approximation
+of the likelihood function and conduct simulation experiments to document the accuracy.</li>
+</ul>
+</li>
+</ul>
+<h3 id="why">Why???</h3>
+<ul>
+<li>Likelihood evaluation for nonlinear DSGE models requires nonlinear filtering \(\longrightarrow\) sequential  Monte Carlo.
+<br></li>
+<li>For inference about the static parameter \(\theta\), ``standard'' MCMC methods can be
+quite inaccurate. Multimodal posteriors may arise because it is difficult to
+<ul>
+<li>disentangling internal and external propagation mechanisms;</li>
+<li>disentangling the relative importance of shocks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="putting-the-pieces-together--smc-2">Putting the Pieces Together &ndash; \(SMC^2\)</h3>
+<ul>
+<li>Start from SMC algorithm &hellip;  replace actual likelihood by particle filter approximation in the correction
+and mutation steps of SMC algorithm.</li>
+<li>Data tempering instead of likelihood tempering: \(\pi_n^D(\theta) = p(\theta|Y_{1:t_n})\).</li>
+<li>Key Idea: let
+\[
+\hat{p}(Y_{1:t_n}|\theta_n) = g(Y_{1:t_n}|\theta_n,U_{1:t_n}).
+\]
+where \(U_{1:t_n} \sim p(U_{1:t_n})\) is an array of \(iid\) uniform random variables generated
+by the particle filter.</li>
+<li>Important Result: Particle filter delivers an unbiased estimate of the incremental weight \(p(Y_{t_{n-1}+1:t_n}|\theta)\):
+\[
+\int g(Y_{1:t_n}|\theta_n,U_{1:t_n}) p(U_{1:t_n}) dU_{1:t_n} = p(Y_{1:t_n}|\theta_n).
+\]</li>
+</ul>
+<h3 id="particle-system-for--smc-2--sampler-after-stage--n">Particle System for \(SMC^2\) Sampler After Stage \(n\)</h3>
+<p>\begin{center}
+\begin{tabular}{ccccc} \ \hline \hline
+Parameter &amp; \multicolumn{4}{c}{State} \ \hline
+$(\theta_n^1,W_n^1)$  &amp; $(s_{t_n}^{1,1},{\cal W}_{t_n}^{1,1})$ &amp; $(s_{t_n}^{1,2},{\cal W}_{t_n}^{1,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{1,M},{\cal W}_{t_n}^{1,M})$ \\\<br>
+$(\theta_n^2,W_n^2)$  &amp; $(s_{t_n}^{2,1},{\cal W}_{t_n}^{2,1})$ &amp; $(s_{t_n}^{2,2},{\cal W}_{t_n}^{2,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{2,M},{\cal W}_{t_n}^{2,M})$ \\\<br>
+$\vdots$  &amp; $\vdots$ &amp; $\vdots$ &amp; $\ddots$ &amp; $\vdots$ \\\<br>
+$(\theta_n^N,W_n^N)$ &amp; $(s_{t_n}^{N,1},{\cal W}_{t_n}^{N,1})$ &amp; $(s_{t_n}^{N,2},{\cal W}_{t_n}^{N,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{N,M},{\cal W}_{t_n}^{N,M})$ \ \hline
+\end{tabular}
+\end{center}</p>
+<p>\vspace*{1cm}</p>
+<p>To simplify notation, we add one observation at a time, \(n=t\), and write \(\theta_t\) and \(\pi_t(\cdot)\).</p>
+<h3 id="smc-2">\(SMC^2\)</h3>
+<p>\begin{enumerate}
+\item {\bf Initialization.}
+Draw the initial particles from the prior: $\theta^i_0 \stackrel{iid}{\sim} p(\theta)$ and
+$W^{i}_{0} = 1$, $i = 1, \ldots, N$.
+\item {\bf Recursion.} For $t = 1, \ldots, T$,
+\begin{enumerate}
+\item {\bf Correction.}  Reweight the particles from stage $t-1$ by defining
+the incremental weights
+\[
+\tilde w_{t}^i = \hat{p}(y_t|Y_{1:t-1},\theta_{t-1}^i) = g(y_t|Y_{1:t-1},\theta_{t-1}^i,U^i_{1:t})
+\label{eq_smc2deftildew}
+\]
+and the normalized weights
+\[
+\tilde{W}^i_t = \frac{\tilde w_n^{i} W^{i}_{t-1}}{\frac{1}{N} \sum_{i=1}^N \tilde w_t^{i} W^{i}_{t-1}}, \quad
+i = 1,\ldots,N.
+\]
+Then,
+\[
+\tilde{h}_{t,N} = \frac{1}{N} \sum_{i=1}^N \tilde W_t^{i} h(\theta_{t-1}^i) \approx \mathbb{E}_{\pi_t}[h(\theta)].
+\label{eq_smc2deftildeh}
+\]
+\item {\bf Selection.}  (unchanged)
+\item {\bf Mutation.}
+\end{enumerate}</p>
+<p>\end{enumerate}</p>
+<h3 id="smc-2">\(SMC^2\)</h3>
+<p>\begin{enumerate}
+\item {\bf Initialization.}
+\item {\bf Recursion.} For $t = 1, \ldots, T$,
+\begin{enumerate}
+\item {\bf Correction.}
+\item {\bf Selection.}
+\item {\bf Mutation.} Propagate the particles $\{ \hat{\theta}_t^i,W_t^i \}$ via $1$
+step of an MH algorithm. The proposal distribution is given by
+\[
+q(\vartheta_t^i|\hat{\theta}_t^i)p(U_{1:t}^{*i})
+\]
+and the acceptance ratio can be expressed as
+\[
+\alpha(\vartheta_t^i|\hat{\theta}_t^i)
+= \min ; \left\{ 1, , \frac{ g(Y_{1:t}|\vartheta_t^i,U_{1:t}^{*i}) p(\vartheta_t^i)p(U_{1:t}^{*i})/ q(\vartheta_t^i|\hat{\theta}_t^i)p(U_{1:t}^{*i})}{
+g(Y_{1:t}|\hat{\theta}_t^i,U_{1:t}^{i}) p(\hat{\theta}_t^i) p(U_{1:t}^{i}) / q(\hat{\theta}_t^i|\vartheta_t^i)p(U_{1:t}^{i})} \right\}.
+\]
+Then,
+\[
+\bar{h}_{t,N} = \frac{1}{N} \sum_{i=1}^N h(\theta_{t}^i) W^i_t \approx \mathbb{E}_{\pi_t}[h(\theta)].
+\label{eq_smc2defbarh}
+\]
+\end{enumerate}</p>
+<p>\end{enumerate}</p>
+<h3 id="why-does--smc-2--work">Why Does \(SMC^2\) Work?</h3>
+<ul>
+<li>
+<p>Work on enlarged probability space that includes sequence of random vectors \(U^i_{1:t-1}\) that underlies the simulation approximation
+of the particle filter.</p>
+</li>
+<li>
+<p>At the end of iteration \(t-1\):</p>
+<ul>
+<li>
+<p>Particles \(\{ \theta_{t-1}^i,U_{1:t-1}^i,W_{t-1}^i\}_{i=1}^N\).</p>
+</li>
+<li>
+<p>For each parameter value \(\theta_{t-1}^i\) there is PF approx of
+the likelihood:
+\(\hat{p}(Y_{1:t-1}|\theta_{t-1}^i)=g(Y_{1:t-1}|\theta_{t-1}^i,U_{1:t-1}^i)\).</p>
+</li>
+<li>
+<p>Swarm of particles \(\{s_{t-1}^{i,j},{\cal
+W}_{t-1}^{i,j}\}_{j=1}^M\) that represents the distribution
+\(p(s_{t-1}|Y_{1:t-1},\theta_{t-1}^i)\).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The triplets \(\{ \theta_{t-1}^i,U_{1:t-1}^i,W_{t-1}^i \}_{i=1}^N\) approximate:</p>
+<p>\begin{eqnarray*}
+\lefteqn{\int \int h(\theta,U_{1:t-1}) p(U_{1:t-1}) p(\theta|Y_{1:t-1}) d U_{1:t-1} d\theta} \\\<br>
+&amp;\approx&amp;  \frac{1}{N} \sum_{i=1}^{N} h(\theta_{t-1}^i,U^i_{1:t-1}) W_{t-1}^i.
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="correction-step">Correction Step</h3>
+<ul>
+<li>
+<p>Write the particle filter approximation of the likelihood increment
+as
+\[
+\tilde{w}_t^i = \hat{p}(y_t|Y_{1:t-1},\theta_{t-1}^i) = g(y_{t}|Y_{1:t-1},U^i_{1:t},\theta_{t-1}^i).
+\]</p>
+</li>
+<li>
+<p>By induction, we can deduce that \(\frac{1}{N} \sum_{i=1}^N
+h(\theta_{t-1}^i) \tilde{w}_t^iW_{t-1}^i\) approximates the following
+integral</p>
+<p>\begin{eqnarray*}
+\lefteqn{ \int \int h(\theta) g(y_t|Y_{1:t-1},U_{1:t},\theta)
+p(U_{1:t}) p(\theta|Y_{1:t-1}) d U_{1:t} d \theta } \\\<br>
+&amp;=&amp; \int h(\theta) \left[ \int g(y_t|Y_{1:t-1},U_{1:t},\theta) p(U_{1:t}) dU_{1:t} \right] p(\theta|Y_{1:t-1}) d\theta. \nonumber
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Provided that the particle filter approximation of the likelihood
+increment is unbiased, that is, \[ \int
+g(y_t|Y_{1:t-1},U_{1:t},\theta) p(U_{1:t}) dU_{1:t} =
+p(y_t|Y_{1:t-1},\theta) \] for each \(\theta\), we deduce that
+\(\tilde{h}_{t,N}\) is a consistent estimator of
+\(\mathbb{E}_{\pi_t}[h(\theta)]\).</p>
+</li>
+</ul>
+<h3 id="selection-step">Selection Step</h3>
+<ul>
+<li>
+<p>Similar to regular SMC.</p>
+</li>
+<li>
+<p>We resample in every period for expositional purposes.</p>
+</li>
+<li>
+<p>We are keeping track of the ancestry information in the vector
+\({\cal A}_t\). This is important, because for each resampled particle
+\(i\) we not only need to know its value \(\hat{\theta}_t^i\) but we
+also want to track the corresponding value of the likelihood
+function \(\hat{p}(Y_{1:t}|\hat{\theta}_t^i)\) as well as the particle
+approximation of the state, given by \(\{ s_t^{i,j},{\cal
+W}_t^{i,j}\}\), and the set of random numbers \(U_{1:t}^i\).</p>
+</li>
+<li>
+<p>In the implementation, the likelihood values are needed
+for the mutation step.</p>
+</li>
+<li>
+<p>The \(U_{1:t}^i\)&rsquo;s are not required for</p>
+</li>
+</ul>
+<h3 id="mutation-step">Mutation Step</h3>
+<ul>
+<li>
+<p>For each particle \(i\) we have:</p>
+<ul>
+<li>A proposed value \(\vartheta_t^i\);</li>
+<li>A sequence of random vectors \(U^*_{1:t}\) drawn from the distribution \(p(U_{1:t})\);</li>
+<li>An associated particle filter approximation of the likelihood:
+\[
+\hat{p}(Y_{1:t}|\vartheta_t^i) = g(Y_{1:t}|\vartheta_t^i,U^*_{1:t}).
+\]</li>
+</ul>
+</li>
+<li>
+<p>The densities \(p(U_{1:t}^i)\) and \(p(U^*_{1:t})\) cancel from the
+formula for the acceptance probability
+\(\alpha(\vartheta_t^i|\hat{\theta}_t^i)\):</p>
+<p>\begin{eqnarray*}
+\alpha(\vartheta|\theta^{i-1})
+&amp;=&amp;
+\min ; \left\{ 1,
+\frac{ \frac{ g(Y|\vartheta,U^*)p(U^*) p(\vartheta)}{ q(\vartheta|\theta^{(i-1)}) p(U^*) } }{
+\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\<br>
+&amp;=&amp;         \min ; \left\{ 1,
+\frac{  \hat{p}(Y|\vartheta)p(\vartheta) \big/ q(\vartheta|\theta^{(i-1)})  }{
+\hat{p}(Y|\theta^{(i-1)})p(\theta^{(i-1)}) \big/ q(\theta^{(i-1)}|\vartheta) } \right\}.
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="application-to-small-scale-dsge-model">Application to Small-Scale DSGE Model</h3>
+<ul>
+<li>Results are based on \(N_{run}= 20\) runs of the \(SMC^2\) algorithm
+with \(N=4,000\) particles.
+<br></li>
+<li>D is data tempering and L is likelihood tempering.
+<br></li>
+<li>KF is Kalman filter, CO-PF is conditionally-optimal PF with \(M=400\), BS-PF is bootstrap PF with \(M=40,000\). CO-PF and BS-PF use data tempering.</li>
+</ul>
+<h3 id="accuracy-of--smc-2--approximations">Accuracy of \(SMC^2\) Approximations</h3>
+<p>\begin{center}
+\scalebox{0.55}{
+\begin{tabular}{lcccc@{\hspace*{1cm}}cccc@{\hspace*{1cm}}cccc} \hline \hline
+&amp; \multicolumn{4}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{4}{c}{Inefficiency Factors} &amp; \multicolumn{4}{c}{Std Dev of Means} \\\<br>
+&amp; KF(L)     &amp; KF(D)     &amp;  CO-PF    &amp;  BS-PF &amp; KF(L) &amp; KF(D)  &amp;  CO-PF &amp;  BS-PF &amp; KF(L) &amp; KF(D)  &amp;  CO-PF &amp;  BS-PF \ \hline
+$\tau$               &amp;   2.65 &amp;   2.67 &amp;   2.68 &amp;     2.53 &amp;   1.51 &amp;  10.41 &amp;  47.60 &amp;  6570 &amp;   0.01 &amp;   0.03 &amp;   0.07 &amp;     0.76\\\<br>
+$\kappa$             &amp;   0.81 &amp;   0.81 &amp;   0.81 &amp;     0.70 &amp;   1.40 &amp;   8.36 &amp;  40.60 &amp;  7223 &amp;   0.00 &amp;   0.01 &amp;   0.01 &amp;     0.18\\\<br>
+$\psi_1$             &amp;   1.87 &amp;   1.88 &amp;   1.87 &amp;     1.89 &amp;   3.29 &amp;  18.27 &amp;  22.56 &amp;  4785 &amp;   0.01 &amp;   0.02 &amp;   0.02 &amp;     0.27\\\<br>
+$\psi_2$             &amp;   0.66 &amp;   0.66 &amp;   0.67 &amp;     0.65 &amp;   2.72 &amp;  10.02 &amp;  43.30 &amp;  4197 &amp;   0.01 &amp;   0.02 &amp;   0.03 &amp;     0.34\\\<br>
+$\rho_r$             &amp;   0.75 &amp;   0.75 &amp;   0.75 &amp;     0.72 &amp;   1.31 &amp;  11.39 &amp;  60.18 &amp; 14979 &amp;   0.00 &amp;   0.00 &amp;   0.01 &amp;     0.08\\\<br>
+$\rho_g$             &amp;   0.98 &amp;   0.98 &amp;   0.98 &amp;     0.95 &amp;   1.32 &amp;   4.28 &amp; 250.34 &amp; 21736 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.04\\\<br>
+$\rho_z$             &amp;   0.88 &amp;   0.88 &amp;   0.88 &amp;     0.84 &amp;   3.16 &amp;  15.06 &amp;  35.35 &amp; 10802 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.05\\\<br>
+$r^{(A)}$            &amp;   0.45 &amp;   0.46 &amp;   0.44 &amp;     0.46 &amp;   1.09 &amp;  26.58 &amp;  73.78 &amp;  7971 &amp;   0.00 &amp;   0.02 &amp;   0.04 &amp;     0.42\\\<br>
+$\pi^{(A)}$          &amp;   3.32 &amp;   3.31 &amp;   3.31 &amp;     3.56 &amp;   2.15 &amp;  40.45 &amp; 158.64 &amp;  6529 &amp;   0.01 &amp;   0.03 &amp;   0.06 &amp;     0.40\\\<br>
+$\gamma^{(Q)}$       &amp;   0.59 &amp;   0.59 &amp;   0.59 &amp;     0.64 &amp;   2.35 &amp;  32.35 &amp; 133.25 &amp;  5296 &amp;   0.00 &amp;   0.01 &amp;   0.03 &amp;     0.16\\\<br>
+$\sigma_r$           &amp;   0.24 &amp;   0.24 &amp;   0.24 &amp;     0.26 &amp;   0.75 &amp;   7.29 &amp;  43.96 &amp; 16084 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.06\\\<br>
+$\sigma_g$           &amp;   0.68 &amp;   0.68 &amp;   0.68 &amp;     0.73 &amp;   1.30 &amp;   1.48 &amp;  20.20 &amp;  5098 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.08\\\<br>
+$\sigma_z$           &amp;   0.32 &amp;   0.32 &amp;   0.32 &amp;     0.42 &amp;   2.32 &amp;   3.63 &amp;  26.98 &amp; 41284 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.11\\\<br>
+$\ln p(Y)$  &amp; -358.75 &amp;  -357.34 &amp; -356.33 &amp; -340.47 &amp; &amp; &amp; &amp; &amp; 0.120 &amp; 1.191 &amp; 4.374 &amp; 14.49 \ \hline
+\end{tabular}
+}
+\end{center}</p>
+<h3 id="computational-considerations">Computational Considerations</h3>
+<ul>
+<li>The \(SMC^2\) results are obtained by utilizing 40 processors.
+<br></li>
+<li>We parallelized the likelihood evaluations
+\(\hat{p}(Y_{1:t}|\theta^i_t)\) for the \(\theta_t^i\) particles rather
+than the particle filter computations for the swarms
+\(\{s_{t}^{i,j},{\cal W}_{t}^{i,j} \}_{j=1}^M\).
+<br></li>
+<li>The run time for the \(SMC^2\) with
+conditionally-optimal PF (\(N=4,000\), \(M=400\)) is 23:24 [mm:ss] minutes, where
+as the algorithm with bootstrap PF (\(N=4,000\) and \(M=40,000\)) runs for
+08:05:35 [hh:mm:ss] hours.
+<br></li>
+<li>Due to memory constraints we re-computed the entire likelihood for \(Y_{1:t}\) in
+each iteration.
+<br></li>
+<li>Our sequential (data-tempering) implementation of the \(SMC^2\) algorithm suffers
+from particle degeneracy in the intial stages, i.e., for small sample sizes.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<ul>
+<li>We explored PMCMC and \(SMC^2\) methods for DSGE models.
+<br></li>
+<li>These methods are promising, because they can handle multi-modal posterior
+surfaces and they can be parallelized.
+<br></li>
+<li>However, careful tuning is required and the particle filter approximation of the likelihood
+function needs to be sufficiently accurate.
+<br></li>
+<li>The method worked well for a small-scale DSGE model, but not for the Smets-Wouters model, because
+there was too much noise in the likelihood approximation.</li>
+</ul>
+<h2 id="references">References</h2>
+<h3 id="references">References</h3>
+<h1 id="bibliography">Bibliography</h1>
+<p><a id="Andrieu_2010"></a>[Andrieu_2010] Andrieu, Doucet, &amp; Holenstein, Particle Markov chain Monte Carlo methods, <i>Journal of the Royal Statistical Society: Series B
+(Statistical Methodology)</i>, <b>72(3)</b>, 269 342 (2010). <a href="http://dx.doi.org/10.1111/j.1467-9868.2009.00736.x">link</a>. <a href="http://dx.doi.org/10.1111/j.1467-9868.2009.00736.x">doi</a>. <a href="#bdbeaec8ecb4a8ea982e4ad765654ea6">↩</a></p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="The Particle Filter" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/" /><meta property="article:published_time" content="2020-12-11T09:47:16-05:00" />
+
+
+
+<meta name="twitter:title" content="The Particle Filter"/>
+<meta name="twitter:description" content="Nonlinear DSGE Models From Linear to Nonlinear DSGE Models  While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear.  One can add certain features that generate more pronounced nonlinearities:  stochastic volatility; markov switching coefficients; asymmetric adjustment costs; occasionally binding constraints.    From Linear to Nonlinear DSGE Models   Linear DSGE model leads to
+\begin{eqnarray*} y_t &amp;=&amp; \Psi_0(\theta) &#43; \Psi_1(\theta)t &#43; \Psi_2(\theta) s_t &#43; u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters'>07-nonlinear-dsge-models-and-particle-filters</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>The Particle Filter</h1>
+<h2 id="nonlinear-dsge-models">Nonlinear DSGE Models</h2>
+<h3 id="from-linear-to-nonlinear-dsge-models">From Linear to Nonlinear DSGE Models</h3>
+<ul>
+<li>While DSGE models are inherently nonlinear, the nonlinearities are often
+small and decision rules are approximately linear.
+<br></li>
+<li>One can add certain features that generate more pronounced nonlinearities:
+<ul>
+<li>stochastic volatility;</li>
+<li>markov switching coefficients;</li>
+<li>asymmetric adjustment costs;</li>
+<li>occasionally binding constraints.</li>
+</ul>
+</li>
+</ul>
+<h3 id="from-linear-to-nonlinear-dsge-models">From Linear to Nonlinear DSGE Models</h3>
+<ul>
+<li>
+<p>Linear DSGE model leads to</p>
+<p>\begin{eqnarray*}
+y_t &amp;=&amp; \Psi_0(\theta) + \Psi_1(\theta)t + \Psi_2(\theta) s_t + u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\<br>
+s_t &amp;=&amp; \Phi_1(\theta)s_{t-1} + \Phi_\epsilon(\theta) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon).
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Nonlinear DSGE model leads to</p>
+<p>\begin{eqnarray*}
+y_t &amp;=&amp; \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\<br>
+s_t &amp;=&amp; \Phi(s_{t-1},\epsilon_t; \theta), \quad \epsilon_t \sim F_\epsilon(\cdot;\theta).
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="some-prominent-examples">Some Prominent Examples</h3>
+<ul>
+<li><sup id="b5c5a1c35c233f892cfda8eb381ed059"><a href="#Fern_ndez_Villaverde_2011" title="Fern&#225;ndez-Villaverde, Guerr&#243;n-Quintana, Pablo, Kuester \&amp; Rubio-Ram&#237;rez, Fiscal Volatility Shocks and Economic Activity, v(), (2011).">Fern_ndez_Villaverde_2011</a></sup>
+<br></li>
+<li><sup id="a850d3ceb9d36cd11520fdc3648d356a"><a href="#Fern_ndez_Villaverde_2015" title="Fern&#225;ndez-Villaverde, Gordon, , Guerr&#243;n-Quintana \&amp; Rubio-Ram&#237;rez, Nonlinear adventures at the zero lower bound, {Journal of Economic Dynamics and Control}, v(), 182&#8211;204 (2015).">Fern_ndez_Villaverde_2015</a></sup>
+<br></li>
+<li><sup id="d9f86da9d68227c998b4cf1066d8028d"><a href="#Bora_an_Aruoba_2017" title="Aruoba, Cuba-Borda, \&amp; Schorfheide, Macroeconomic Dynamics Near the ZLB: A Tale of Two  Countries, {The Review of Economic Studies}, v(1), 87 118 (2018).">Bora_an_Aruoba_2017</a></sup>
+<br></li>
+<li><sup id="f96243f22295b8d14b1640a268a6e625"><a href="#Gust_2017" title="Gust, Herbst, , L&#243;pez-Salido \&amp; Smith, The Empirical Implications of the Interest-Rate  Lower Bound, {American Economic Review}, v(7), 1971 2006 (2017).">Gust_2017</a></sup>
+<br></li>
+</ul>
+<h2 id="particle-filter">Particle Filter</h2>
+<h3 id="particle-filters">Particle Filters</h3>
+<ul>
+<li>There are many particle filters&hellip;
+<br></li>
+<li>We will focus on four types:
+<ul>
+<li>Bootstrap PF</li>
+<li>A generic PF</li>
+<li>A conditionally-optimal PF</li>
+<li>Tempered Particle Filter</li>
+</ul>
+</li>
+</ul>
+<h3 id="filtering-general-idea">Filtering - General Idea</h3>
+<ul>
+<li>
+<p>State-space representation of nonlinear DSGE model</p>
+<p>\begin{eqnarray*}
+\mbox{Measurement Eq.}   &amp;:&amp; y_t = \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\<br>
+\mbox{State Transition}  &amp;:&amp; s_t = \Phi(s_{t-1},\epsilon_t; \theta), \quad \epsilon_t \sim F_\epsilon(\cdot;\theta).
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Likelihood function:
+\[
+p(Y_{1:T}|\theta) = \prod_{t=1}^T {\color{red} p(y_t |Y_{1:t-1},\theta)}
+\]</p>
+</li>
+<li>
+<p>A filter generates a sequence of conditional distributions
+\(s_t|Y_{1:t}\).</p>
+</li>
+</ul>
+<h3 id="filtering-general-idea">Filtering - General Idea</h3>
+<ul>
+<li>Iterations:
+<ul>
+<li>Initialization at time \(t-1\): \(p( s_{t-1} |Y_{1:t-1}, \theta )\)</li>
+<li>Forecasting \(t\) given \(t-1\):
+<ol>
+<li>Transition equation:  \(p(s_{t}|Y_{1:t-1},\theta ) = \int p(s_{t}|s_{t-1}, Y_{1:t-1} , \theta  ) p (s_{t-1} |Y_{1:t-1} , \theta ) ds_{t-1}\)</li>
+<li>Measurement equation: \({\color{red} p(y_{t}|Y_{1:t-1},\theta )} = \int p(y_{t}|s_{t}, Y_{1:t-1} , \theta  ) p(s_{t} | Y_{1:t-1} , \theta ) ds_{t}\)</li>
+</ol>
+</li>
+<li>Updating with Bayes theorem. Once \(y_{t}\) becomes available:
+\[
+p(s_{t}| Y_{1:t} , \theta  ) = p(s_{t} | y_{t},Y_{1:t-1} , \theta )
+= \frac{ p(y_{t}|s_{t},Y_{1:t-1} , \theta ) p(s_{t} |Y_{1:t-1} , \theta )}{ p(y_{t}|Y_{1:t-1}, \theta )}
+\]</li>
+</ul>
+</li>
+</ul>
+<h3 id="bootstrap-particle-filter">Bootstrap Particle Filter</h3>
+<ul>
+<li>
+<p><strong>Initialization.</strong> Draw the initial particles from the distribution \(s_0^j \stackrel{iid}{\sim} p(s_0)\)
+and set \(W_0^j=1\), \(j=1,\ldots,M\).</p>
+</li>
+<li>
+<p><strong>Recursion.</strong> For \(t=1,\ldots,T\):</p>
+<ol>
+<li>
+<p><strong>Forecasting \(s_t\).</strong> Propagate the period \(t-1\) particles \(\{ s_{t-1}^j, W_{t-1}^j \}\)
+by iterating the state-transition equation forward:</p>
+<p>\begin{equation}
+\tilde{s}_t^j = \Phi(s_{t-1}^j,\epsilon^j_t; \theta), \quad \epsilon^j_t \sim F_\epsilon(\cdot;\theta).
+\end{equation}</p>
+<p>An approximation of \(\mathbb{E}[h(s_t)|Y_{1:t-1},\theta]\) is given by</p>
+<p>\begin{equation}
+\hat{h}_{t,M} = \frac{1}{M} \sum_{j=1}^M h(\tilde{s}_t^j)W_{t-1}^j.
+\label{eq_pfhtt1}
+\end{equation}</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="bootstrap-particle-filter">Bootstrap Particle Filter</h3>
+<ul>
+<li><strong>Initialization.</strong></li>
+<li><strong>Recursion.</strong> For \(t=1,\ldots,T\):
+<ol>
+<li>
+<p><strong>Forecasting \(s_t\).</strong></p>
+</li>
+<li>
+<p><strong>Forecasting \(y_t\).</strong> Define the incremental weights</p>
+<p>\begin{equation}
+\tilde{w}^j_t = p(y_t|\tilde{s}^j_t,\theta).
+\end{equation}</p>
+<p>The predictive density \(p(y_t|Y_{1:t-1},\theta)\)
+can be approximated by</p>
+<p>\begin{equation}
+\hat{p}(y_t|Y_{1:t-1},\theta) = \frac{1}{M} \sum_{j=1}^M \tilde{w}^j_t W_{t-1}^j.
+\end{equation}</p>
+<p>If the measurement errors are \(N(0,\Sigma_u)\) then the incremental weights take the form</p>
+<p>\begin{equation}
+\tilde{w}_t^j = (2 \pi)^{-n/2} |\Sigma_u|^{-1/2}
+\exp \bigg\{ - \frac{1}{2} \big(y_t - \Psi(\tilde{s}^j_t,t;\theta) \big)'\Sigma_u^{-1}
+\big(y_t - \Psi(\tilde{s}^j_t,t;\theta)\big) \bigg\}, \label{eq_pfincrweightgaussian}
+\end{equation}</p>
+<p>where \(n\) here denotes the dimension of \(y_t\).</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="bootstrap-particle-filter">Bootstrap Particle Filter</h3>
+<ul>
+<li><strong>Initialization.</strong></li>
+<li><strong>Recursion.</strong> For \(t=1,\ldots,T\):
+<ol>
+<li>
+<p><strong>Forecasting \(s_t\).</strong></p>
+</li>
+<li>
+<p><strong>Forecasting \(y_t\).</strong> Define the incremental weights</p>
+<p>\begin{equation}
+\tilde{w}^j_t = p(y_t|\tilde{s}^j_t,\theta).
+\end{equation}</p>
+</li>
+<li>
+<p><strong>Updating.</strong> Define the normalized weights</p>
+<p>\begin{equation}
+\tilde{W}^j_t = \frac{ \tilde{w}^j_t W^j_{t-1} }{ \frac{1}{M} \sum_{j=1}^M \tilde{w}^j_t W^j_{t-1} }.
+\end{equation}</p>
+<p>An approximation of \(\mathbb{E}[h(s_t)|Y_{1:t},\theta]\) is given by</p>
+<p>\begin{equation}
+\tilde{h}_{t,M} = \frac{1}{M} \sum_{j=1}^M h(\tilde{s}_t^j) \tilde{W}_{t}^j.
+\label{eq_pfhtildett}
+\end{equation}</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="bootstrap-particle-filter">Bootstrap Particle Filter</h3>
+<ul>
+<li><strong>Initialization.</strong></li>
+<li><strong>Recursion.</strong> For \(t=1,\ldots,T\):
+<ol>
+<li>
+<p><strong>Forecasting \(s_t\).</strong></p>
+</li>
+<li>
+<p><strong>Forecasting \(y_t\).</strong></p>
+</li>
+<li>
+<p><strong>Updating.</strong></p>
+</li>
+<li>
+<p><strong>Selection (Optional).</strong> Resample the particles via
+multinomial resampling. Let \(\{ s_t^j \}_{j=1}^M\) denote \(M\)
+iid draws from a multinomial distribution characterized by
+support points and weights \(\{ \tilde{s}_t^j,\tilde{W}_t^j
+\}\) and set \(W_t^j=1\) for \(j=,1\ldots,M\). <br />
+An approximation of \(\mathbb{E}[h(s_t)|Y_{1:t},\theta]\) is
+given by</p>
+<p>\begin{equation}
+\bar{h}_{t,M} = \frac{1}{M} \sum_{j=1}^Mh(s_t^j)W_{t}^j.
+\label{eq_pfhtt} \end{equation}</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="likelihood-approximation">Likelihood Approximation</h3>
+<ul>
+<li>
+<p>The approximation of the  log likelihood function
+is given by</p>
+<p>\begin{equation}
+\ln \hat{p}(Y_{1:T}|\theta) = \sum_{t=1}^T \ln \left( \frac{1}{M} \sum_{j=1}^M \tilde{w}^j_t W_{t-1}^j \right).
+\end{equation}</p>
+</li>
+<li>
+<p>One can show that the approximation of the  likelihood function is unbiased.
+<br></p>
+</li>
+<li>
+<p>This implies that the approximation of the  log likelihood function is downward biased.</p>
+</li>
+</ul>
+<h3 id="the-role-of-measurement-errors">The Role of Measurement Errors</h3>
+<ul>
+<li>Measurement errors may not be intrinsic to DSGE model.
+<br></li>
+<li>Bootstrap filter needs non-degenerate \(p(y_t|s_t,\theta)\) for incremental weights to be well defined.
+<br></li>
+<li>Decreasing the measurement error variance \(\Sigma_u\), holding
+everything else fixed, increases the variance of the particle
+weights, and reduces the accuracy of Monte Carlo approximation.</li>
+</ul>
+<h3 id="generic-particle-filter-recursion">Generic Particle Filter &ndash; Recursion</h3>
+<ul>
+<li>
+<p><strong>Forecasting \(s_t\).</strong> Draw \(\tilde{s}_t^j\) from density \(g_t(\tilde{s}_t|s_{t-1}^j,\theta)\)
+and define</p>
+<p>\begin{equation}
+{\color{blue} \omega_t^j = \frac{p(\tilde{s}_t^j|s_{t-1}^j,\theta)}{g_t(\tilde{s}_t^j|s_{t-1}^j,\theta)}.}
+\label{eq_generalpfomega}
+\end{equation}</p>
+</li>
+<li>
+<p>An approximation of \(\mathbb{E}[h(s_t)|Y_{1:t-1},\theta]\) is given by</p>
+<p>\begin{equation}
+\hat{h}_{t,M} = \frac{1}{M} \sum_{j=1}^M h(\tilde{s}_t^j) {\color{blue} \omega_t^j} W_{t-1}^j.
+\label{eq_generalpfhtt1}
+\end{equation}</p>
+</li>
+<li>
+<p><strong>Forecasting \(y_t\).</strong> Define the incremental weights</p>
+<p>\begin{equation}
+\tilde{w}^j_t = p(y_t|\tilde{s}^j_t,\theta) {\color{blue} \omega_t^j}.
+\label{eq_generalpfincrweight}
+\end{equation}</p>
+<p>The predictive density \(p(y_t|Y_{1:t-1},\theta)\)
+can be approximated by</p>
+<p>\begin{equation}
+\hat{p}(y_t|Y_{1:t-1},\theta) = \frac{1}{M} \sum_{j=1}^M \tilde{w}^j_t W_{t-1}^j.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>Updating / Selection.</strong> Same as BS PF</p>
+</li>
+</ul>
+<h3 id="asymptotics">Asymptotics</h3>
+<ul>
+<li>
+<p>The convergence results can be established recursively, starting from the assumption</p>
+<p>\begin{eqnarray*}
+\bar{h}_{t-1,M} &amp;\stackrel{a.s.}{\longrightarrow}&amp; \mathbb{E}[h(s_{t-1})|Y_{1:t-1}], \\\<br>
+\sqrt{M} \big( \bar{h}_{t-1,M} - \mathbb{E}[h(s_{t-1})|Y_{1:t-1}] \big) &amp;\Longrightarrow&amp; N \big( 0, \Omega_{t-1}(h) \big). \nonumber
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Forward iteration: draw \(s_t\) from \(g_t(s_t|s_{t-1}^j)= p(s_t|s_{t-1}^j)\).</p>
+</li>
+<li>
+<p>Decompose</p>
+<p>\begin{eqnarray}
+\lefteqn{\hat{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t-1}]}	\label{eq_pfdecomphtt1} \\\<br>
+&amp;=&amp; \frac{1}{M} \sum_{j=1}^M  \left( h(\tilde{s}_t^j) - \mathbb{E}_{p(\cdot|s_{t-1}^j)}[h] \right) W_{t-1}^j \nonumber \\\<br>
+&amp; &amp; + \frac{1}{M} \sum_{j=1}^M	\left( \mathbb{E}_{p(\cdot|s_{t-1}^j)}[h] W_{t-1}^j
+- \mathbb{E}[h(s_t)|Y_{1:t-1}] \right)	\nonumber \\\<br>
+&amp;=&amp; I + II, \nonumber
+\end{eqnarray}</p>
+</li>
+<li>
+<p>Both \(I\) and \(II\) converge to zero (and potentially satisfy CLT).</p>
+</li>
+</ul>
+<h3 id="asymptotics">Asymptotics</h3>
+<ul>
+<li>
+<p>Updating step approximates</p>
+<p>\begin{equation}
+\hspace{-0.5in}
+\mathbb{E}[h(s_t)|Y_{1:t}]
+= \frac{ \int h(s_t) p(y_t|s_t) p(s_t |Y_{1:t-1}) d s_t }{
+\int p(y_t|s_t) p(s_t |Y_{1:t-1}) d s_t }
+\approx \frac{ \frac{1}{M} \sum_{j=1}^M h(\tilde{s}_t^j) \tilde{w}_t^j W_{t-1}^j }{
+\frac{1}{M} \sum_{j=1}^M \tilde{w}_t^j W_{t-1}^j}
+\end{equation}</p>
+</li>
+<li>
+<p>Define the normalized incremental weights as</p>
+<p>\begin{equation}
+v_t(s_t) = \frac{p(y_t|s_t)}{\int p(y_t|s_t) p(s_t|Y_{1:t-1}) ds_t}.
+\label{eq_pfincrweightv}
+\end{equation}</p>
+</li>
+<li>
+<p>Under suitable regularity conditions, the Monte Carlo approximation satisfies a CLT of the
+form</p>
+<p>\begin{eqnarray}
+\lefteqn{\sqrt{M} \big( \tilde{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t}] \big) } \label{eq_pftildehclt} \\\<br>
+&amp;\Longrightarrow&amp; N \big( 0, \tilde{\Omega}_t(h) \big), \quad
+\tilde{\Omega}_t(h) = \hat{\Omega}_t \big( v_t(s_t) ( h(s_t) - \mathbb{E}[h(s_t)|Y_{1:t}] )\big). \nonumber
+\end{eqnarray}</p>
+</li>
+<li>
+<p>Distribution of particle weights matters for accuracy! \(\Longrightarrow\) Resampling!</p>
+</li>
+</ul>
+<h3 id="adapting-the-generic-pf">Adapting the Generic PF</h3>
+<ul>
+<li>
+<p>Conditionally-optimal importance distribution:
+\[
+g_t(\tilde{s}_t|s^j_{t-1}) = p(\tilde{s}_t|y_t,s_{t-1}^j).
+\]
+This is the posterior of \(s_t\) given \(s_{t-1}^j\). Typically infeasible, but a
+good benchmark.</p>
+</li>
+<li>
+<p>Approximately conditionally-optimal distributions: from linearized version
+of DSGE model or approximate nonlinear filters.</p>
+</li>
+<li>
+<p>Conditionally-linear models: do Kalman filter updating on a subvector of \(s_t\). Example:</p>
+<p>\begin{eqnarray*}
+y_t &amp;=&amp; \Psi_0(m_t) + \Psi_1(m_t) t + \Psi_2(m_t) s_t + u_t, \quad u_t \sim N(0,\Sigma_u), \label{eq_pfsslinearms} \\\<br>
+s_t &amp;=&amp; \Phi_0(m_t) + \Phi_1(m_t)s_{t-1} + \Phi_\epsilon(m_t) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon), \nonumber
+\end{eqnarray*}</p>
+<p>where \(m_t\) follows a discrete Markov-switching process.</p>
+</li>
+</ul>
+<h3 id="more-on-conditionally-linear-models">More on Conditionally-Linear Models</h3>
+<ul>
+<li>
+<p>State-space representation is linear conditional on \(m_t\).</p>
+</li>
+<li>
+<p>Write</p>
+<p>\begin{equation}
+p(m_{t},s_{t}|Y_{1:t}) = p(m_{t}|Y_{1:t})p(s_{t}|m_{t},Y_{1:t}),
+\end{equation}</p>
+<p>where</p>
+<p>\begin{equation}
+s_t|(m_t,Y_{1:t}) \sim N \big( \bar{s}_{t|t}(m_t), P_{t|t}(m_t) \big).
+\end{equation}</p>
+</li>
+<li>
+<p>Vector of means \(\bar{s}_{t|t}(m_t)\) and the covariance matrix
+\(P_{t|t}(m)_t\) are sufficient statistics for the conditional distribution of \(s_t\).</p>
+</li>
+<li>
+<p>Approximate \((m_t,s_t)|Y_{1:t}\) by \(\{m_{t}^j,\bar{s}_{t|t}^j,P_{t|t}^j,W_t^j\}_{i=1}^N\).</p>
+</li>
+<li>
+<p>The swarm of particles approximates</p>
+<p>\begin{eqnarray}
+\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t,Y_{1:t}) d(m_t,s_t)} \\\<br>
+&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t}) d s_{t} \right] p(m_{t}|Y_{1:t}) dm_{t} \label{eq_pfraoapproxtt} \nonumber \\\<br>
+&amp;\approx&amp;
+\frac{1}{M} \sum_{j=1}^M \left[ \int h(m_{t}^j,s_{t}^j) p_N\big(s_t|\bar{s}_{t|t}^j,P_{t|t}^j \big) ds_t \right] W_t^j. \nonumber
+\end{eqnarray}</p>
+</li>
+</ul>
+<h3 id="more-on-conditionally-linear-models">More on Conditionally-Linear Models</h3>
+<ul>
+<li>
+<p>We used Rao-Blackwellization to reduce variance:</p>
+<p>\begin{eqnarray*}
+\mathbb{V}[h(s_t,m_t)] &amp;=&amp; \mathbb{E} \big[ \mathbb{V}[h(s_t,m_t)|m_t] \big] + \mathbb{V} \big[ \mathbb{E}[h(s_t,m_t)|m_t] \big]\&amp; \ge&amp; \mathbb{V} \big[ \mathbb{E}[h(s_t,m_t)|m_t] \big]
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>To forecast the states in period generate \(\tilde{m}^j_t\) from  \(g_t(\tilde{m}_t|m_{t-1}^j)\) and define:</p>
+<p>\begin{equation}
+\omega_t^j = \frac{p(\tilde{m}_t^j|m_{t-1}^j)}{g_t(\tilde{m}_t^j|m_{t-1}^j)}.
+\label{eq_generalpfomegacondlinear}
+\end{equation}</p>
+</li>
+<li>
+<p>The Kalman filter forecasting step can be used to compute:</p>
+<p>\begin{equation}
+\begin{array}{lcl}
+\tilde{s}_{t|t-1}^j &amp;=&amp;	 \Phi_0(\tilde{m}^j_t) + \Phi_1(\tilde{m}^j_t) s_{t-1}^j  \\\<br>
+P_{t|t-1}^j &amp;=&amp; \Phi_\epsilon(\tilde{m}^j_t) \Sigma_\epsilon(\tilde{m}^j_t) \Phi_\epsilon(\tilde{m}^j_t)' \\\<br>
+\tilde{y}_{t|t-1}^j &amp;=&amp; \Psi_0(\tilde{m}^j_t) + \Psi_1(\tilde{m}^j_t) t + \Psi_2(\tilde{m}^j_t) \tilde{s}_{t|t-1}^j \ F_{t|t-1}^j &amp;=&amp; \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)' + \Sigma_u.
+\end{array}
+\label{eq_pfforeccondlinear}
+\end{equation}</p>
+</li>
+</ul>
+<h3 id="more-on-conditionally-linear-models">More on Conditionally-Linear Models</h3>
+<div class="latex">
+  <div></div>
+<p>\begin{itemize}
+\item Then,
+\begin{eqnarray}
+\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t|Y_{1:t-1}) d(m_t,s_t)} \\\<br>
+&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t-1}) d s_{t} \right] p(m_{t}|Y_{1:t-1}) dm_{t} \label{eq_generalpfhtt1condlinear}  \nonumber \\\<br>
+&amp;\approx&amp;\frac{1}{M} \sum_{j=1}^M \left[ \int h(m_{t}^j,s_{t}^j) p_N\big(s_t| \tilde{s}_{t|t-1}^j,P_{t|t-1}^j \big) ds_t \right] \omega_t^j W_{t-1}^j \nonumber
+\end{eqnarray}
+\item The likelihood approximation is based on the incremental weights
+\begin{equation}
+\tilde{w}_t^j = p_N \big(y_t|\tilde{y}_{t|t-1}^j,F_{t|t-1}^j \big) \omega_t^j.
+\label{eq_generalpfincrweightcondlinear}
+\end{equation}
+\item Conditional on $\tilde{m}_t^j$ we can use the Kalman filter once more
+to update the information about $s_t$ in view of the current observation $y_t$:
+\begin{equation}
+\begin{array}{lcl}
+\tilde{s}_{t|t}^j &amp;=&amp; \tilde{s}_{t|t-1}^j + P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)' \big( F_{t|t-1}^j \big)^{-1} (y_t - \bar{y}^j_{t|t-1}) \\\<br>
+\tilde{P}_{t|t}^j &amp;=&amp; P^j_{t|t-1} - P^j_{t|t-1} \Psi_2(\tilde{m}^j_t)'\big(F^j_{t|t-1} \big)^{-1} \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j.
+\end{array}
+\label{eq_pfupdatecondlinear}
+\end{equation}
+\end{itemize}</p>
+</div>
+<h3 id="particle-filter-for-conditionally-linear-models">Particle Filter For Conditionally Linear Models</h3>
+<div class="latex">
+  <div></div>
+<p>\begin{enumerate}
+\item {\bf Initialization.}</p>
+<pre><code>\item {\bf Recursion.} For $t=1,\ldots,T$:
+\begin{enumerate}
+    \item {\bf Forecasting $s\_t$.} Draw $\tilde{m}\_t^j$ from density $g\_t(\tilde{m}\_t|m\_{t-1}^j,\theta)$,
+    calculate the importance weights $\omega\_t^j$ in~(\ref{eq\_generalpfomegacondlinear}),
+    and compute $\tilde{s}\_{t|t-1}^j$ and $P\_{t|t-1}^j$ according to~(\ref{eq\_pfforeccondlinear}).
+    An approximation of $\mathbb{E}[h(s\_t,m\_t)|Y\_{1:t-1},\theta]$ is given by~(\ref{eq\_generalpfhtt1condlinear}).
+    \item {\bf Forecasting $y\_t$.} Compute the incremental weights $\tilde{w}\_t^j$
+    according to~(\ref{eq\_generalpfincrweightcondlinear}).
+    Approximate the predictive density $p(y\_t|Y\_{1:t-1},\theta)$
+    by
+    \begin{equation}
+    \hat{p}(y\_t|Y\_{1:t-1},\theta) = \frac{1}{M} \sum\_{j=1}^M \tilde{w}^j\_t W\_{t-1}^j.
+    \end{equation}
+    \item {\bf Updating.} Define the normalized weights
+    \begin{equation}
+    \tilde{W}\_t^j = \frac{\tilde{w}\_t^j W\_{t-1}^j}{\frac{1}{M} \sum\_{j=1}^M \tilde{w}\_t^j W\_{t-1}^j}
+    \end{equation}
+    and compute $\tilde{s}\_{t|t}^j$ and $\tilde{P}\_{t|t}^j$ according to~(\ref{eq\_pfupdatecondlinear}). An approximation of $\mathbb{E}[h(m\_{t},s\_{t})|Y\_{1:t},\theta]$ can be obtained
+    from $\\{\tilde{m}\_t^j,\tilde{s}\_{t|t}^j,\tilde{P}\_{t|t}^j,\tilde{W}\_t^j\\}$.
+    \item {\bf Selection.}
+\end{enumerate}
+</code></pre>
+<p>\end{enumerate}</p>
+</div>
+<h3 id="nonlinear-and-partially-deterministic-state-transitions">Nonlinear and Partially Deterministic State Transitions</h3>
+<p>\begin{itemize}
+\item Example:
+\[
+s_{1,t} = \Phi_1(s_{t-1},\epsilon_t), \quad s_{2,t} = \Phi_2(s_{t-1}), \quad \epsilon_t \sim N(0,1).
+\]
+\item Generic filter requires evaluation of $p(s_t|s_{t-1})$.
+\spitem Define $\varsigma_t = [s_t',\epsilon_t']'$ and add identity $\epsilon_t =
+\epsilon_t$ to state transition.
+\spitem Factorize the density
+$p(\varsigma_t|\varsigma_{t-1})$ as
+\[
+p(\varsigma_t|\varsigma_{t-1}) = p^\epsilon(\epsilon_t) p(s_{1,t}|s_{t-1},\epsilon_t) p(s_{2,t}|s_{t-1}).
+\]
+where $p(s_{1,t}|s_{t-1},\epsilon_t)$ and $p(s_{2,t}|s_{t-1})$ are
+pointmasses.
+\item Sample innovation
+$\epsilon_t$ from $g_t^\epsilon(\epsilon_t|s_{t-1})$.
+\item Then
+\[
+\omega_t^j = \frac{ p(\tilde{\varsigma}^j_t|\varsigma^j_{t-1}) }{g_t (\tilde{\varsigma}^j_t|\varsigma^j_{t-1})}
+= \frac{ p^\epsilon( \tilde{\epsilon}_t^j) p(\tilde{s}_{1,t}^j|s^j_{t-1},\tilde{\epsilon}^j_t) p(\tilde{s}^j_{2,t}|s^j_{t-1}) }
+{ g_t^\epsilon(\tilde{\epsilon}^j_t|s^j_{t-1}) p(\tilde{s}_{1,t}^j|s^j_{t-1},\tilde{\epsilon}^j_t) p(\tilde{s}^j_{2,t}|s^j_{t-1}) }
+= \frac{ p^\epsilon(\tilde{\epsilon}_t^j)}{g_t^\epsilon(\tilde{\epsilon}^j_t|s^j_{t-1})}.
+\label{eq_pfomegaepsilon}
+\]
+\end{itemize}</p>
+<h3 id="degenerate-measurement-error-distributions">Degenerate Measurement Error Distributions</h3>
+<p>\begin{itemize}
+\item  Our discussion of the conditionally-optimal
+importance distribution suggests that in the absence of measurement
+errors, one has to solve the system of equations
+\[ y_t = \Psi \big(
+\Phi( s_{t-1}^j,\tilde{\epsilon}_t^j) \big),
+\label{eq_pfepssystem}
+\]
+to determine $\tilde{\epsilon}_t^j$ as a function of $s_{t-1}^j$ and the current observation $y_t$.
+\spitem Then define
+\[
+\omega_t^j = p^\epsilon(\tilde{\epsilon}_t^j) \quad \mbox{and} \quad
+\tilde{s}_t^j = \Phi( s_{t-1}^j,\tilde{\epsilon}_t^j).
+\]
+\item Difficulty: one has to find all solutions to a nonlinear system of equations.
+\spitem While resampling duplicates particles, the duplicated particles do not mutate, which
+can lead to a degeneracy.
+\end{itemize}</p>
+<h3 id="next-steps">Next Steps</h3>
+<p>\begin{itemize}
+\item We will now apply PFs to linearized DSGE models.
+\item This allows us to compare the Monte Carlo approximation to the ``truth.''
+\item Small-scale New Keynesian DSGE model
+\item Smets-Wouters model
+\end{itemize}</p>
+<h3 id="illustration-1-small-scale-dsge-model">Illustration 1: Small-Scale DSGE Model</h3>
+<p>Parameter Values For Likelihood Evaluation</p>
+<p>\begin{center}
+\begin{tabular}{lcclcc} \hline\hline
+Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$ &amp; Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$  \ \hline
+$\tau$               &amp;  2.09 &amp;  3.26 &amp; $\kappa$             &amp;  0.98 &amp;  0.89 \\\<br>
+$\psi_1$             &amp;  2.25 &amp;  1.88 &amp; $\psi_2$             &amp;  0.65 &amp;  0.53 \\\<br>
+$\rho_r$             &amp;  0.81 &amp;  0.76 &amp; $\rho_g$             &amp;  0.98 &amp;  0.98 \\\<br>
+$\rho_z$             &amp;  0.93 &amp;  0.89 &amp; $r^{(A)}$            &amp;  0.34 &amp;  0.19 \\\<br>
+$\pi^{(A)}$          &amp;  3.16 &amp;  3.29 &amp; $\gamma^{(Q)}$       &amp;  0.51 &amp;  0.73 \\\<br>
+$\sigma_r$           &amp;  0.19 &amp;  0.20 &amp; $\sigma_g$           &amp;  0.65 &amp;  0.58 \\\<br>
+$\sigma_z$           &amp;  0.24 &amp;  0.29 &amp; $\ln p(Y|\theta)$    &amp; -306.5 &amp; -313.4 \ \hline
+\end{tabular}
+\end{center}</p>
+<h3 id="likelihood-approximation">Likelihood Approximation</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+$\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ vs. $\ln p(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+\includegraphics[width=3.2in]{static/dsge1_me_paramax_lnpy.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> The results depicted in the figure are based on a single run
+of the bootstrap PF (dashed, \(M=40,000\)), the conditionally-optimal PF (dotted, \(M=400\)), and the Kalman filter (solid).</p>
+<h3 id="filtered-state">Filtered State</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+$\widehat{\mathbb{E}}[\hat{g}_t|Y_{1:t},\theta^m]$ vs. $\mathbb{E}[\hat{g}_t|Y_{1:t},\theta^m]$\\\<br>
+\includegraphics[width=3.2in]{static/dsge1_me_paramax_ghat.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> The results depicted in the figure are based on a single run
+of the bootstrap PF (dashed, \(M=40,000\)), the conditionally-optimal PF (dotted, \(M=400\)), and the Kalman filter (solid).</p>
+<h3 id="distribution-of-log-likelihood-approximation-errors">Distribution of Log-Likelihood Approximation Errors</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+Bootstrap PF: $\theta^m$ vs. $\theta^l$ \\\<br>
+\includegraphics[width=3in]{static/dsge1_me_bootstrap_lnlhbias.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Density estimate of \(\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta)- \ln p(Y_{1:T}|\theta)\)
+based on \(N_{run}=100\) runs of the PF. Solid line is \(\theta = \theta^m\); dashed line is \(\theta = \theta^l\)
+(\(M=40,000\)).</p>
+<h3 id="distribution-of-log-likelihood-approximation-errors">Distribution of Log-Likelihood Approximation Errors</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+$\theta^m$: Bootstrap vs. Cond. Opt. PF \\\<br>
+\includegraphics[width=3in]{static/dsge1_me_paramax_lnlhbias.pdf} \\\<br>
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Density estimate of \(\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta)- \ln p(Y_{1:T}|\theta)\)
+based on \(N_{run}=100\) runs of the PF. Solid line is bootstrap particle filter
+(\(M=40,000\)); dotted line is conditionally optimal particle filter
+(\(M=400\)).</p>
+<h3 id="summary-statistics-for-particle-filters">Summary Statistics for Particle Filters</h3>
+<p>\begin{center}
+\begin{tabular}{lrrr} \ \hline \hline
+&amp; Bootstrap &amp; Cond. Opt. &amp; Auxiliary \ \hline
+Number of Particles $M$ &amp; 40,000 &amp; 400 &amp; 40,000 \\\<br>
+Number of Repetitions   &amp; 100 &amp; 100 &amp; 100 \ \hline
+\multicolumn{4}{c}{High Posterior Density: $\theta = \theta^m$} \ \hline
+Bias $\hat{\Delta}_1$ &amp; -1.39 &amp; -0.10 &amp; -2.83 \\\<br>
+StdD $\hat{\Delta}_1$ &amp;  2.03 &amp;  0.37 &amp;  1.87 \\\<br>
+Bias $\hat{\Delta}_2$ &amp;  0.32 &amp; -0.03 &amp; -0.74 \ \hline
+\multicolumn{4}{c}{Low Posterior Density: $\theta = \theta^l$} \ \hline
+Bias $\hat{\Delta}_1$ &amp; -7.01 &amp; -0.11 &amp; -6.44 \\\<br>
+StdD $\hat{\Delta}_1$ &amp;  4.68 &amp;  0.44 &amp;  4.19 \\\<br>
+Bias $\hat{\Delta}_2$ &amp; -0.70 &amp; -0.02 &amp; -0.50 \ \hline
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> \(\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta) - \ln p(Y_{1:T}|\theta)\)
+and \(\hat{\Delta}_2 = \exp[ \ln \hat{p}(Y_{1:T}|\theta) - \ln
+p(Y_{1:T}|\theta) ] - 1\). Results
+are based on \(N_{run}=100\) runs of the particle filters.</p>
+<h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+\includegraphics[width=3in]{static/dsge1_me_great_recession_lnpy.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Solid lines represent results from Kalman
+filter. Dashed lines correspond to bootstrap particle filter
+(\(M=40,000\)) and dotted lines correspond to
+conditionally-optimal particle filter (\(M=400\)). Results are
+based on \(N_{run}=100\) runs of the filters.</p>
+<h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+\includegraphics[width=2.9in]{static/dsge1_me_post_great_recession_lnpy.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Solid lines represent results from Kalman
+filter. Dashed lines correspond to bootstrap particle filter
+(\(M=40,000\)) and dotted lines correspond to
+conditionally-optimal particle filter (\(M=400\)). Results are
+based on \(N_{run}=100\) runs of the filters.</p>
+<h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+Log Standard Dev of Log-Likelihood Increments \\\<br>
+\includegraphics[width=3in]{static/dsge1_me_great_recession_lnpy_lnstd.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Solid lines represent results from Kalman
+filter. Dashed lines correspond to bootstrap particle filter
+(\(M=40,000\)) and dotted lines correspond to
+conditionally-optimal particle filter (\(M=400\)). Results are
+based on \(N_{run}=100\) runs of the filters.</p>
+<h3 id="sw-model-distr-dot-of-log-likelihood-approximation-errors">SW Model: Distr. of Log-Likelihood Approximation Errors</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+BS ($M=40,000$) versus CO ($M=4,000$) \\\<br>
+\includegraphics[width=3in]{static/sw_me_paramax_lnlhbias.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Density estimates of \(\hat{\Delta}_1 = \ln \hat{p}(Y|\theta)- \ln p(Y|\theta)\) based on \(N_{run}=100\).
+Solid densities summarize results for the bootstrap (BS) particle filter;
+dashed densities summarize results for the conditionally-optimal (CO) particle filter.</p>
+<h3 id="sw-model-distr-dot-of-log-likelihood-approximation-errors">SW Model: Distr. of Log-Likelihood Approximation Errors</h3>
+<p>\begin{center}
+\begin{tabular}{c}
+BS ($M=400,000$) versus CO ($M=4,000$) \\\<br>
+\includegraphics[width=3in]{static/sw_me_paramax_bs_lnlhbias.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Density estimates of \(\hat{\Delta}_1 = \ln \hat{p}(Y|\theta)- \ln p(Y|\theta)\) based on \(N_{run}=100\).
+Solid densities summarize results for the bootstrap (BS) particle filter;
+dashed densities summarize results for the conditionally-optimal (CO) particle filter.</p>
+<h3 id="sw-model-summary-statistics-for-particle-filters">SW Model: Summary Statistics for Particle Filters</h3>
+<p>\begin{center}
+\begin{tabular}{lrrrr} \ \hline \hline
+&amp; \multicolumn{2}{c}{Bootstrap} &amp; \multicolumn{2}{c}{Cond. Opt.} \ \hline
+Number of Particles $M$ &amp; 40,000 &amp; 400,000 &amp; 4,000 &amp; 40,000 \\\<br>
+Number of Repetitions   &amp; 100 &amp; 100 &amp; 100 &amp; 100 \ \hline
+\multicolumn{5}{c}{High Posterior Density: $\theta = \theta^m$} \ \hline
+Bias $\hat{\Delta}_1$ &amp; -238.49 &amp; -118.20 &amp;   -8.55 &amp;   -2.88 \\\<br>
+StdD $\hat{\Delta}_1$ &amp;   68.28 &amp;   35.69 &amp;    4.43 &amp;    2.49 \\\<br>
+Bias $\hat{\Delta}_2$ &amp;   -1.00 &amp;   -1.00 &amp;   -0.87 &amp;   -0.41 \ \hline
+\multicolumn{5}{c}{Low Posterior Density: $\theta = \theta^l$} \ \hline
+Bias $\hat{\Delta}_1$ &amp; -253.89 &amp; -128.13 &amp;  -11.48 &amp;   -4.91 \\\<br>
+StdD $\hat{\Delta}_1$ &amp;   65.57 &amp;   41.25 &amp;    4.98 &amp;    2.75 \\\<br>
+Bias $\hat{\Delta}_2$ &amp;   -1.00 &amp;   -1.00 &amp;   -0.97 &amp;   -0.64 \ \hline
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> \(\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta) - \ln p(Y_{1:T}|\theta)\)
+and \(\hat{\Delta}_2 = \exp[ \ln \hat{p}(Y_{1:T}|\theta) - \ln
+p(Y_{1:T}|\theta) ] - 1\). Results are based on \(N_{run}=100\).</p>
+<h3 id="tempered-particle-filter">Tempered Particle Filter</h3>
+<ul>
+<li>Use sequence of distributions between the forecast and updated state distributions.
+<br></li>
+<li>Candidates? Well,  the PF will work arbitrarily well when \(\Sigma_{u}\rightarrow\infty\).
+<br></li>
+<li>Reduce measurement error variance from an inflated initial level
+\(\Sigma_u(\theta)/{\color{blue}\phi_1}\) to the nominal level \(\Sigma_u(\theta)\).</li>
+</ul>
+<h3 id="the-key-idea">The Key Idea</h3>
+<p>\begin{itemize}</p>
+<pre><code>\spitem Define
+\begin{eqnarray\*} p\_n(y\_t|s\_t,\theta) &amp;\propto&amp; {\color{blue}\phi\_n^{d/2}}
+|\Sigma\_u(\theta)|^{-1/2}\exp \bigg\\{ - \frac{1}{2} (y\_t - \Psi(s\_t,t;\theta))' \\\\\\
+&amp;&amp; \times {\color{blue}\phi\_n} \Sigma\_u^{-1}(\theta)(y\_t - \Psi(s\_t,t;\theta)) \bigg\\},
+\end{eqnarray\*}
+where:
+\\[
+{\color{blue} \phi\_1 &lt; \phi\_2 &lt; \ldots &lt; \phi\_{N\_\phi} = 1}.
+\\]
+\item {\color{red} Bridge posteriors given $s\_{t-1}$:}
+\\[
+p\_n(s\_t|y\_t,s\_{t-1},\theta)
+  \propto p\_n(y\_t|s\_t,\theta) p(s\_t|s\_{t-1},\theta).
+\\]
+\item {\color{red} Bridge posteriors given $Y\_{1:t-1}$:}
+\\[
+p\_n(s\_t|Y\_{1:t})= \int p\_n(s\_t|y\_t,s\_{t-1},\theta) p(s\_{t-1}|Y\_{1:t-1}) ds\_{t-1}.
+\\]
+</code></pre>
+<p>\end{itemize}</p>
+<h3 id="algorithm-overview">Algorithm Overview</h3>
+<ul>
+<li>For each \(t\) we  start with the BS-PF
+iteration by simulating the state-transition equation
+forward.
+<br></li>
+<li>Incremental weights are obtained based on  inflated
+measurement error variance \(\Sigma_u/{\color{blue}\phi_1}\).
+<br></li>
+<li>Then we start the tempering iterations&hellip;
+<br></li>
+<li>After the tempering iterations are completed we proceed to \(t+1\)&hellip;</li>
+</ul>
+<h3 id="overview">Overview</h3>
+<ul>
+<li>
+<p>If \(N_{\phi} = 1\), this collapses to the Bootstrap particle filter.
+<br></p>
+</li>
+<li>
+<p>For each time period \(t\),  we embed a
+``static'' SMC sampler used for parameter estimation
+[See Earlier Lectures]:</p>
+<p>Iterate over \(n=1,\ldots,N_\phi\):</p>
+<ul>
+<li><strong>Correction step</strong>:  change particle weights (importance sampling)</li>
+<li><strong>Selection step</strong>: equalize particle weights (resampling of particles)</li>
+<li><strong>Mutation step</strong>:  change particle values (based on Markov transition kernel generated with
+Metropolis-Hastings algorithm</li>
+<li>Each step approximates the same \(\int h(s_t) p_n(s_{t}|Y_{1:t},\theta) ds_t\).</li>
+</ul>
+</li>
+</ul>
+<h3 id="an-illustration--p-ns-t-y-1-t----n-1-ldots-n-phi--dot">An Illustration: \(p_n(s_t|Y_{1:t})\), \(n=1,\ldots,N_\phi\).</h3>
+<p>\begin{center}
+\includegraphics[width=4in]{static/phi_evolution.pdf}
+\end{center}</p>
+<h3 id="choice-of--phi-n">Choice of \(\phi_n\)</h3>
+<p>\begin{itemize}
+\spitem Based on Geweke and Frischknecht (2014).
+\spitem {\color{blue} Express post-correction inefficiency ratio as}
+\[
+\mbox{InEff}(\phi_n)
+=  \frac{\frac{1}{M} \sum_{j=1}^M \exp [ -2(\phi_n-\phi_{n-1}) e_{j,t}] }{ \left(\frac{1}{M} \sum_{j=1}^M  \exp [ -(\phi_n-\phi_{n-1}) e_{j,t}] \right)^2}
+\]
+where
+\[
+e_{j,t} = \frac{1}{2} (y_t - \Psi(s_t^{j,n-1},t;\theta))' \Sigma_u^{-1}(y_t -
+\Psi(s_t^{j,n-1},t;\theta)).
+\]
+\item {\color{red} Pick target ratio $r^*$ and solve equation $\mbox{InEff}(\phi_n^*) = r^*$ for $\phi_n^*$.}
+\end{itemize}</p>
+<h3 id="small-scale-model-pf-summary-statistics">Small-Scale Model: PF Summary Statistics</h3>
+<div class="latex">
+  <div></div>
+<p>\begin{tabular}{l@{\hspace{1cm}}r@{\hspace{1cm}}rrrr}												    \ \hline \hline
+&amp; BSPF	 &amp; \multicolumn{4}{c}{TPF} \ \hline
+Number of Particles $M$		 &amp; 40k &amp; 4k	    &amp; 4k	  &amp; 40k		&amp; 40k	       \\\<br>
+Target Ineff. Ratio $r^*$	     &amp;	   &amp; 2		  &amp; 3		   &amp; 2		    &amp; 3		   \ \hline
+\multicolumn{6}{c}{High Posterior Density: $\theta = \theta^m$}						      \ \hline
+Bias		&amp; -1.4 &amp; -0.9 &amp; -1.5 &amp; -0.3 &amp; -.05     \\\<br>
+StdD		&amp; 1.9  &amp; 1.4  &amp; 1.7  &amp; 0.4  &amp; 0.6	\\\<br>
+$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$      &amp; 1.0  &amp; 4.3  &amp; 3.2  &amp; 4.3 &amp; 3.2			  \\\<br>
+Average Run Time (s)		 &amp; 0.8	&amp; 0.4 &amp; 0.3 &amp; 4.0 &amp; 3.3	     \ \hline
+\multicolumn{6}{c}{Low Posterior Density: $\theta = \theta^l$}						      \ \hline
+Bias		 &amp; -6.5 &amp; -2.1 &amp; -3.1 &amp; -0.3  &amp; -0.6		      \\\<br>
+StdD		 &amp; 5.3	&amp; 2.1  &amp; 2.6  &amp; 0.8   &amp; 1.0		       \\\<br>
+$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$       &amp; 1.0  &amp; 4.4 &amp; 3.3     &amp; 4.4 &amp; 3.3	       \\\<br>
+Average Run Time (s)		 &amp; 1.6 &amp; 0.4 &amp; 0.3 &amp; 3.7     &amp; 2.9		      \ \hline
+\end{tabular}</p>
+</div>
+<h2 id="computational-considerations">Computational Considerations</h2>
+<h3 id="parallel-particle-filtering">Parallel Particle Filtering</h3>
+<ul>
+<li>We want (need) to use a lot of particles.
+<br></li>
+<li>Use <em>distributed memory</em> parallelism to allocate the operations among many processing elements (processors), each processor has its own local memory.
+<br></li>
+<li>Forecasting and updating steps can operate independently for each particle. Great news!
+<br></li>
+<li>Bad news: resampling phase cannot be executed locally.</li>
+</ul>
+<h3 id="parallel-resampling">Parallel Resampling</h3>
+<ul>
+<li>\(M\) total particles, \(K\) processors.
+<br></li>
+<li>Let \(M_{local}\) = \(M/K\) (assume it&rsquo;s an integer)
+<br></li>
+<li>\((s_t^{i, k},W_t^{i,k})\) denote the $i$th particle on the $k$th processor.
+<br></li>
+<li>Use a stratified resampling scheme across processors, new particles will have weight
+\[
+\tilde{W}^{k}_t = {M_{local}}^{-1}\sum_{j=1}^{M_{local}} \tilde W_t^{j, k}.
+\]
+(<em>Distributed resampling with proportial allocation</em>, Bolic et al. [2005])
+<br></li>
+<li>Distribution of total weight across processors can become uneven! Same problem as before.</li>
+</ul>
+<h3 id="weight-balancing">Weight Balancing</h3>
+<ul>
+<li>
+<p>Let \(\alpha_k\) be the share of the weighted particles
+associated with processor \(k\).</p>
+<p>\begin{eqnarray}
+\alpha_k = \frac{\sum_{i=1}^{M_{local}}W_t^{i, k}}{\sum_{j=1}^K\sum_{i=1}^{M_{local}}W_t^{i, j}},
+\end{eqnarray}</p>
+</li>
+</ul>
+<!--listend-->
+<ul>
+<li>
+<p>effective number of processors as</p>
+<p>\begin{eqnarray}
+EP_t = \frac{1}{\sum_{k=1}^K \alpha_k^2}.
+\end{eqnarray}</p>
+</li>
+<li>
+<p>If \(EP_t &lt; K/2\) shuffle the particles in the following way.</p>
+<ul>
+<li>Rank processors according to \(\alpha_k\)</li>
+<li>Match largest \(\alpha_k\) with smallest, and so on.</li>
+<li>Exchange \(M_{exchange} (&lt; M_{local})\) particles between these processors</li>
+</ul>
+</li>
+<li>
+<p>Is it worth it? <strong>YES</strong></p>
+</li>
+</ul>
+<h3 id="speed-gains-from-parallelization-100-lik-dot-eval-dot">Speed Gains from Parallelization, 100 lik. eval.</h3>
+<p>\vspace*{-0.25in}</p>
+<p>\begin{center}
+\includegraphics[width=4.8in]{static/parallel_pf}
+\end{center}</p>
+<h2 id="references">References</h2>
+<h3 id="references">References</h3>
+<h1 id="bibliography">Bibliography</h1>
+<p><a id="Fern_ndez_Villaverde_2011"></a>[Fern_ndez_Villaverde_2011] Fernández-Villaverde, Guerrón-Quintana, Pablo, Kuester &amp; Rubio-Ramírez, Fiscal Volatility Shocks and Economic Activity, <i></i>,  (2011). <a href="http://dx.doi.org/10.3386/w17317">link</a>. <a href="http://dx.doi.org/10.3386/w17317">doi</a>. <a href="#b5c5a1c35c233f892cfda8eb381ed059">↩</a></p>
+<p><a id="Fern_ndez_Villaverde_2015"></a>[Fern_ndez_Villaverde_2015] Fernández-Villaverde, Gordon, , Guerrón-Quintana &amp; Rubio-Ramírez, Nonlinear adventures at the zero lower bound, <i>Journal of Economic Dynamics and Control</i>, <b>57</b>, 182–204 (2015). <a href="http://dx.doi.org/10.1016/j.jedc.2015.05.014">link</a>. <a href="http://dx.doi.org/10.1016/j.jedc.2015.05.014">doi</a>. <a href="#a850d3ceb9d36cd11520fdc3648d356a">↩</a></p>
+<p><a id="Bora_an_Aruoba_2017"></a>[Bora_an_Aruoba_2017] Aruoba, Cuba-Borda, &amp; Schorfheide, Macroeconomic Dynamics Near the ZLB: A Tale of Two  Countries, <i>The Review of Economic Studies</i>, <b>85(1)</b>, 87 118 (2018). <a href="http://dx.doi.org/10.1093/restud/rdx027">link</a>. <a href="http://dx.doi.org/10.1093/restud/rdx027">doi</a>. <a href="#d9f86da9d68227c998b4cf1066d8028d">↩</a></p>
+<p><a id="Gust_2017"></a>[Gust_2017] Gust, Herbst, , López-Salido &amp; Smith, The Empirical Implications of the Interest-Rate  Lower Bound, <i>American Economic Review</i>, <b>107(7)</b>, 1971 2006 (2017). <a href="http://dx.doi.org/10.1257/aer.20121437">link</a>. <a href="http://dx.doi.org/10.1257/aer.20121437">doi</a>. <a href="#f96243f22295b8d14b1640a268a6e625">↩</a></p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

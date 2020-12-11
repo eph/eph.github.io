@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Markov Chain Monte Carlo" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/" /><meta property="article:published_time" content="2020-12-11T09:45:35-05:00" />
+
+
+
+<meta name="twitter:title" content="Markov Chain Monte Carlo"/>
+<meta name="twitter:description" content="Metropolis-Hastings Algorithm The Metropolis-Hastings Algorithm  Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain Monte Carlo (MCMC) algorithms.  Algorithm constructs a Markov chain such that the stationary distribution associated with this Markov chain is unique and equals the posterior distribution of interest.  First version constructed by Metropolis1953. Later generalized by Hastings1970. Tierney1994 proved important convergence results for MCMC algorithms.  Introduction: Chib1995a. Textbook Robert2004 or Geweke2005.  Markov Chain Monte Carlo  Importance sampler generates a sequence of independent draws from the posterior distribution \(\pi(\theta)\), the MH algorithm generates a sequence of serially correlated draws."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings'>04-metropolis-hastings</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Markov Chain Monte Carlo</h1>
+<h2 id="metropolis-hastings-algorithm">Metropolis-Hastings Algorithm</h2>
+<h3 id="the-metropolis-hastings-algorithm">The Metropolis-Hastings Algorithm</h3>
+<ul>
+<li>Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain
+Monte Carlo (MCMC) algorithms.
+<br></li>
+<li>Algorithm constructs a Markov chain such that the stationary distribution
+associated with this Markov chain is unique and equals the posterior
+distribution of interest.
+<br></li>
+<li>First version constructed by <sup id="c23d29eb5bdb8bc2fc575e7437b8f907"><a href="#Metropolis1953" title="Metropolis, Rosenbluth, Rosenbluth, Teller \&amp; Teller, Equations of State Calculations by Fast Computing Machines, {Journal of Chemical Physics}, v(), 1087-1091 (1953).">Metropolis1953</a></sup>. Later
+generalized by <sup id="694230c3a5e9d6fd8f0276c37355f1da"><a href="#Hastings1970" title="Hastings, Monte Carlo Sampling Methods Using Markov Chains and Their Applications, {Biometrika}, v(), 97-109 (1970).">Hastings1970</a></sup>.  <sup id="e841d197fa5fee977a33401116803ab6"><a href="#Tierney1994" title="Tierney, Markov Chains for Exploring Posterior Distributions, {The Annals of Statistics}, v(4), 1701-1728 (1994).">Tierney1994</a></sup> proved
+important convergence results for MCMC algorithms.
+<br></li>
+<li>Introduction: <sup id="a50677fe8b96e99056f5de85b8e1fdf7"><a href="#Chib1995a" title="Chib \&amp; Greenberg, Understanding the Metropolis-Hastings Algorithm, {The American Statistician}, v(), 327-335 (1995).">Chib1995a</a></sup>. Textbook <sup id="8af5f7bb8c79b7337d6458aff47c33f6"><a href="#Robert2004" title="Robert \&amp; Casella, Monte Carlo Statistical Methods, Springer (2004).">Robert2004</a></sup> or
+<sup id="dfa786895eb8edffb49a91c754a89c01"><a href="#Geweke2005" title="John Geweke, Contemporary Bayesian Econometrics and Statistics, John Wiley \&amp; Sons, Inc. (2005).">Geweke2005</a></sup>.</li>
+</ul>
+<h3 id="markov-chain-monte-carlo">Markov Chain Monte Carlo</h3>
+<ul>
+<li>Importance sampler generates a sequence of independent draws
+from the posterior distribution \(\pi(\theta)\), the MH algorithm generates
+a sequence of serially correlated draws.
+<br></li>
+<li>As long as the correlation in the Markov chain is not too strong, Monte
+Carlo averages \index{Monte Carlo average} of these draws can accurately
+approximate posterior means of \(h(\theta)\).
+<br></li>
+<li>We are going to care a lot about this correlation.  Why?
+\[
+\sqrt{n}( \bar{X} - \mathbb{E}[\bar{X}]) \Longrightarrow N \bigg( 0, \frac{1}{n} \sum_{i=1}^n \mathbb{V}[X_i] +
+{\color{red} \frac{1}{n} \sum_{i=1}^n \sum_{j \not=i} COV(X_i,X_j)} \bigg)
+\]</li>
+</ul>
+<h3 id="the-metropolis-hastings-algorithm">The Metropolis Hastings Algorithm</h3>
+<p>A key ingredient is the proposal distribution \index{proposal density}
+\(q(\vartheta|\theta^{i-1})\), which potentially depends on the draw
+\(\theta^{i-1}\) in iteration \(i-1\) of the algorithm.
+\vspace{0.05in}</p>
+<p>\begin{algo}[Generic MH Algorithm]
+\label{algo_genericmh}
+For $i=1$ to N:
+Draw $\vartheta$ from a density $q(\vartheta|\theta^{i-1})$.
+Set $\theta^{i} = \vartheta$ with probability
+\[
+\alpha(\vartheta | \theta^{i-1} ) = \min \left\{ 1, ;
+\frac{ p(Y| \vartheta )p(\vartheta) / q(\vartheta | \theta^{i-1}) }{
+p(Y|\theta^{i-1}) p(\theta^{i-1})  / q(\theta^{i-1} | \vartheta) } \right\}
+\]
+and $\theta^{i} = \theta^{i-1}$ otherwise.
+\end{algo}</p>
+ <br>
+Because \\(p(\theta|Y) \propto p(Y|\theta)p(\theta)\\) we can replace the posterior
+densities in the calculation of the acceptance probabilities \\(\alpha(\vartheta |
+\theta^{i-1})\\)
+This yields a Markov transition kernel \\(K(\theta|\tilde{\theta})\\), where
+the conditioning value \\(\tilde{\theta}\\) corresponds to the parameter draw from
+iteration \\(i-1\\).
+<h3 id="convergence">Convergence</h3>
+<p>Probability theory for MH is much harder than for IS.</p>
+<ul>
+<li>Suppose that \(\theta^0\sim g(\cdot)\) and \(\theta^N\) is obtained by
+iterating the Markov transition kernel forward \(N\) times, then is it
+true that \(\theta^N\) is approximately distributed according to
+\(p(\theta|Y)\) and the approximation error vanishes as \(N \longrightarrow
+\infty\)?</li>
+<li>Suppose that (i) is true, is it also true that sample averages of
+\(\theta^i\), \(i=1,\ldots,N\) satisfy a SLLN and a CLT?</li>
+</ul>
+<p>Key property: <strong>invariance</strong> of Markov Chain.</p>
+<p>\begin{eqnarray}
+p(\theta|Y) = \int K(\theta | \tilde{\theta}) p(\tilde{\theta} |Y) d \tilde{\theta}.
+\label{eq_mhinvariance}
+\end{eqnarray}</p>
+<p>Show this property using <strong>reversibility of the Markov Chain</strong>
+<br>
+Not sufficient for SLLN or CLT, these things depend on \(q\) and \(\pi\).
+<br>
+\textcolor{red}{Look at specific example.}</p>
+<h3 id="a-specific-example">A Specific Example</h3>
+<ul>
+<li>
+<p>Suppose the parameter space is discrete and \(\theta\) can only take two
+values: \(\tau_1\) and \(\tau_2\).</p>
+</li>
+<li>
+<p>The posterior distribution then simplifies to two probabilities which
+we denote as \(\pi_l = \mathbb{P}\{ \theta=\tau_l|Y\}\), \(l=1,2\).</p>
+</li>
+<li>
+<p>The proposal distribution in Algorithm~\ref{algo_genericmh}
+can be represented as a two-stage Markov process with transition
+matrix</p>
+<p>\begin{equation}
+Q = \left[ \begin{array}{cc} q_{11} &amp; q_{12} \ q_{21} &amp; q_{22} \end{array} \right],
+\end{equation}</p>
+<p>where \(q_{lk}\) is the probability of drawing \(\vartheta = \tau_k\) conditional
+on \(\theta^{i-1} = \tau_l\).</p>
+</li>
+<li>
+<p>Assume that
+\[
+q_{11} = q_{22} = q, \quad q_{12}=q_{21}=1-q
+\]
+and that the posterior distribution has the property
+\[
+\pi_2 &gt; \pi_1.
+\]</p>
+</li>
+</ul>
+<h3 id="deriving-the-transition-kernel">Deriving the Transition Kernel</h3>
+<ul>
+<li>Suppose that \(\theta^{i-1} = \tau_1\). Then with probability \(q\),
+\(\vartheta=\tau_1\). The probability that this draw will be
+accepted is
+\[
+\alpha(\tau_1|\tau_1) = \min \left\{ 1, \frac{ \pi_1/ q}{\pi_1 / q} \right\} = 1.
+\]</li>
+<li>With probability \(1-q\) the proposed draw is \(\vartheta = \tau_2\). The probability
+that this draw will be rejected is
+\[
+1-\alpha(\tau_2|\tau_1) = 1-\min \left\{ 1, \frac{ \pi_2/ (1-q)}{\pi_1 / (1-q)} \right\} = 0
+\]
+because we previously assumed that \(\pi_2 &gt; \pi_1\).</li>
+<li>The probability of a transition from \(\theta^{i-1}=\tau_1\) to \(\theta^{i}=\tau_1\) is
+\[
+k_{11} = q \cdot 1 + (1-q) \cdot 0 = q.
+\]</li>
+</ul>
+<h3 id="transition-kernel-continued">Transition Kernel, Continued</h3>
+<ul>
+<li>
+<p>Similar reasoning as before</p>
+<p>\begin{eqnarray}
+K = \left[ \begin{array}{cc} k_{11} &amp; k_{12} \ k_{21} &amp; k_{22} \end{array} \right] \label{eq_exKtransition}
+= \left[ \begin{array}{cc} q &amp; (1-q) \ (1-q)\frac{\pi_1}{\pi_2} &amp;  q + (1-q)\left( 1- \frac{\pi_1}{\pi_2} \right) \end{array} \right]. \nonumber
+\end{eqnarray}</p>
+ <br>
+</li>
+<li>
+<p>\(K\) has two eigenvalues \(\lambda_1\) and \(\lambda_2\):</p>
+<p>\begin{equation}
+\lambda_1(K) = 1, \quad \lambda_2(K) = q - (1-q)\frac{\pi_1}{1-\pi_1}.
+\end{equation}</p>
+<p>Eigenvector associated with with \(\lambda_1(K)\) determines the invariant distribution
+of the Markov chain (=posterior).  If \(\lambda_2(K)\neq 1\), this distribution is unique.
+<br></p>
+<p>The persistence of the Markov chain is characterized by the eigenvalue \(\lambda_2(K)\).</p>
+</li>
+</ul>
+<h3 id="markov-chain">Markov Chain</h3>
+<p>We can represent the Markov Chain generated by MH as an AR(1).  Define:
+\[
+\xi^i = \frac{\theta^i - \tau_1}{\tau_2-\tau_1},\quad \xi^i \in \{0, 1\}.
+\]
+\(\xi^i\) follows the first-order autoregressive process</p>
+<p>\begin{equation}
+\xi^i = (1-k_{11}) + \lambda_2(K) \xi^{i-1} + \nu^i.
+\label{eq_exKxi}
+\end{equation}</p>
+ <br>
+Conditional on \\(\xi^{i-1}=j-1\\), \\(j=1,2\\), the innovation \\(\nu^i\\) has
+support on \\(k\_{jj}\\) and \\((1-k\_{jj})\\), its conditional mean is equal to
+zero, and its conditional variance is equal to \\(k\_{jj}(1-k\_{jj})\\).
+<h3 id="more-on-markov-chain">More on Markov Chain</h3>
+<ul>
+<li>Persistence of the Markov chain depends on the proposal distribution,
+which in our discrete example is characterized by the probability \(q\).
+<br></li>
+<li>You could get an \(iid\) sample from the posterior by setting \(q =\pi_1\), so
+\(\lambda_2(K)=0\).)
+<br></li>
+<li>OTOH, if \(q=1\), then \(\theta^i=\theta^1\) for all \(i\) and the equilibrium
+distribution of the chain is no longer unique.
+<br></li>
+<li>General goal of MCMC: keep the persistence of the chain as low as possible.</li>
+</ul>
+<h3 id=""></h3>
+<p>\[
+\bar{h}_N = \frac{1}{N} \sum_{i=1}^N h(\theta^i)
+\]
+we deduce from a central limit theorem for dependent random variables that
+\[
+\sqrt{N} (\bar{h}_N - \mathbb{E}_\pi[h])
+\Longrightarrow N \big(0, \Omega(h) \big),
+\]
+where \(\Omega(h)\) is now the long-run covariance matrix
+\[
+\Omega(h) = \lim_{L \longrightarrow \infty} \mathbb{V}_\pi[h] \left( 1 + 2 \sum_{l=1}^L \frac{L-l}{L} \left( q - (1-q)\frac{\pi_1}{1-\pi_1} \right)^l \right).
+\]
+In turn, the asymptotic inefficiency factor is given by \index{inefficiency factor}</p>
+<p>\begin{eqnarray}
+\mbox{InEff}_\infty &amp;=&amp; \frac{\Omega(h)}{\mathbb{V}_\pi[h]} \\\<br>
+&amp;=&amp; 1 + 2 \lim_{L \longrightarrow \infty} ; \sum_{l=1}^L \frac{L-l}{L} \left( q - (1-q)\frac{\pi_1}{1-\pi_1} \right)^l. \nonumber
+\end{eqnarray}</p>
+<h3 id="numerical-example">Numerical Example</h3>
+<ul>
+<li>Bernoulli distribution (\(\tau_1 = 0, \tau_2 = 1\)) with \(\pi_1 = 0.2\).
+<br></li>
+<li>Assess the effectiveness of different MH settings, we vary \(q \in [0, 1)\).
+<br></li>
+<li>Look at autocorrelation for \(q= \{0, 0.2, 0.5, 0.99\}\).
+<br></li>
+<li>\(\mbox{Ineff}_\infty\) for \(q \in [0, 1)\).
+<br></li>
+<li>Relationship between across chain variance and within chain (HAC)
+estimates.  This the heart of many convergence statistics.</li>
+</ul>
+<h3 id="autocorrelation-functions">Autocorrelation Functions</h3>
+<p>\includegraphics[width=4.3in]{static/mh_acf}</p>
+<h3 id="log-inefficiency-factor-as-function-of--q">Log Inefficiency Factor as function of \(q\)</h3>
+<p>\includegraphics[width=4.3in]{static/mh_relative_variance}</p>
+<h3 id="convergence-within-vs-across-chain-variance-estimates">Convergence: within vs across chain variance estimates</h3>
+<p>\begin{center}
+\includegraphics[width=2.1in]{static/mh_hac}
+\end{center}</p>
+<h3 id="take-aways">Take Aways</h3>
+<ul>
+<li>
+<p>high autocorrelation reflects the fact that it will take a high number
+of draws to accurately reflect the \index{target distribution} target
+distribution</p>
+ <br>
+</li>
+<li>
+<p>for large values of \(q\), the variance of Monte Carlo estimates of \(h\)
+drawn from the MH chain are much larger than the variance of estimates
+derived from \(iid\) draws</p>
+ <br>
+</li>
+<li>
+<p>HAC estimates bracket small-sample estimates, indicating convergence,
+but they tend to underestimate variance for all \(q\).</p>
+</li>
+</ul>
+<p><strong>How to pick \(q\) for a DSGE model?</strong></p>
+<h3 id="random-walk-metropolis-hastings">Random Walk Metropolis-Hastings</h3>
+<ul>
+<li>Most popular \(q\) for DSGE Models.
+<br></li>
+<li>\(q(\vartheta|\theta^{i-1})\) can be expressed as the random walk \(\vartheta = \theta^{i-1} + \eta\)
+<br></li>
+<li>\(\eta\) is normally distributed with mean zero and variance \(c^2\hat{\Sigma}\).
+<br></li>
+<li>Given the symmetric
+nature of the proposal distribution, the acceptance probability \index{acceptance probability} becomes
+\[
+\alpha = \min\left\{\frac{p(\vartheta|Y)}{p(\theta^{i-1}|Y)}, 1 \right\}.
+\]</li>
+<li>Still need to specify \(c\) and \(\hat \Sigma\).</li>
+</ul>
+<h3 id="on--hat-sigma">On \(\hat\Sigma\)</h3>
+<ul>
+<li>
+<p>Want \(\hat\Sigma\) to incorporate information about the posterior.</p>
+</li>
+<li>
+<p>One approach: \cite{Schorfheide2000}, is to set \(\hat\Sigma\) to be the
+negative of the inverse \index{Hessian matrix} Hessian at the mode of the
+log posterior, \(\hat\theta\), obtained by running a numerical optimization
+\index{numerical optimization}.
+<br>
+This has appealing large sample properties, but can be tedious and innacurate.</p>
+</li>
+<li>
+<p>Another (adaptive) approach: use prior variance for a first sequence of
+posterior draws, the compute the sample covariance matrix and use that as
+\(\hat\Sigma\).  <em>Must be fixed eventually</em>.</p>
+</li>
+<li>
+<p>Here we cheat:
+\[
+\mbox{RWMH-V} : \hat\Sigma =\mathbb{V}_\pi[\theta].
+\]</p>
+</li>
+</ul>
+<h3 id="picking-scaling--c">Picking Scaling \(c\)</h3>
+<ul>
+<li>Goldilocks principal: choose \(c\) so that you don&rsquo;t reject too much or too little.
+<br></li>
+<li>\cite{RobertsEtAl1997} have derived a limit (in the size of parameter
+vector) optimal acceptance rate of \(0.234\) for a special case (normal
+posterior).
+<br></li>
+<li>Most practitioners target an acceptance rate between
+\(0.20\) and \(0.40\).
+<br></li>
+<li>Requites pre-estimation tuning.</li>
+</ul>
+<h3 id="from-prior-to-posterior">From Prior to Posterior</h3>
+<ul>
+<li>Prior distributions are used to describe the state of knowledge about the
+parameter vector \(\theta\) before observing the sample \(Y\).</li>
+<li>In our example, we have to specify a joint probability distribution in
+13-dimensional parameter space.</li>
+</ul>
+<p>\vspace{0.15in}
+Eliciting prior distributions <sup id="834470fef9441d6d459e3c457e25acdd"><a href="#DelNegro2008a" title="Del Negro \&amp; Frank Schorfheide, Forming Priors for DSGE Models (and How it Affects the Assessment  of Nominal Rigidities), {Journal of Monetary Economics}, v(7), 1191-1208 (2008).">DelNegro2008a</a></sup>:</p>
+<ul>
+<li>
+<p>Group parameters by categories: \(\theta_{(ss)}\) (related to steady state),
+\(\theta_{(exo)}\) (related to exogenous processes), \(\theta_{(endo)}\) (affects
+mechanisms but not steady state).</p>
+<p>\begin{eqnarray}
+\theta_{(ss)} &amp;=&amp; [r^{(A)},\pi^{(A)},\gamma^{(Q)}]' \nonumber\\\<br>
+\theta_{(exo)} &amp;=&amp; [\rho_g,\rho_z,\sigma_g,\sigma_z,\sigma_R]'\nonumber \\\<br>
+\theta_{(endo)} &amp;=&amp; [\tau,\kappa,\psi_1,\psi_2,\rho_R]' \nonumber
+\end{eqnarray}</p>
+</li>
+</ul>
+<h3 id="priors-continued">Priors, Continued</h3>
+<ul>
+<li>Priors for \(\theta_{(ss)}\) are often based on pre-sample averages. If
+sample starts in 1983:I, the prior distribution for \(r^{(A)}\), \(\pi^{(A)}\),
+and \(\gamma^{(Q)}\) may be informed by data from the 1970s.</li>
+<li>Priors for \(\theta_{(endo)}\) may be partly based on microeconometric evidence.</li>
+<li>Priors for \(\theta_{(exo)}\) are the most difficult to specify.  You
+could specific indirectly, by looking at the volatility/autocorrelation of
+observables implied by \(\theta_{(exo)}\) given other parameters.</li>
+</ul>
+<p>\vspace{0.2in}
+<strong>Above all:</strong> Generate draws from the prior
+distribution of \(\theta\); compute important transformations of
+\(\theta\) such as steady-state ratios and possibly impulse-response
+functions or variance decompositions.</p>
+<ul>
+<li>Marginals may be plausible, while joint is not.</li>
+<li>Nonlinear transformations of uniform variables are not uniform!</li>
+</ul>
+<h3 id="try-not-to-set-priors-based--y">Try not to set priors based \(Y\)</h3>
+<p>\includegraphics[width=4.3in]{static/swpi}</p>
+<h3 id="rho-frac-x-2-x-2-plus-y-2-x-sim-u-0-1-y-sim-u-0-1">\(\rho = \frac{x^2}{x^2+y^2}, x\sim U[0, 1], y\sim U[0, 1]\)}</h3>
+<p>Density of \(\rho\)
+\includegraphics[width=4.3in]{static/rho}</p>
+<h3 id="bayesian-estimation-prior">Bayesian Estimation &ndash; Prior</h3>
+<p>\begin{center}
+\scalebox{0.85}{
+\begin{tabular}{lllcc} \hline\hline
+Name &amp; Domain &amp; \multicolumn{3}{c}{Prior} \\\<br>
+&amp;  &amp; Density &amp; Para (1) &amp; Para (2)  \ \hline
+\multicolumn{5}{c}{Steady State Related Parameters $\theta_{(ss)}$} \ \hline
+$r^{(A)}$      &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.50  \\\<br>
+$\pi^{(A)}$    &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  7.00 &amp;  2.00  \\\<br>
+$\gamma^{(Q)}$ &amp; $\mathbb{R}$    &amp; Normal   &amp;  0.40 &amp;  0.20  \ \hline
+\multicolumn{5}{c}{Endogenous Propagation Parameters $\theta_{(endo)}$} \ \hline
+$\tau$         &amp;  $\mathbb{R}^+$ &amp; Gamma    &amp;  2.00 &amp;  0.50  \\\<br>
+$\kappa$       &amp;  $[0,1]$ &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
+$\psi_1$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  1.50 &amp;  0.25  \\\<br>
+$\psi_2$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.25  \\\<br>
+$\rho_R$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \ \hline
+\multicolumn{5}{c}{Exogenous Shock Parameters $\theta_{(exo)}$} \ \hline
+$\rho_G$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
+$\rho_Z$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
+$100 \sigma_R$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.40 &amp;  4.00  \\\<br>
+$100 \sigma_G$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  1.00 &amp;  4.00  \\\<br>
+$100 \sigma_Z$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.50 &amp;  4.00  \ \hline \hline
+\end{tabular}
+}
+\end{center}</p>
+<h3 id="baseline-estimation">Baseline Estimation</h3>
+<p>\begin{table}[t!]
+\caption{Posterior Estimates of DSGE Model Parameters}
+\label{t_dsge1_posterior}
+\begin{center}
+\begin{tabular}{p{0.8cm}ccp{0.8cm}cc} \hline\hline
+&amp; Mean &amp; [0.05, 0.95] &amp;  &amp; Mean &amp; [0.05,0.95] \ \hline
+$\tau$               &amp;  2.83 &amp; [ 1.95,  3.82]  &amp; $\rho_r$             &amp;  0.77 &amp; [ 0.71,  0.82] \\\<br>
+$\kappa$             &amp;  0.78 &amp; [ 0.51,  0.98]  &amp; $\rho_g$             &amp;  0.98 &amp; [ 0.96,  1.00] \\\<br>
+$\psi_1$             &amp;  1.80 &amp; [ 1.43,  2.20]  &amp; $\rho_z$             &amp;  0.88 &amp; [ 0.84,  0.92] \\\<br>
+$\psi_2$             &amp;  0.63 &amp; [ 0.23,  1.21]  &amp; $\sigma_r$           &amp;  0.22 &amp; [ 0.18,  0.26] \\\<br>
+$r^{(A)}$            &amp;  0.42 &amp; [ 0.04,  0.95]  &amp; $\sigma_g$           &amp;  0.71 &amp; [ 0.61,  0.84] \\\<br>
+$\pi^{(A)}$          &amp;  3.30 &amp; [ 2.78,  3.80]  &amp; $\sigma_z$           &amp;  0.31 &amp; [ 0.26,  0.36] \\\<br>
+$\gamma^{(Q)}$       &amp;  0.52 &amp; [ 0.28,  0.74]  &amp;  &amp; &amp; \\\<br>
+\hline \hline
+\end{tabular}
+\end{center}
+{\em Notes:} We generated $N=100,000$ draws from the posterior and discarded the first 50,000 draws.
+Based on the remaining draws we approximated the posterior mean and the 5th and 95th percentiles.
+\end{table}</p>
+<h3 id="more-on--c">More on \(c\)</h3>
+<p>Vary \(c\in(0, 2]\).  Look at effect on</p>
+<ul>
+<li>Acceptance Rate</li>
+<li>\(Ineff_{\infty}\)</li>
+<li>\(Ineff_{N}\)</li>
+</ul>
+<p>What is the relationship between acceptance rate and accuracy?</p>
+<h3 id="effects-of-scaling">Effects of Scaling</h3>
+<p>\includegraphics[width=4.3in]{static/dsge1_rwmh_scaling}</p>
+<h3 id="acceptance-rate-vs-dot-accuracy">Acceptance Rate vs. Accuracy</h3>
+<p>\includegraphics[width=4.3in]{static/dsge1_rwmh_acceptance_v_accuracy}</p>
+<h3 id="convergence-of-monte-carlo-average--bar-tau-n-n-0">Convergence of Monte Carlo Average \(\bar{\tau}_{N|N_0}\)</h3>
+<p>\begin{center}
+\includegraphics[width=3.5in]{static/dsge1_recursive_means_tau.pdf} \\\<br>
+\end{center}</p>
+<p><em>Notes:</em> The $x-$axis indicates the number of draws \(N\). \(N_0\) is set to \(0\), \(25,000\) and \(50,000\), respectively.</p>
+<h3 id="improvements-to-mcmc-blocking">Improvements to MCMC: Blocking</h3>
+<ul>
+<li>
+<p>In high-dimensional parameter spaces the RWMH algorithm generates
+highly persistent Markov chains.</p>
+</li>
+<li>
+<p>What&rsquo;s bad about persistence?</p>
+<p>\begin{eqnarray*}
+\lefteqn{ \sqrt{N}( \bar{h}_N - \mathbb{E}[\bar{h}_N]) } \\\<br>
+&amp; \Longrightarrow &amp; N \bigg( 0, , \frac{1}{N} \sum_{i=1}^n \mathbb{V}[h(\theta^i)]
++ {\color{red} \frac{1}{N} \sum_{i=1}^N \sum_{j \not=i} COV\big[ h(\theta^i),h(\theta^j) \big]} \bigg).
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>Potential Remedy:</p>
+<ul>
+<li>Partition \(\theta = [\theta_1, \ldots, \theta_K]\).</li>
+<li>Iterate over conditional posteriors \(p(\theta_k | Y, \theta_{&lt;-k&gt;} )\).</li>
+</ul>
+</li>
+<li>
+<p>To reduce persistence of the chain, try to find partitions such that parameters are strongly correlated within blocks and
+weakly correlated across blocks or use random blocking.</p>
+</li>
+</ul>
+<h3 id="block-mh-algorithm">Block MH Algorithm</h3>
+<p>Draw \(\theta^0 \in \Theta\) and then for \(i=1\) to \(N\):</p>
+<ol>
+<li>Create a partition \(B^i\) of the parameter
+vector into \(N_{blocks}\) blocks \(\theta_1, \ldots,
+\theta_{N_{blocks}}\) via some rule (perhaps probabilistic), unrelated
+to the current state of the Markov chain.</li>
+<li>For \(b = 1, \ldots, N_{blocks}\):
+<ol>
+<li>Draw
+\(\vartheta_b \sim q(\cdot|\left[\theta^{i}_{&lt; b}, \theta_b^{i-1}, \theta^{i-1}_{\ge b}\right])\).</li>
+<li>With probability,
+\[ \alpha = \max\left\{\frac{p(\left[\theta^{i}_{&lt; b}, \vartheta_{b},
+\theta^{i-1}_{&gt;b}\right]|Y) q(\theta^{i-1}_b,|\theta^{i}_{&lt; b},\vartheta_b,\theta^{i-1}_{&gt;
+b})} {p(\theta^{i}_{&lt; b}, \theta_b^{i-1}, \theta^{i-1}_{&gt;
+b}|Y)q(\vartheta_b|\theta^{i}_{&lt; b}, \theta_b^{i-1}, \theta^{i-1}_{&gt;
+b})},1\right\},
+\]
+set \(\theta^i_b = \vartheta_{b}\), otherwise set \(\theta_b^{i} = \theta^{i-1}_b.\)</li>
+</ol>
+</li>
+</ol>
+<h3 id="random-block-mh-algorithm">Random-Block MH Algorithm</h3>
+<ul>
+<li>
+<p>Generate a sequence of random partitions \(\{ B^i\}_{i=1}^N\) of the
+parameter vector \(\theta\) into \(N_{blocks}\) equally sized blocks, denoted
+by \(\theta_b\), \(b=1,\ldots,N_{blocks}\) as follows:</p>
+<ol>
+<li>assign an \(iid U[0,1]\) draw to each element of \(\theta\);</li>
+<li>sort the parameters according to the assigned random number;</li>
+<li>let the \(b\)&lsquo;th block consist of parameters \((b-1)N_{blocks},\ldots,b N_{blocks}\).</li>
+</ol>
+ <br>
+</li>
+<li>
+<p>Execute Algorithm Block MH Algorithm.</p>
+</li>
+</ul>
+<h3 id="metropolis-adjusted-langevin-algorithm">Metropolis-Adjusted Langevin Algorithm</h3>
+<ul>
+<li>
+<p>The proposal distribution of Metropolis-Adjusted Langevin (MAL) algorithm is given by</p>
+<p>\begin{align*}
+\mu(\theta^{i-1}) &amp;= \theta^{i-1} + \frac{c_1}{2} M_1 \frac{\partial}{\partial \theta}
+\ln p(\theta^{i-1}|Y) \bigg|_{\theta = \theta^{i-1}},  \\\<br>
+\Sigma(\theta^{i-1}) &amp;= c_2^2M_2. \nonumber
+\end{align*}</p>
+<p>that is \(\theta^{i-1}\) is adjusted by a step in the direction of the
+gradient of the log posterior density function.</p>
+</li>
+<li>
+<p>One standard practice is to set \(M_1 = M_2 = M\), with
+\[
+M = -\left[\frac{\partial}{\partial \theta \partial \theta&rsquo;} \ln p(\theta|Y) \bigg|_{\theta = \hat{\theta}}\right]^{-1},
+\]
+where \(\hat\theta\) is the mode of the posterior distribution obtained
+using a numerical optimization routine.</p>
+</li>
+</ul>
+<h3 id="newton-mh-algorithm">Newton MH Algorithm</h3>
+<ul>
+<li>
+<p>Newton MH Algorithm replaces the Hessian evaluated at the posterior
+mode \(\hat{\theta}\) by the Hessian evaluated at \(\theta^{i-1}\).
+<br></p>
+</li>
+<li>
+<p>The proposal distribution is given by</p>
+<p>\begin{align*}
+\mu(\theta^{i-1}) &amp;= \theta^{i-1} - s \left[\frac{\partial}{\partial
+\theta \partial \theta'} \ln p(\theta|Y) \bigg|_{\theta =
+\theta^{i-1}}\right]^{-1} \ &amp; \times\frac{\partial}{\partial
+\theta} \ln p(\theta^{i-1}|Y) \bigg|_{\theta = \theta^{i-1}}
+\nonumber \\\<br>
+\hat\Sigma(\theta^{i-1}) &amp;= - c_2^2
+\left[\frac{\partial}{\partial \theta \partial \theta'} \ln
+p(\theta|Y) \bigg|_{\theta = \theta^{i-1}}\right]^{-1}. \nonumber
+\end{align*}</p>
+ <br>
+</li>
+<li>
+<p>It is useful to let \(s\) be independently of \(\theta^{i-1}\):
+\[
+c_1 = 2s, \quad s\sim iid U[0, \bar s],
+\]
+where \(\bar s\) is a tuning parameter.</p>
+</li>
+</ul>
+<h3 id="run-times-and-tuning-constants-for-mh-algorithms">Run Times and Tuning Constants for MH Algorithms</h3>
+<p>\begin{center}
+\begin{tabular}{llll}
+\hline\hline
+Algorithm &amp; Run Time &amp; Accpt. &amp; Tuning\\\<br>
+&amp;  [hh:mm:ss] &amp; Rate  &amp; Constants \\\<br>
+\hline
+1-Block RWMH-I	&amp; 00:01:13 &amp;  0.28 &amp; $c = 0.015$ \\\<br>
+1-Block RWMH-V	&amp; 00:01:13 &amp;  0.37 &amp; $c = 0.400$  \\\<br>
+3-Block RWMH-I	&amp; 00:03:38 &amp;  0.40 &amp; $c = 0.070$  \\\<br>
+3-Block RWMH-V	&amp; 00:03:36 &amp;  0.43 &amp; $c = 1.200$ \\\<br>
+3-Block MAL	&amp; 00:54:12 &amp;  0.43  &amp; $c_1 = 0.4,  c_2 = 0.750$ \\\<br>
+3-Block Newton MH  &amp; 03:01:40 &amp; 0.53 &amp; $\bar s = 0.7,	 c_2 = 0.600$ \\\<br>
+\hline
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> In each run we generate \(N=100,000\) draws. We report
+the fastest run time and the average acceptance rate across \(N_{run}=50\) independent Markov chains.<br /></p>
+<h3 id="autocorrelation-function-of--tau-i">Autocorrelation Function of \(\tau^{i}\)</h3>
+<pre><code>\begin{center}
+\includegraphics[width=3.5in]{static/dsge1\_tau\_acf.pdf}
+</code></pre>
+<p>\end{center}</p>
+<p><em>Notes:</em> The autocorrelation functions are computed based on a single
+run of each algorithm.</p>
+<h3 id="inefficiency-factor--mbox-ineff-n-bar-tau">Inefficiency Factor \(\mbox{InEff}_N[\bar{\tau}]\)</h3>
+<p>\begin{center}
+\includegraphics[width=3.5in]{static/dsge1_relative_variance_tau.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The small-sample inefficiency factors  are computed
+based on \(N_{run}=50\) independent runs of each algorithm.</p>
+<h3 id="iid-equivalent-draws-per-second">IID Equivalent Draws Per Second</h3>
+<p>\[
+\mbox{$iid$-equivalent draws per second}
+= \frac{N}{\mbox{Run Time [seconds]}} \cdot \frac{1}{\mbox{InEff}_N}.
+\]</p>
+<p>\begin{center}
+\begin{tabular}{lr} \hline \hline
+Algorithm &amp; Draws Per Second \ \hline
+1-Block RWMH-V &amp; 7.76 \\\<br>
+3-Block RWMH-V &amp; 5.65 \\\<br>
+3-Block MAL    &amp; 1.24 \\\<br>
+3-Block RWMH-I &amp; 0.14 \\\<br>
+3-Block Newton MH &amp; 0.13 \\\<br>
+1-Block RWMH-I &amp; 0.04 \ \hline
+\end{tabular}
+\end{center}</p>
+<h3 id="performance-of-different-mh-algorithms">Performance of Different MH Algorithms</h3>
+<p>\begin{center}
+\begin{tabular}{cc}
+RWMH-V (1 Block) &amp; RWMH-V (3 Blocks) \\\<br>
+\includegraphics[width=1.35in]{static/dsge1_rwmh_one_block_hac.pdf} &amp;
+\includegraphics[width=1.35in]{static/dsge1_rwmh_three_block_hac.pdf} \\\<br>
+MAL &amp; Newton \\\<br>
+\includegraphics[width=1.35in]{static/dsge1_langevin_hac.pdf} &amp;
+\includegraphics[width=1.35in]{static/dsge1_newton_hac.pdf}
+\end{tabular}
+\end{center}</p>
+<p>\tiny
+<em>Notes:</em> Each panel contains scatter plots of the small sample
+variance \(\mathbb{V}[\bar{\theta}]\) computed across multiple chains
+(\(x\)-axis) versus the \(\mbox{HAC}[\bar{h}]\) estimates of
+\(\Omega(\theta)/N\) (\(y\)-axis).</p>
+<h3 id="recall-posterior-odds-and-marginal-data-densities">Recall: Posterior Odds and Marginal Data Densities</h3>
+<ul>
+<li>
+<p>Posterior model probabilities can be computed as follows:</p>
+<p>\begin{equation}
+\pi_{i,T} = \frac{ \pi_{i,0} p(Y|{\cal M}_i) }{ \sum_{j} \pi_{j,0} p(Y|{\cal M}_j) }, \quad j=1,\ldots,2,
+\end{equation}</p>
+<p>where</p>
+<p>\begin{equation}
+p(Y|{\cal M}) = \int p(Y|\theta,{\cal M}) p(\theta|{\cal M}) d\theta
+\end{equation}</p>
+ <br>
+</li>
+<li>
+<p>Note:
+\[
+\ln p(Y_{1:T}|{\cal M})
+= \sum_{t=1}^T \ln \int p(y_t |\theta, Y_{1:t-1}, {\cal M}) p(\theta|Y_{1:t-1},{\cal M}) d\theta
+\]</p>
+</li>
+<li>
+<p>Posterior odds and Bayes Factor</p>
+<p>\begin{equation}
+\frac{\pi_{1,T}}{\pi_{2,T}}
+= \underbrace{ \frac{\pi_{1,0}}{\pi_{2,0}} }_{\displaystyle Prior, Odds}
+\times \underbrace{ \frac{p(Y|{\cal M}_1)}{p(Y|{\cal M}_2)} }_{\displaystyle Bayes, Factor}
+\end{equation}</p>
+</li>
+</ul>
+<h3 id="computation-of-marginal-data-densities">Computation of Marginal Data Densities</h3>
+<ul>
+<li>
+<p>Reciprocal importance sampling:</p>
+<ul>
+<li>Geweke&rsquo;s modified harmonic mean estimator</li>
+<li>Sims, Waggoner, and Zha&rsquo;s estimator</li>
+</ul>
+ <br>
+</li>
+<li>
+<p>Chib and Jeliazkov&rsquo;s estimator
+<br></p>
+</li>
+<li>
+<p>For a survey, see Ardia, Hoogerheide, and van Dijk (2009).</p>
+</li>
+</ul>
+<h3 id="modified-harmonic-mean">Modified Harmonic Mean</h3>
+<ul>
+<li>
+<p>Reciprocal importance samplers are based on the following identity:</p>
+<p>\begin{eqnarray}
+\frac{1}{p(Y ) } = \int \frac{ f(\theta) }{ p(Y|\theta) p(\theta ) } p(\theta |Y) d\theta,
+\end{eqnarray}</p>
+<p>where  \(\int f(\theta) d\theta = 1\).</p>
+</li>
+<li>
+<p>Conditional on the choice of \(f(\theta)\) an obvious estimator is</p>
+<p>\begin{equation}
+\hat{p}_{G}(Y) = \left[ \frac{1}{N} \sum_{i=1}^{N} \frac{ f(\theta^{i}) }{ p(Y|\theta^{i}) p(\theta^{i})} \right]^{-1},
+\label{eq_harmonicmean}
+\end{equation}</p>
+<p>where \(\theta^{i}\) is drawn from the posterior \(p(\theta|Y)\).</p>
+</li>
+<li>
+<p>Geweke (1999):</p>
+<p>\begin{eqnarray}
+f(\theta) &amp;=&amp; \tau^{-1} (2\pi)^{-d/2} |V_{\theta}|^{-1/2} \exp
+\left[ - 0.5(\theta - \bar{\theta})' V^{-1}_{\theta}
+(\theta - \bar{\theta}) \right] \nonumber \\\<br>
+&amp;&amp; \times \left\{ (\theta - \bar{\theta})' V^{-1}_{\theta}
+(\theta - \bar{\theta}) \le F_{\chi^2_{d}}^{-1}(\tau) \right\}.
+\end{eqnarray}</p>
+</li>
+</ul>
+<h3 id="chib-and-jeliazkov">Chib and Jeliazkov</h3>
+<ul>
+<li>
+<p>Rewrite Bayes Theorem:</p>
+<p>\begin{equation}
+p(Y) = \frac{ p(Y|\theta) p(\theta)}{p(\theta|Y)}.
+\label{eq_csequality}
+\end{equation}</p>
+</li>
+<li>
+<p>Thus,</p>
+<p>\begin{equation}
+\hat{p}_{CS}(Y) = \frac{ p(Y|\tilde{\theta}) p(\tilde{\theta}) }{ \hat{p}(\tilde{\theta}|Y) },
+\end{equation}</p>
+<p>where we replaced the generic \(\theta\) in~(\ref{eq_csequality})
+by the posterior mode \(\tilde{\theta}\).</p>
+</li>
+</ul>
+<h3 id="chib-and-jeliazkov">Chib and Jeliazkov</h3>
+<ul>
+<li>
+<p>Use output of Metropolis-Hastings Algorithm.</p>
+</li>
+<li>
+<p>Proposal density for transition \(\theta \mapsto \tilde{\theta}\):
+\(q(\theta,\tilde{\theta}|Y)\).</p>
+</li>
+<li>
+<p>Probability of accepting proposed draw:
+\[
+\alpha(\theta,\tilde{\theta}|Y) = \min ; \left\{ 1, ; \frac{p(\tilde{\theta}|Y)/q(\theta,\tilde{\theta}|Y)}{
+p(\theta|Y)/q(\tilde{\theta},\theta|Y)} \right\}.
+\]</p>
+</li>
+<li>
+<p>Note that</p>
+<p>\begin{eqnarray*}
+\lefteqn{ \int \alpha(\theta,\tilde{\theta}|Y) q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta } \\\<br>
+&amp;=&amp; \int \min ; \left\{ 1, ; \frac{p(\tilde{\theta}|Y)/q(\theta,\tilde{\theta}|Y)}{
+p(\theta|Y)/q(\tilde{\theta},\theta|Y)} \right\} q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta \\\<br>
+&amp;=&amp; p(\tilde{\theta}|Y) \int \min ; \left\{ \frac{p(\theta|Y)/q(\tilde{\theta},\theta|Y)}{p(\tilde{\theta}|Y)/q(\theta,\tilde{\theta}|Y)}, ; 1  \right\}
+q(\tilde{\theta},\theta|Y) d\theta \\\<br>
+&amp;=&amp; p(\tilde{\theta}|Y) \int \alpha(\tilde{\theta},\theta|Y) q(\tilde{\theta},\theta|Y) d\theta
+\end{eqnarray*}</p>
+</li>
+</ul>
+<h3 id="chib-and-jeliazkov">Chib and Jeliazkov</h3>
+<ul>
+<li>
+<p>Posterior density at the mode can be approximated as follows</p>
+<p>\begin{equation}
+\hat{p}(\tilde \theta|Y)
+= \frac{ \frac{1}{N} \sum_{i=1}^{N} \alpha (\theta^{i},\tilde{\theta}|Y) q(\theta^{i},\tilde{\theta}|Y) }{
+\frac{1}{J} \sum_{j=1}^J \alpha (\tilde{\theta},\theta^{j}|Y) },
+\end{equation}</p>
+</li>
+<li>
+<p>\(\{ \theta^{i} \}\) are posterior draws obtained with the the M-H Algorithm;</p>
+</li>
+<li>
+<p>\(\{ \theta^{j}\}\) are additional draws from \(q(\tilde{\theta},\theta|Y)\) given the fixed
+value \(\tilde{\theta}\).</p>
+</li>
+</ul>
+<h3 id="mh-based-marginal-data-density-estimates">MH-Based Marginal Data Density Estimates</h3>
+<p>\begin{center}
+\begin{tabular}{lcc}
+\hline\hline
+Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\<br>
+\hline
+Geweke $(\tau = 0.5)$          &amp; -346.17 &amp;  0.03 \\\<br>
+Geweke $(\tau = 0.9)$          &amp; -346.10 &amp;  0.04 \\\<br>
+SWZ $(q = 0.5)$                &amp; -346.29 &amp;  0.03 \\\<br>
+SWZ $(q = 0.9)$                &amp; -346.31 &amp;  0.02 \\\<br>
+Chib and Jeliazkov             &amp; -346.20 &amp;  0.40 \\\<br>
+\hline \hline
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Table shows mean and standard deviation of log marginal data density
+estimators, computed over \(N_{run} =50\) runs of the RWMH-V sampler
+using \(N=100,000\) draws, discarding a burn-in sample of \(N_0=50,000\) draws.
+The SWZ estimator uses \(J=100,000\) draws to compute \(\hat
+\tau\), while the CJ estimators uses \(J=100,000\) to compute the denominator of \(\hat{p}(\tilde{\theta}|Y)\).</p>
+<h3 id="references">References</h3>
+<h1 id="bibliography">Bibliography</h1>
+<p><a id="Metropolis1953"></a>[Metropolis1953] Metropolis, Rosenbluth, Rosenbluth, Teller &amp; Teller, Equations of State Calculations by Fast Computing Machines, <i>Journal of Chemical Physics</i>, <b>21</b>, 1087-1091 (1953). <a href="#c23d29eb5bdb8bc2fc575e7437b8f907">↩</a></p>
+<p><a id="Hastings1970"></a>[Hastings1970] Hastings, Monte Carlo Sampling Methods Using Markov Chains and Their Applications, <i>Biometrika</i>, <b>57</b>, 97-109 (1970). <a href="#694230c3a5e9d6fd8f0276c37355f1da">↩</a></p>
+<p><a id="Tierney1994"></a>[Tierney1994] Tierney, Markov Chains for Exploring Posterior Distributions, <i>The Annals of Statistics</i>, <b>22(4)</b>, 1701-1728 (1994). <a href="#e841d197fa5fee977a33401116803ab6">↩</a></p>
+<p><a id="Chib1995a"></a>[Chib1995a] Chib &amp; Greenberg, Understanding the Metropolis-Hastings Algorithm, <i>The American Statistician</i>, <b>49</b>, 327-335 (1995). <a href="#a50677fe8b96e99056f5de85b8e1fdf7">↩</a></p>
+<p><a id="Robert2004"></a>[Robert2004] Robert &amp; Casella, Monte Carlo Statistical Methods, Springer (2004). <a href="#8af5f7bb8c79b7337d6458aff47c33f6">↩</a></p>
+<p><a id="Geweke2005"></a>[Geweke2005] John Geweke, Contemporary Bayesian Econometrics and Statistics, John Wiley &amp; Sons, Inc. (2005). <a href="#dfa786895eb8edffb49a91c754a89c01">↩</a></p>
+<p><a id="DelNegro2008a"></a>[DelNegro2008a] Del Negro &amp; Frank Schorfheide, Forming Priors for DSGE Models (and How it Affects the Assessment  of Nominal Rigidities), <i>Journal of Monetary Economics</i>, <b>55(7)</b>, 1191-1208 (2008). <a href="http://www.sciencedirect.com/science/article/B6VBW-4TKPVGT-3/2/508d89fdb8eb927643250b7f36aab161">link</a>. <a href="http://dx.doi.org/DOI: 10.1016/j.jmoneco.2008.09.006">doi</a>. <a href="#834470fef9441d6d459e3c457e25acdd">↩</a></p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

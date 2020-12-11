@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Estimating Three DSGE Models" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/" /><meta property="article:published_time" content="2020-12-11T09:46:05-05:00" />
+
+
+
+<meta name="twitter:title" content="Estimating Three DSGE Models"/>
+<meta name="twitter:description" content="Three DSGE Models Application 1: A New Keynesian Model with Correlated Shocks   The assumption that exogenous shocks evolve according to independent AR(1) is to some extent arbitrary.
+  Trying to generalize this assumption seems natural.
+  However, the more elaborate the exogenous propagation mechanism, the more difficult it becomes to disentangle endogenous from exogenous propagation.
+  This generates identification problems.
+  Application 1: A New Keynesian Model with Correlated Shocks   Technology growth shock \(\hat{z}_t\), government spending shock \index{government!"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model'>06-estimating-a-linear-dsge-model</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Estimating Three DSGE Models</h1>
+<h2 id="three-dsge-models">Three DSGE Models</h2>
+<h3 id="application-1-a-new-keynesian-model-with-correlated-shocks">Application 1: A New Keynesian Model with Correlated Shocks</h3>
+<ul>
+<li>
+<p>The assumption that exogenous shocks evolve according to independent AR(1) is to some extent arbitrary.</p>
+</li>
+<li>
+<p>Trying to generalize this assumption seems natural.</p>
+</li>
+<li>
+<p>However, the more elaborate the exogenous propagation mechanism, the more difficult it becomes to disentangle endogenous from exogenous propagation.</p>
+</li>
+<li>
+<p>This generates identification problems.</p>
+</li>
+</ul>
+<h3 id="application-1-a-new-keynesian-model-with-correlated-shocks">Application 1: A New Keynesian Model with Correlated Shocks</h3>
+<ul>
+<li>
+<p>Technology growth shock \(\hat{z}_t\), government spending shock \index{government!spending shock}
+\(\hat{g}_t\) evolve:</p>
+<p>\begin{align*}
+\left[ \begin{array}{c} \hat{z}_t \ \hat{g}_t \end{array} \right]
+&amp;= \left[ \begin{array}{cc} \rho_z &amp;  \rho_{zg}  \  \rho_{gz}  &amp; \rho_g \end{array} \right]
+\left[ \begin{array}{c} \hat{z}_{t-1} \ \hat{g}_{t-1} \end{array} \right]</p>
+<ul>
+<li>\left[ \begin{array}{c} \epsilon_{z,t} \ \epsilon_{g,t} \end{array} \right], \\\<br>
+\left[ \begin{array}{c} \epsilon_{z,t} \ \epsilon_{g,t} \end{array} \right]
+&amp;\sim
+N \left( \left[ \begin{array}{c} 0 \ 0 \end{array} \right], ,
+\left[ \begin{array}{cc} \sigma^2_z &amp;  0  \  0  &amp; \sigma^2_g \end{array} \right] \right). \nonumber
+\end{align*}</li>
+</ul>
+</li>
+<li>
+<p>This VAR process is combined with:</p>
+<p>\begin{eqnarray*}
+\hat y_{t} &amp;=&amp;  \mathbb{E}_t[\hat y_{t+1}]
+- \frac{1}{\tau} \bigg( \hat R_t -  \mathbb{E}_t[\hat\pi_{t+1}] - \mathbb{E}_t[\hat{z}_{t+1}] \bigg)\\\<br>
+&amp;&amp;+ \hat{g}_t - \mathbb{E}_t[\hat{g}_{t+1}], \\\<br>
+\hat \pi_t &amp;=&amp; \beta \mathbb{E}_t[\hat \pi_{t+1}] + \kappa (\hat y_t- \hat g_t), \\\<br>
+\hat R_{t} &amp;=&amp; \rho_R \hat R_{t-1} + (1-\rho_R) \psi_1 \hat \pi_{t} + (1-\rho_R) \psi_2 \left( \hat y_{t} - \hat g_t \right)+ \epsilon_{R,t}.
+\end{eqnarray*}</p>
+</li>
+<li>
+<p>We use agnostic priors:\( \quad \rho_g, \rho_z \sim U[0,1], \quad \rho_{gz}, \rho_{zg} \sim U[-1,1].\)</p>
+</li>
+</ul>
+<h3 id="priors-and-posteriors-of--rho-gz--and--rho-zg">Priors and Posteriors of \(\rho_{gz}\) and \(\rho_{zg}\)</h3>
+<p>\begin{center}
+\includegraphics[width=4in]{static/dsge1_gen_shock_density.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The two panels depict histograms of prior distributions (shaded area) and kernel density estimates of the posterior densities (solid lines).</p>
+<h3 id="impulse-responses--part-1">Impulse Responses (Part 1)</h3>
+<p>\begin{center}
+\includegraphics[width=4in]{static/dsge1_gen_shock_irfs_exo.pdf}
+\end{center}</p>
+<h3 id="impulse-responses--part-2">Impulse Responses (Part 2)</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/dsge1_gen_shock_irfs_endo.pdf}
+\end{center}</p>
+<h3 id="algorithm-configuration">Algorithm Configuration</h3>
+<p>\begin{table}[t!]
+\begin{center}
+\begin{tabular}{p{2in}p{2in}} \hline \hline
+RWMH-V &amp; SMC \ \hline
+$N = 100,000$       &amp; $N = 4,800$ \\\<br>
+$N_{burn} = 50,000 $ &amp; $N_\phi = 500$ \\\<br>
+$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\<br>
+$c= 0.125      $    &amp; $\lambda = 2$ \\\<br>
+Run Time: 00:28 (1 core) &amp; Run Time: 05:52 (12 cores) \ \hline \hline\\\<br>
+\end{tabular}
+\end{center}
+\end{table}</p>
+<p><em>Note:</em> We run each algorithm \(N_{run}=50\) times. Run time is reported as mm:ss.</p>
+<h3 id="posterior-probability-approximations">Posterior Probability Approximations</h3>
+<p>\begin{center}
+\begin{tabular}{cc}
+$\mathbb{P}_\pi\{\rho_{zg} &gt; 0 \}$ &amp; $\mathbb{P}_\pi\{\partial \hat{\pi}_t / \partial \hat{\epsilon}_{g,t} &gt; 0  \}$ \\\<br>
+\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_rhozg.pdf} &amp;			\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_pi_g_irf.pdf}\\\<br>
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Each symbol (50 in total) corresponds to one run of the SMC algorithm (dot) or the RWMH algorithm (triangle).</p>
+<h3 id="marginal-data-density-approximations">Marginal Data Density Approximations</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/dsge1_gen_shock_log_mdd.pdf}
+\end{center}</p>
+<p><em>Notes:</em> Each symbol (50 in total) corresponds to one run of the SMC algorithm (dot) or the RWMH algorithm (triangle). The SMC algorithm automatically generates an estimate of the MDD; for the RWMH algorithm we use Geweke&rsquo;s modified harmonic mean estimator.</p>
+<h3 id="marginal-data-density">Marginal Data Density</h3>
+<p>\begin{table}[t!]
+\begin{center}
+\begin{tabular}{lcc}
+\hline\hline
+Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\<br>
+\hline
+AR(1) Shocks  &amp; $-346.16$ &amp;   (0.07) \\\<br>
+VAR(1) Shocks  &amp; $-314.45$ &amp;   (0.05) \\\<br>
+\hline \hline\\\<br>
+\end{tabular}
+\end{center}
+\end{table}</p>
+<p><em>Notes:</em> Table shows mean and standard deviation of SMC-based estimate of
+the log marginal data density, computed over \(N_{run}=50\) runs of the SMC sampler.</p>
+<h3 id="application-2-estimation-of-smets-and-wouters--2007--model">Application 2: Estimation of Smets and Wouters (2007) Model</h3>
+<ul>
+<li>Benchmark macro model, has been estimated many (many) times.
+<br></li>
+<li>``Core'' of many larger-scale models.
+<br></li>
+<li>36 estimated parameters.
+<br></li>
+<li>SW priors might be considered implausible because they seem to be informed by in-sample information.
+<br></li>
+<li>How does quality of posterior simulators
+change as one makes the priors more diffuse?
+<br></li>
+<li>Replace Beta by Uniform distributions; increase variances of
+parameters with Gamma and Normal prior by factor of 3.</li>
+</ul>
+<h3 id="generating-quantile-estimates">Generating Quantile Estimates</h3>
+<ul>
+<li>We will focus on the accuracy of the approximation of posterior quantiles.
+<br></li>
+<li>Quantile estimates can be computed in two different ways:
+<ol>
+<li>
+<p>Sort the posterior draws \(\{\theta_j^i\}_{i=1}^N\) and select
+the \(\lfloor \tau N \rfloor\)&lsquo;th element.
+<br></p>
+</li>
+<li>
+<p>Quantile regression (Koenker and Basset, 1978)</p>
+<p>\begin{eqnarray*}
+\hat{q}_\tau(\theta_j) &amp;=&amp; \mbox{argmin}_{q} ; \bigg[
+(1-\tau) \frac{1}{N} \sum_{i: , \theta^i_j &lt; q} (\theta_j^i - q) \&amp;&amp;+
+\tau \frac{1}{N} \sum_{i: , \theta^i_j \ge q} (\theta_j^i - q)
+\bigg]. \nonumber
+\end{eqnarray*}</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="accuracy-of-quantile-estimates">Accuracy of Quantile Estimates</h3>
+<ul>
+<li>Accuracy of
+the quantile estimates is given by the following CLT:
+\[
+\sqrt{N}(\hat{q}_\tau - q_\tau) \Longrightarrow N \left( 0,
+\frac{\tau(1-\tau)}{\pi^2(q_\tau)} \right),
+\]
+where \(\pi(\theta)\) is the posterior density.
+<br></li>
+<li>Finite sample inefficiency:
+\[ \mbox{InEff}_N = \frac{ \mathbb{V}[\hat{q}_\tau]}{
+\tau(1-\tau)/ \big( N \pi^2(q_\tau) \big) }
+\]</li>
+</ul>
+<h3 id="algorithm-configuration">Algorithm Configuration</h3>
+<p>\begin{table}[t!]
+\begin{center}
+\begin{tabular}{p{2in}p{2in}} \hline \hline
+RWMH-V &amp; SMC \ \hline
+$N = 10,000,000$       &amp; $N = 12,000$ \\\<br>
+$N_{burn} = 5,000,000 $ &amp; $N_\phi = 500$ \\\<br>
+$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\<br>
+$c= 0.08      $    &amp; $\lambda = 2.1$ \\\<br>
+Run Time: 14:06 (1 core) &amp; Run Time: 02:32 (24 cores) \ \hline \hline\\\<br>
+\end{tabular}
+\end{center}
+\end{table}</p>
+<p><em>Note:</em> We run each algorithm \(N_{run}=50\) times. Run time is reported as hh:mm.</p>
+<h3 id="precision-of-quantile-approximations--part-1">Precision of Quantile Approximations (Part 1)</h3>
+<p>\begin{center}
+\begin{tabular}{cc}			\includegraphics[width=0.35\textwidth]{static/sw_diffuse_density_Neff_alp.pdf} &amp;	\includegraphics[width=0.35\textwidth]{static/sw_diffuse_density_Neff_rdely.pdf} \	\includegraphics[width=0.35\textwidth]{static/sw_diffuse_density_Neff_xiw.pdf} &amp;	\includegraphics[width=0.35\textwidth]{static/sw_diffuse_density_Neff_iotaw.pdf}
+\end{tabular}
+\end{center}</p>
+<p><em>Notes:</em> Each panel depicts a Kernel estimate of the posterior
+density (solid) and \(\ln (N_{eff}) = \ln (N/\mbox{InEff}_N)\)
+(light gray hatched bars correspond to RWMH and solid bars
+correspond to SMC) for various choices of \(\tau\) equal to
+\(0.05\), \(0.5\), and \(0.95\).</p>
+<h3 id="precision-of-quantile-approximations--part-2">Precision of Quantile Approximations (Part 2)</h3>
+<p>\begin{center}		\includegraphics[width=0.38\textwidth]{static/sw_diffuse_scatter_Neffs_log.pdf}
+\end{center}</p>
+<p><em>Notes:</em> \(N_{eff}\) for the RWMH-V and SMC quantile approximations. Each dot corresponds to one parameter.
+The 45-degree line appears in solid.</p>
+<h3 id="application-3-a-fiscal-policy-dsge-model">Application 3: A Fiscal Policy DSGE Model</h3>
+<ul>
+<li>Based on Leeper, Plante, and Traum (2010)
+<br></li>
+<li>Incorporate elaborate fiscal policy rules (government spending, labor, capital, and consumption taxes) into DSGE model to study effects of tax and spending changes.
+<br></li>
+<li>Complex specification of fiscal policy creates identification problems.</li>
+</ul>
+<h3 id="application-3-a-fiscal-policy-dsge-model">Application 3: A Fiscal Policy DSGE Model</h3>
+<ul>
+<li>
+<p>The budget constraint of the households</p>
+<p>\begin{align*}
+(1+\tau_t^c)c_t &amp;+ i_t + b_t \\\<br>
+&amp;= (1-\tau_t^l)w_tl_t + (1-\tau_t^k)R_t^ku_tk_{t-1} + R_{t-1}b_{t-1} + z_t. \nonumber
+\end{align*}</p>
+</li>
+<li>
+<p>The budget constraint for the government, using
+capital letters to denote aggregate quantities
+\[
+B_t + \tau_t^kR_t^ku_tK_{t-1} + \tau_t^l w_t L_t + \tau_t^cC_t = R_{t-1}B_{t-1} + G_t + Z_t.
+\]</p>
+</li>
+<li>
+<p>The fiscal policy rules (\(\hat x_t\): log deviation from steady state of \(x_t\))</p>
+<p>\begin{align*}
+\hat\tau_t^k &amp;= \varphi_k\hat Y_t + \gamma_k \hat B_{t-1}
++ \phi_{kl}\hat u_t^l + \phi_{kc} \hat u_t^c + \hat u_t^k, \\\<br>
+\hat\tau_t^l &amp;= \varphi_l\hat Y_t + \gamma_l \hat B_{t-1}
++ \phi_{lk}\hat u_t^k + \phi_{lc} \hat u_t^c + \hat u_t^l, \\\<br>
+\hat\tau_t^c &amp;= \phi_{ck}\hat u_t^k + \phi_{cl} \hat u_t^l + \hat u_t^c.
+\end{align*}</p>
+</li>
+</ul>
+<h3 id="application-3-a-fiscal-policy-dsge-model">Application 3: A Fiscal Policy DSGE Model</h3>
+<ul>
+<li>
+<p>The exogenous movements in taxes follow AR(1) processes</p>
+<p>\begin{align*}
+\hat u_t^k &amp;= \rho_k \hat u_{t-1}^k + \sigma_k \epsilon_t^k,
+\quad \epsilon_t^k \sim N(0,1), \\\<br>
+\hat u_t^l &amp;= \rho_l \hat u_{t-1}^l + \sigma_l \epsilon_t^l,
+\quad \epsilon_t^l \sim N(0,1), \\\<br>
+\hat u_t^c &amp;= \rho_c \hat u_{t-1}^c + \sigma_c \epsilon_t^c,
+\quad \epsilon_t^c \sim N(0,1).
+\end{align*}</p>
+</li>
+<li>
+<p>The government spending rule is given by</p>
+<p>\begin{align*}
+\hat G_t &amp;= -\varphi_g \hat Y_t - \gamma_g \hat B_{t-1} + \hat u_t^g, \\\<br>
+\hat u_t^g &amp;= \rho_g \hat u_{t-1}^g + \sigma_g \epsilon_t^g,
+\quad \epsilon_t^g \sim N(0,1).
+\end{align*}</p>
+</li>
+<li>
+<p>The transfer rule is
+given by</p>
+<p>\begin{align*}
+\hat Z_t &amp;= -\varphi_z \hat Y_t - \gamma_z \hat B_{t-1} + \hat u_t^z, \\\<br>
+\hat u_t^z &amp;= \rho_z \hat u_{t-1}^z + \sigma_z \epsilon_t^z,
+\quad \epsilon_t^z \sim N(0,1).
+\end{align*}</p>
+</li>
+</ul>
+<h3 id="prior-distributions-for-fiscal-rule-parameters">Prior Distributions for Fiscal Rule Parameters</h3>
+<p>\begin{table}[t!]
+\begin{center}
+\scalebox{0.93}{
+\begin{tabular}{lcccccc}
+\hline\hline
+&amp; \multicolumn{3}{c}{LPT Prior} &amp; \multicolumn{3}{c}{Diffuse Prior} \\\<br>
+&amp; Type &amp; Para (1) &amp; Para (2) &amp; Type &amp; Para (1) &amp; Para (2)\\\<br>
+\hline
+\multicolumn{7}{c}{Debt Response Parameters} \\\<br>
+\hline
+$\gamma_{g}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
+$\gamma_{tk}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
+$\gamma_{tl}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
+$\gamma_{z}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
+\hline
+\multicolumn{7}{c}{Output Response Parameters} \\\<br>
+\hline
+$\varphi_{tk}$&amp; G                &amp;   1.0 &amp;   0.3  &amp; N               &amp;   1.0 &amp;     1 \\\<br>
+$\varphi_{tl}$&amp; G                &amp;   0.5 &amp;  0.25  &amp; N               &amp;   0.5 &amp;     1 \\\<br>
+$\varphi_{g}$ &amp; G                &amp;  0.07 &amp;  0.05  &amp; N               &amp;  0.07 &amp;     1 \\\<br>
+$\varphi_{z}$ &amp; G                &amp;   0.2 &amp;   0.1  &amp; N               &amp;   0.2 &amp;     1 \\\<br>
+\hline
+\multicolumn{7}{c}{Exogenous Tax Comovement Parameters} \\\<br>
+\hline
+$\phi_{kl}$   &amp; N               &amp;  0.25 &amp;   0.1  &amp; N               &amp;  0.25 &amp;     1 \\\<br>
+$\phi_{kc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\<br>
+$\phi_{lc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\<br>
+\hline \hline\\\<br>
+\end{tabular}
+}
+\end{center}
+/Notes:/ Para (1) and Para (2) correspond to the mean and standard deviation of the
+Beta (B), Gamma (G), and Normal (N) distributions and to the upper, lower bounds of the support
+for Uniform (U) distribution.  \end{table}</p>
+<h3 id="common-prior-distributions">Common Prior Distributions</h3>
+<pre><code>\begin{table}[t!]
+\begin{center}
+    \scalebox{0.93}{
+    \begin{tabular}{lccccccc} \hline\hline
+        &amp; Type &amp; Para (1) &amp; Para (2) &amp;  &amp; Type &amp; Para (1) &amp; Para (2)\\ \hline
+        \multicolumn{8}{c}{Endogenous Propagation Parameters} \\ \hline
+        $\gamma$      &amp; G                &amp;  1.75 &amp;   0.5  &amp; $s''$         &amp; G                &amp;     5 &amp;   0.5 \\\\\\
+        $\kappa$      &amp; G                &amp;   2.0 &amp;   0.5  &amp; $\delta\_2$    &amp; G                &amp;   0.7 &amp;   0.5  \\\\\\
+        $h$           &amp; B                 &amp;   0.5 &amp;   0.2  &amp;               &amp;                     &amp;       &amp; \\\\\\
+        \hline
+        \multicolumn{8}{c}{Exogenous Process Parameters} \\\\\\
+        \hline
+        $\rho\_{a}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{a}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{b}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{b}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{l}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{l}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{i}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{i}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{g}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{g}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{tk}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tk}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{tl}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tl}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{tc}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tc}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        $\rho\_{z}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{z}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+        \hline \hline\\\\\\
+    \end{tabular}
+}
+\end{center}
+/Notes:/ For the Inv. Gamma (IG) distribution, Para (1) and Para (2) refer to
+$s$ and $\nu$, where $p(\sigma|\nu, s)\propto \sigma^{-\nu-1}e^{-\nu s^2/2\sigma^2}$.
+</code></pre>
+<p>\end{table}</p>
+<h3 id="smc-configuration">SMC Configuration</h3>
+<p>\begin{table}[t!]
+\begin{center}
+\begin{tabular}{p{4cm}p{2.5cm}} \hline \hline
+$N = 6,000$       &amp;  $N_\phi = 500$\\\<br>
+$N_{blocks} = 3$ &amp; $N_{MH}=1$ \\\<br>
+$\lambda = 4.0$  &amp; \\\<br>
+\multicolumn{2}{l}{Run Time [mm:ss]: 48:00 (12 cores)}  \ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}</p>
+<h3 id="posterior-moments">Posterior Moments</h3>
+<pre><code>\begin{table}[t!]
+\begin{center}
+    \footnotesize
+    \begin{tabular}{l@{\hspace\*{1cm}}cc@{\hspace\*{1cm}}cc} \hline\hline
+        &amp; \multicolumn{2}{c}{Based on LPT Prior} &amp; \multicolumn{2}{c}{Based on Diff. Prior} \\\\\\
+        &amp; Mean &amp; [5\%, 95\%] Int. &amp; Mean &amp; [5\%, 95\%] Int. \\ \hline
+        \multicolumn{5}{c}{Debt Response Parameters} \\ \hline
+        $\gamma\_{g}$         &amp;   0.16 &amp; [  0.07,   0.27]  &amp;   0.10 &amp; [  0.01,   0.23] \\\\\\
+        $\gamma\_{tk}$        &amp;   0.39 &amp; [  0.22,   0.60]  &amp;   0.38 &amp; [  0.16,   0.62] \\\\\\
+        $\gamma\_{tl}$        &amp;   0.11 &amp; [  0.04,   0.21]  &amp;   0.04 &amp; [  0.00,   0.11] \\\\\\
+        $\gamma\_{z}$         &amp;   0.32 &amp; [  0.17,   0.47]  &amp;   0.32 &amp; [  0.14,   0.49] \\\\\\
+        \hline \multicolumn{5}{c}{Output Response Parameters} \\ \hline
+        $\varphi\_{tk}$          &amp;   1.67 &amp; [  1.18,   2.18]  &amp;   2.06 &amp; [  1.44,   2.69] \\\\\\
+        $\varphi\_{tl}$          &amp;   0.29 &amp; [  0.11,   0.53]  &amp;   0.11 &amp; [ -0.34,   0.58] \\\\\\
+        $\varphi\_{g}$           &amp;   0.06 &amp; [  0.01,   0.13]  &amp;  -0.43 &amp; [ -0.87,   0.02] \\\\\\
+        $\varphi\_{z}$           &amp;   0.17 &amp; [  0.06,   0.33]  &amp;  -0.07 &amp; [ -0.56,   0.41] \\\\\\
+        \hline \multicolumn{5}{c}{Exogenous Tax Comovement Parameters} \\ \hline
+        $\phi\_{kl}$          &amp;   0.19 &amp; [  0.14,   0.24]  &amp;   1.57 &amp; [  1.29,   1.87] \\\\\\
+        $\phi\_{kc}$          &amp;   0.03 &amp; [ -0.03,   0.08]  &amp;  -0.33 &amp; [ -2.84,   2.73] \\\\\\
+        $\phi\_{lc}$          &amp;  -0.02 &amp; [ -0.07,   0.04]  &amp;   0.20 &amp; [ -1.23,   1.40] \\\\\\
+        \hline
+        \multicolumn{5}{c}{Innovations to Fiscal Rules} \\ \hline
+        $\sigma\_{g}$         &amp;   3.03 &amp; [  2.79,   3.30]  &amp;   2.91 &amp; [  2.66,   3.19] \\\\\\
+        $\sigma\_{tk}$        &amp;   4.36 &amp; [  4.01,   4.75]  &amp;   1.26 &amp; [  1.08,   1.46] \\\\\\
+        $\sigma\_{tl}$        &amp;   2.95 &amp; [  2.71,   3.22]  &amp;   2.00 &amp; [  1.71,   2.33] \\\\\\
+        $\sigma\_{tc}$        &amp;   3.99 &amp; [  3.67,   4.33]  &amp;   1.14 &amp; [  0.96,   1.35] \\\\\\
+        $\sigma\_{z}$         &amp;   3.34 &amp; [  3.07,   3.63]  &amp;   3.34 &amp; [  3.07,   3.63] \\ \hline \hline
+    \end{tabular}
+    \footnotesize
+    \renewcommand{\baselinestretch}{2}
+    \normalsize
+\end{center}
+</code></pre>
+<p>\end{table}</p>
+<h3 id="posterior-of-output-response-parameters">Posterior of Output Response Parameters</h3>
+<p>\begin{figure}[t!]
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=0.47\textwidth]{static/lpt_varphi_g.pdf} &amp;
+\includegraphics[width=0.47\textwidth]{static/lpt_varphi_z.pdf}
+\end{tabular}
+\end{center}
+\end{figure}</p>
+<p><em>Notes:</em> The figure depicts posterior densities under the LPT prior (solid) and the diffuse prior (dashed).</p>
+<h3 id="posterior-of-tax-comovement-parameters">Posterior of Tax Comovement Parameters</h3>
+<p>\begin{center}
+\includegraphics[width=2.5in]{static/lpt_phi_scatter.pdf}
+\end{center}</p>
+<p><em>Notes:</em> The plots on the diagonal depict posterior densities under the LPT prior (solid) and the diffuse prior (dashed). The plots on the off-diagonals depict draws from the posterior
+distribution under the LPT prior (circles) and the diffuse prior (triangles).</p>
+<h3 id="impulse-response-to-a-labor-tax-innovation">Impulse Response to a Labor Tax Innovation</h3>
+<p>\begin{center}
+\includegraphics[width=3in]{static/lpt_etn_irf.pdf}
+\end{center}</p>
+<p><em>Notes:</em> Figure depicts posterior mean impulse responses under LPT prior (solid);
+diffuse prior (dashed); diffuse prior with \(\phi_{lc} &gt; 0\), \(\phi_{kl} &lt; 0\) (dotted);
+and diffuse prior with \(\phi_{lc} &lt; 0\), \(\phi_{kl} &gt; 0\) (dots and short dashes). \(\hat{C}_t\),
+\(\hat{I}_t\) and \(\hat{L}_t\) are consumption, investment, and hours worked in deviation from steady state.</p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>
