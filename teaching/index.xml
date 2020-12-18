@@ -6,16 +6,7 @@
     <description>Recent content in teaching on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 -0500</lastBuildDate><atom:link href="https://edherbst.net/teaching/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Advanced Monte Carlo for Macroeconometrics  Part 1: Theory</title>
-      <link>https://edherbst.net/teaching/bank-of-colombia-smc/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 -0500</pubDate>
-      
-      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/</guid>
-      <description>Abstract The goal of this course is to understand Bayesian methods used in macroeconometrics with an emphasis on the estimation of Dynamic Stochastic General Equilibrium (DSGE) models. The course will cover posterior simulation from linear and nonlinear DSGE models. We&amp;rsquo;ll start will linear(ized) models and cover the Kalman filter, importance sampling, Markov chain monte carlo (MCMC), the Metropolis-Hastings (MH) algorithm, and Sequential Monte Carlo (SMC) for static parameters. Next, we will cover the estimation of nonlinear models via the particle filter using either (particle) Markov chain monte carlo (PMCMC) or SMC\(^2\).</description>
-    </item>
-    
+    <lastBuildDate>Fri, 11 Dec 2020 11:38:50 -0500</lastBuildDate><atom:link href="https://edherbst.net/teaching/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Particle Filters</title>
       <link>https://edherbst.net/teaching/lecture-particle-filters/particle-filters/</link>

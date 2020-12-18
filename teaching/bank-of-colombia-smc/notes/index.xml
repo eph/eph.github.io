@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ed Herbst</title>
+    <link>https://edherbst.net/teaching/bank-of-colombia-smc/notes/</link>
+    <description>Recent content on Ed Herbst</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 -0500</lastBuildDate><atom:link href="https://edherbst.net/teaching/bank-of-colombia-smc/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Some Notes on the Kalman Filter</title>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 -0500</pubDate>
+      
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</guid>
+      <description>State space models form a very general class of models that encompass many of the specifications that we encountered earlier. VARMA models, linearized DSGE models, and more can be written in state space form. State space models are particularly popular at the FRB. For example, the models in the \(r^*\) suite can all be written in state space form.
+A state space model can be described by two different equations: a measurement equation that relates an unobservable state vector \(s_t\) to the observables \(y_t\), and a transition equation that describes the evolution of the state vector \(s_t\).</description>
+    </item>
+    
+  </channel>
+</rss>
