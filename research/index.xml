@@ -6,7 +6,16 @@
     <description>Recent content in research on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edherbst.net/research/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://edherbst.net/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
+      <link>https://edherbst.net/research/woodford/</link>
+      <pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://edherbst.net/research/woodford/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Online Estimation of DSGE Models</title>
       <link>https://edherbst.net/research/online-estimation-of-dsge-models/</link>
@@ -31,15 +40,6 @@
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
-      <link>https://edherbst.net/research/woodford/</link>
-      <pubDate>Fri, 15 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://edherbst.net/research/woodford/</guid>
       <description></description>
     </item>
     
