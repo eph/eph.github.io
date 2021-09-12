@@ -97,7 +97,7 @@ If there&amp;rsquo;s something you&amp;rsquo;d like to talk about, or spend more
     <item>
       <title>Some Notes on the Kalman Filter</title>
       <link>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</guid>
       <description>State space models form a very general class of models that encompass many of the specifications that we encountered earlier. VARMA models, linearized DSGE models, and more can be written in state space form. State space models are particularly popular at the FRB. For example, the models in the \(r^*\) suite can all be written in state space form.
@@ -126,16 +126,25 @@ Modes of Inference  Previously, we focussed on frequentist inference (repeated s
     <item>
       <title>Online Estimation of DSGE Models</title>
       <link>https://edherbst.net/research/online-estimation-of-dsge-models/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/research/online-estimation-of-dsge-models/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>The Factor Structure of Disagreement</title>
+      <link>https://edherbst.net/research/factor-structure-of-disagreement/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://edherbst.net/research/factor-structure-of-disagreement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Bias in Local Projections</title>
       <link>https://edherbst.net/research/bias-in-local-projections/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
       <description></description>
@@ -189,16 +198,16 @@ Modes of Inference  Previously, we focussed on frequentist inference (repeated s
     <item>
       <title>Hey Hey</title>
       <link>https://edherbst.net/etc/test/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/etc/test/</guid>
-      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]);   $x_t = 1$</description>
+      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]);  $x_t = 1$</description>
     </item>
     
     <item>
       <title>Stock and Watson (2007) in pymc3 and Stan</title>
       <link>https://edherbst.net/etc/sw/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/etc/sw/</guid>
       <description>This file is available as Jupyter Notebook.

@@ -6,20 +6,20 @@
     <description>Recent content in etc on Ed Herbst</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Sep 2017 00:00:00 -0400</lastBuildDate><atom:link href="https://edherbst.net/etc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://edherbst.net/etc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hey Hey</title>
       <link>https://edherbst.net/etc/test/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/etc/test/</guid>
-      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]);   $x_t = 1$</description>
+      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]);  $x_t = 1$</description>
     </item>
     
     <item>
       <title>Stock and Watson (2007) in pymc3 and Stan</title>
       <link>https://edherbst.net/etc/sw/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/etc/sw/</guid>
       <description>This file is available as Jupyter Notebook.

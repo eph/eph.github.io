@@ -19,7 +19,7 @@
        <meta property="og:title" content="Stock and Watson (2007) in pymc3 and Stan" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://edherbst.net/etc/sw/" /><meta property="article:published_time" content="2017-09-10T00:00:00-04:00" />
+<meta property="og:url" content="https://edherbst.net/etc/sw/" /><meta property="article:published_time" content="2017-09-10T00:00:00+00:00" />
 
 
 
@@ -73,19 +73,18 @@ distributed with mean 0 and variances \(\sigma_\eta^2\) and
 \(\sigma_\epsilon^2\).</p>
 <h2 id="a-replication">A Replication</h2>
 <p>First we start by importing some standard libraries.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">%matplotlib inline
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">%matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as p
 </code></pre></div><p>Next we get the data used and plot it.</p>
-<figure>
-    <img src="https://edherbst.net/ox-hugo/0877b3a1f8ff225d7686ac63f7450e3a7e6c5a87.png"
-         alt="Figure 1: Inflation Data"/> <figcaption>
+<figure><img src="https://edherbst.net/ox-hugo/0877b3a1f8ff225d7686ac63f7450e3a7e6c5a87.png"
+         alt="Figure 1: Inflation Data"/><figcaption>
             <p>Figure 1: Inflation Data</p>
         </figcaption>
 </figure>
 
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">from pymc3 import Model, Normal, InverseGamma, sample
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">from pymc3 import Model, Normal, InverseGamma, sample
 from pymc3.distributions.timeseries import GaussianRandomWalk
 
 from pymc3 import Uniform, Deterministic
@@ -107,13 +106,13 @@ with Model() as ucsv_model:
 
     temp = Deterministic(&#39;temp&#39;, sigma_eta[1:]**2/(sigma_eps**2 + 2*sigma_eta[1:]**2))
     theta = Deterministic(&#39;theta&#39;, (-1 + sqrt(1-4*temp*temp)) /(-2*temp))
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">with ucsv_model:
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">with ucsv_model:
     trace = sample(2000)
 
 sigma_eps_df = p.DataFrame(trace[&#39;sigma_eps&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
 sigma_eta_df = p.DataFrame(trace[&#39;sigma_eta&#39;],columns=sw_infl[&#39;1953&#39;:&#39;2004&#39;].index)
 theta_df = p.DataFrame(trace[&#39;theta&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def sw_figure2(sigma_eps, sigma_eta, theta):
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def sw_figure2(sigma_eps, sigma_eta, theta):
     fig,ax = plt.subplots(nrows=3, sharex=True)
 
     for i, para in enumerate([sigma_eps, sigma_eta, theta]):
@@ -131,7 +130,7 @@ theta_df = p.DataFrame(trace[&#39;theta&#39;],columns=sw_infl[&#39;1953Q2&#39;:&
     fig.set_size_inches(3,9)
 
 sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 NameErrorTraceback (most recent call last)
 &lt;ipython-input-8-16860f4ca04e&gt; in &lt;module&gt;
      16     fig.set_size_inches(3,9)

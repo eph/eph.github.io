@@ -930,7 +930,7 @@ D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix
 We can use the Kalman filter to maximize the likelihood function,
 since we haven&rsquo;t quite worked out how to elicit the posterior of
 this model just yet.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Initial likelihood:  -4293.835439078496
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Initial likelihood:  -4293.835439078496
       fun: 358.8810028467478
  hess_inv: &lt;5x5 LbfgsInvHessProduct with dtype=float64&gt;
       jac: array([-1.08002496e-04, -1.70530257e-05, -3.12638804e-04, -2.95585778e-04,
@@ -947,8 +947,7 @@ Maximized Likelihood:  -358.8810028467478
 \(\{ A_t\}_{t=1}^T\), the filtered means of the &ldquo;true&rdquo; GDP series.
 We&rsquo;ll plot them along with the observables, and the simple average
 of expenditure-side and income-side GDP estimates.</p>
-<figure>
-    <img src="https://edherbst.net/ox-hugo/cb6ce1f5d1fa3c6a180eb701c9ed82c3b28b84cb.png"/> 
+<figure><img src="https://edherbst.net/ox-hugo/cb6ce1f5d1fa3c6a180eb701c9ed82c3b28b84cb.png"/>
 </figure>
 
 <p>To make it a bit easier to see, let&rsquo;s look at the last five or so years.</p>

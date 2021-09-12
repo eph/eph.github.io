@@ -367,26 +367,6 @@ Initialization
 </h3>
 <div id="outline-text-headline-14" class="outline-text-3">
 <p>To obtain draws from $s_0$, we draw 1000 particles from a $N(1,1)$. </p>
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  %matplotlib inline 
-
-  import numpy as np
-  import pandas as p
-  import matplotlib.pyplot as plt
-  from scipy.stats import norm
-  M = 1000
-  st_1 = norm.rvs(size=M, loc=1)
-  Wt_1 = np.ones((M))
-
-  print(&#39;Filtered Mean [t-1]:&#39;, np.mean(st_1 * Wt_1))
-
-  ax=p.Series(st_1).plot(kind=&#39;hist&#39;,normed=True)#, linewidth=3)
-
-  # the truth
-  grid = np.linspace(-8,8,1000)
-  ax.plot(grid, norm.pdf(grid,loc=1), linewidth=3, color=&#39;black&#39;)
-  ax.legend([&#39;truth&#39;,&#39;particles&#39;]);</code></pre></div>
-</div>
 <p><img src="initialization.png" alt="initialization.png" title="initialization.png" /></p>
 </div>
 </div>
@@ -396,19 +376,6 @@ Forecasting $s_1$
 </h3>
 <div id="outline-text-headline-15" class="outline-text-3">
 <p>For each of the 1000 particles, we simulate from $s_1^i = \rho s_0^i + \sigma_e e^i$ with $e^i \sim N(0,1)$.</p>
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  rho, sigeps = 0.8, 0.1
-
-  st = rho * st_1 + sigeps * norm.rvs(size=M)
-
-  ax=p.Series(st).plot(kind=&#39;hist&#39;, normed=True)
-
-  true_loc = rho * 1 + sigeps * 0
-  true_sig = rho**2 * 1 + sigeps**2 * 1
-
-  ax.plot(grid, norm.pdf(grid,loc=true_loc, scale=np.sqrt(true_sig)), linewidth=3, color=&#39;black&#39;)
-  ax.legend([&#39;truth&#39;, &#39;particles&#39;])</code></pre></div>
-</div>
 <p><img src="forecast.png" alt="forecast.png" title="forecast.png" /></p>
 </div>
 </div>
@@ -434,23 +401,6 @@ Updating $s_1$
 Predicting $y_1$
 </h3>
 <div id="outline-text-headline-17" class="outline-text-3">
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  # yt = 2 * st + sigu * ut (ut ~ N(0,1))
-  sigu = 0.3
-  predyt = 2 * st 
-  ax = p.Series(predyt).plot(kind=&#39;hist&#39;,normed=True,bins=20)
-
-  # the true yt
-  yt = 0.2
-  ax.axvline(yt, color=&#39;black&#39;,linewidth=3)
-
-  ax.plot(grid,norm.pdf(grid,loc=yt, scale=0.05), color=&#39;lightgrey&#39;,linestyle=&#39;dashed&#39;)
-  ax.plot(grid,norm.pdf(grid,loc=yt, scale=0.3), color=&#39;grey&#39;,linestyle=&#39;dashed&#39;)
-  ax.plot(grid,norm.pdf(grid,loc=yt, scale=0.5), color=&#39;darkgrey&#39;,linestyle=&#39;dashed&#39;)
-  ax.set_xlim(-2,4)
-  ax.set_ylim(0,.5)
-  ax.legend([&#39;truth&#39;,r&#39;$\sigma_u=0.05$&#39;,r&#39;$\sigma_u=0.3$&#39;, r&#39;$\sigma_u=0.5$&#39;,&#39;particles&#39;])</code></pre></div>
-</div>
 <p><img src="updated.png" alt="updated.png" title="updated.png" /></p>
 </div>
 </div>
@@ -459,28 +409,6 @@ Predicting $y_1$
 Updated $s_1, \sigma_u = 0.3$
 </h3>
 <div id="outline-text-headline-18" class="outline-text-3">
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.3
-
-  wt_tilde = 1/ sigu * np.exp(-0.5 * (yt - 2*st)**2/sigu)
-
-  Wt = wt_tilde * Wt_1
-  Wt = Wt / np.mean(Wt)
-  str1 = &#39;Effective Number of Part: %5.2f&#39; % (M/np.mean(Wt**2))
-  str2 = &#39;Filtered Mean s[t]: %5.2f&#39; % np.mean(st * Wt)
-  str3 = &#39;True mean %5.2f:&#39; % (yt/2)
-
-  # resampling 
-  inds = np.random.multinomial(M,Wt/M)
-  st_update = np.repeat(st,inds)
-
-  # plot density
-  ax = p.Series(st_update).plot(kind=&#39;hist&#39;, normed=True)
-  ax.plot(grid, norm.pdf(grid, loc=yt/2, scale=sigu), color=&#39;black&#39;, linewidth=3)
-  ax.legend([&#39;truth&#39;,&#39;particles&#39;])
-  ax.set_xlim(-2,4)
-  ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(1,1.00));</code></pre></div>
-</div>
 <p><img src="updated2.png" alt="updated2.png" title="updated2.png" /></p>
 </div>
 </div>
@@ -489,28 +417,6 @@ Updated $s_1, \sigma_u = 0.3$
 Updated $s_1, \sigma_u = 0.5$
 </h3>
 <div id="outline-text-headline-19" class="outline-text-3">
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.5
-
-  wt_tilde = 1/ sigu * np.exp(-0.5 * (yt - 2*st)**2/sigu)
-
-  Wt = wt_tilde * Wt_1
-  Wt = Wt / np.mean(Wt)
-  str1 = &#39;Effective Number of Part: %5.2f&#39; % (M/np.mean(Wt**2))
-  str2 = &#39;Filtered Mean s[t]: %5.2f&#39; % np.mean(st * Wt)
-  str3 = &#39;True mean %5.2f:&#39; % (yt/2)
-
-  # resampling 
-  inds = np.random.multinomial(M,Wt/M)
-  st_update = np.repeat(st,inds)
-
-  # plot density
-  ax = p.Series(st_update).plot(kind=&#39;hist&#39;, normed=True)
-  ax.plot(grid, norm.pdf(grid, loc=yt/2, scale=sigu), color=&#39;black&#39;, linewidth=3)
-  ax.legend([&#39;truth&#39;,&#39;particles&#39;])
-  ax.set_xlim(-2,4)
-  ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(1,0.8));</code></pre></div>
-</div>
 <p><img src="updated2big.png" alt="updated2big.png" title="updated2big.png" /></p>
 </div>
 </div>
@@ -519,28 +425,6 @@ Updated $s_1, \sigma_u = 0.5$
 Updated $s_1, \sigma_u = 0.05$
 </h3>
 <div id="outline-text-headline-20" class="outline-text-3">
-<div class="src src-ipython">
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  sigu = 0.05
-
-  wt_tilde = 1/ sigu * np.exp(-0.5 * (yt - 2*st)**2/sigu)
-
-  Wt = wt_tilde * Wt_1
-  Wt = Wt / np.mean(Wt)
-  str1 = &#39;Effective Number of Part: %5.2f&#39; % (M/np.mean(Wt**2))
-  str2 = &#39;Filtered Mean s[t]: %5.2f&#39; % np.mean(st * Wt)
-  str3 = &#39;True mean %5.2f:&#39; % (yt/2)
-
-  # resampling 
-  inds = np.random.multinomial(M,Wt/M)
-  st_update = np.repeat(st,inds)
-
-  # plot density
-  ax = p.Series(st_update).plot(kind=&#39;hist&#39;, normed=True)
-  ax.plot(grid, norm.pdf(grid, loc=yt/2, scale=sigu), color=&#39;black&#39;, linewidth=3)
-  ax.legend([&#39;truth&#39;,&#39;particles&#39;])
-  ax.set_xlim(-0.5,0.5)
-  ax.annotate(&#39;\n&#39;.join([str1,str2,str3]), xy=(-0.48,5));</code></pre></div>
-</div>
 <p><img src="updated2small.png" alt="updated2small.png" title="updated2small.png" /></p>
 </div>
 </div>

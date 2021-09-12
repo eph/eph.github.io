@@ -496,24 +496,24 @@ to update the information about $s_t$ in view of the current observation $y_t$:
 \item {\bf Initialization.}</p>
 <pre><code>\item {\bf Recursion.} For $t=1,\ldots,T$:
 \begin{enumerate}
-    \item {\bf Forecasting $s\_t$.} Draw $\tilde{m}\_t^j$ from density $g\_t(\tilde{m}\_t|m\_{t-1}^j,\theta)$,
-    calculate the importance weights $\omega\_t^j$ in~(\ref{eq\_generalpfomegacondlinear}),
-    and compute $\tilde{s}\_{t|t-1}^j$ and $P\_{t|t-1}^j$ according to~(\ref{eq\_pfforeccondlinear}).
-    An approximation of $\mathbb{E}[h(s\_t,m\_t)|Y\_{1:t-1},\theta]$ is given by~(\ref{eq\_generalpfhtt1condlinear}).
-    \item {\bf Forecasting $y\_t$.} Compute the incremental weights $\tilde{w}\_t^j$
-    according to~(\ref{eq\_generalpfincrweightcondlinear}).
-    Approximate the predictive density $p(y\_t|Y\_{1:t-1},\theta)$
-    by
-    \begin{equation}
-    \hat{p}(y\_t|Y\_{1:t-1},\theta) = \frac{1}{M} \sum\_{j=1}^M \tilde{w}^j\_t W\_{t-1}^j.
-    \end{equation}
-    \item {\bf Updating.} Define the normalized weights
-    \begin{equation}
-    \tilde{W}\_t^j = \frac{\tilde{w}\_t^j W\_{t-1}^j}{\frac{1}{M} \sum\_{j=1}^M \tilde{w}\_t^j W\_{t-1}^j}
-    \end{equation}
-    and compute $\tilde{s}\_{t|t}^j$ and $\tilde{P}\_{t|t}^j$ according to~(\ref{eq\_pfupdatecondlinear}). An approximation of $\mathbb{E}[h(m\_{t},s\_{t})|Y\_{1:t},\theta]$ can be obtained
-    from $\\{\tilde{m}\_t^j,\tilde{s}\_{t|t}^j,\tilde{P}\_{t|t}^j,\tilde{W}\_t^j\\}$.
-    \item {\bf Selection.}
+	\item {\bf Forecasting $s\_t$.} Draw $\tilde{m}\_t^j$ from density $g\_t(\tilde{m}\_t|m\_{t-1}^j,\theta)$,
+	calculate the importance weights $\omega\_t^j$ in~(\ref{eq\_generalpfomegacondlinear}),
+	and compute $\tilde{s}\_{t|t-1}^j$ and $P\_{t|t-1}^j$ according to~(\ref{eq\_pfforeccondlinear}).
+	An approximation of $\mathbb{E}[h(s\_t,m\_t)|Y\_{1:t-1},\theta]$ is given by~(\ref{eq\_generalpfhtt1condlinear}).
+	\item {\bf Forecasting $y\_t$.} Compute the incremental weights $\tilde{w}\_t^j$
+	according to~(\ref{eq\_generalpfincrweightcondlinear}).
+	Approximate the predictive density $p(y\_t|Y\_{1:t-1},\theta)$
+	by
+	\begin{equation}
+	\hat{p}(y\_t|Y\_{1:t-1},\theta) = \frac{1}{M} \sum\_{j=1}^M \tilde{w}^j\_t W\_{t-1}^j.
+	\end{equation}
+	\item {\bf Updating.} Define the normalized weights
+	\begin{equation}
+	\tilde{W}\_t^j = \frac{\tilde{w}\_t^j W\_{t-1}^j}{\frac{1}{M} \sum\_{j=1}^M \tilde{w}\_t^j W\_{t-1}^j}
+	\end{equation}
+	and compute $\tilde{s}\_{t|t}^j$ and $\tilde{P}\_{t|t}^j$ according to~(\ref{eq\_pfupdatecondlinear}). An approximation of $\mathbb{E}[h(m\_{t},s\_{t})|Y\_{1:t},\theta]$ can be obtained
+	from $\\{\tilde{m}\_t^j,\tilde{s}\_{t|t}^j,\tilde{P}\_{t|t}^j,\tilde{W}\_t^j\\}$.
+	\item {\bf Selection.}
 \end{enumerate}
 </code></pre>
 <p>\end{enumerate}</p>
