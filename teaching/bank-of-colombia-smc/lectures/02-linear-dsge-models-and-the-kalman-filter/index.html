@@ -24,7 +24,7 @@
 
 
 <meta name="twitter:title" content="Introduction Bayes 6: (Linear) State Space Models"/>
-<meta name="twitter:description" content="Intro Background  Textbook treatments: woodford_2003, Gali2008  Key empirical papers: ireland2004, christiano2005, Smets2007, An2007b,  Frequentist estimation: Harvey1991, Hamilton,  Bayesian estimation: HerbstSchorfheide2015  A DSGE Model Small-Scale DSGE Model  Intermediate and final goods producers  Households  Monetary and fiscal policy  Exogenous processes  Equilibrium Relationships  Final Goods Producers  Perfectly competitive firms combine a continuum of intermediate goods: \[ Y_t = \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}}."/>
+<meta name="twitter:description" content="Intro Background Textbook treatments: woodford_2003, Gali2008 Key empirical papers: ireland2004, christiano2005, Smets2007, An2007b, Frequentist estimation: Harvey1991, Hamilton, Bayesian estimation: HerbstSchorfheide2015 A DSGE Model Small-Scale DSGE Model Intermediate and final goods producers Households Monetary and fiscal policy Exogenous processes Equilibrium Relationships Final Goods Producers Perfectly competitive firms combine a continuum of intermediate goods: \[ Y_t = \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}}. \] Firms take input prices \(P_t(j)\) and output prices \(P_t\) as given; maximize profits \[ \Pi_t = P_t \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}} - \int_{0}^1 P_t(j)Y_t(j)dj."/>
 
 </head>
 <body class="terminal">
@@ -122,14 +122,14 @@ the present value of future profits:
 <li>
 <p>Household derives disutility from hours worked \(H_t\) and maximizes</p>
 <p>\begin{eqnarray*}
-\lefteqn{ \mathbb{E}_t \bigg[ \sum_{s=0}^\infty \beta^s \bigg( \frac{ (C_{t+s}/A_{t+s})^{1-\tau} -1 }{1-\tau} } \\\<br>
+\lefteqn{ \mathbb{E}_t \bigg[ \sum_{s=0}^\infty \beta^s \bigg( \frac{ (C_{t+s}/A_{t+s})^{1-\tau} -1 }{1-\tau} } \\\
 &amp;&amp;+ \chi_M \ln \left( \frac{M_{t+s}}{P_{t+s}} \right) - \chi_H H_{t+s} \bigg) \bigg].
 \end{eqnarray*}</p>
 </li>
 <li>
 <p>Budget constraint:</p>
 <p>\begin{eqnarray*}
-\lefteqn{P_t C_{t} + B_{t} + M_t + T_t} \\\<br>
+\lefteqn{P_t C_{t} + B_{t} + M_t + T_t} \\\
 &amp;=&amp; P_t W_t H_{t} + R_{t-1}B_{t-1} + M_{t-1} + P_t D_{t} + P_t SC_t.
 \end{eqnarray*}</p>
 </li>
@@ -142,7 +142,7 @@ the present value of future profits:
 <li>
 <p>Monetary policy rule:</p>
 <p>\begin{eqnarray*}
-R_t &amp;=&amp; R_t^{*, 1-\rho_R} R_{t-1}^{\rho_R} e^{\epsilon_{R,t}} \\\<br>
+R_t &amp;=&amp; R_t^{*, 1-\rho_R} R_{t-1}^{\rho_R} e^{\epsilon_{R,t}} \\\
 R_t^* &amp;=&amp; r \pi^* \left( \frac{\pi_t}{\pi^*} \right)^{\psi_1} \left( \frac{Y_t}{Y_t^*} \right)^{\psi_2}
 \end{eqnarray*}</p>
 </li>
@@ -190,11 +190,11 @@ Q_{t+s|t} = (C_{t+s}/C_t)^{-\tau}(A_t/A_{t+s})^{1-\tau}.
 <li>
 <p>Consumption Euler equation and New Keynesian Phillips curve:</p>
 <p>\begin{eqnarray*}
-1 &amp;=&amp; \beta \mathbb{E}_t \left[ \left( \frac{ C_{t+1} /A_{t+1} }{C_t/A_t} \right)^{-\tau} \frac{A_t}{A_{t+1}} \frac{R_t}{\pi_{t+1}} \right] \label{eq_dsge1HHopt} \\\<br>
+1 &amp;=&amp; \beta \mathbb{E}_t \left[ \left( \frac{ C_{t+1} /A_{t+1} }{C_t/A_t} \right)^{-\tau} \frac{A_t}{A_{t+1}} \frac{R_t}{\pi_{t+1}} \right] \label{eq_dsge1HHopt} \\\
 1 &amp;=&amp;
-\phi (\pi_t - \pi) \left[ \left( 1 - \frac{1}{2\nu} \right) \pi_t + \frac{\pi}{2 \nu} \right] \label{eq_dsge1Firmopt}\\\<br>
+\phi (\pi_t - \pi) \left[ \left( 1 - \frac{1}{2\nu} \right) \pi_t + \frac{\pi}{2 \nu} \right] \label{eq_dsge1Firmopt}\\\
 &amp;&amp; - \phi \beta \mathbb{E}_t \left[ \left( \frac{ C_{t+1} /A_{t+1} }{C_t/A_t} \right)^{-\tau} \frac{ Y_{t+1} /A_{t+1} }{Y_t/A_t}
-(\pi_{t+1} - \pi) \pi_{t+1} \right] \nonumber \\\<br>
+(\pi_{t+1} - \pi) \pi_{t+1} \right] \nonumber \\\
 &amp;&amp; + \frac{1}{\nu} \left[ 1 - \left( \frac{C_t}{A_t} \right)^\tau \right]. \nonumber
 \end{eqnarray*}</p>
 </li>
@@ -230,7 +230,7 @@ y^*_t = Y^*_t/A_t.
 <p>Steady state is given by:</p>
 <p>\begin{eqnarray*}
 \pi &amp;=&amp; \pi^*, \quad r = \frac{\gamma}{\beta}, \quad R = r
-\pi^*, \\\<br>
+\pi^*, \\\
 c &amp;=&amp; (1-\nu)^{1/\tau}, \quad  y = g c =
 y^*.
 \end{eqnarray*}</p>
@@ -289,7 +289,7 @@ f(y_{t-1},\sigma \epsilon_t)
 <p>\textcolor{red}{Linearization} around \(Y_*\), \(A_*\), \(K_*\), \(N_*\):</p>
 <p>\begin{eqnarray*}
 Y_t-Y_* &amp;\approx&amp; K_*^\alpha N_*^{1-\alpha}(A_t - A_*)
-+ \alpha A_* K_*^{\alpha-1} N_*^{1-\alpha} (K_t-K_*) \\\<br>
++ \alpha A_* K_*^{\alpha-1} N_*^{1-\alpha} (K_t-K_*) \\\
 &amp;&amp;	  + (1-\alpha) A_* K_*^\alpha N_*^{-\alpha} (N_t-N_*)
 \end{eqnarray*}</p>
 </li>
@@ -297,11 +297,11 @@ Y_t-Y_* &amp;\approx&amp; K_*^\alpha N_*^{1-\alpha}(A_t - A_*)
 <p>\textcolor{blue}{Log-linearization:} Let \(f(x) = f(e^v)\) and linearize
 with respect to \(v\):
 \[
-f(e^v) \approx f(e^{v_*}) + e^{v_*} f'(e^{v_*}) (v-v_*).
+f(e^v) \approx f(e^{v_*}) + e^{v_*} f&rsquo;(e^{v_*}) (v-v_*).
 \]
 Thus:
 \[
-f(x) \approx f(x_*) + x_* f'(x_*){\color{blue} (\ln x/x_*)} = f(x_*) + f'(x_*) {\color{blue} \tilde{x}}
+f(x) \approx f(x_*) + x_* f&rsquo;(x_*){\color{blue} (\ln x/x_*)} = f(x_*) + f&rsquo;(x_*) {\color{blue} \tilde{x}}
 \]</p>
 </li>
 <li>
@@ -334,13 +334,13 @@ where
 <ul>
 <li>Define
 \[
-x_t  = [ \hat y_t, \hat \pi_t, \hat R_t, \epsilon_{R,t}, \hat{g}_t, \hat z_t  ]'.
+x_t  = [ \hat y_t, \hat \pi_t, \hat R_t, \epsilon_{R,t}, \hat{g}_t, \hat z_t  ]&rsquo;.
 \]</li>
 <li>Augment \(x_t\) by
 \(\mathbb{E}_t[\hat{y}_{t+1}]\) and \(\mathbb{E}_t[\hat{\pi}_{t+1}]\).</li>
 <li>Define
 \[
-s_t = \big[ x_t', \mathbb{E}_t[\hat{y}_{t+1}], \mathbb{E}_t[\hat{\pi}_{t+1}] \big]'.
+s_t = \big[ x_t&rsquo;, \mathbb{E}_t[\hat{y}_{t+1}], \mathbb{E}_t[\hat{\pi}_{t+1}] \big]&rsquo;.
 \]</li>
 <li>Define rational expectations forecast errors forecast errors for inflation and output. Let
 \[
@@ -422,7 +422,7 @@ s_{t}=\Gamma _{1}^{\ast }(\theta) s_{t-1}+\Psi^{\ast}(\theta)\epsilon_{t}
 <p>To deal with repeated eigenvalues and non-singular \(\Gamma_0\) we use Generalized Complex Schur Decomposition (QZ) in practice.</p>
 </li>
 <li>
-<p>Let the \(i\)&lsquo;th element of \(w_{t}\) be \(w_{i,t}\) and denote the \(i\)&lsquo;th
+<p>Let the \(i\)&rsquo;th element of \(w_{t}\) be \(w_{i,t}\) and denote the \(i\)&rsquo;th
 row of \(J^{-1}\Pi ^{\ast }\) and \(J^{-1}\Psi ^{\ast }\) by \([J^{-1}\Pi
 ^{\ast }]_{i.}\) and \([J^{-1}\Psi ^{\ast }]_{i.}\), respectively.</p>
 </li>
@@ -463,23 +463,23 @@ U_{.1} &amp; U_{.2}
 \end{array}
 \right] \left[
 \begin{array}{cc}
-D_{11} &amp; 0 \\\<br>
+D_{11} &amp; 0 \\\
 0 &amp; 0
 \end{array}
 \right] \left[
 \begin{array}{c}
-V_{.1}^{\prime } \\\<br>
+V_{.1}^{\prime } \\\
 V_{.2}^{\prime }
 \end{array}
-\right] \label{eq_svd} \\\<br>
-&amp;=&amp;\underbrace{U}_{m\times m}\underbrace{D}_{m\times k}\underbrace{V^{\prime }}_{k\times k} \nonumber \\\<br>
+\right] \label{eq_svd} \\\
+&amp;=&amp;\underbrace{U}_{m\times m}\underbrace{D}_{m\times k}\underbrace{V^{\prime }}_{k\times k} \nonumber \\\
 &amp;=&amp;\underbrace{U_{.1}}_{m\times r}\underbrace{D_{11}}_{r\times r}\underbrace{V_{.1}^{\prime }}_{r\times k}. \nonumber
 \end{eqnarray}</p>
 </li>
 <li>
 <p>If there exists a solution to Eq.~(\ref{eq_stabcond}) that expresses the forecast errors as function of the fundamental shocks \(\epsilon_t\) and sunspot shocks \(\zeta_t\), it is of the form</p>
 <p>\begin{eqnarray}
-\eta_t &amp;=&amp; \eta_1 \epsilon_t + \eta_2 \zeta_t  \label{eq_etasol} \\\<br>
+\eta_t &amp;=&amp; \eta_1 \epsilon_t + \eta_2 \zeta_t  \label{eq_etasol} \\\
 &amp;=&amp; ( - V_{.1}D_{11}^{-1} U_{.1}^{\prime}\Psi_x^J + V_{.2} \widetilde{M}) \epsilon_t +
 V_{.2} M_\zeta \zeta_t,	 \notag
 \end{eqnarray}</p>
@@ -493,7 +493,7 @@ is zero.</p>
 <p>If there exists a solution to Eq. (\ref{eq_stabcond}) that expresses the forecast errors as function of the
 fundamental shocks \(\epsilon_t\) and sunspot shocks \(\zeta_t\), it is of the form</p>
 <p>\begin{eqnarray}
-\eta_t &amp;=&amp; \eta_1 \epsilon_t + \eta_2 \zeta_t  \label{eq_etasol} \\\<br>
+\eta_t &amp;=&amp; \eta_1 \epsilon_t + \eta_2 \zeta_t  \label{eq_etasol} \\\
 &amp;=&amp; ( - V_{.1}D_{11}^{-1} U_{.1}^{\prime}\Psi_x^J + V_{.2} \widetilde{M}) \epsilon_t +
 V_{.2} M_\zeta \zeta_t,	 \notag
 \end{eqnarray}</p>
@@ -518,8 +518,8 @@ functions of the parameters of the DSGE model.</li>
 <li>
 <p>In NK model:</p>
 <p>\begin{eqnarray*}
-YGR_t  &amp;=&amp; \gamma^{(Q)} + 100(\hat y_t - \hat y_{t-1} + \hat z_t) \label{eq_dsge1measure}\\\<br>
-INFL_t &amp;=&amp; \pi^{(A)} + 400 \hat \pi_t  \nonumber \\\<br>
+YGR_t  &amp;=&amp; \gamma^{(Q)} + 100(\hat y_t - \hat y_{t-1} + \hat z_t) \label{eq_dsge1measure}\\\
+INFL_t &amp;=&amp; \pi^{(A)} + 400 \hat \pi_t  \nonumber \\\
 INT_t  &amp;=&amp; \pi^{(A)} + r^{(A)} + 4 \gamma^{(Q)} + 400 \hat R_t . \nonumber
 \end{eqnarray*}</p>
 <p>where
@@ -555,10 +555,10 @@ y_t = D_{t|t-1} + Z_{t|t-1} s_t  + \eta_t , \quad t=1,\ldots,T
 <p>where \(y_t\) is an \(n_y \times 1\) vector of observables, \(s_t\) is an \(n_s
 \times 1\) vector of state variables, \(Z_{t|t-1}\) is an \(n_y \times n_s\)
 vector, \(D_{t|t-1}\) is a \(n_y\times 1\) vector, and \(\eta_t\) are
-innovations (or often ``measurement errors&rsquo;') with mean zero and
+innovations (or often ``measurement errors&rsquo;&rsquo;) with mean zero and
 \(\mathbb{E}_{t-1}[ \eta_t \eta_t&rsquo;] = H_{t|t-1}\).</p>
 <ul>
-<li>The matrices \(Z_{t|t-1}\), \(D_{t|t-1}\), and \(H_{t|t-1}\) are in many applications constant (&ldquo;time-invariant.&quot;)</li>
+<li>The matrices \(Z_{t|t-1}\), \(D_{t|t-1}\), and \(H_{t|t-1}\) are in many applications constant (&ldquo;time-invariant.&rdquo;)</li>
 <li>However, it is sufficient that they are predetermined at \(t-1\). They could be functions of \(y_{t-1}, y_{t-2}, \ldots\).</li>
 <li>To simplify the notation, we will denote them by \(Z_t\), \(D_t\), and \(H_t\), respectively.</li>
 </ul>
@@ -568,7 +568,7 @@ innovations (or often ``measurement errors&rsquo;') with mean zero and
 s_t = C_{t|t-1} + T_{t|t-1} s_{t-1}  + R_{t|t-1} \epsilon_t
 \end{eqnarray}</p>
 <p>where \(R_t\) is \(n_s \times n_\epsilon\), and \(\epsilon\) is a \(n_\epsilon \times 1\) vector of innovations
-with mean zero and variance \(\mathbb{E}_{t|t-1}[ \epsilon_t \epsilon_t'] = Q_{t|t-1}\).</p>
+with mean zero and variance \(\mathbb{E}_{t|t-1}[ \epsilon_t \epsilon_t&rsquo;] = Q_{t|t-1}\).</p>
 <ul>
 <li>The assumption that \(s_t\) evolves according to an VAR(1) process
 is not very restrictive, since it could be the companion form to a
@@ -590,7 +590,7 @@ y_t = \phi y_{t-1} + \epsilon_t + \theta \epsilon_{t-1} \quad \epsilon_t \sim ii
 \end{eqnarray}</p>
 <p>The model can be rewritten in state space form</p>
 <p>\begin{eqnarray}
-y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right] + \phi y_{t-1}\\\<br>
+y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right] + \phi y_{t-1}\\\
 \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right]
 &amp; = &amp;
 \left[ \begin{array}{cc} 0 &amp; 0 \ 1 &amp; 0 \end{array} \right]
@@ -599,11 +599,11 @@ y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t
 \left[ \begin{array}{c} \eta_t \ 0 \end{array} \right]
 \end{eqnarray}</p>
 <p>where \(\epsilon_t \sim iid{\cal N}(0,\sigma^2)\). Thus, the state
-vector is composed of \(s_t = [\epsilon_t, \epsilon_{t-1}]'\) and \(D_{t}
+vector is composed of \(s_t = [\epsilon_t, \epsilon_{t-1}]&rsquo;\) and \(D_{t}
 = \rho y_{t-1}\).  This construction is not unique. We could also write
 the model as:</p>
 <p>\begin{eqnarray}
-y_t &amp; = &amp; [ 1 ; 0] \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right] \\\<br>
+y_t &amp; = &amp; [ 1 ; 0] \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right] \\\
 \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right]
 &amp; = &amp;
 \left[ \begin{array}{cc} \phi &amp; \theta \ 0 &amp; 0 \end{array} \right]
@@ -671,16 +671,16 @@ this case the likelihood calculation delivers a quasi-likelihood.</p>
 has a natural Bayesian interpretation.  Before we proceed, we&rsquo;re
 going to state some results about multivariate normal
 distributions, which will help later on.</p>
-<p><em>Lemma.</em> Let \((x',y')'\) be jointly normal with
+<p><em>Lemma.</em> Let \((x&rsquo;,y&rsquo;)&rsquo;\) be jointly normal with
 \[
 \mu = \left[ \begin{array}{c} \mu_x \ \mu_y \end{array} \right]
 \quad \mbox{and} \quad
-\Sigma = \left[ \begin{array}{cc} \Sigma_{xx} &amp; \Sigma_{xy} \\\<br>
+\Sigma = \left[ \begin{array}{cc} \Sigma_{xx} &amp; \Sigma_{xy} \\\
 \Sigma_{yx} &amp; \Sigma_{yy} \end{array} \right]
 \]
 Then the \(pdf(x|y)\) is multivariate normal with</p>
 <p>\begin{eqnarray}
-\mu_{x|y} &amp;=&amp; \mu_x + \Sigma_{xy} \Sigma_{yy}^{-1}(y - \mu_y) \\\<br>
+\mu_{x|y} &amp;=&amp; \mu_x + \Sigma_{xy} \Sigma_{yy}^{-1}(y - \mu_y) \\\
 \Sigma_{xx|y} &amp;=&amp; \Sigma_{xx} - \Sigma_{xy} \Sigma_{yy}^{-1} \Sigma_{yx}
 \end{eqnarray}</p>
 <p>Note that the converse is not necessarily true. \(\Box\)</p>
@@ -705,7 +705,7 @@ s_1 | \theta \sim \mathcal N\left(A_{1|0}, P_{1|0}\right)
 \]
 where
 \[
-A_{1|0} = C+T A_{0} \mbox{ and } P_{1|0} = T P_0 T' + RQR'.
+A_{1|0} = C+T A_{0} \mbox{ and } P_{1|0} = T P_0 T&rsquo; + RQR&rsquo;.
 \]
 Note that this is the unconditional distribution of \(s_1\), a prior
 distribution for \(s_1\) before seeing \(y_1\).  We write the mean
@@ -722,7 +722,7 @@ y_1|\theta  \sim {\cal N} (\hat{y}_{1|0}, F_{1|0})
 \end{eqnarray}</p>
 <p>where</p>
 <p>\begin{eqnarray*}
-\hat{y}_{1|0} = D + Z A_{1|0} \mbox{ and }  F_{1|0} =  Z P_{1|0} Z' + H.
+\hat{y}_{1|0} = D + Z A_{1|0} \mbox{ and }  F_{1|0} =  Z P_{1|0} Z&rsquo; + H.
 \end{eqnarray*}</p>
 <p>Here we&rsquo;ve been explicit in going \(s_0 \rightarrow s_1 \rightarrow
 y_1\).</p>
@@ -732,19 +732,19 @@ observation equation (<a href="#eq:obs">eq:obs</a>) in terms of \(s_{t-1}\) and
 easy to see that \(s_1\) and \(y_1\) are jointly normally distributed with
 the marginal and conditional distributions mentioned above.  We have:</p>
 <p>\begin{eqnarray}
-s_1 &amp;=&amp; C + T s_0 + R\epsilon_t \\\<br>
+s_1 &amp;=&amp; C + T s_0 + R\epsilon_t \\\
 y_1 &amp;=&amp; D + Z T s_0 + Z\epsilon_t + \eta_t.
 \end{eqnarray}</p>
 <p>Direct calculation yields:</p>
 <p>\begin{eqnarray}
-\begin{bmatrix}s_1 \ y_1 \end{bmatrix} \bigg| \theta \sim \mathcal N \left( \begin{bmatrix} A_{1|0} \ \hat y_{1|0} \end{bmatrix}, \begin{bmatrix} P_{1|0} &amp; P_{1|0} Z' \ Z P_{1|0} &amp; F_{1|0} \end{bmatrix}\right).
+\begin{bmatrix}s_1 \ y_1 \end{bmatrix} \bigg| \theta \sim \mathcal N \left( \begin{bmatrix} A_{1|0} \ \hat y_{1|0} \end{bmatrix}, \begin{bmatrix} P_{1|0} &amp; P_{1|0} Z&rsquo; \ Z P_{1|0} &amp; F_{1|0} \end{bmatrix}\right).
 \end{eqnarray}</p>
 <p>Consider the third goal of toolbox: delivering
 \(p(s_1|y_1,\theta)\). Well, we can get that easily using the formula
 for the conditional normal distribution:</p>
 <p>\begin{align}
 \label{eq:update}
-s_1 | y_1 \sim N\left( A_{1|0} + P_{1|0} Z' F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right), P_{1|0} - P_{1|0} Z' F_{1|0}^{-1} Z P_{1|0}\right).
+s_1 | y_1 \sim N\left( A_{1|0} + P_{1|0} Z&rsquo; F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right), P_{1|0} - P_{1|0} Z&rsquo; F_{1|0}^{-1} Z P_{1|0}\right).
 \end{align}</p>
 <p>Note that we could have instead obtained this using:</p>
 <p>\begin{align}
@@ -756,7 +756,7 @@ p(s_1 | y_1,\theta) \propto p(y_1|s_1,\theta) p(s_1|\theta),
 distributed posterior.  Finally, let&rsquo;s call give our updated state mean and variance:</p>
 <p>\begin{align}
 \label{eq:ms}
-A_1 = A_{1|0} + P_{1|0} Z' F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right) \mbox{ and } P_1 = P_{1|0} - P_{1|0} Z' F_{1|0}^{-1} Z P_{1|0}.
+A_1 = A_{1|0} + P_{1|0} Z&rsquo; F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right) \mbox{ and } P_1 = P_{1|0} - P_{1|0} Z&rsquo; F_{1|0}^{-1} Z P_{1|0}.
 \end{align}</p>
 <p><em>Generalization.</em> Now, with the distribution form
 \(s_1|y_1,\theta\), we&rsquo;re back where we started!  So all we have to
@@ -771,12 +771,12 @@ can summarize the recursions:</p>
 <p><strong>Recursions.</strong> For \(t=1,\ldots,T\):</p>
 <p>\begin{align}
 \label{eq:state-prediction}
-\mbox{state prediction}&amp;: A_{t|t-1} = C+T A_{t-1} \mbox{ and } P_{t|t-1} = T P_{t-1} T' + RQR'.\\\<br>
+\mbox{state prediction}&amp;: A_{t|t-1} = C+T A_{t-1} \mbox{ and } P_{t|t-1} = T P_{t-1} T&rsquo; + RQR&rsquo;.\\\
 \label{eq:obs-prediction}
-\mbox{observation prediction}&amp;: \hat y_{t|t-1} = D + Z A_{t|t-1} \mbox{ and } F_{t|t-1} = Z P_{t|t-1} Z' + H. \\\<br>
+\mbox{observation prediction}&amp;: \hat y_{t|t-1} = D + Z A_{t|t-1} \mbox{ and } F_{t|t-1} = Z P_{t|t-1} Z&rsquo; + H. \\\
 \label{eq:state-update}
-\mbox{state update}&amp;: A_t = A_{t|t-1} + P_{t|t-1} Z' F_{t|t-1}^{-1} \left(y_t - \hat y_{t|t-1}\right) \mbox { and } \nonumber \\\<br>
-&amp;~~ P_t = P_{t|t-1} - P_{t|t-1} Z' F_{t|t-1}^{-1} Z P_{t|t-1}.
+\mbox{state update}&amp;: A_t = A_{t|t-1} + P_{t|t-1} Z&rsquo; F_{t|t-1}^{-1} \left(y_t - \hat y_{t|t-1}\right) \mbox { and } \nonumber \\\
+&amp;~~ P_t = P_{t|t-1} - P_{t|t-1} Z&rsquo; F_{t|t-1}^{-1} Z P_{t|t-1}.
 \end{align}</p>
 </li>
 </ol>
@@ -787,8 +787,8 @@ can summarize the recursions:</p>
 <p>The likelihood function is given by</p>
 <p>\begin{eqnarray}
 p(Y^T | \theta )
-&amp; = &amp; \prod_{t=1}^T p(y_t|Y^{t-1}, \theta) \nonumber \\\<br>
-&amp; = &amp; ( 2 \pi)^{-n_yT/2} \left( \prod_{t=1}^T |F_{t|t-1}| \right)^{-1/2} \times \exp \left\{ - \frac{1}{2} \sum_{t=1}^T \nu_t F_{t|t-1}^{-1} \nu_t' \right\}
+&amp; = &amp; \prod_{t=1}^T p(y_t|Y^{t-1}, \theta) \nonumber \\\
+&amp; = &amp; ( 2 \pi)^{-n_yT/2} \left( \prod_{t=1}^T |F_{t|t-1}| \right)^{-1/2} \times \exp \left\{ - \frac{1}{2} \sum_{t=1}^T \nu_t F_{t|t-1}^{-1} \nu_t&rsquo; \right\}
 \end{eqnarray}</p>
 <p>This representation of the likelihood function is often called prediction
 error form, because it is based on the recursive prediction one-step ahead
@@ -800,12 +800,12 @@ stationary (i.e., all the eigenvalues of \(T\) are less than one in
 magnitude), it might make sense to initialize the Kalman filter
 from the invariant distribution, i.e., we have \(A_0\) and \(P_0\) such that
 \[
-A_0 = (I_{n_s} - T)^{-1} C \mbox{ and } P_0 = T P_0 T' + RQR'.
+A_0 = (I_{n_s} - T)^{-1} C \mbox{ and } P_0 = T P_0 T&rsquo; + RQR&rsquo;.
 \]
 If the system is not too big, you can solve for \(P_0\) directly
 using the \(vec\) operator:
 \[
-vec(P_0) = \left(I_{n_s^2} - (T' \otimes T)\right)^{-1} RQR'.
+vec(P_0) = \left(I_{n_s^2} - (T&rsquo; \otimes T)\right)^{-1} RQR&rsquo;.
 \]
 Otherwise, there are algorithms available for computing \(P_0\)
 reliably and quickly.</p>
@@ -840,7 +840,7 @@ observed}\}\), where \(e_i\) is the \(n_y\times 1\) vector with a
 one in the \(i\)th position and zeros elsewhere.  Then,</p>
 <p>\begin{align}
 \label{eq:missing}
-D_t = M_t D,~~ Z_t = M_t Z, \mbox{ and } H_t = M_t H M_t'.
+D_t = M_t D,~~ Z_t = M_t Z, \mbox{ and } H_t = M_t H M_t&rsquo;.
 \end{align}</p>
 <p>The ability to handle missing data is an extremely powerful feature
 of the Kalman filter, as it allows us to both handle estimating
@@ -856,7 +856,7 @@ handle this without user intervention.</p>
 (<a href="#eq:state-prediction">eq:state-prediction</a>), (<a href="#eq:obs-prediction">eq:obs-prediction</a>) (<a href="#eq:state-update">eq:state-update</a>) for the state
 variance, we obtain</p>
 <p>\begin{eqnarray}
-P_{t+1|t} = T P_{t|t-1}T' + RQR - T P_{t|t-1} Z' (Z P_{t|t-1} Z' + H)^{-1} Z P_{t|t-1}T'
+P_{t+1|t} = T P_{t|t-1}T&rsquo; + RQR - T P_{t|t-1} Z&rsquo; (Z P_{t|t-1} Z&rsquo; + H)^{-1} Z P_{t|t-1}T'
 \end{eqnarray}</p>
 <p>with \(P_{0|-1} = P_0.\) This equation is known as the <em>matrix
 Riccati recursion</em>, a discrete time analogue to the popular set of
@@ -918,7 +918,7 @@ GDP_t \ GDP_t
 \end{align}</p>
 <p>We can cast this into state space form with \(n_y = 2\) and \(n_s = n_\epsilon = 1\).  We have</p>
 <p>\begin{align}
-C = \mu(1-\rho),~~ T = \rho,~~ R = 1, \mbox{ and } Q = \sigma^2, \nonumber \\\<br>
+C = \mu(1-\rho),~~ T = \rho,~~ R = 1, \mbox{ and } Q = \sigma^2, \nonumber \\\
 D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix}, \mbox{ and } H =     \left[
 \begin{array}{cc}
 \sigma_{E}^2 &amp; 0 \ 0 &amp; \sigma_{I}^2
@@ -930,20 +930,20 @@ D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix
 We can use the Kalman filter to maximize the likelihood function,
 since we haven&rsquo;t quite worked out how to elicit the posterior of
 this model just yet.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Initial likelihood:  -4293.835439078496
-      fun: 358.8810028467478
- hess_inv: &lt;5x5 LbfgsInvHessProduct with dtype=float64&gt;
-      jac: array([-1.08002496e-04, -1.70530257e-05, -3.12638804e-04, -2.95585778e-04,
-       -2.16004992e-04])
-  message: b&#39;CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH&#39;
-     nfev: 108
-      nit: 14
-   status: 0
-  success: True
-        x: array([0.50974449, 0.39613152, 0.28275435, 0.40326539, 0.64044755])
-Maximized Likelihood:  -358.8810028467478
-{&#39;rho&#39;: 0.5097444850915837, &#39;mu&#39;: 0.39613152196112617, &#39;sige&#39;: 0.2827543510275178, &#39;sigi&#39;: 0.4032653925782693, &#39;sig&#39;: 0.6404475458159359}
-</code></pre></div><p>We these point estimates, we can use the kalman filter to extract
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Initial likelihood:  -4293.835439078496
+</span></span><span style="display:flex;"><span>      fun: 358.8810028467478
+</span></span><span style="display:flex;"><span> hess_inv: &lt;5x5 LbfgsInvHessProduct with dtype=float64&gt;
+</span></span><span style="display:flex;"><span>      jac: array([-1.08002496e-04, -1.70530257e-05, -3.12638804e-04, -2.95585778e-04,
+</span></span><span style="display:flex;"><span>       -2.16004992e-04])
+</span></span><span style="display:flex;"><span>  message: b&#39;CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH&#39;
+</span></span><span style="display:flex;"><span>     nfev: 108
+</span></span><span style="display:flex;"><span>      nit: 14
+</span></span><span style="display:flex;"><span>   status: 0
+</span></span><span style="display:flex;"><span>  success: True
+</span></span><span style="display:flex;"><span>        x: array([0.50974449, 0.39613152, 0.28275435, 0.40326539, 0.64044755])
+</span></span><span style="display:flex;"><span>Maximized Likelihood:  -358.8810028467478
+</span></span><span style="display:flex;"><span>{&#39;rho&#39;: 0.5097444850915837, &#39;mu&#39;: 0.39613152196112617, &#39;sige&#39;: 0.2827543510275178, &#39;sigi&#39;: 0.4032653925782693, &#39;sig&#39;: 0.6404475458159359}
+</span></span></code></pre></div><p>We these point estimates, we can use the kalman filter to extract
 \(\{ A_t\}_{t=1}^T\), the filtered means of the &ldquo;true&rdquo; GDP series.
 We&rsquo;ll plot them along with the observables, and the simple average
 of expenditure-side and income-side GDP estimates.</p>

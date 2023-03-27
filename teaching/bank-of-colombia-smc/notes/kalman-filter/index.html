@@ -74,10 +74,10 @@ y_t = D_{t|t-1} + Z_{t|t-1} s_t  + \eta_t , \quad t=1,\ldots,T
 <p>where \(y_t\) is an \(n_y \times 1\) vector of observables, \(s_t\) is an \(n_s
 \times 1\) vector of state variables, \(Z_{t|t-1}\) is an \(n_y \times n_s\)
 vector, \(D_{t|t-1}\) is a \(n_y\times 1\) vector, and \(\eta_t\) are
-innovations (or often ``measurement errors'') with mean zero and
-\(\mathbb{E}_{t-1}[ \eta_t \eta_t'] = H_{t|t-1}\).</p>
+innovations (or often ``measurement errors&rsquo;&rsquo;) with mean zero and
+\(\mathbb{E}_{t-1}[ \eta_t \eta_t&rsquo;] = H_{t|t-1}\).</p>
 <ul>
-<li>The matrices \(Z_{t|t-1}\), \(D_{t|t-1}\), and \(H_{t|t-1}\) are in many applications constant (&ldquo;time-invariant.&quot;)</li>
+<li>The matrices \(Z_{t|t-1}\), \(D_{t|t-1}\), and \(H_{t|t-1}\) are in many applications constant (&ldquo;time-invariant.&rdquo;)</li>
 <li>However, it is sufficient that they are predetermined at \(t-1\). They could be functions of \(y_{t-1}, y_{t-2}, \ldots\).</li>
 <li>To simplify the notation, we will denote them by \(Z_t\), \(D_t\), and \(H_t\), respectively.</li>
 </ul>
@@ -87,7 +87,7 @@ innovations (or often ``measurement errors'') with mean zero and
 s_t = C_{t|t-1} + T_{t|t-1} s_{t-1}  + R_{t|t-1} \epsilon_t
 \end{eqnarray}</p>
 <p>where \(R_t\) is \(n_s \times n_\epsilon\), and \(\epsilon\) is a \(n_\epsilon \times 1\) vector of innovations
-with mean zero and variance \(\mathbb{E}_{t|t-1}[ \epsilon_t \epsilon_t'] = Q_{t|t-1}\).</p>
+with mean zero and variance \(\mathbb{E}_{t|t-1}[ \epsilon_t \epsilon_t&rsquo;] = Q_{t|t-1}\).</p>
 <ul>
 <li>The assumption that \(s_t\) evolves according to an VAR(1) process
 is not very restrictive, since it could be the companion form to a
@@ -109,7 +109,7 @@ y_t = \phi y_{t-1} + \epsilon_t + \theta \epsilon_{t-1} \quad \epsilon_t \sim ii
 \end{eqnarray}</p>
 <p>The model can be rewritten in state space form</p>
 <p>\begin{eqnarray}
-y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right] + \phi y_{t-1}\\\<br>
+y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right] + \phi y_{t-1}\\\
 \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t-1} \end{array} \right]
 &amp; = &amp;
 \left[ \begin{array}{cc} 0 &amp; 0 \ 1 &amp; 0 \end{array} \right]
@@ -118,11 +118,11 @@ y_t &amp; = &amp; [ 1 ; \theta] \left[ \begin{array}{c} \epsilon_t \ \epsilon_{t
 \left[ \begin{array}{c} \eta_t \ 0 \end{array} \right]
 \end{eqnarray}</p>
 <p>where \(\epsilon_t \sim iid{\cal N}(0,\sigma^2)\). Thus, the state
-vector is composed of \(s_t = [\epsilon_t, \epsilon_{t-1}]'\) and \(D_{t}
+vector is composed of \(s_t = [\epsilon_t, \epsilon_{t-1}]&rsquo;\) and \(D_{t}
 = \rho y_{t-1}\).  This construction is not unique. We could also write
 the model as:</p>
 <p>\begin{eqnarray}
-y_t &amp; = &amp; [ 1 ; 0] \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right] \\\<br>
+y_t &amp; = &amp; [ 1 ; 0] \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right] \\\
 \left[ \begin{array}{c} y_t \ \epsilon_{t} \end{array} \right]
 &amp; = &amp;
 \left[ \begin{array}{cc} \phi &amp; \theta \ 0 &amp; 0 \end{array} \right]
@@ -190,16 +190,16 @@ this case the likelihood calculation delivers a quasi-likelihood.</p>
 has a natural Bayesian interpretation.  Before we proceed, we&rsquo;re
 going to state some results about multivariate normal
 distributions, which will help later on.</p>
-<p><em>Lemma.</em> Let \((x',y')'\) be jointly normal with
+<p><em>Lemma.</em> Let \((x&rsquo;,y&rsquo;)&rsquo;\) be jointly normal with
 \[
 \mu = \left[ \begin{array}{c} \mu_x \ \mu_y \end{array} \right]
 \quad \mbox{and} \quad
-\Sigma = \left[ \begin{array}{cc} \Sigma_{xx} &amp; \Sigma_{xy} \\\<br>
+\Sigma = \left[ \begin{array}{cc} \Sigma_{xx} &amp; \Sigma_{xy} \\\
 \Sigma_{yx} &amp; \Sigma_{yy} \end{array} \right]
 \]
 Then the \(pdf(x|y)\) is multivariate normal with</p>
 <p>\begin{eqnarray}
-\mu_{x|y} &amp;=&amp; \mu_x + \Sigma_{xy} \Sigma_{yy}^{-1}(y - \mu_y) \\\<br>
+\mu_{x|y} &amp;=&amp; \mu_x + \Sigma_{xy} \Sigma_{yy}^{-1}(y - \mu_y) \\\
 \Sigma_{xx|y} &amp;=&amp; \Sigma_{xx} - \Sigma_{xy} \Sigma_{yy}^{-1} \Sigma_{yx}
 \end{eqnarray}</p>
 <p>Note that the converse is not necessarily true. \(\Box\)</p>
@@ -224,7 +224,7 @@ s_1 | \theta \sim \mathcal N\left(A_{1|0}, P_{1|0}\right)
 \]
 where
 \[
-A_{1|0} = C+T A_{0} \mbox{ and } P_{1|0} = T P_0 T' + RQR'.
+A_{1|0} = C+T A_{0} \mbox{ and } P_{1|0} = T P_0 T&rsquo; + RQR&rsquo;.
 \]
 Note that this is the unconditional distribution of \(s_1\), a prior
 distribution for \(s_1\) before seeing \(y_1\).  We write the mean
@@ -241,7 +241,7 @@ y_1|\theta  \sim {\cal N} (\hat{y}_{1|0}, F_{1|0})
 \end{eqnarray}</p>
 <p>where</p>
 <p>\begin{eqnarray*}
-\hat{y}_{1|0} = D + Z A_{1|0} \mbox{ and }  F_{1|0} =  Z P_{1|0} Z' + H.
+\hat{y}_{1|0} = D + Z A_{1|0} \mbox{ and }  F_{1|0} =  Z P_{1|0} Z&rsquo; + H.
 \end{eqnarray*}</p>
 <p>Here we&rsquo;ve been explicit in going \(s_0 \rightarrow s_1 \rightarrow
 y_1\).</p>
@@ -251,19 +251,19 @@ observation equation (<a href="#eq:obs">eq:obs</a>) in terms of \(s_{t-1}\) and
 easy to see that \(s_1\) and \(y_1\) are jointly normally distributed with
 the marginal and conditional distributions mentioned above.  We have:</p>
 <p>\begin{eqnarray}
-s_1 &amp;=&amp; C + T s_0 + R\epsilon_t \\\<br>
+s_1 &amp;=&amp; C + T s_0 + R\epsilon_t \\\
 y_1 &amp;=&amp; D + Z T s_0 + Z\epsilon_t + \eta_t.
 \end{eqnarray}</p>
 <p>Direct calculation yields:</p>
 <p>\begin{eqnarray}
-\begin{bmatrix}s_1 \ y_1 \end{bmatrix} \bigg| \theta \sim \mathcal N \left( \begin{bmatrix} A_{1|0} \ \hat y_{1|0} \end{bmatrix}, \begin{bmatrix} P_{1|0} &amp; P_{1|0} Z' \ Z P_{1|0} &amp; F_{1|0} \end{bmatrix}\right).
+\begin{bmatrix}s_1 \ y_1 \end{bmatrix} \bigg| \theta \sim \mathcal N \left( \begin{bmatrix} A_{1|0} \ \hat y_{1|0} \end{bmatrix}, \begin{bmatrix} P_{1|0} &amp; P_{1|0} Z&rsquo; \ Z P_{1|0} &amp; F_{1|0} \end{bmatrix}\right).
 \end{eqnarray}</p>
 <p>Consider the third goal of toolbox: delivering
 \(p(s_1|y_1,\theta)\). Well, we can get that easily using the formula
 for the conditional normal distribution:</p>
 <p>\begin{align}
 \label{eq:update}
-s_1 | y_1 \sim N\left( A_{1|0} + P_{1|0} Z' F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right), P_{1|0} - P_{1|0} Z' F_{1|0}^{-1} Z P_{1|0}\right).
+s_1 | y_1 \sim N\left( A_{1|0} + P_{1|0} Z&rsquo; F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right), P_{1|0} - P_{1|0} Z&rsquo; F_{1|0}^{-1} Z P_{1|0}\right).
 \end{align}</p>
 <p>Note that we could have instead obtained this using:</p>
 <p>\begin{align}
@@ -275,7 +275,7 @@ p(s_1 | y_1,\theta) \propto p(y_1|s_1,\theta) p(s_1|\theta),
 distributed posterior.  Finally, let&rsquo;s call give our updated state mean and variance:</p>
 <p>\begin{align}
 \label{eq:ms}
-A_1 = A_{1|0} + P_{1|0} Z' F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right) \mbox{ and } P_1 = P_{1|0} - P_{1|0} Z' F_{1|0}^{-1} Z P_{1|0}.
+A_1 = A_{1|0} + P_{1|0} Z&rsquo; F_{1|0}^{-1} \left(y_1 - \hat y_{1|0}\right) \mbox{ and } P_1 = P_{1|0} - P_{1|0} Z&rsquo; F_{1|0}^{-1} Z P_{1|0}.
 \end{align}</p>
 <p><em>Generalization.</em> Now, with the distribution form
 \(s_1|y_1,\theta\), we&rsquo;re back where we started!  So all we have to
@@ -290,12 +290,12 @@ can summarize the recursions:</p>
 <p><strong>Recursions.</strong> For \(t=1,\ldots,T\):</p>
 <p>\begin{align}
 \label{eq:state-prediction}
-\mbox{state prediction}&amp;: A_{t|t-1} = C+T A_{t-1} \mbox{ and } P_{t|t-1} = T P_{t-1} T' + RQR'.\\\<br>
+\mbox{state prediction}&amp;: A_{t|t-1} = C+T A_{t-1} \mbox{ and } P_{t|t-1} = T P_{t-1} T&rsquo; + RQR&rsquo;.\\\
 \label{eq:obs-prediction}
-\mbox{observation prediction}&amp;: \hat y_{t|t-1} = D + Z A_{t|t-1} \mbox{ and } F_{t|t-1} = Z P_{t|t-1} Z' + H. \\\<br>
+\mbox{observation prediction}&amp;: \hat y_{t|t-1} = D + Z A_{t|t-1} \mbox{ and } F_{t|t-1} = Z P_{t|t-1} Z&rsquo; + H. \\\
 \label{eq:state-update}
-\mbox{state update}&amp;: A_t = A_{t|t-1} + P_{t|t-1} Z' F_{t|t-1}^{-1} \left(y_t - \hat y_{t|t-1}\right) \mbox { and } \nonumber \\\<br>
-&amp;~~ P_t = P_{t|t-1} - P_{t|t-1} Z' F_{t|t-1}^{-1} Z P_{t|t-1}.
+\mbox{state update}&amp;: A_t = A_{t|t-1} + P_{t|t-1} Z&rsquo; F_{t|t-1}^{-1} \left(y_t - \hat y_{t|t-1}\right) \mbox { and } \nonumber \\\
+&amp;~~ P_t = P_{t|t-1} - P_{t|t-1} Z&rsquo; F_{t|t-1}^{-1} Z P_{t|t-1}.
 \end{align}</p>
 </li>
 </ol>
@@ -306,8 +306,8 @@ can summarize the recursions:</p>
 <p>The likelihood function is given by</p>
 <p>\begin{eqnarray}
 p(Y^T | \theta )
-&amp; = &amp; \prod_{t=1}^T p(y_t|Y^{t-1}, \theta) \nonumber \\\<br>
-&amp; = &amp; ( 2 \pi)^{-n_yT/2} \left( \prod_{t=1}^T |F_{t|t-1}| \right)^{-1/2} \times \exp \left\{ - \frac{1}{2} \sum_{t=1}^T \nu_t F_{t|t-1}^{-1} \nu_t' \right\}
+&amp; = &amp; \prod_{t=1}^T p(y_t|Y^{t-1}, \theta) \nonumber \\\
+&amp; = &amp; ( 2 \pi)^{-n_yT/2} \left( \prod_{t=1}^T |F_{t|t-1}| \right)^{-1/2} \times \exp \left\{ - \frac{1}{2} \sum_{t=1}^T \nu_t F_{t|t-1}^{-1} \nu_t&rsquo; \right\}
 \end{eqnarray}</p>
 <p>This representation of the likelihood function is often called prediction
 error form, because it is based on the recursive prediction one-step ahead
@@ -319,12 +319,12 @@ stationary (i.e., all the eigenvalues of \(T\) are less than one in
 magnitude), it might make sense to initialize the Kalman filter
 from the invariant distribution, i.e., we have \(A_0\) and \(P_0\) such that
 \[
-A_0 = (I_{n_s} - T)^{-1} C \mbox{ and } P_0 = T P_0 T' + RQR'.
+A_0 = (I_{n_s} - T)^{-1} C \mbox{ and } P_0 = T P_0 T&rsquo; + RQR&rsquo;.
 \]
 If the system is not too big, you can solve for \(P_0\) directly
 using the \(vec\) operator:
 \[
-vec(P_0) = \left(I_{n_s^2} - (T' \otimes T)\right)^{-1} RQR'.
+vec(P_0) = \left(I_{n_s^2} - (T&rsquo; \otimes T)\right)^{-1} RQR&rsquo;.
 \]
 Otherwise, there are algorithms available for computing \(P_0\)
 reliably and quickly.</p>
@@ -359,7 +359,7 @@ observed}\}\), where \(e_i\) is the \(n_y\times 1\) vector with a
 one in the \(i\)th position and zeros elsewhere.  Then,</p>
 <p>\begin{align}
 \label{eq:missing}
-D_t = M_t D,~~ Z_t = M_t Z, \mbox{ and } H_t = M_t H M_t'.
+D_t = M_t D,~~ Z_t = M_t Z, \mbox{ and } H_t = M_t H M_t&rsquo;.
 \end{align}</p>
 <p>The ability to handle missing data is an extremely powerful feature
 of the Kalman filter, as it allows us to both handle estimating
@@ -375,7 +375,7 @@ handle this without user intervention.</p>
 (<a href="#eq:state-prediction">eq:state-prediction</a>), (<a href="#eq:obs-prediction">eq:obs-prediction</a>) (<a href="#eq:state-update">eq:state-update</a>) for the state
 variance, we obtain</p>
 <p>\begin{eqnarray}
-P_{t+1|t} = T P_{t|t-1}T' + RQR - T P_{t|t-1} Z' (Z P_{t|t-1} Z' + H)^{-1} Z P_{t|t-1}T'
+P_{t+1|t} = T P_{t|t-1}T&rsquo; + RQR - T P_{t|t-1} Z&rsquo; (Z P_{t|t-1} Z&rsquo; + H)^{-1} Z P_{t|t-1}T'
 \end{eqnarray}</p>
 <p>with \(P_{0|-1} = P_0.\) This equation is known as the <em>matrix
 Riccati recursion</em>, a discrete time analogue to the popular set of
@@ -412,19 +412,19 @@ distribution of the form</p>
 <p>\begin{eqnarray}
 \label{eq:smoother}
 \begin{bmatrix}s_{T-1} \ s_T \ y_T \end{bmatrix} \bigg| Y^{T-1}, \theta
-\sim \mathcal N \left( \begin{bmatrix} A_{T-1} \ A_{T|T-1} \ \hat y_{T|T-1} \end{bmatrix}, \begin{bmatrix} P_{T-1} &amp; P_{T-1}T' &amp; P_{T-1} T' Z'  \\\<br>
-T P_{T-1} &amp; P_{T|T-1} &amp; P_{T|T-1} Z' \\\<br>
+\sim \mathcal N \left( \begin{bmatrix} A_{T-1} \ A_{T|T-1} \ \hat y_{T|T-1} \end{bmatrix}, \begin{bmatrix} P_{T-1} &amp; P_{T-1}T&rsquo; &amp; P_{T-1} T&rsquo; Z&rsquo;  \\\
+T P_{T-1} &amp; P_{T|T-1} &amp; P_{T|T-1} Z&rsquo; \\\
 Z T P_{T-1} &amp; Z P_{T|T-1} &amp; F_{T|T-1} \end{bmatrix}\right).
 \end{eqnarray}</p>
 <p>Thus, the mean of \(s_{T-1} | Y^T, \theta\) is given by:</p>
 <p>\begin{align}
-A_{T-1|T} &amp;= A_{T-1} + P_{T-1} T' Z' F_{T|T-1}^{-1} (y_T - \hat y_{T|T-1})  &amp;  \nonumber \\\<br>
-&amp;= A_{T-1} + \underbrace{P_{T-1} T' P_{T|T-1}^{-1}}_{J_{T-1}} (A_T - A_{T|T-1}) &amp; \mbox{using (\ref{eq:state-update})}.
+A_{T-1|T} &amp;= A_{T-1} + P_{T-1} T&rsquo; Z&rsquo; F_{T|T-1}^{-1} (y_T - \hat y_{T|T-1})  &amp;  \nonumber \\\
+&amp;= A_{T-1} + \underbrace{P_{T-1} T&rsquo; P_{T|T-1}^{-1}}_{J_{T-1}} (A_T - A_{T|T-1}) &amp; \mbox{using (\ref{eq:state-update})}.
 \end{align}</p>
 <p>The variance is similarly calculated as:</p>
 <p>\begin{align}
-P_{T-1|T} &amp;= P_{T-1} - P_{T-1} T' Z' F_{T|T-1}^{-1} Z T P_{T-1} &amp; \nonumber \\\<br>
-&amp;= P_{T-1} - J_{T-1}  (P_T - P_{T|T-1}) J_{T-1} ' &amp; \mbox{using (\ref{eq:state-update})}.
+P_{T-1|T} &amp;= P_{T-1} - P_{T-1} T&rsquo; Z&rsquo; F_{T|T-1}^{-1} Z T P_{T-1} &amp; \nonumber \\\
+&amp;= P_{T-1} - J_{T-1}  (P_T - P_{T|T-1}) J_{T-1} &rsquo; &amp; \mbox{using (\ref{eq:state-update})}.
 \end{align}</p>
 <p>To extend this to \(T-2\) and so on simply modify
 (\ref{eq:smoother}).  Note that the procedure sketched here can be
@@ -473,7 +473,7 @@ GDP_t \ GDP_t
 \end{align}</p>
 <p>We can cast this into state space form with \(n_y = 2\) and \(n_s = n_\epsilon = 1\).  We have</p>
 <p>\begin{align}
-C = \mu(1-\rho),~~ T = \rho,~~ R = 1, \mbox{ and } Q = \sigma^2, \nonumber \\\<br>
+C = \mu(1-\rho),~~ T = \rho,~~ R = 1, \mbox{ and } Q = \sigma^2, \nonumber \\\
 D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix}, \mbox{ and } H =     \left[
 \begin{array}{cc}
 \sigma_{E}^2 &amp; 0 \ 0 &amp; \sigma_{I}^2
@@ -485,10 +485,10 @@ D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix
 We can use the Kalman filter to maximize the likelihood function,
 since we haven&rsquo;t quite worked out how to elicit the posterior of
 this model just yet.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Initial likelihood:  -4293.835439078496
-Maximized Likelihood:  -358.8810028467478
-{&#39;rho&#39;: 0.5097444850915837, &#39;mu&#39;: 0.39613152196112617, &#39;sige&#39;: 0.2827543510275178, &#39;sigi&#39;: 0.4032653925782693, &#39;sig&#39;: 0.6404475458159359}
-</code></pre></div><p>We these point estimates, we can use the kalman filter to extract
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Initial likelihood:  -4293.835439078496
+</span></span><span style="display:flex;"><span>Maximized Likelihood:  -358.8810028467478
+</span></span><span style="display:flex;"><span>{&#39;rho&#39;: 0.5097444850915837, &#39;mu&#39;: 0.39613152196112617, &#39;sige&#39;: 0.2827543510275178, &#39;sigi&#39;: 0.4032653925782693, &#39;sig&#39;: 0.6404475458159359}
+</span></span></code></pre></div><p>We these point estimates, we can use the kalman filter to extract
 \(\{ A_t\}_{t=1}^T\), the filtered means of the &ldquo;true&rdquo; GDP series.
 We&rsquo;ll plot them along with the observables, and the simple average
 of expenditure-side and income-side GDP estimates.</p>

@@ -26,8 +26,7 @@
 <meta name="twitter:title" content="Stock and Watson (2007) in pymc3 and Stan"/>
 <meta name="twitter:description" content="This file is available as Jupyter Notebook.
 The STOCK_2007 model inflation as an unobserved components models:
-\begin{eqnarray} \pi_t &amp;=&amp; \tau_t &#43; \eta_t \\\
-\tau_t &amp;=&amp; \tau_{t-1} &#43; \epsilon_t \end{eqnarray}
+\begin{eqnarray} \pi_t &amp;=&amp; \tau_t &#43; \eta_t \\\ \tau_t &amp;=&amp; \tau_{t-1} &#43; \epsilon_t \end{eqnarray}
 where \(\eta_t\) and \(\epsilon_t\) are independently and identically distributed with mean 0 and variances \(\sigma_\eta^2\) and \(\sigma_\epsilon^2\).
 A Replication First we start by importing some standard libraries.
 %matplotlib inline import matplotlib.pyplot as plt import numpy as np import pandas as p Next we get the data used and plot it."/>
@@ -65,7 +64,7 @@ A Replication First we start by importing some standard libraries.
 <p>The <sup id="751475a24881d3cf8ff77e5dc432fc83"><a href="#STOCK_2007" title="Stock \&amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, {Journal of Money, Credit and Banking}, v(), 3 33 (2007).">STOCK_2007</a></sup> model inflation as an unobserved components
 models:</p>
 <p>\begin{eqnarray}
-\pi_t &amp;=&amp; \tau_t + \eta_t \\\<br>
+\pi_t &amp;=&amp; \tau_t + \eta_t \\\
 \tau_t &amp;=&amp; \tau_{t-1} + \epsilon_t
 \end{eqnarray}</p>
 <p>where \(\eta_t\) and \(\epsilon_t\) are independently and identically
@@ -73,72 +72,72 @@ distributed with mean 0 and variances \(\sigma_\eta^2\) and
 \(\sigma_\epsilon^2\).</p>
 <h2 id="a-replication">A Replication</h2>
 <p>First we start by importing some standard libraries.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">%matplotlib inline
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as p
-</code></pre></div><p>Next we get the data used and plot it.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>%matplotlib inline
+</span></span><span style="display:flex;"><span>import matplotlib.pyplot as plt
+</span></span><span style="display:flex;"><span>import numpy as np
+</span></span><span style="display:flex;"><span>import pandas as p
+</span></span></code></pre></div><p>Next we get the data used and plot it.</p>
 <figure><img src="https://edherbst.net/ox-hugo/0877b3a1f8ff225d7686ac63f7450e3a7e6c5a87.png"
          alt="Figure 1: Inflation Data"/><figcaption>
             <p>Figure 1: Inflation Data</p>
         </figcaption>
 </figure>
 
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">from pymc3 import Model, Normal, InverseGamma, sample
-from pymc3.distributions.timeseries import GaussianRandomWalk
-
-from pymc3 import Uniform, Deterministic
-from pymc3.math import exp, sqrt
-
-y = sw_infl[&#39;1953&#39;:&#39;2004&#39;].values.flatten()
-
-with Model() as ucsv_model:
-
-    gamma = 0.2
-    ln_sigma2_eps = GaussianRandomWalk(&#39;ln_sigma2_eps&#39;, sd=gamma, shape=len(y)-1)
-    ln_sigma2_eta = GaussianRandomWalk(&#39;ln_sigma2_eta&#39;, sd=gamma, shape=len(y))
-
-    sigma_eps = Deterministic(&#39;sigma_eps&#39;, exp(0.5*ln_sigma2_eps))
-    tau = GaussianRandomWalk(&#39;tau&#39;, sd=sigma_eps, shape=len(y))
-
-    sigma_eta = Deterministic(&#39;sigma_eta&#39;, exp(0.5*ln_sigma2_eta))
-    pinf = Normal(&#39;pi&#39;,mu=tau, sd=sigma_eta, observed=y)
-
-    temp = Deterministic(&#39;temp&#39;, sigma_eta[1:]**2/(sigma_eps**2 + 2*sigma_eta[1:]**2))
-    theta = Deterministic(&#39;theta&#39;, (-1 + sqrt(1-4*temp*temp)) /(-2*temp))
-</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">with ucsv_model:
-    trace = sample(2000)
-
-sigma_eps_df = p.DataFrame(trace[&#39;sigma_eps&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
-sigma_eta_df = p.DataFrame(trace[&#39;sigma_eta&#39;],columns=sw_infl[&#39;1953&#39;:&#39;2004&#39;].index)
-theta_df = p.DataFrame(trace[&#39;theta&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def sw_figure2(sigma_eps, sigma_eta, theta):
-    fig,ax = plt.subplots(nrows=3, sharex=True)
-
-    for i, para in enumerate([sigma_eps, sigma_eta, theta]):
-
-        if i &lt; 2:
-            ylim = (0,2)
-        else:
-            ylim = (0,1)
-
-        para.median().plot(ax=ax[i], color=&#39;black&#39;, ylim=ylim)
-        para.quantile([0.16,0.84]).T.plot(ax=ax[i], color=&#39;black&#39;,
-                                          linestyle=&#39;dashed&#39;, legend=False)
-
-    plt.tight_layout()
-    fig.set_size_inches(3,9)
-
-sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
-NameErrorTraceback (most recent call last)
-&lt;ipython-input-8-16860f4ca04e&gt; in &lt;module&gt;
-     16     fig.set_size_inches(3,9)
-     17
----&gt; 18 sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
-
-NameError: name &#39;sigma_eps_df&#39; is not defined
-</code></pre></div><h1 id="bibliography">Bibliography</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>from pymc3 import Model, Normal, InverseGamma, sample
+</span></span><span style="display:flex;"><span>from pymc3.distributions.timeseries import GaussianRandomWalk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>from pymc3 import Uniform, Deterministic
+</span></span><span style="display:flex;"><span>from pymc3.math import exp, sqrt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y = sw_infl[&#39;1953&#39;:&#39;2004&#39;].values.flatten()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>with Model() as ucsv_model:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    gamma = 0.2
+</span></span><span style="display:flex;"><span>    ln_sigma2_eps = GaussianRandomWalk(&#39;ln_sigma2_eps&#39;, sd=gamma, shape=len(y)-1)
+</span></span><span style="display:flex;"><span>    ln_sigma2_eta = GaussianRandomWalk(&#39;ln_sigma2_eta&#39;, sd=gamma, shape=len(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sigma_eps = Deterministic(&#39;sigma_eps&#39;, exp(0.5*ln_sigma2_eps))
+</span></span><span style="display:flex;"><span>    tau = GaussianRandomWalk(&#39;tau&#39;, sd=sigma_eps, shape=len(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sigma_eta = Deterministic(&#39;sigma_eta&#39;, exp(0.5*ln_sigma2_eta))
+</span></span><span style="display:flex;"><span>    pinf = Normal(&#39;pi&#39;,mu=tau, sd=sigma_eta, observed=y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    temp = Deterministic(&#39;temp&#39;, sigma_eta[1:]**2/(sigma_eps**2 + 2*sigma_eta[1:]**2))
+</span></span><span style="display:flex;"><span>    theta = Deterministic(&#39;theta&#39;, (-1 + sqrt(1-4*temp*temp)) /(-2*temp))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>with ucsv_model:
+</span></span><span style="display:flex;"><span>    trace = sample(2000)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sigma_eps_df = p.DataFrame(trace[&#39;sigma_eps&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
+</span></span><span style="display:flex;"><span>sigma_eta_df = p.DataFrame(trace[&#39;sigma_eta&#39;],columns=sw_infl[&#39;1953&#39;:&#39;2004&#39;].index)
+</span></span><span style="display:flex;"><span>theta_df = p.DataFrame(trace[&#39;theta&#39;],columns=sw_infl[&#39;1953Q2&#39;:&#39;2004&#39;].index)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def sw_figure2(sigma_eps, sigma_eta, theta):
+</span></span><span style="display:flex;"><span>    fig,ax = plt.subplots(nrows=3, sharex=True)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    for i, para in enumerate([sigma_eps, sigma_eta, theta]):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        if i &lt; 2:
+</span></span><span style="display:flex;"><span>            ylim = (0,2)
+</span></span><span style="display:flex;"><span>        else:
+</span></span><span style="display:flex;"><span>            ylim = (0,1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        para.median().plot(ax=ax[i], color=&#39;black&#39;, ylim=ylim)
+</span></span><span style="display:flex;"><span>        para.quantile([0.16,0.84]).T.plot(ax=ax[i], color=&#39;black&#39;,
+</span></span><span style="display:flex;"><span>                                          linestyle=&#39;dashed&#39;, legend=False)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt.tight_layout()
+</span></span><span style="display:flex;"><span>    fig.set_size_inches(3,9)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NameErrorTraceback (most recent call last)
+</span></span><span style="display:flex;"><span>&lt;ipython-input-8-16860f4ca04e&gt; in &lt;module&gt;
+</span></span><span style="display:flex;"><span>     16     fig.set_size_inches(3,9)
+</span></span><span style="display:flex;"><span>     17
+</span></span><span style="display:flex;"><span>---&gt; 18 sw_figure2(sigma_eps_df, sigma_eta_df, theta_df)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NameError: name &#39;sigma_eps_df&#39; is not defined
+</span></span></code></pre></div><h1 id="bibliography">Bibliography</h1>
 <p><a id="STOCK_2007"></a>[STOCK_2007] Stock &amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, <i>Journal of Money, Credit and Banking</i>, <b>39</b>, 3 33 (2007). <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">link</a>. <a href="http://dx.doi.org/10.1111/j.1538-4616.2007.00014.x">doi</a>. <a href="#751475a24881d3cf8ff77e5dc432fc83">↩</a></p>
 
 

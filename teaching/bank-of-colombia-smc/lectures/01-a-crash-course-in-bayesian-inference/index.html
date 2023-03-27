@@ -25,7 +25,7 @@
 
 <meta name="twitter:title" content="A Crash Course In Bayesian Inference"/>
 <meta name="twitter:description" content="Introduction These notes are available as slides and a Jupyter notebook.
-Modes of Inference  Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed  Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta&#43;1 \} = \frac{1}{2} \] Consider the following confidence set"/>
+Modes of Inference Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta&#43;1 \} = \frac{1}{2} \] Consider the following confidence set"/>
 
 </head>
 <body class="terminal">
@@ -78,13 +78,13 @@ Consider the following confidence set</p>
 <p>\begin{eqnarray*}
 C(Y_1,Y_2) = \left\{
 \begin{array}{lcl}
-\frac{1}{2}(Y_1+Y_2) &amp; \mbox{if} &amp; Y_1 \not= Y_2 \\\<br>
+\frac{1}{2}(Y_1+Y_2) &amp; \mbox{if} &amp; Y_1 \not= Y_2 \\\
 Y_1 - 1              &amp; \mbox{if} &amp; Y_1 = Y_2
 \end{array} \right.
 \end{eqnarray*}</p>
 <p>From a pre-experimental perspective \(C(Y_1,Y_2)\) is a 75% confidence interval.</p>
-<p>However, from a post-experimental perspective, we are a ``100% confident'' that \(C(Y_1,Y_2)\) contains the``true'' \(\theta\) if \(Y_1 \not= Y_2\), whereas we are only
-``50% percent'' confident if \(Y_1 = Y_2\).</p>
+<p>However, from a post-experimental perspective, we are a ``100% confident&rsquo;&rsquo; that \(C(Y_1,Y_2)\) contains the``true&rsquo;&rsquo; \(\theta\) if \(Y_1 \not= Y_2\), whereas we are only
+``50% percent&rsquo;&rsquo; confident if \(Y_1 = Y_2\).</p>
 <h3 id="some-principles">Some Principles</h3>
 <p>Does it make sense to report a pre-experimental
 measure of accuracy, when it is known to be misleading
@@ -135,13 +135,13 @@ p(\theta|Y^T) = \frac{ p(Y^T|\theta) p(\theta)}{ \int p(Y^T|\theta) p(\theta) d\
 <p>can interpret this formula as an inversion of probabilities.</p>
 </li>
 <li>
-<p>think of the parameter \(\theta\) as ``cause'' and the data \(Y^T\) as ``effect''</p>
+<p>think of the parameter \(\theta\) as ``cause&rsquo;&rsquo; and the data \(Y^T\) as ``effect''</p>
 </li>
 <li>
-<p>formula allows the calculation of the probability of a particular ``cause'' given the observed ``effect'' based on</p>
+<p>formula allows the calculation of the probability of a particular ``cause&rsquo;&rsquo; given the observed ``effect&rsquo;&rsquo; based on</p>
 </li>
 </ul>
-<p>the probability of the ``effect'' given the possible ``causes''</p>
+<p>the probability of the ``effect&rsquo;&rsquo; given the possible ``causes''</p>
 <p>Unlike in the frequentist framework, the parameter \(\theta\) is regarded as a random variable.</p>
 <p>This does, however, not imply that Bayesians consider parameters
 to be determined in a random experiment.</p>
@@ -214,7 +214,7 @@ P \{ Y=1|\theta=0 \} P\{\theta=0\} +P \{ Y=1|\theta=1 \} P\{\theta=1\}
 are</p>
 <p>\begin{eqnarray*}
 P \{ \theta=0|Y=1 \} &amp;=&amp; \frac{ P \{Y=1|\theta=0 \} P\{ \theta = 0\} }{ P \{Y=1\} }
-= \frac{0.07}{0.1955} = 0.358 \\\<br>
+= \frac{0.07}{0.1955} = 0.358 \\\
 P \{ \theta=1|Y=1 \} &amp;=&amp; \frac{ P\{Y=1|\theta=1 \} P\{ \theta = 1\} }{ P \{Y=1\} }
 = \frac{0.1255}{0.1955} = 0.642
 \end{eqnarray*}</p>
@@ -222,7 +222,7 @@ P \{ \theta=1|Y=1 \} &amp;=&amp; \frac{ P\{Y=1|\theta=1 \} P\{ \theta = 1\} }{ P
 <h3 id="example-2">Example 2</h3>
 <p>Consider the linear regression model:</p>
 <p>\begin{eqnarray}
-y_t = x_t'\theta + u_t, \quad u_t \sim iid{\cal N}(0,1),
+y_t = x_t&rsquo;\theta + u_t, \quad u_t \sim iid{\cal N}(0,1),
 \end{eqnarray}</p>
 <p>which can be written in matrix form as \(Y = X\theta + U\).
 We assume that \(X&rsquo;X/T \stackrel{p}{\longrightarrow} Q_{XX}\)
@@ -231,7 +231,7 @@ The dimension of \(\theta\) is \(k\).
 The likelihood function is of
 the form</p>
 <p>\begin{eqnarray}
-p(Y|X,\theta) = (2\pi)^{-T/2} \exp \left\{ Y - X\theta)'(Y-X\theta) \right\}.
+p(Y|X,\theta) = (2\pi)^{-T/2} \exp \left\{ Y - X\theta)&rsquo;(Y-X\theta) \right\}.
 \end{eqnarray}</p>
 <p>Suppose the prior distribution is of the form</p>
 <p>\begin{eqnarray}
@@ -239,7 +239,7 @@ p(Y|X,\theta) = (2\pi)^{-T/2} \exp \left\{ Y - X\theta)'(Y-X\theta) \right\}.
 \end{eqnarray}</p>
 <p>with density</p>
 <p>\begin{eqnarray}
-p(\theta) = (2 \pi \tau^2 )^{-k/2} \exp \left\{ - \frac{1}{2 \tau^2} \theta' \theta \right\}
+p(\theta) = (2 \pi \tau^2 )^{-k/2} \exp \left\{ - \frac{1}{2 \tau^2} \theta&rsquo; \theta \right\}
 \end{eqnarray}</p>
 <p>For small values of \(\tau\) the prior concentrates near zero, whereas for larger values
 of \(\tau\) it is more diffuse.</p>
@@ -251,19 +251,19 @@ p(\theta | Y,X) \propto p(\theta) p(Y|X,\theta).
 \end{eqnarray}</p>
 <p>The right-hand-side is given by</p>
 <p>\begin{eqnarray}
-\lefteqn{p(\theta) p(Y|X,\theta)} \nonumber \\\<br>
+\lefteqn{p(\theta) p(Y|X,\theta)} \nonumber \\\
 &amp;\propto&amp; (2\pi)^{-\frac{T+k}{2}} \tau^{-k}
-\exp \bigg\{ -\frac{1}{2}[ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta' X&rsquo;X \theta \nonumber \\\<br>
-&amp;-&amp; \tau^{-2} \theta'\theta ] \bigg\}.
+\exp \bigg\{ -\frac{1}{2}[ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta&rsquo; X&rsquo;X \theta \nonumber \\\
+&amp;-&amp; \tau^{-2} \theta&rsquo;\theta ] \bigg\}.
 \end{eqnarray}</p>
 <h3 id="example-2-continued">Example 2, Continued</h3>
 <p>The exponential term can be rewritten as follows</p>
 <p>\begin{eqnarray}
-\lefteqn{ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta' X&rsquo;X \theta - \tau^{-2} \theta'\theta } \nonumber \\\<br>
-&amp;=&amp; Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta + \theta'(X&rsquo;X + \tau^{-2} {\cal I}) \theta \\\<br>
+\lefteqn{ Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta - \theta&rsquo; X&rsquo;X \theta - \tau^{-2} \theta&rsquo;\theta } \nonumber \\\
+&amp;=&amp; Y&rsquo;Y - \theta&rsquo;X&rsquo;Y - Y&rsquo;X\theta + \theta&rsquo;(X&rsquo;X + \tau^{-2} {\cal I}) \theta \\\
 &amp;=&amp; \bigg( \theta - (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \bigg)'
-\bigg(X&rsquo;X + \tau^{-2} {\cal I} \bigg) \nonumber \\\<br>
-&amp;&amp;    \bigg( \theta - (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \bigg) \nonumber \\\<br>
+\bigg(X&rsquo;X + \tau^{-2} {\cal I} \bigg) \nonumber \\\
+&amp;&amp;    \bigg( \theta - (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \bigg) \nonumber \\\
 &amp;&amp;  + Y&rsquo;Y - Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1}X&rsquo;Y \nonumber.
 \end{eqnarray}</p>
 <p>Thus, the exponential term is a quadratic function of \(\theta\).</p>
@@ -276,7 +276,7 @@ a multivariate normal distribution</p>
 \end{eqnarray}</p>
 <p>with mean and covariance</p>
 <p>\begin{eqnarray}
-\tilde{\theta}_T &amp;=&amp; (X&rsquo;X + \tau^{-2}{\cal I})^{-1} X&rsquo;Y \\\<br>
+\tilde{\theta}_T &amp;=&amp; (X&rsquo;X + \tau^{-2}{\cal I})^{-1} X&rsquo;Y \\\
 \tilde{V}_T      &amp;=&amp; (X&rsquo;X + \tau^{-2}{\cal I})^{-1}.
 \end{eqnarray}</p>
 <p>The maximum likelihood estimator for this problem is \(\hat{\theta}_{mle} = (X&rsquo;X)^{-1}X&rsquo;Y\)
@@ -326,7 +326,7 @@ data favor model \({\cal M}_1\) or \({\cal M}_2\)?</p>
 <p>decision rule \(\delta(Y^T)\) that maps observations into decisions, and a loss function \(L(\theta,\delta)\)
 according to which the decisions are evaluated.</p>
 <p>\begin{eqnarray}
-\delta(Y^T) &amp;:&amp; {\cal Y} \mapsto {\cal D} \\\<br>
+\delta(Y^T) &amp;:&amp; {\cal Y} \mapsto {\cal D} \\\
 L(\theta,\delta) &amp;:&amp; \Theta \otimes {\cal D} \mapsto R^+
 \end{eqnarray}</p>
 <p>\({\cal D}\) denotes the decision space.</p>
@@ -346,7 +346,7 @@ L(\theta,\delta) &amp;:&amp; \Theta \otimes {\cal D} \mapsto R^+
 <p>\begin{eqnarray}
 L(\theta,\delta) = \left\{
 \begin{array}{l@{\quad}l}
-0 &amp; \delta = \theta \\\<br>
+0 &amp; \delta = \theta \\\
 1 &amp; \delta \not= \theta
 \end{array}
 \right\}.
@@ -354,13 +354,13 @@ L(\theta,\delta) = \left\{
 <p>The posterior expected loss is  \(E_Y[L(\theta,\delta)] = 1 - E_Y \{\theta = \delta\}\)
 The optimal decision rule is</p>
 <p>\begin{eqnarray}
-\delta = \mbox{argmax}_{\theta' \in \Theta} ; P_Y \{ \theta = \theta'\}
+\delta = \mbox{argmax}_{\theta&rsquo; \in \Theta} ; P_Y \{ \theta = \theta&rsquo;\}
 \end{eqnarray}</p>
 <p>the point estimator under the zero-one loss is equal
 to the parameter value that has the highest posterior probability. We showed
 that</p>
 <p>\begin{eqnarray}
-P \{\theta = 0 |Y=1 \} &amp;=&amp; 0.358 \\\<br>
+P \{\theta = 0 |Y=1 \} &amp;=&amp; 0.358 \\\
 P \{\theta = 1 |Y=1 \} &amp;=&amp; 0.642
 \end{eqnarray}</p>
 <p>Thus \(\delta(Y=1) = 1\).</p>
@@ -375,12 +375,12 @@ the form \(L(\theta,\delta) = (\theta - \delta)^2\)</p>
 \(\delta(Y^T) = E_{Y^T} [\theta]\).</p>
 <p>Thus, the posterior mean \(\tilde{\theta}_T\) is the optimal point predictor under quadratic loss.</p>
 <h3 id="asymptotically">Asymptotically</h3>
-<p>Suppose data are generated from the model \(y_t = x_t'\theta_0 + u_t\).
-Asymptotically the Bayes estimator converges to the ``true'' parameter \(\theta_0\)</p>
+<p>Suppose data are generated from the model \(y_t = x_t&rsquo;\theta_0 + u_t\).
+Asymptotically the Bayes estimator converges to the ``true&rsquo;&rsquo; parameter \(\theta_0\)</p>
 <p>\begin{eqnarray}
 \tilde{\theta}_T
-&amp;=&amp; (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \\\<br>
-&amp;=&amp; \theta_0 + \bigg( \frac{1}{T} X&rsquo;X + \frac{1}{\tau^2 T}{\cal I} \bigg)^{-1} \bigg( \frac{1}{T} X&rsquo;U \bigg) \nonumber \\\<br>
+&amp;=&amp; (X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y \\\
+&amp;=&amp; \theta_0 + \bigg( \frac{1}{T} X&rsquo;X + \frac{1}{\tau^2 T}{\cal I} \bigg)^{-1} \bigg( \frac{1}{T} X&rsquo;U \bigg) \nonumber \\\
 &amp;\stackrel{p}{\longrightarrow} &amp; \theta_0 \nonumber
 \end{eqnarray}</p>
 <p>The disagreement between two Bayesians who have different priors
@@ -395,8 +395,8 @@ function \(\{\theta \in \Theta_0\}\).</p>
 <p>\begin{eqnarray}
 L(\theta,\delta) = \left\{
 \begin{array}{l@{\quad}l@{\quad}l}
-0   &amp; \delta = \{\theta \in \Theta_0\} &amp; \mbox{correct decision}\\\<br>
-a_0 &amp; \delta = 0, ; \theta \in \Theta_0 &amp; \mbox{Type 1 error} \\\<br>
+0   &amp; \delta = \{\theta \in \Theta_0\} &amp; \mbox{correct decision}\\\
+a_0 &amp; \delta = 0, ; \theta \in \Theta_0 &amp; \mbox{Type 1 error} \\\
 a_1 &amp; \delta = 1, ; \theta \in \Theta_1 &amp; \mbox{Type 2 error}
 \end{array}
 \right.
@@ -407,7 +407,7 @@ preferences.</p>
 <p>\begin{eqnarray}
 \delta(Y^T) = \left\{
 \begin{array}{l@{\quad}l}
-1 &amp; P_{Y^T}\{\theta \in \Theta_0\} \ge a_1/(a_0+a_1) \\\<br>
+1 &amp; P_{Y^T}\{\theta \in \Theta_0\} \ge a_1/(a_0+a_1) \\\
 0 &amp; \mbox{otherwise}
 \end{array}
 \right.
@@ -432,7 +432,7 @@ B(Y^T) = \frac{\mbox{Posterior Odds}}{\mbox{Prior Odds}}
 <h3 id="example-1-continued">Example 1, Continued</h3>
 <p>Suppose the observed value of \(Y\) is \(2\). Note that</p>
 <p>\begin{eqnarray}
-P_{\theta=0} \{Y \ge 2\} &amp; = &amp; 0.110 \\\<br>
+P_{\theta=0} \{Y \ge 2\} &amp; = &amp; 0.110 \\\
 P_{\theta=1} \{Y \ge 2\} &amp; = &amp; 0.049
 \end{eqnarray}</p>
 <p>The frequentist interpretation of this result would be
@@ -465,7 +465,7 @@ Suppose that \(a_0=a_1=1\)</p>
 <p>Suppose that \(y_t = x_t \theta_0 + u_t\). Note that</p>
 <p>\begin{eqnarray}
 \frac{\tilde{\theta}_T}{ \sqrt{ \tilde{V}_T } }
-&amp;=&amp; \sqrt{( \frac{1}{\tau^2} + \sum x_t^2 )^{-1} }\sum x_t y_t \\\<br>
+&amp;=&amp; \sqrt{( \frac{1}{\tau^2} + \sum x_t^2 )^{-1} }\sum x_t y_t \\\
 &amp;=&amp; \sqrt{T} \theta_0 \frac{ \frac{1}{T} \sum x_t^2 }{ \sqrt{ \frac{1}{T} \sum x_t^2 + \frac{1}{\tau^2 T} } }
 + \frac{ \frac{1}{\sqrt{T}} \sum x_t u_t }{ \sqrt{ \frac{1}{T} \sum x_t^2 + \frac{1}{\tau^2 T} } }
 \end{eqnarray}</p>
@@ -494,9 +494,9 @@ where \(\Delta[ \{\theta=0\}]\) is a point mass or dirac function.</p>
 <p>\begin{eqnarray*}
 \int p(Y^T|\theta)p^*(\theta) d\theta
 &amp; = &amp;  \lambda \int p(Y^T|\theta) \Delta [ \{\theta = 0\}] d\theta \nonumber \ &amp;&amp; +
-(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\<br>
+(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\
 &amp; = &amp;  \lambda \int p(Y^T|0) \Delta [\{\theta = 0\} ] d\theta \nonumber \ &amp;&amp; +
-(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\<br>
+(1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta \nonumber \\\
 &amp; = &amp;  \lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta) p(\theta) d\theta
 \end{eqnarray*}</p>
 <h3 id="evidence-for--theta-0">Evidence for \(\theta=0\)</h3>
@@ -504,11 +504,11 @@ where \(\Delta[ \{\theta=0\}]\) is a point mass or dirac function.</p>
 {\tiny</p>
 <p>\begin{eqnarray}
 P_{Y^T}\{\theta=0\}
-&amp;=&amp; \lim_{\epsilon \longrightarrow 0} ; P_{Y^T} \{ 0 \le \theta \le \epsilon \} \label{eq_pTth0} \\\<br>
+&amp;=&amp; \lim_{\epsilon \longrightarrow 0} ; P_{Y^T} \{ 0 \le \theta \le \epsilon \} \label{eq_pTth0} \\\
 &amp;=&amp; \lim_{\epsilon \longrightarrow 0} ;
 \frac{ \lambda \int_0^\epsilon p(Y^T|\theta) \Delta[\{\theta = 0\}] d \theta
 + (1 - \lambda) \int_0^\epsilon p(Y^T|\theta)p(\theta) d\theta }{
-\lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta)p(\theta)d\theta} \nonumber \\\<br>
+\lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta)p(\theta)d\theta} \nonumber \\\
 &amp;=&amp; \frac{ \lambda p(Y^T| 0) }{
 \lambda p(Y^T|0) + (1-\lambda) \int p(Y^T|\theta)p(\theta)d\theta}.
 \end{eqnarray}</p>
@@ -527,7 +527,7 @@ p(Y|X) = \int p(Y|X,\theta) p(\theta) d\theta.
 <p>Typically, this is a pain!  However, since everything is normal here, we can show:</p>
 <p>\begin{eqnarray}
 p(Y|X)
-&amp;=&amp; (2 \pi)^{-T/2} \tau^{-k} | X&rsquo;X + \tau^{-2} |^{-1/2} \nonumber \\\<br>
+&amp;=&amp; (2 \pi)^{-T/2} \tau^{-k} | X&rsquo;X + \tau^{-2} |^{-1/2} \nonumber \\\
 &amp;&amp; \times \exp \left\{ - \frac{1}{2}[ Y&rsquo;Y - Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y ] \right\}
 . \nonumber
 \end{eqnarray}</p>
@@ -535,29 +535,29 @@ p(Y|X)
 <p>the posterior odds ratio in favor of the null hypothesis is given by</p>
 <p>\begin{eqnarray}
 \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} }
-= \tau^{k} | X&rsquo;X + \tau^{-2} |^{1/2} \nonumber \\\<br>
+= \tau^{k} | X&rsquo;X + \tau^{-2} |^{1/2} \nonumber \\\
 \times \exp \left\{ - \frac{1}{2}[ Y&rsquo;X(X&rsquo;X + \tau^{-2} {\cal I})^{-1} X&rsquo;Y ] \right\}
 \end{eqnarray}</p>
 <p>Taking logs and standardizing the sums by \(T^{-1}\) yields</p>
 <p>\begin{eqnarray*}
 \ln \left[ \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} } \right]
 &amp;=&amp; - \frac{T}{2} \bigg( \frac{1}{T} \sum x_t y_t \bigg)'
-\bigg( \frac{1}{T} \sum x_t x_t' + \frac{1}{\tau^2 T} \bigg)^{-1} \nonumber \\\</p>
+\bigg( \frac{1}{T} \sum x_t x_t&rsquo; + \frac{1}{\tau^2 T} \bigg)^{-1} \nonumber \\\</p>
 <p>&amp;&amp; \times         \bigg( \frac{1}{T} \sum x_t y_t \bigg)
 &amp;&amp; + \frac{k}{2} \ln T</p>
 <ul>
-<li>\frac{1}{2} \ln \bigg| \frac{1}{T} \sum x_t x_t' + \frac{1}{\tau^2 T} \bigg| + k \ln \tau
+<li>\frac{1}{2} \ln \bigg| \frac{1}{T} \sum x_t x_t&rsquo; + \frac{1}{\tau^2 T} \bigg| + k \ln \tau
 \end{eqnarray*}</li>
 </ul>
 <h3 id="assessing-posterior-odds">Assessing Posterior Odds</h3>
-<p>Assume that Data Were Generated from \(y_t = x_t'\theta_0 + u_t\).</p>
+<p>Assume that Data Were Generated from \(y_t = x_t&rsquo;\theta_0 + u_t\).</p>
 <p>\begin{eqnarray}
-\lefteqn{ Y&rsquo;X(X&rsquo;X +\tau^{-2})^{-1} X&rsquo;Y } \nonumber \\\<br>
-&amp;=&amp; \theta_0' X&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\<br>
-&amp;&amp; + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + \theta_0&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\<br>
-&amp;=&amp; T \theta_0' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \theta_0
-+ \sqrt{T} 2 \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)' \theta_0 \nonumber \\\<br>
-&amp;&amp;+ \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)</p>
+\lefteqn{ Y&rsquo;X(X&rsquo;X +\tau^{-2})^{-1} X&rsquo;Y } \nonumber \\\
+&amp;=&amp; \theta_0&rsquo; X&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\
+&amp;&amp; + U&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;X \theta_0 + \theta_0&rsquo;X (X&rsquo;X +\tau^{-2})^{-1} X&rsquo;U \nonumber \\\
+&amp;=&amp; T \theta_0&rsquo; \bigg( \frac{1}{T} \sum x_t x_t&rsquo; \bigg)^{-1} \theta_0
++ \sqrt{T} 2 \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)&rsquo; \theta_0 \nonumber \\\
+&amp;&amp;+ \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)&rsquo; \bigg( \frac{1}{T} \sum x_t x_t&rsquo; \bigg)^{-1} \bigg( \frac{1}{\sqrt{T}} \sum x_t u_t \bigg)</p>
 <ul>
 <li>O_p(1). \nonumber
 \end{eqnarray}</li>
@@ -574,7 +574,7 @@ and the posterior probability of \(\theta = 0\) converges to one.</p>
 then</p>
 <p>\begin{eqnarray}
 \ln \left[ \frac{ P_{Y^T}\{ \theta =0\} }{  P_{Y^T}\{ \theta \not=0\} } \right]
-=  -\frac{T}{2} \theta_0' \bigg( \frac{1}{T} \sum x_t x_t' \bigg)^{-1} \theta_0  + small \longrightarrow - \infty. \nonumber
+=  -\frac{T}{2} \theta_0&rsquo; \bigg( \frac{1}{T} \sum x_t x_t&rsquo; \bigg)^{-1} \theta_0  + small \longrightarrow - \infty. \nonumber
 \end{eqnarray}</p>
 <p>and the posterior odds converge to zero, which implies that the posterior probability
 of the null hypothesis being true converges to zero.</p>
@@ -582,21 +582,21 @@ of the null hypothesis being true converges to zero.</p>
 <p>Bayesian test is consistent in the following sense.</p>
 <ul>
 <li>
-<p>If the null hypothesis is ``true'' then the posterior probability
+<p>If the null hypothesis is ``true&rsquo;&rsquo; then the posterior probability
 of \(H_0\) converges in probability to one as \(T \longrightarrow\infty\).</p>
 </li>
 <li>
 <p>If the null hypothesis is false then the posterior probability of \(H_0\) tends to zero</p>
 </li>
 </ul>
-<p>Thus, asymptotically the Bayesian test procedure has no ``Type 1'' error.</p>
+<p>Thus, asymptotically the Bayesian test procedure has no ``Type 1&rsquo;&rsquo; error.</p>
 <h3 id="understanding-this">Understanding this</h3>
 <p>consider the marginal data density \(p(Y|X)\) in Example~2.
 The terms that asymptotically dominate are</p>
 <p>\begin{eqnarray}
 \ln p(Y|X)
-&amp;=&amp; - \frac{T}{2} \ln (2\pi) - \frac{1}{2} (Y&rsquo;Y - Y&rsquo;X(X&rsquo;X)^{-1} X&rsquo;Y) - \frac{k}{2} \ln T + small \\\<br>
-&amp;=&amp; \ln p(Y|X,\hat{\theta}_{mle}) - \frac{k}{2} \ln T + small \nonumber \\\<br>
+&amp;=&amp; - \frac{T}{2} \ln (2\pi) - \frac{1}{2} (Y&rsquo;Y - Y&rsquo;X(X&rsquo;X)^{-1} X&rsquo;Y) - \frac{k}{2} \ln T + small \\\
+&amp;=&amp; \ln p(Y|X,\hat{\theta}_{mle}) - \frac{k}{2} \ln T + small \nonumber \\\
 &amp;=&amp; \mbox{maximized likelihood function} - \mbox{penalty}.
 \end{eqnarray}</p>
 <p>The marginal data density has the form of a penalized likelihood function.</p>
@@ -631,7 +631,7 @@ regions of the parameter space \(\Theta\).</p>
 C_{Y^T} = \left[ \tilde{\theta}_{T,j} - z_{crit} [ \tilde{V}_T]^{1/2}_{jj}
 \le \theta_j \le \tilde{\theta}_{T,j} + z_{crit} [ \tilde{V}_T]^{1/2}_{jj} \right]
 \]
-where \([ \tilde{V}_T]_{jj}\) is the \(j\)&lsquo;th diagonal element of \(\tilde{V}_T\),
+where \([ \tilde{V}_T]_{jj}\) is the \(j\)&rsquo;th diagonal element of \(\tilde{V}_T\),
 and \(z_{crit}\) is the \(\alpha/2\) critical value of a \({\cal N}(0,1)\).</p>
 <p>In the Gaussian linear
 regression model the Bayesian

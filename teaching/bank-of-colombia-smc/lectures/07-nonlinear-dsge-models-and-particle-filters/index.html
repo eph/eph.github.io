@@ -24,8 +24,8 @@
 
 
 <meta name="twitter:title" content="The Particle Filter"/>
-<meta name="twitter:description" content="Nonlinear DSGE Models From Linear to Nonlinear DSGE Models  While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear.  One can add certain features that generate more pronounced nonlinearities:  stochastic volatility; markov switching coefficients; asymmetric adjustment costs; occasionally binding constraints.    From Linear to Nonlinear DSGE Models   Linear DSGE model leads to
-\begin{eqnarray*} y_t &amp;=&amp; \Psi_0(\theta) &#43; \Psi_1(\theta)t &#43; \Psi_2(\theta) s_t &#43; u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\"/>
+<meta name="twitter:description" content="Nonlinear DSGE Models From Linear to Nonlinear DSGE Models While DSGE models are inherently nonlinear, the nonlinearities are often small and decision rules are approximately linear. One can add certain features that generate more pronounced nonlinearities: stochastic volatility; markov switching coefficients; asymmetric adjustment costs; occasionally binding constraints. From Linear to Nonlinear DSGE Models Linear DSGE model leads to
+\begin{eqnarray*} y_t &amp;=&amp; \Psi_0(\theta) &#43; \Psi_1(\theta)t &#43; \Psi_2(\theta) s_t &#43; u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\ s_t &amp;=&amp; \Phi_1(\theta)s_{t-1} &#43; \Phi_\epsilon(\theta) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon)."/>
 
 </head>
 <body class="terminal">
@@ -76,14 +76,14 @@ small and decision rules are approximately linear.
 <li>
 <p>Linear DSGE model leads to</p>
 <p>\begin{eqnarray*}
-y_t &amp;=&amp; \Psi_0(\theta) + \Psi_1(\theta)t + \Psi_2(\theta) s_t + u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\<br>
+y_t &amp;=&amp; \Psi_0(\theta) + \Psi_1(\theta)t + \Psi_2(\theta) s_t + u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\
 s_t &amp;=&amp; \Phi_1(\theta)s_{t-1} + \Phi_\epsilon(\theta) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon).
 \end{eqnarray*}</p>
 </li>
 <li>
 <p>Nonlinear DSGE model leads to</p>
 <p>\begin{eqnarray*}
-y_t &amp;=&amp; \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\<br>
+y_t &amp;=&amp; \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\
 s_t &amp;=&amp; \Phi(s_{t-1},\epsilon_t; \theta), \quad \epsilon_t \sim F_\epsilon(\cdot;\theta).
 \end{eqnarray*}</p>
 </li>
@@ -118,7 +118,7 @@ s_t &amp;=&amp; \Phi(s_{t-1},\epsilon_t; \theta), \quad \epsilon_t \sim F_\epsil
 <li>
 <p>State-space representation of nonlinear DSGE model</p>
 <p>\begin{eqnarray*}
-\mbox{Measurement Eq.}   &amp;:&amp; y_t = \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\<br>
+\mbox{Measurement Eq.}   &amp;:&amp; y_t = \Psi(s_t,t; \theta) + u_t, \quad u_t \sim F_u(\cdot;\theta) \label{eq_nlssnonlinear} \\\
 \mbox{State Transition}  &amp;:&amp; s_t = \Phi(s_{t-1},\epsilon_t; \theta), \quad \epsilon_t \sim F_\epsilon(\cdot;\theta).
 \end{eqnarray*}</p>
 </li>
@@ -197,7 +197,7 @@ can be approximated by</p>
 <p>If the measurement errors are \(N(0,\Sigma_u)\) then the incremental weights take the form</p>
 <p>\begin{equation}
 \tilde{w}_t^j = (2 \pi)^{-n/2} |\Sigma_u|^{-1/2}
-\exp \bigg\{ - \frac{1}{2} \big(y_t - \Psi(\tilde{s}^j_t,t;\theta) \big)'\Sigma_u^{-1}
+\exp \bigg\{ - \frac{1}{2} \big(y_t - \Psi(\tilde{s}^j_t,t;\theta) \big)&rsquo;\Sigma_u^{-1}
 \big(y_t - \Psi(\tilde{s}^j_t,t;\theta)\big) \bigg\}, \label{eq_pfincrweightgaussian}
 \end{equation}</p>
 <p>where \(n\) here denotes the dimension of \(y_t\).</p>
@@ -327,7 +327,7 @@ can be approximated by</p>
 <li>
 <p>The convergence results can be established recursively, starting from the assumption</p>
 <p>\begin{eqnarray*}
-\bar{h}_{t-1,M} &amp;\stackrel{a.s.}{\longrightarrow}&amp; \mathbb{E}[h(s_{t-1})|Y_{1:t-1}], \\\<br>
+\bar{h}_{t-1,M} &amp;\stackrel{a.s.}{\longrightarrow}&amp; \mathbb{E}[h(s_{t-1})|Y_{1:t-1}], \\\
 \sqrt{M} \big( \bar{h}_{t-1,M} - \mathbb{E}[h(s_{t-1})|Y_{1:t-1}] \big) &amp;\Longrightarrow&amp; N \big( 0, \Omega_{t-1}(h) \big). \nonumber
 \end{eqnarray*}</p>
 </li>
@@ -337,10 +337,10 @@ can be approximated by</p>
 <li>
 <p>Decompose</p>
 <p>\begin{eqnarray}
-\lefteqn{\hat{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t-1}]}	\label{eq_pfdecomphtt1} \\\<br>
-&amp;=&amp; \frac{1}{M} \sum_{j=1}^M  \left( h(\tilde{s}_t^j) - \mathbb{E}_{p(\cdot|s_{t-1}^j)}[h] \right) W_{t-1}^j \nonumber \\\<br>
+\lefteqn{\hat{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t-1}]}	\label{eq_pfdecomphtt1} \\\
+&amp;=&amp; \frac{1}{M} \sum_{j=1}^M  \left( h(\tilde{s}_t^j) - \mathbb{E}_{p(\cdot|s_{t-1}^j)}[h] \right) W_{t-1}^j \nonumber \\\
 &amp; &amp; + \frac{1}{M} \sum_{j=1}^M	\left( \mathbb{E}_{p(\cdot|s_{t-1}^j)}[h] W_{t-1}^j
-- \mathbb{E}[h(s_t)|Y_{1:t-1}] \right)	\nonumber \\\<br>
+- \mathbb{E}[h(s_t)|Y_{1:t-1}] \right)	\nonumber \\\
 &amp;=&amp; I + II, \nonumber
 \end{eqnarray}</p>
 </li>
@@ -372,7 +372,7 @@ v_t(s_t) = \frac{p(y_t|s_t)}{\int p(y_t|s_t) p(s_t|Y_{1:t-1}) ds_t}.
 <p>Under suitable regularity conditions, the Monte Carlo approximation satisfies a CLT of the
 form</p>
 <p>\begin{eqnarray}
-\lefteqn{\sqrt{M} \big( \tilde{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t}] \big) } \label{eq_pftildehclt} \\\<br>
+\lefteqn{\sqrt{M} \big( \tilde{h}_{t,M} - \mathbb{E}[h(s_t)|Y_{1:t}] \big) } \label{eq_pftildehclt} \\\
 &amp;\Longrightarrow&amp; N \big( 0, \tilde{\Omega}_t(h) \big), \quad
 \tilde{\Omega}_t(h) = \hat{\Omega}_t \big( v_t(s_t) ( h(s_t) - \mathbb{E}[h(s_t)|Y_{1:t}] )\big). \nonumber
 \end{eqnarray}</p>
@@ -398,7 +398,7 @@ of DSGE model or approximate nonlinear filters.</p>
 <li>
 <p>Conditionally-linear models: do Kalman filter updating on a subvector of \(s_t\). Example:</p>
 <p>\begin{eqnarray*}
-y_t &amp;=&amp; \Psi_0(m_t) + \Psi_1(m_t) t + \Psi_2(m_t) s_t + u_t, \quad u_t \sim N(0,\Sigma_u), \label{eq_pfsslinearms} \\\<br>
+y_t &amp;=&amp; \Psi_0(m_t) + \Psi_1(m_t) t + \Psi_2(m_t) s_t + u_t, \quad u_t \sim N(0,\Sigma_u), \label{eq_pfsslinearms} \\\
 s_t &amp;=&amp; \Phi_0(m_t) + \Phi_1(m_t)s_{t-1} + \Phi_\epsilon(m_t) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon), \nonumber
 \end{eqnarray*}</p>
 <p>where \(m_t\) follows a discrete Markov-switching process.</p>
@@ -429,8 +429,8 @@ s_t|(m_t,Y_{1:t}) \sim N \big( \bar{s}_{t|t}(m_t), P_{t|t}(m_t) \big).
 <li>
 <p>The swarm of particles approximates</p>
 <p>\begin{eqnarray}
-\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t,Y_{1:t}) d(m_t,s_t)} \\\<br>
-&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t}) d s_{t} \right] p(m_{t}|Y_{1:t}) dm_{t} \label{eq_pfraoapproxtt} \nonumber \\\<br>
+\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t,Y_{1:t}) d(m_t,s_t)} \\\
+&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t}) d s_{t} \right] p(m_{t}|Y_{1:t}) dm_{t} \label{eq_pfraoapproxtt} \nonumber \\\
 &amp;\approx&amp;
 \frac{1}{M} \sum_{j=1}^M \left[ \int h(m_{t}^j,s_{t}^j) p_N\big(s_t|\bar{s}_{t|t}^j,P_{t|t}^j \big) ds_t \right] W_t^j. \nonumber
 \end{eqnarray}</p>
@@ -455,9 +455,9 @@ s_t|(m_t,Y_{1:t}) \sim N \big( \bar{s}_{t|t}(m_t), P_{t|t}(m_t) \big).
 <p>The Kalman filter forecasting step can be used to compute:</p>
 <p>\begin{equation}
 \begin{array}{lcl}
-\tilde{s}_{t|t-1}^j &amp;=&amp;	 \Phi_0(\tilde{m}^j_t) + \Phi_1(\tilde{m}^j_t) s_{t-1}^j  \\\<br>
-P_{t|t-1}^j &amp;=&amp; \Phi_\epsilon(\tilde{m}^j_t) \Sigma_\epsilon(\tilde{m}^j_t) \Phi_\epsilon(\tilde{m}^j_t)' \\\<br>
-\tilde{y}_{t|t-1}^j &amp;=&amp; \Psi_0(\tilde{m}^j_t) + \Psi_1(\tilde{m}^j_t) t + \Psi_2(\tilde{m}^j_t) \tilde{s}_{t|t-1}^j \ F_{t|t-1}^j &amp;=&amp; \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)' + \Sigma_u.
+\tilde{s}_{t|t-1}^j &amp;=&amp;	 \Phi_0(\tilde{m}^j_t) + \Phi_1(\tilde{m}^j_t) s_{t-1}^j  \\\
+P_{t|t-1}^j &amp;=&amp; \Phi_\epsilon(\tilde{m}^j_t) \Sigma_\epsilon(\tilde{m}^j_t) \Phi_\epsilon(\tilde{m}^j_t)&rsquo; \\\
+\tilde{y}_{t|t-1}^j &amp;=&amp; \Psi_0(\tilde{m}^j_t) + \Psi_1(\tilde{m}^j_t) t + \Psi_2(\tilde{m}^j_t) \tilde{s}_{t|t-1}^j \ F_{t|t-1}^j &amp;=&amp; \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)&rsquo; + \Sigma_u.
 \end{array}
 \label{eq_pfforeccondlinear}
 \end{equation}</p>
@@ -469,8 +469,8 @@ P_{t|t-1}^j &amp;=&amp; \Phi_\epsilon(\tilde{m}^j_t) \Sigma_\epsilon(\tilde{m}^j
 <p>\begin{itemize}
 \item Then,
 \begin{eqnarray}
-\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t|Y_{1:t-1}) d(m_t,s_t)} \\\<br>
-&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t-1}) d s_{t} \right] p(m_{t}|Y_{1:t-1}) dm_{t} \label{eq_generalpfhtt1condlinear}  \nonumber \\\<br>
+\lefteqn{\int h(m_{t},s_{t}) p(m_t,s_t|Y_{1:t-1}) d(m_t,s_t)} \\\
+&amp;=&amp; \int \left[ \int h(m_{t},s_{t}) p(s_{t}|m_{t},Y_{1:t-1}) d s_{t} \right] p(m_{t}|Y_{1:t-1}) dm_{t} \label{eq_generalpfhtt1condlinear}  \nonumber \\\
 &amp;\approx&amp;\frac{1}{M} \sum_{j=1}^M \left[ \int h(m_{t}^j,s_{t}^j) p_N\big(s_t| \tilde{s}_{t|t-1}^j,P_{t|t-1}^j \big) ds_t \right] \omega_t^j W_{t-1}^j \nonumber
 \end{eqnarray}
 \item The likelihood approximation is based on the incremental weights
@@ -482,8 +482,8 @@ P_{t|t-1}^j &amp;=&amp; \Phi_\epsilon(\tilde{m}^j_t) \Sigma_\epsilon(\tilde{m}^j
 to update the information about $s_t$ in view of the current observation $y_t$:
 \begin{equation}
 \begin{array}{lcl}
-\tilde{s}_{t|t}^j &amp;=&amp; \tilde{s}_{t|t-1}^j + P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)' \big( F_{t|t-1}^j \big)^{-1} (y_t - \bar{y}^j_{t|t-1}) \\\<br>
-\tilde{P}_{t|t}^j &amp;=&amp; P^j_{t|t-1} - P^j_{t|t-1} \Psi_2(\tilde{m}^j_t)'\big(F^j_{t|t-1} \big)^{-1} \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j.
+\tilde{s}_{t|t}^j &amp;=&amp; \tilde{s}_{t|t-1}^j + P_{t|t-1}^j \Psi_2(\tilde{m}^j_t)&rsquo; \big( F_{t|t-1}^j \big)^{-1} (y_t - \bar{y}^j_{t|t-1}) \\\
+\tilde{P}_{t|t}^j &amp;=&amp; P^j_{t|t-1} - P^j_{t|t-1} \Psi_2(\tilde{m}^j_t)&rsquo;\big(F^j_{t|t-1} \big)^{-1} \Psi_2(\tilde{m}^j_t) P_{t|t-1}^j.
 \end{array}
 \label{eq_pfupdatecondlinear}
 \end{equation}
@@ -525,7 +525,7 @@ to update the information about $s_t$ in view of the current observation $y_t$:
 s_{1,t} = \Phi_1(s_{t-1},\epsilon_t), \quad s_{2,t} = \Phi_2(s_{t-1}), \quad \epsilon_t \sim N(0,1).
 \]
 \item Generic filter requires evaluation of $p(s_t|s_{t-1})$.
-\spitem Define $\varsigma_t = [s_t',\epsilon_t']'$ and add identity $\epsilon_t =
+\spitem Define $\varsigma_t = [s_t&rsquo;,\epsilon_t&rsquo;]&rsquo;$ and add identity $\epsilon_t =
 \epsilon_t$ to state transition.
 \spitem Factorize the density
 $p(\varsigma_t|\varsigma_{t-1})$ as
@@ -567,7 +567,7 @@ can lead to a degeneracy.
 <h3 id="next-steps">Next Steps</h3>
 <p>\begin{itemize}
 \item We will now apply PFs to linearized DSGE models.
-\item This allows us to compare the Monte Carlo approximation to the ``truth.''
+\item This allows us to compare the Monte Carlo approximation to the ``truth.&rsquo;'
 \item Small-scale New Keynesian DSGE model
 \item Smets-Wouters model
 \end{itemize}</p>
@@ -576,19 +576,19 @@ can lead to a degeneracy.
 <p>\begin{center}
 \begin{tabular}{lcclcc} \hline\hline
 Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$ &amp; Parameter &amp; $\theta^{m}$ &amp; $\theta^{l}$  \ \hline
-$\tau$               &amp;  2.09 &amp;  3.26 &amp; $\kappa$             &amp;  0.98 &amp;  0.89 \\\<br>
-$\psi_1$             &amp;  2.25 &amp;  1.88 &amp; $\psi_2$             &amp;  0.65 &amp;  0.53 \\\<br>
-$\rho_r$             &amp;  0.81 &amp;  0.76 &amp; $\rho_g$             &amp;  0.98 &amp;  0.98 \\\<br>
-$\rho_z$             &amp;  0.93 &amp;  0.89 &amp; $r^{(A)}$            &amp;  0.34 &amp;  0.19 \\\<br>
-$\pi^{(A)}$          &amp;  3.16 &amp;  3.29 &amp; $\gamma^{(Q)}$       &amp;  0.51 &amp;  0.73 \\\<br>
-$\sigma_r$           &amp;  0.19 &amp;  0.20 &amp; $\sigma_g$           &amp;  0.65 &amp;  0.58 \\\<br>
+$\tau$               &amp;  2.09 &amp;  3.26 &amp; $\kappa$             &amp;  0.98 &amp;  0.89 \\\
+$\psi_1$             &amp;  2.25 &amp;  1.88 &amp; $\psi_2$             &amp;  0.65 &amp;  0.53 \\\
+$\rho_r$             &amp;  0.81 &amp;  0.76 &amp; $\rho_g$             &amp;  0.98 &amp;  0.98 \\\
+$\rho_z$             &amp;  0.93 &amp;  0.89 &amp; $r^{(A)}$            &amp;  0.34 &amp;  0.19 \\\
+$\pi^{(A)}$          &amp;  3.16 &amp;  3.29 &amp; $\gamma^{(Q)}$       &amp;  0.51 &amp;  0.73 \\\
+$\sigma_r$           &amp;  0.19 &amp;  0.20 &amp; $\sigma_g$           &amp;  0.65 &amp;  0.58 \\\
 $\sigma_z$           &amp;  0.24 &amp;  0.29 &amp; $\ln p(Y|\theta)$    &amp; -306.5 &amp; -313.4 \ \hline
 \end{tabular}
 \end{center}</p>
 <h3 id="likelihood-approximation">Likelihood Approximation</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-$\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ vs. $\ln p(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+$\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ vs. $\ln p(y_t|Y_{1:t-1},\theta^m)$ \\\
 \includegraphics[width=3.2in]{static/dsge1_me_paramax_lnpy.pdf}
 \end{tabular}
 \end{center}</p>
@@ -597,7 +597,7 @@ of the bootstrap PF (dashed, \(M=40,000\)), the conditionally-optimal PF (dotted
 <h3 id="filtered-state">Filtered State</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-$\widehat{\mathbb{E}}[\hat{g}_t|Y_{1:t},\theta^m]$ vs. $\mathbb{E}[\hat{g}_t|Y_{1:t},\theta^m]$\\\<br>
+$\widehat{\mathbb{E}}[\hat{g}_t|Y_{1:t},\theta^m]$ vs. $\mathbb{E}[\hat{g}_t|Y_{1:t},\theta^m]$\\\
 \includegraphics[width=3.2in]{static/dsge1_me_paramax_ghat.pdf}
 \end{tabular}
 \end{center}</p>
@@ -606,7 +606,7 @@ of the bootstrap PF (dashed, \(M=40,000\)), the conditionally-optimal PF (dotted
 <h3 id="distribution-of-log-likelihood-approximation-errors">Distribution of Log-Likelihood Approximation Errors</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-Bootstrap PF: $\theta^m$ vs. $\theta^l$ \\\<br>
+Bootstrap PF: $\theta^m$ vs. $\theta^l$ \\\
 \includegraphics[width=3in]{static/dsge1_me_bootstrap_lnlhbias.pdf}
 \end{tabular}
 \end{center}</p>
@@ -616,8 +616,8 @@ based on \(N_{run}=100\) runs of the PF. Solid line is \(\theta = \theta^m\); da
 <h3 id="distribution-of-log-likelihood-approximation-errors">Distribution of Log-Likelihood Approximation Errors</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-$\theta^m$: Bootstrap vs. Cond. Opt. PF \\\<br>
-\includegraphics[width=3in]{static/dsge1_me_paramax_lnlhbias.pdf} \\\<br>
+$\theta^m$: Bootstrap vs. Cond. Opt. PF \\\
+\includegraphics[width=3in]{static/dsge1_me_paramax_lnlhbias.pdf} \\\
 \end{tabular}
 \end{center}</p>
 <p><em>Notes:</em> Density estimate of \(\hat{\Delta}_1 = \ln \hat{p}(Y_{1:T}|\theta)- \ln p(Y_{1:T}|\theta)\)
@@ -628,15 +628,15 @@ based on \(N_{run}=100\) runs of the PF. Solid line is bootstrap particle filter
 <p>\begin{center}
 \begin{tabular}{lrrr} \ \hline \hline
 &amp; Bootstrap &amp; Cond. Opt. &amp; Auxiliary \ \hline
-Number of Particles $M$ &amp; 40,000 &amp; 400 &amp; 40,000 \\\<br>
+Number of Particles $M$ &amp; 40,000 &amp; 400 &amp; 40,000 \\\
 Number of Repetitions   &amp; 100 &amp; 100 &amp; 100 \ \hline
 \multicolumn{4}{c}{High Posterior Density: $\theta = \theta^m$} \ \hline
-Bias $\hat{\Delta}_1$ &amp; -1.39 &amp; -0.10 &amp; -2.83 \\\<br>
-StdD $\hat{\Delta}_1$ &amp;  2.03 &amp;  0.37 &amp;  1.87 \\\<br>
+Bias $\hat{\Delta}_1$ &amp; -1.39 &amp; -0.10 &amp; -2.83 \\\
+StdD $\hat{\Delta}_1$ &amp;  2.03 &amp;  0.37 &amp;  1.87 \\\
 Bias $\hat{\Delta}_2$ &amp;  0.32 &amp; -0.03 &amp; -0.74 \ \hline
 \multicolumn{4}{c}{Low Posterior Density: $\theta = \theta^l$} \ \hline
-Bias $\hat{\Delta}_1$ &amp; -7.01 &amp; -0.11 &amp; -6.44 \\\<br>
-StdD $\hat{\Delta}_1$ &amp;  4.68 &amp;  0.44 &amp;  4.19 \\\<br>
+Bias $\hat{\Delta}_1$ &amp; -7.01 &amp; -0.11 &amp; -6.44 \\\
+StdD $\hat{\Delta}_1$ &amp;  4.68 &amp;  0.44 &amp;  4.19 \\\
 Bias $\hat{\Delta}_2$ &amp; -0.70 &amp; -0.02 &amp; -0.50 \ \hline
 \end{tabular}
 \end{center}</p>
@@ -647,7 +647,7 @@ are based on \(N_{run}=100\) runs of the particle filters.</p>
 <h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\
 \includegraphics[width=3in]{static/dsge1_me_great_recession_lnpy.pdf}
 \end{tabular}
 \end{center}</p>
@@ -659,7 +659,7 @@ based on \(N_{run}=100\) runs of the filters.</p>
 <h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\<br>
+Mean of Log-likelihood Increments $\ln \hat{p}(y_t|Y_{1:t-1},\theta^m)$ \\\
 \includegraphics[width=2.9in]{static/dsge1_me_post_great_recession_lnpy.pdf}
 \end{tabular}
 \end{center}</p>
@@ -671,7 +671,7 @@ based on \(N_{run}=100\) runs of the filters.</p>
 <h3 id="great-recession-and-beyond">Great Recession and Beyond</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-Log Standard Dev of Log-Likelihood Increments \\\<br>
+Log Standard Dev of Log-Likelihood Increments \\\
 \includegraphics[width=3in]{static/dsge1_me_great_recession_lnpy_lnstd.pdf}
 \end{tabular}
 \end{center}</p>
@@ -683,7 +683,7 @@ based on \(N_{run}=100\) runs of the filters.</p>
 <h3 id="sw-model-distr-dot-of-log-likelihood-approximation-errors">SW Model: Distr. of Log-Likelihood Approximation Errors</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-BS ($M=40,000$) versus CO ($M=4,000$) \\\<br>
+BS ($M=40,000$) versus CO ($M=4,000$) \\\
 \includegraphics[width=3in]{static/sw_me_paramax_lnlhbias.pdf}
 \end{tabular}
 \end{center}</p>
@@ -693,7 +693,7 @@ dashed densities summarize results for the conditionally-optimal (CO) particle f
 <h3 id="sw-model-distr-dot-of-log-likelihood-approximation-errors">SW Model: Distr. of Log-Likelihood Approximation Errors</h3>
 <p>\begin{center}
 \begin{tabular}{c}
-BS ($M=400,000$) versus CO ($M=4,000$) \\\<br>
+BS ($M=400,000$) versus CO ($M=4,000$) \\\
 \includegraphics[width=3in]{static/sw_me_paramax_bs_lnlhbias.pdf}
 \end{tabular}
 \end{center}</p>
@@ -704,15 +704,15 @@ dashed densities summarize results for the conditionally-optimal (CO) particle f
 <p>\begin{center}
 \begin{tabular}{lrrrr} \ \hline \hline
 &amp; \multicolumn{2}{c}{Bootstrap} &amp; \multicolumn{2}{c}{Cond. Opt.} \ \hline
-Number of Particles $M$ &amp; 40,000 &amp; 400,000 &amp; 4,000 &amp; 40,000 \\\<br>
+Number of Particles $M$ &amp; 40,000 &amp; 400,000 &amp; 4,000 &amp; 40,000 \\\
 Number of Repetitions   &amp; 100 &amp; 100 &amp; 100 &amp; 100 \ \hline
 \multicolumn{5}{c}{High Posterior Density: $\theta = \theta^m$} \ \hline
-Bias $\hat{\Delta}_1$ &amp; -238.49 &amp; -118.20 &amp;   -8.55 &amp;   -2.88 \\\<br>
-StdD $\hat{\Delta}_1$ &amp;   68.28 &amp;   35.69 &amp;    4.43 &amp;    2.49 \\\<br>
+Bias $\hat{\Delta}_1$ &amp; -238.49 &amp; -118.20 &amp;   -8.55 &amp;   -2.88 \\\
+StdD $\hat{\Delta}_1$ &amp;   68.28 &amp;   35.69 &amp;    4.43 &amp;    2.49 \\\
 Bias $\hat{\Delta}_2$ &amp;   -1.00 &amp;   -1.00 &amp;   -0.87 &amp;   -0.41 \ \hline
 \multicolumn{5}{c}{Low Posterior Density: $\theta = \theta^l$} \ \hline
-Bias $\hat{\Delta}_1$ &amp; -253.89 &amp; -128.13 &amp;  -11.48 &amp;   -4.91 \\\<br>
-StdD $\hat{\Delta}_1$ &amp;   65.57 &amp;   41.25 &amp;    4.98 &amp;    2.75 \\\<br>
+Bias $\hat{\Delta}_1$ &amp; -253.89 &amp; -128.13 &amp;  -11.48 &amp;   -4.91 \\\
+StdD $\hat{\Delta}_1$ &amp;   65.57 &amp;   41.25 &amp;    4.98 &amp;    2.75 \\\
 Bias $\hat{\Delta}_2$ &amp;   -1.00 &amp;   -1.00 &amp;   -0.97 &amp;   -0.64 \ \hline
 \end{tabular}
 \end{center}</p>
@@ -771,7 +771,7 @@ measurement error variance \(\Sigma_u/{\color{blue}\phi_1}\).
 </li>
 <li>
 <p>For each time period \(t\),  we embed a
-``static'' SMC sampler used for parameter estimation
+``static&rsquo;&rsquo; SMC sampler used for parameter estimation
 [See Earlier Lectures]:</p>
 <p>Iterate over \(n=1,\ldots,N_\phi\):</p>
 <ul>
@@ -797,7 +797,7 @@ Metropolis-Hastings algorithm</li>
 \]
 where
 \[
-e_{j,t} = \frac{1}{2} (y_t - \Psi(s_t^{j,n-1},t;\theta))' \Sigma_u^{-1}(y_t -
+e_{j,t} = \frac{1}{2} (y_t - \Psi(s_t^{j,n-1},t;\theta))&rsquo; \Sigma_u^{-1}(y_t -
 \Psi(s_t^{j,n-1},t;\theta)).
 \]
 \item {\color{red} Pick target ratio $r^*$ and solve equation $\mbox{InEff}(\phi_n^*) = r^*$ for $\phi_n^*$.}
@@ -807,17 +807,17 @@ e_{j,t} = \frac{1}{2} (y_t - \Psi(s_t^{j,n-1},t;\theta))' \Sigma_u^{-1}(y_t -
   <div></div>
 <p>\begin{tabular}{l@{\hspace{1cm}}r@{\hspace{1cm}}rrrr}												    \ \hline \hline
 &amp; BSPF	 &amp; \multicolumn{4}{c}{TPF} \ \hline
-Number of Particles $M$		 &amp; 40k &amp; 4k	    &amp; 4k	  &amp; 40k		&amp; 40k	       \\\<br>
+Number of Particles $M$		 &amp; 40k &amp; 4k	    &amp; 4k	  &amp; 40k		&amp; 40k	       \\\
 Target Ineff. Ratio $r^*$	     &amp;	   &amp; 2		  &amp; 3		   &amp; 2		    &amp; 3		   \ \hline
 \multicolumn{6}{c}{High Posterior Density: $\theta = \theta^m$}						      \ \hline
-Bias		&amp; -1.4 &amp; -0.9 &amp; -1.5 &amp; -0.3 &amp; -.05     \\\<br>
-StdD		&amp; 1.9  &amp; 1.4  &amp; 1.7  &amp; 0.4  &amp; 0.6	\\\<br>
-$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$      &amp; 1.0  &amp; 4.3  &amp; 3.2  &amp; 4.3 &amp; 3.2			  \\\<br>
+Bias		&amp; -1.4 &amp; -0.9 &amp; -1.5 &amp; -0.3 &amp; -.05     \\\
+StdD		&amp; 1.9  &amp; 1.4  &amp; 1.7  &amp; 0.4  &amp; 0.6	\\\
+$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$      &amp; 1.0  &amp; 4.3  &amp; 3.2  &amp; 4.3 &amp; 3.2			  \\\
 Average Run Time (s)		 &amp; 0.8	&amp; 0.4 &amp; 0.3 &amp; 4.0 &amp; 3.3	     \ \hline
 \multicolumn{6}{c}{Low Posterior Density: $\theta = \theta^l$}						      \ \hline
-Bias		 &amp; -6.5 &amp; -2.1 &amp; -3.1 &amp; -0.3  &amp; -0.6		      \\\<br>
-StdD		 &amp; 5.3	&amp; 2.1  &amp; 2.6  &amp; 0.8   &amp; 1.0		       \\\<br>
-$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$       &amp; 1.0  &amp; 4.4 &amp; 3.3     &amp; 4.4 &amp; 3.3	       \\\<br>
+Bias		 &amp; -6.5 &amp; -2.1 &amp; -3.1 &amp; -0.3  &amp; -0.6		      \\\
+StdD		 &amp; 5.3	&amp; 2.1  &amp; 2.6  &amp; 0.8   &amp; 1.0		       \\\
+$T^{-1}\sum_{t=1}^{T}N_{\phi,t}$       &amp; 1.0  &amp; 4.4 &amp; 3.3     &amp; 4.4 &amp; 3.3	       \\\
 Average Run Time (s)		 &amp; 1.6 &amp; 0.4 &amp; 0.3 &amp; 3.7     &amp; 2.9		      \ \hline
 \end{tabular}</p>
 </div>

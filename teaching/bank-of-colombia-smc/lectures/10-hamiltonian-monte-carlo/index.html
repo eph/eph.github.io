@@ -25,7 +25,7 @@
 
 <meta name="twitter:title" content="Advanced MCMC: Hamiltonian Monte Carlo"/>
 <meta name="twitter:description" content="Introduction Hamiltonian Monte Carlo We previously spoke about how much the efficacy of MCMC algorithms depended on the shape of the posterior. We&rsquo;re going to talk about posterior simulators that make that idea explicit. In particular, the Hamiltonian Monte Carlo sampler described in \cite{Neal_2011}.
-Details  Hamiltonian Monte Carlo adapts methods from the study of molecular dynamics: simulate the motion of molecules based on Newton&rsquo;s laws.  The systems which describe the evolution of molecules over time exhibit so-called Hamiltonian dynamics  The state of the system at any point in time is summarized by a pair \((\theta, p)\)."/>
+Details Hamiltonian Monte Carlo adapts methods from the study of molecular dynamics: simulate the motion of molecules based on Newton&rsquo;s laws. The systems which describe the evolution of molecules over time exhibit so-called Hamiltonian dynamics The state of the system at any point in time is summarized by a pair \((\theta, p)\)."/>
 
 </head>
 <body class="terminal">
@@ -94,14 +94,14 @@ Our world:</p>
 </ul>
 <h3 id="explicit-formulation-of-hamiltonian">Explicit Formulation of Hamiltonian</h3>
 <p>\begin{eqnarray}
-H(\theta,p) &amp;=&amp; -\log\pi(p|\theta) - \log\pi(\theta). \nonumber \\\<br>
+H(\theta,p) &amp;=&amp; -\log\pi(p|\theta) - \log\pi(\theta). \nonumber \\\
 &amp;=&amp; K(p,\theta) + V(\theta) \nonumber
 \end{eqnarray}</p>
 <p>Then the joint density of \((\theta,p)\) is given by \(e^{-H(\theta,p)}\)
 <br>
 As mentioned above, the \(\theta,p\) evolve over time according to the Hamiltonian equations:</p>
 <p>\begin{eqnarray}
-\frac{d\theta}{dt} &amp;=&amp; \frac{\partial H}{\partial p} = \frac{\partial K}{\partial p} \\\<br>
+\frac{d\theta}{dt} &amp;=&amp; \frac{\partial H}{\partial p} = \frac{\partial K}{\partial p} \\\
 \frac{dp}{dt} &amp;=&amp; -\frac{\partial H}{\partial \theta} = -\frac{\partial K}{\partial \theta}  -\frac{\partial V}{\partial \theta}
 \end{eqnarray}</p>
 <p>Note that \(-\partial V/\partial \theta = \nabla \log \pi(\theta)\), the
@@ -162,7 +162,7 @@ density would vary according to
 \]
 with</p>
 <p>\begin{eqnarray*}
-\mathbb{E}[\log \pi(\theta^i) ]  &amp;=&amp; - \frac{1}{2} \ln (2 \pi \sigma^2) - \frac{1}{2} \\\<br>
+\mathbb{E}[\log \pi(\theta^i) ]  &amp;=&amp; - \frac{1}{2} \ln (2 \pi \sigma^2) - \frac{1}{2} \\\
 \mathbb{V}[\log \pi(\theta^i) ]  &amp;=&amp; \frac{1}{2}
 \end{eqnarray*}</p>
 <h3 id="example-continued">Example, Continued</h3>
@@ -182,13 +182,13 @@ but not the variance in the fluctuations around this level.</p>
 <h3 id="example-continued">Example, Continued</h3>
 <p>We are now in a position to solve the Hamiltonian equations, which take the form:</p>
 <p>\begin{eqnarray*}
-\dot{\theta} &amp;=&amp; \frac{1}{M} p \\\<br>
+\dot{\theta} &amp;=&amp; \frac{1}{M} p \\\
 \dot{p}      &amp;=&amp; -\frac{1}{\sigma^2}(\theta - \mu)
 \end{eqnarray*}</p>
 <p>It can be verified that the solution to this system of differential equations
 takes the form</p>
 <p>\begin{eqnarray*}
-\theta(t) &amp;=&amp; \mu + \rho \cos \big(\alpha + t/\sqrt{\sigma^2 M} \big) \\\<br>
+\theta(t) &amp;=&amp; \mu + \rho \cos \big(\alpha + t/\sqrt{\sigma^2 M} \big) \\\
 p(t)      &amp;=&amp; - \rho \frac{\sqrt{M}}{\sigma} \sin \big(\alpha + t/\sqrt{\sigma^2 M} \big).
 \end{eqnarray*}</p>
 <h3 id="example-continued">Example, Continued</h3>
@@ -204,14 +204,14 @@ which leads to
 <h3 id="example-continued">Example, Continued</h3>
 <p>We can now specify the function \(Q_{\bar t}(p, \theta)\). Using the fact that</p>
 <p>\begin{eqnarray*}
-\cos(x+y) &amp;=&amp; \cos x \cos y - \sin x \sin y \\\<br>
+\cos(x+y) &amp;=&amp; \cos x \cos y - \sin x \sin y \\\
 \sin(x+y) &amp;=&amp; \sin x \cos y + \cos x \sin y,
 \end{eqnarray*}</p>
 <p>we obtain</p>
 <p>\begin{eqnarray*}
-\theta(t) - \mu &amp;=&amp; \rho \cos(\alpha) \cos(t/\sqrt{\sigma^2 M}) - \rho \sin (\alpha) \sin (t/\sqrt{\sigma^2 M}) \\\<br>
-&amp;=&amp;  (\theta(0) - \mu) \cos(t/\sqrt{\sigma^2 M}) + p(0) \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \\\<br>
-p(t)      &amp;=&amp; -\rho \frac{\sqrt{M}}{\sigma} \sin(\alpha) \cos(t/\sqrt{\sigma^2 M}) -\rho \frac{\sqrt{M}}{\sigma} \cos(\alpha) \sin(t/\sqrt{\sigma^2 M}) \\\<br>
+\theta(t) - \mu &amp;=&amp; \rho \cos(\alpha) \cos(t/\sqrt{\sigma^2 M}) - \rho \sin (\alpha) \sin (t/\sqrt{\sigma^2 M}) \\\
+&amp;=&amp;  (\theta(0) - \mu) \cos(t/\sqrt{\sigma^2 M}) + p(0) \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \\\
+p(t)      &amp;=&amp; -\rho \frac{\sqrt{M}}{\sigma} \sin(\alpha) \cos(t/\sqrt{\sigma^2 M}) -\rho \frac{\sqrt{M}}{\sigma} \cos(\alpha) \sin(t/\sqrt{\sigma^2 M}) \\\
 &amp;=&amp; p(0) \cos(t/\sqrt{\sigma^2 M}) - (\theta(0)-\mu) \frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}).
 \end{eqnarray*}</p>
 <h3 id="example-continued">Example, Continued</h3>
@@ -229,10 +229,10 @@ p(t)      &amp;=&amp; -\rho \frac{\sqrt{M}}{\sigma} \sin(\alpha) \cos(t/\sqrt{\s
 <p>\small</p>
 <p>\begin{eqnarray*}
 \lefteqn{\left[ \begin{array}{cc} \cos(t/\sqrt{\sigma^2 M}) &amp; \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \         -\frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}) &amp; \cos(t/\sqrt{\sigma^2 M}) \end{array}\right]
-\left[ \begin{array}{c} \theta(t) - \mu \ -p(t) \end{array} \right] } \\\<br>
-&amp;=&amp;  \left[ \begin{array}{cc} \cos(t/\sqrt{\sigma^2 M}) &amp; \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \        -\frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}) &amp; \cos(t/\sqrt{\sigma^2 M}) \end{array}\right] \\\<br>
+\left[ \begin{array}{c} \theta(t) - \mu \ -p(t) \end{array} \right] } \\\
+&amp;=&amp;  \left[ \begin{array}{cc} \cos(t/\sqrt{\sigma^2 M}) &amp; \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \        -\frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}) &amp; \cos(t/\sqrt{\sigma^2 M}) \end{array}\right] \\\
 &amp;&amp;	\times \left[ \begin{array}{cc} \cos(t/\sqrt{\sigma^2 M}) &amp; \frac{\sigma}{\sqrt{M}} \sin (t/\sqrt{\sigma^2 M}) \        \frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}) &amp; -\cos(t/\sqrt{\sigma^2 M}) \end{array}\right]
-\left[ \begin{array}{c} \theta(0) - \mu \ p(0) \end{array} \right] \\\<br>
+\left[ \begin{array}{c} \theta(0) - \mu \ p(0) \end{array} \right] \\\
 &amp;=&amp; \left[ \begin{array}{cc} 1 &amp; 0 \ 0 &amp; -1 \end{array} \right] 	\left[ \begin{array}{c} \theta(0) - \mu \ p(0) \end{array} \right].
 \end{eqnarray*}</p>
 </div>
@@ -241,10 +241,10 @@ p(t)      &amp;=&amp; -\rho \frac{\sqrt{M}}{\sigma} \sin(\alpha) \cos(t/\sqrt{\s
 <p>\begin{eqnarray*}
 H\big( \theta(t),p(t) \big)
 &amp;=&amp;  \frac{1}{2} \ln (2 \pi M) + \frac{1}{2 M} \rho^2 \frac{M}{\sigma^2} \sin^2(\cdot)
-+ \frac{1}{2} \ln (2 \pi \sigma^2) + \frac{1}{2 \sigma^2} \rho^2 \cos^2(\cdot) \\\<br>
++ \frac{1}{2} \ln (2 \pi \sigma^2) + \frac{1}{2 \sigma^2} \rho^2 \cos^2(\cdot) \\\
 &amp;=&amp; \frac{1}{2}  \left( \ln (2 \pi M) + \frac{1}{2} \ln (2 \pi \sigma^2) + \frac{\rho^2}{\sigma^2}  \right).
 \end{eqnarray*}</p>
-<p>Note that the initial values enter the level of ``energy'' through the parameter \(\rho\).</p>
+<p>Note that the initial values enter the level of ``energy&rsquo;&rsquo; through the parameter \(\rho\).</p>
 <h3 id="the-algorithm">The Algorithm</h3>
 <p>The subsequent algorithm generates the proposal distribution using the Hamiltonian equations.
 In particular, it will start from
@@ -254,7 +254,7 @@ In particular, it will start from
 Using the Hamiltonian equations over a time interval \(t\), we obtain (in slight abuse of notation)</p>
 <p>\begin{eqnarray*}
 \hspace{-0.2in}
-\theta^* - \mu &amp;=&amp; \cos(t/\sqrt{\sigma^2 M}) (\theta^{i-1} - \mu) + \sigma \sin (t/\sqrt{\sigma^2 M}) N(0,1)\\\<br>
+\theta^* - \mu &amp;=&amp; \cos(t/\sqrt{\sigma^2 M}) (\theta^{i-1} - \mu) + \sigma \sin (t/\sqrt{\sigma^2 M}) N(0,1)\\\
 p^*            &amp;=&amp; -\frac{\sqrt{M}}{\sigma} \sin(t/\sqrt{\sigma^2 M}) (\theta^{i-1} - \mu) + \sqrt{M} \cos(t/\sqrt{\sigma^2 M}) \cdot N(0,1)
 \end{eqnarray*}</p>
 <h3 id="the-chain">The Chain</h3>
@@ -297,8 +297,8 @@ the calculations are considerably simplified.
 Given \(\theta(t)\) and \(p(t)\), a
 step of size \(\epsilon\) is taken using the following three steps.</p>
 <p>\begin{eqnarray*}
-p(t+\epsilon/2) &amp;=&amp; p(t) + \frac{\epsilon}{2}\nabla \log \pi(\theta(t)) \\\<br>
-\theta(t+\epsilon) &amp;=&amp; \theta(t) + \epsilon M^{-1}p(t+\epsilon/2) \\\<br>
+p(t+\epsilon/2) &amp;=&amp; p(t) + \frac{\epsilon}{2}\nabla \log \pi(\theta(t)) \\\
+\theta(t+\epsilon) &amp;=&amp; \theta(t) + \epsilon M^{-1}p(t+\epsilon/2) \\\
 p(t+\epsilon) &amp;=&amp; p(t+\epsilon/2) + \frac{\epsilon}{2}\nabla \log \pi(\theta(t+\epsilon)).
 \end{eqnarray*}</p>
 <h3 id="the-details">The Details</h3>
@@ -313,8 +313,8 @@ for $L$ steps.
 \begin{enumerate}
 \item For $l = 1, \ldots, L$. Set
 \begin{eqnarray*}
-&amp;1.&amp; p \leftarrow p + \epsilon \nabla \log \pi(\theta)/2 \\\<br>
-&amp;2.&amp; \theta \leftarrow \theta + \epsilon M^{-1} p \\\<br>
+&amp;1.&amp; p \leftarrow p + \epsilon \nabla \log \pi(\theta)/2 \\\
+&amp;2.&amp; \theta \leftarrow \theta + \epsilon M^{-1} p \\\
 &amp;3.&amp; p \leftarrow p + \epsilon \nabla \log \pi(\theta) / 2
 \end{eqnarray*}
 \item  Return $\theta^* = \theta$ and $p^* = -p$.  (The negation is not a typo!)
@@ -343,15 +343,15 @@ for $L$ steps.
 \right]                                                                             \end{eqnarray*}</p>
 <p>The stability of this system is determined by the eigenvalues \(\lambda_1\) and \(\lambda_2\), where</p>
 <p>\begin{eqnarray}
-\lambda_1 &amp;= \frac{2 M \sigma^{2} - \epsilon^{2}}{2 M \sigma^{2}} + \frac{\epsilon}{2 M \sigma^{2}} \sqrt{- 4 M \sigma^{2} + \epsilon^{2}}, \nonumber \\\<br>
+\lambda_1 &amp;= \frac{2 M \sigma^{2} - \epsilon^{2}}{2 M \sigma^{2}} + \frac{\epsilon}{2 M \sigma^{2}} \sqrt{- 4 M \sigma^{2} + \epsilon^{2}}, \nonumber \\\
 \lambda_2 &amp;= \frac{2 M \sigma^{2} - \epsilon^{2}}{2 M \sigma^{2}} - \frac{\epsilon}{2 M \sigma^{2}} \sqrt{- 4 M \sigma^{2} + \epsilon^{2}} \nonumber
 \end{eqnarray}</p>
 <h3 id="example-continued">Example, Continued</h3>
 <p><strong>Case 1:</strong> \(\epsilon &gt; \sqrt{4M\sigma^2}\). Then</p>
 <p>\begin{eqnarray*}
-\lambda_2 &amp;=&amp; 1 - \frac{\epsilon^2}{2M\sigma^2} - \frac{\epsilon}{4M\sigma^2}\sqrt{- 4 M \sigma^{2} + \epsilon^{2}} \\\<br>
-&amp;&lt;&amp; 1 - \frac{\epsilon^2}{2M\sigma^2} \\\<br>
-&amp;&lt;&amp; 1 - \frac{4M\sigma^2}{2M\sigma^2} \\\<br>
+\lambda_2 &amp;=&amp; 1 - \frac{\epsilon^2}{2M\sigma^2} - \frac{\epsilon}{4M\sigma^2}\sqrt{- 4 M \sigma^{2} + \epsilon^{2}} \\\
+&amp;&lt;&amp; 1 - \frac{\epsilon^2}{2M\sigma^2} \\\
+&amp;&lt;&amp; 1 - \frac{4M\sigma^2}{2M\sigma^2} \\\
 &amp;&lt;&amp; -1
 \end{eqnarray*}</p>
  <br>
@@ -364,7 +364,7 @@ are complex conjugates.  A quick calculation reveals that \\(|\lambda\_i|
 too big \((&gt; 2\sqrt{M\sigma^2})\),  \(|\lambda_2| &gt; 1\), so the leapfrog
 simulator will explode.
 <br></li>
-<li>On the other hand, step size can&rsquo;t really be ``too small'' in
+<li>On the other hand, step size can&rsquo;t really be ``too small&rsquo;&rsquo; in
 the sense that the system will be stable for any \(\epsilon &lt;
 4\sqrt{M\sigma^2}\).
 <br></li>
@@ -384,10 +384,10 @@ expected (unbounded) acceptance probability is given by:</p>
 E\left[\frac{\pi(x^*)q(x|x^*)}{\pi(x)q(x^*|x)}\right]
 &amp;=&amp;
 \int\int\frac{\pi(x^*)q(x|x^*)}{\pi(x)q(x^*|x)}
-q(x^*|x) \pi(x) dx dx^* \nonumber \\\<br>
+q(x^*|x) \pi(x) dx dx^* \nonumber \\\
 &amp;=&amp; \int \pi(x^*)\left[\int q(x|x^*) dx\right]
-dx^* \nonumber \\\<br>
-&amp;=&amp; \int \pi(x^*)dx^*  \nonumber \\\<br>
+dx^* \nonumber \\\
+&amp;=&amp; \int \pi(x^*)dx^*  \nonumber \\\
 &amp;=&amp; 1.
 \end{eqnarray}</p>
 <h3 id="some-analytics">Some Analytics</h3>
@@ -424,19 +424,19 @@ written as
 \hspace{-2.4in}
 \label{eq:avgacpt}
 \bar \alpha &amp;=&amp; \int \alpha(x^* | x) q(x^*|x) \pi(x) dx^* dx
-\nonumber \\\<br>
+\nonumber \\\
 &amp;=&amp; \int_{\Delta(x^*,x) &lt; 0} \alpha(x^* | x) q(x^*|x) \pi(x) dx^* dx
 + \int_{\Delta(x^*,x) &gt; 0} \alpha(x^* | x) q(x^*|x) \pi(x)
-dx^* dx\nonumber \\\<br>
+dx^* dx\nonumber \\\
 &amp;=&amp; \int_{\Delta(x^*,x) &lt; 0} \alpha(x^*| x) q(x^*|x) \pi(x) dx^* dx
 + \int_{\Delta(x^*,x) &gt; 0} \alpha(x | x^*) q(x|x^*) \pi(x^*)
-dx^* dx\nonumber \\\<br>
+dx^* dx\nonumber \\\
 &amp;=&amp; \int_{\Delta(x^*,x) &lt; 0} \alpha(x^*| x) q(x^*|x) \pi(x) dx^* dx
 + \int_{\Delta(x,x^*) &lt; 0} \alpha(x | x^*) q(x|x^*) \pi(x^*)
-dx^* dx\nonumber \\\<br>
+dx^* dx\nonumber \\\
 &amp;=&amp; \int_{\Delta(x^*,x) &lt; 0}  q(x^*|x) \pi(x) dx^* dx +
 \int_{\Delta(x,x^*) &lt; 0} q(x|x^*) \pi(x^*)
-dx^* dx\nonumber \\\<br>
+dx^* dx\nonumber \\\
 &amp;=&amp; 2 \times {\mathbb P}(\Delta &lt; 0).
 \end{eqnarray}</p>
 <h3 id="properties-of-delta">Properties of Delta</h3>
@@ -465,9 +465,9 @@ that \(E[\Delta] \approx E[\Delta^2]/2\).</p>
 Using this, we can write:</p>
 <p>\begin{eqnarray}
 \label{eq:abar}
-\bar \alpha &amp;=&amp; 2 \times {\mathbb P}(\Delta &lt; 0) \nonumber \\\<br>
+\bar \alpha &amp;=&amp; 2 \times {\mathbb P}(\Delta &lt; 0) \nonumber \\\
 &amp;=&amp; 2 \Phi\left(\frac{0 - \mu}{\sqrt{2\mu}}\right)
-\nonumber \\\<br>
+\nonumber \\\
 &amp;=&amp; 2 \Phi(-\sqrt{\mu/2}).
 \end{eqnarray}</p>
 <p>Finally, we use this to construct a (heuristic) cost of an
@@ -475,8 +475,8 @@ algorithm:</p>
 <p>\begin{eqnarray}
 \label{eq:cost}
 \mbox {Cost of Alg.} &amp;\propto&amp; \mbox{Avg. Number of Proposals
-Before Acceptance} \nonumber \\\<br>
-&amp;~&amp; \times \mbox{ Proposal Steps to <code>Independent'' Point} \nonumber \\\\\\ &amp;=&amp; \frac{1}{\bar \alpha} \times \mbox{ Proposal Steps to </code>Independent'' Point}
+Before Acceptance} \nonumber \\\
+&amp;~&amp; \times \mbox{ Proposal Steps to <code>Independent'' Point} \nonumber \\\\\\ &amp;=&amp; \frac{1}{\bar \alpha} \times \mbox{ Proposal Steps to </code>Independent&rsquo;&rsquo; Point}
 \end{eqnarray}</p>
 <h3 id="mu--for-rwmh-dot">\(\mu\) for RWMH.</h3>
 <p>Consider the RWMH applied
@@ -493,7 +493,7 @@ at rate \(D^{-1/2}\).</p>
 <h3 id="rwmh-continued">RWMH Continued</h3>
 <p>Finally for random walk processes, it is well
 known that the number of steps needed to reach a ``nearly
-independent'' point will be proportional to \(c^{-2}\).  We can then
+independent&rsquo;&rsquo; point will be proportional to \(c^{-2}\).  We can then
 write the cost, \(C_{RWMH}\), as:</p>
 <p>\begin{eqnarray}
 \label{eq:cost-rwmh}
@@ -539,7 +539,7 @@ first operates on \(p\) and then \((\theta, p)\) jointly.</p>
 <h3 id="a-two-step-process">A Two Step Process</h3>
 <ol>
 <li>First, draw \(\hat p \sim \mathcal N(0, M)\).  This draw is
-always ``accepted'' because this in fact coincides with true
+always ``accepted&rsquo;&rsquo; because this in fact coincides with true
 marginal distribution of \(\pi(p|\theta)\).</li>
 <li>Second, given \((\theta^{i-1}, \hat p)\).  Draw
 \((\theta^*, p^*)\) by applying the (approximate) Hamiltonian
@@ -583,7 +583,7 @@ This means that:</p>
 <li>2 \psi_n \left(\theta_{2} - 1\right) \left(\left(\theta_{1} - 1\right)^{2} + \left(\theta_{2} - 1\right)^{2} - 1\right)\bigg].
 \end{multline}</li>
 </ul>
-<p>With \(\psi_n = 1000\), the ``posterior'' covariance of this distribution is:</p>
+<p>With \(\psi_n = 1000\), the ``posterior&rsquo;&rsquo; covariance of this distribution is:</p>
 <p>\begin{eqnarray*}
 \mathbb V_{\pi}[\theta] = \left[\begin{array}{cc} 0.5 &amp; 0 \ 0 &amp; 0.5 \end{array}\right].
 \end{eqnarray*}</p>

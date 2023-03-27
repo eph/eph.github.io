@@ -24,7 +24,7 @@
 
 
 <meta name="twitter:title" content="Particle MCMC and SMC^2"/>
-<meta name="twitter:description" content="Introduction Embedding PF Likelihoods into Posterior Samplers  Likelihood functions for nonlinear DSGE models can be approximated by the PF.  We will now embed the likelihood approximation into a posterior sampler: PFMH Algorithm (a special case of PMCMC).   Embedding PF Likelihoods into Posterior Samplers  Distinguish between:  \(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to: \[ p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta \] \(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to: \[ \hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta."/>
+<meta name="twitter:description" content="Introduction Embedding PF Likelihoods into Posterior Samplers Likelihood functions for nonlinear DSGE models can be approximated by the PF. We will now embed the likelihood approximation into a posterior sampler: PFMH Algorithm (a special case of PMCMC). Embedding PF Likelihoods into Posterior Samplers Distinguish between: \(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to: \[ p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta \] \(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to: \[ \hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta."/>
 
 </head>
 <body class="terminal">
@@ -102,7 +102,7 @@ is computed using a particle filter.</p>
 <ul>
 <li>At each iteration the filter generates draws \(\tilde{s}_t^j\) from the proposal distribution \(g_t(\cdot|s_{t-1}^j)\).
 <br></li>
-<li>Let \(\tilde{S}_t = \big( \tilde{s}_t^1,\ldots,\tilde{s}_t^M \big)'\) and denote the entire sequence
+<li>Let \(\tilde{S}_t = \big( \tilde{s}_t^1,\ldots,\tilde{s}_t^M \big)&rsquo;\) and denote the entire sequence
 of draws by \(\tilde{S}_{1:T}^{1:M}\).
 <br></li>
 <li>Selection step: define a random variable \(A_t^j\) that contains this ancestry information.
@@ -171,7 +171,7 @@ algorithm is given by \(q(\vartheta|\theta^{(i-1)}) p(U_{1:T}^*)\).</p>
 &amp;=&amp;
 \min ; \left\{ 1,
 \frac{ \frac{ g(Y|\vartheta,U^*)p(U^*) p(\vartheta)}{ q(\vartheta|\theta^{(i-1)}) p(U^*) } }{
-\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\<br>
+\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\
 &amp;=&amp;         \min ; \left\{ 1,
 \frac{  \hat{p}(Y|\vartheta)p(\vartheta) \big/ q(\vartheta|\theta^{(i-1)})  }{
 \hat{p}(Y|\theta^{(i-1)})p(\theta^{(i-1)}) \big/ q(\theta^{(i-1)}|\vartheta) } \right\}.
@@ -189,7 +189,7 @@ algorithm is given by \(q(\vartheta|\theta^{(i-1)}) p(U_{1:T}^*)\).</p>
 bootstrap particle filter (BS-PF, \(M=40,000\)) or
 conditionally-optimal particle filter (CO-PF, \(M=400\)).
 <br></li>
-<li>``Pooled'' means that we are pooling the draws from the \(N_{run}=20\)
+<li>``Pooled&rsquo;&rsquo; means that we are pooling the draws from the \(N_{run}=20\)
 runs to compute posterior statistics.</li>
 </ul>
 <h3 id="autocorrelation-of-pfmh-draws">Autocorrelation of PFMH Draws</h3>
@@ -205,21 +205,21 @@ bootstrap particle filter (solid with dots).</p>
 <p>\begin{center}
 \scalebox{0.75}{
 \begin{tabular}{lccccccccc} \hline \hline
-&amp; \multicolumn{3}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{3}{c}{Inefficiency Factors} &amp; \multicolumn{3}{c}{Std Dev of Means} \\\<br>
+&amp; \multicolumn{3}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{3}{c}{Inefficiency Factors} &amp; \multicolumn{3}{c}{Std Dev of Means} \\\
 &amp; KF    &amp;  CO-PF&amp;  BS-PF     &amp; KF        &amp;  CO-PF &amp;  BS-PF     &amp; KF        &amp;  CO-PF &amp;  BS-PF     \ \hline
-$\tau$             &amp;   2.63 &amp;  2.62 &amp;  2.64  &amp;    66.17 &amp;  126.76 &amp; 1360.22  &amp;  0.020 &amp; 0.028 &amp; 0.091 \\\<br>
-$\kappa$           &amp;   0.82 &amp;  0.81 &amp;  0.82  &amp;   128.00 &amp;   97.11 &amp; 1887.37  &amp;  0.007 &amp; 0.006 &amp; 0.026 \\\<br>
-$\psi_1$           &amp;   1.88 &amp;  1.88 &amp;  1.87  &amp;   113.46 &amp;  159.53 &amp;  749.22  &amp;  0.011 &amp; 0.013 &amp; 0.029 \\\<br>
-$\psi_2$           &amp;   0.64 &amp;  0.64 &amp;  0.63  &amp;    61.28 &amp;   56.10 &amp;  681.85  &amp;  0.011 &amp; 0.010 &amp; 0.036 \\\<br>
-$\rho_r$           &amp;   0.75 &amp;  0.75 &amp;  0.75  &amp;   108.46 &amp;  134.01 &amp; 1535.34  &amp;  0.002 &amp; 0.002 &amp; 0.007 \\\<br>
-$\rho_g$           &amp;   0.98 &amp;  0.98 &amp;  0.98  &amp;    94.10 &amp;   88.48 &amp; 1613.77  &amp;  0.001 &amp; 0.001 &amp; 0.002 \\\<br>
-$\rho_z$           &amp;   0.88 &amp;  0.88 &amp;  0.88  &amp;   124.24 &amp;  118.74 &amp; 1518.66  &amp;  0.001 &amp; 0.001 &amp; 0.005 \\\<br>
-$r^{(A)}$          &amp;   0.44 &amp;  0.44 &amp;  0.44  &amp;   148.46 &amp;  151.81 &amp; 1115.74  &amp;  0.016 &amp; 0.016 &amp; 0.044 \\\<br>
-$\pi^{(A)}$        &amp;   3.32 &amp;  3.33 &amp;  3.32  &amp;   152.08 &amp;  141.62 &amp; 1057.90  &amp;  0.017 &amp; 0.016 &amp; 0.045 \\\<br>
-$\gamma^{(Q)}$     &amp;   0.59 &amp;  0.59 &amp;  0.59  &amp;   106.68 &amp;  142.37 &amp;  899.34  &amp;  0.006 &amp; 0.007 &amp; 0.018 \\\<br>
-$\sigma_r$         &amp;   0.24 &amp;  0.24 &amp;  0.24  &amp;    35.21 &amp;  179.15 &amp; 1105.99  &amp;  0.001 &amp; 0.002 &amp; 0.004 \\\<br>
-$\sigma_g$         &amp;   0.68 &amp;  0.68 &amp;  0.67  &amp;    98.22 &amp;   64.18 &amp; 1490.81  &amp;  0.003 &amp; 0.002 &amp; 0.011 \\\<br>
-$\sigma_z$         &amp;   0.32 &amp;  0.32 &amp;  0.32  &amp;    84.77 &amp;   61.55 &amp;  575.90  &amp;  0.001 &amp; 0.001 &amp; 0.003 \\\<br>
+$\tau$             &amp;   2.63 &amp;  2.62 &amp;  2.64  &amp;    66.17 &amp;  126.76 &amp; 1360.22  &amp;  0.020 &amp; 0.028 &amp; 0.091 \\\
+$\kappa$           &amp;   0.82 &amp;  0.81 &amp;  0.82  &amp;   128.00 &amp;   97.11 &amp; 1887.37  &amp;  0.007 &amp; 0.006 &amp; 0.026 \\\
+$\psi_1$           &amp;   1.88 &amp;  1.88 &amp;  1.87  &amp;   113.46 &amp;  159.53 &amp;  749.22  &amp;  0.011 &amp; 0.013 &amp; 0.029 \\\
+$\psi_2$           &amp;   0.64 &amp;  0.64 &amp;  0.63  &amp;    61.28 &amp;   56.10 &amp;  681.85  &amp;  0.011 &amp; 0.010 &amp; 0.036 \\\
+$\rho_r$           &amp;   0.75 &amp;  0.75 &amp;  0.75  &amp;   108.46 &amp;  134.01 &amp; 1535.34  &amp;  0.002 &amp; 0.002 &amp; 0.007 \\\
+$\rho_g$           &amp;   0.98 &amp;  0.98 &amp;  0.98  &amp;    94.10 &amp;   88.48 &amp; 1613.77  &amp;  0.001 &amp; 0.001 &amp; 0.002 \\\
+$\rho_z$           &amp;   0.88 &amp;  0.88 &amp;  0.88  &amp;   124.24 &amp;  118.74 &amp; 1518.66  &amp;  0.001 &amp; 0.001 &amp; 0.005 \\\
+$r^{(A)}$          &amp;   0.44 &amp;  0.44 &amp;  0.44  &amp;   148.46 &amp;  151.81 &amp; 1115.74  &amp;  0.016 &amp; 0.016 &amp; 0.044 \\\
+$\pi^{(A)}$        &amp;   3.32 &amp;  3.33 &amp;  3.32  &amp;   152.08 &amp;  141.62 &amp; 1057.90  &amp;  0.017 &amp; 0.016 &amp; 0.045 \\\
+$\gamma^{(Q)}$     &amp;   0.59 &amp;  0.59 &amp;  0.59  &amp;   106.68 &amp;  142.37 &amp;  899.34  &amp;  0.006 &amp; 0.007 &amp; 0.018 \\\
+$\sigma_r$         &amp;   0.24 &amp;  0.24 &amp;  0.24  &amp;    35.21 &amp;  179.15 &amp; 1105.99  &amp;  0.001 &amp; 0.002 &amp; 0.004 \\\
+$\sigma_g$         &amp;   0.68 &amp;  0.68 &amp;  0.67  &amp;    98.22 &amp;   64.18 &amp; 1490.81  &amp;  0.003 &amp; 0.002 &amp; 0.011 \\\
+$\sigma_z$         &amp;   0.32 &amp;  0.32 &amp;  0.32  &amp;    84.77 &amp;   61.55 &amp;  575.90  &amp;  0.001 &amp; 0.001 &amp; 0.003 \\\
 $\ln \hat p(Y)$ &amp;    -357.14 &amp; -357.17 &amp; -358.32  &amp; &amp; &amp; &amp; 0.040 &amp; 0.038 &amp; 0.949 \ \hline
 \end{tabular}
 }
@@ -234,7 +234,7 @@ draws.
 <li>The likelihood function is computed with the Kalman filter (KF) or
 conditionally-optimal particle filter (CO-PF).
 <br></li>
-<li>``Pooled'' means that we are pooling the draws from the \(N_{run}=20\)
+<li>``Pooled&rsquo;&rsquo; means that we are pooling the draws from the \(N_{run}=20\)
 runs to compute posterior statistics. The CO-PF uses \(M=40,000\)
 particles to compute the likelihood.</li>
 </ul>
@@ -242,26 +242,26 @@ particles to compute the likelihood.</li>
 <p>\begin{center}
 \scalebox{0.7}{
 \begin{tabular}{l@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc} \hline \hline
-&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\<br>
+&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\
 &amp; KF    &amp;  CO-PF      &amp; KF       &amp;  CO-PF     &amp; KF     &amp;  CO-PF    \ \hline
-$(100\beta^{-1}-1)$ &amp;  0.14 &amp;  0.14     &amp;   172.58 &amp; 3732.90    &amp;  0.007 &amp; 0.034 \\\<br>
-$\bar\pi          $ &amp;  0.73 &amp;  0.74     &amp;   185.99 &amp; 4343.83    &amp;  0.016 &amp; 0.079 \\\<br>
-$\bar l           $ &amp;  0.51 &amp;  0.37     &amp;   174.39 &amp; 3133.89    &amp;  0.130 &amp; 0.552 \\\<br>
-$\alpha           $ &amp;  0.19 &amp;  0.20     &amp;   149.77 &amp; 5244.47    &amp;  0.003 &amp; 0.015 \\\<br>
-$\sigma_c         $ &amp;  1.49 &amp;  1.45     &amp;    86.27 &amp; 3557.81    &amp;  0.013 &amp; 0.086 \\\<br>
-$\Phi             $ &amp;  1.47 &amp;  1.45     &amp;   134.34 &amp; 4930.55    &amp;  0.009 &amp; 0.056 \\\<br>
-$\varphi          $ &amp;  5.34 &amp;  5.35     &amp;   138.54 &amp; 3210.16    &amp;  0.131 &amp; 0.628 \\\<br>
-$h                $ &amp;  0.70 &amp;  0.72     &amp;   277.64 &amp; 3058.26    &amp;  0.008 &amp; 0.027 \\\<br>
-$\xi_w            $ &amp;  0.75 &amp;  0.75     &amp;   343.89 &amp; 2594.43    &amp;  0.012 &amp; 0.034 \\\<br>
-$\sigma_l         $ &amp;  2.28 &amp;  2.31     &amp;   162.09 &amp; 4426.89    &amp;  0.091 &amp; 0.477 \\\<br>
-$\xi_p            $ &amp;  0.72 &amp;  0.72     &amp;   182.47 &amp; 6777.88    &amp;  0.008 &amp; 0.051 \\\<br>
-$\iota_w          $ &amp;  0.54 &amp;  0.53     &amp;   241.80 &amp; 4984.35    &amp;  0.016 &amp; 0.073 \\\<br>
-$\iota_p          $ &amp;  0.48 &amp;  0.50     &amp;   205.27 &amp; 5487.34    &amp;  0.015 &amp; 0.078 \\\<br>
-$\psi             $ &amp;  0.45 &amp;  0.44     &amp;   248.15 &amp; 3598.14    &amp;  0.020 &amp; 0.078 \\\<br>
-$r_{\pi}          $ &amp;  2.09 &amp;  2.09     &amp;    98.32 &amp; 3302.07    &amp;  0.020 &amp; 0.116 \\\<br>
-$\rho             $ &amp;  0.80 &amp;  0.80     &amp;   241.63 &amp; 4896.54    &amp;  0.006 &amp; 0.025 \\\<br>
-$r_y              $ &amp;  0.13 &amp;  0.13     &amp;   243.85 &amp; 4755.65    &amp;  0.005 &amp; 0.023 \\\<br>
-$r_{\Delta y}     $ &amp;  0.21 &amp;  0.21   &amp;   101.94 &amp; 5324.19    &amp;  0.003 &amp; 0.022   \\\<br>
+$(100\beta^{-1}-1)$ &amp;  0.14 &amp;  0.14     &amp;   172.58 &amp; 3732.90    &amp;  0.007 &amp; 0.034 \\\
+$\bar\pi          $ &amp;  0.73 &amp;  0.74     &amp;   185.99 &amp; 4343.83    &amp;  0.016 &amp; 0.079 \\\
+$\bar l           $ &amp;  0.51 &amp;  0.37     &amp;   174.39 &amp; 3133.89    &amp;  0.130 &amp; 0.552 \\\
+$\alpha           $ &amp;  0.19 &amp;  0.20     &amp;   149.77 &amp; 5244.47    &amp;  0.003 &amp; 0.015 \\\
+$\sigma_c         $ &amp;  1.49 &amp;  1.45     &amp;    86.27 &amp; 3557.81    &amp;  0.013 &amp; 0.086 \\\
+$\Phi             $ &amp;  1.47 &amp;  1.45     &amp;   134.34 &amp; 4930.55    &amp;  0.009 &amp; 0.056 \\\
+$\varphi          $ &amp;  5.34 &amp;  5.35     &amp;   138.54 &amp; 3210.16    &amp;  0.131 &amp; 0.628 \\\
+$h                $ &amp;  0.70 &amp;  0.72     &amp;   277.64 &amp; 3058.26    &amp;  0.008 &amp; 0.027 \\\
+$\xi_w            $ &amp;  0.75 &amp;  0.75     &amp;   343.89 &amp; 2594.43    &amp;  0.012 &amp; 0.034 \\\
+$\sigma_l         $ &amp;  2.28 &amp;  2.31     &amp;   162.09 &amp; 4426.89    &amp;  0.091 &amp; 0.477 \\\
+$\xi_p            $ &amp;  0.72 &amp;  0.72     &amp;   182.47 &amp; 6777.88    &amp;  0.008 &amp; 0.051 \\\
+$\iota_w          $ &amp;  0.54 &amp;  0.53     &amp;   241.80 &amp; 4984.35    &amp;  0.016 &amp; 0.073 \\\
+$\iota_p          $ &amp;  0.48 &amp;  0.50     &amp;   205.27 &amp; 5487.34    &amp;  0.015 &amp; 0.078 \\\
+$\psi             $ &amp;  0.45 &amp;  0.44     &amp;   248.15 &amp; 3598.14    &amp;  0.020 &amp; 0.078 \\\
+$r_{\pi}          $ &amp;  2.09 &amp;  2.09     &amp;    98.32 &amp; 3302.07    &amp;  0.020 &amp; 0.116 \\\
+$\rho             $ &amp;  0.80 &amp;  0.80     &amp;   241.63 &amp; 4896.54    &amp;  0.006 &amp; 0.025 \\\
+$r_y              $ &amp;  0.13 &amp;  0.13     &amp;   243.85 &amp; 4755.65    &amp;  0.005 &amp; 0.023 \\\
+$r_{\Delta y}     $ &amp;  0.21 &amp;  0.21   &amp;   101.94 &amp; 5324.19    &amp;  0.003 &amp; 0.022   \\\
 \hline
 \end{tabular}
 }
@@ -270,26 +270,26 @@ $r_{\Delta y}     $ &amp;  0.21 &amp;  0.21   &amp;   101.94 &amp; 5324.19    &a
 <p>\begin{center}
 \scalebox{0.7}{
 \begin{tabular}{l@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc@{\hspace*{1cm}}cc} \hline \hline
-&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\<br>
+&amp; \multicolumn{2}{c}{Post. Mean (Pooled)} &amp; \multicolumn{2}{c}{Ineff. Factors} &amp; \multicolumn{2}{c}{Std Dev of Means} \\\
 &amp; KF    &amp;  CO-PF      &amp; KF       &amp;  CO-PF     &amp; KF     &amp;  CO-PF    \ \hline
-$\rho_a           $ &amp;  0.96 &amp;  0.96    &amp;   153.46 &amp; 1358.87  &amp;  0.002 &amp; 0.005  \\\<br>
-$\rho_b           $ &amp;  0.22 &amp;  0.21    &amp;   325.98 &amp; 4468.10  &amp;  0.018 &amp; 0.068  \\\<br>
-$\rho_g           $ &amp;  0.97 &amp;  0.97    &amp;    57.08 &amp; 2687.56  &amp;  0.002 &amp; 0.011  \\\<br>
-$\rho_i           $ &amp;  0.71 &amp;  0.70    &amp;   219.11 &amp; 4735.33  &amp;  0.009 &amp; 0.044  \\\<br>
-$\rho_r           $ &amp;  0.54 &amp;  0.54    &amp;   194.73 &amp; 4184.04  &amp;  0.020 &amp; 0.094  \\\<br>
-$\rho_p           $ &amp;  0.80 &amp;  0.81    &amp;   338.69 &amp; 2527.79  &amp;  0.022 &amp; 0.061  \\\<br>
-$\rho_w           $ &amp;  0.94 &amp;  0.94    &amp;   135.83 &amp; 4851.01  &amp;  0.003 &amp; 0.019  \\\<br>
-$\rho_{ga}        $ &amp;  0.41 &amp;  0.37    &amp;   196.38 &amp; 5621.86  &amp;  0.025 &amp; 0.133 \\\<br>
-$\mu_p            $ &amp;  0.66 &amp;  0.66    &amp;   300.29 &amp; 3552.33  &amp;  0.025 &amp; 0.087  \\\<br>
-$\mu_w            $ &amp;  0.82 &amp;  0.81    &amp;   218.43 &amp; 5074.31  &amp;  0.011 &amp; 0.052  \\\<br>
-$\sigma_a         $ &amp;  0.34 &amp;  0.34    &amp;   128.00 &amp; 5096.75  &amp;  0.005 &amp; 0.034  \\\<br>
-$\sigma_b         $ &amp;  0.24 &amp;  0.24    &amp;   186.13 &amp; 3494.71  &amp;  0.004 &amp; 0.016  \\\<br>
-$\sigma_g         $ &amp;  0.51 &amp;  0.49    &amp;   208.14 &amp; 2945.02  &amp;  0.006 &amp; 0.021  \\\<br>
-$\sigma_i         $ &amp;  0.43 &amp;  0.44    &amp;   115.42 &amp; 6093.72  &amp;  0.006 &amp; 0.043  \\\<br>
-$\sigma_r         $ &amp;  0.14 &amp;  0.14    &amp;   193.37 &amp; 3408.01  &amp;  0.004 &amp; 0.016  \\\<br>
-$\sigma_p         $ &amp;  0.13 &amp;  0.13    &amp;   194.22 &amp; 4587.76  &amp;  0.003 &amp; 0.013  \\\<br>
-$\sigma_w         $ &amp;  0.22 &amp;  0.22    &amp;   211.80 &amp; 2256.19  &amp;  0.004 &amp; 0.012  \\\<br>
-$\ln \hat p(Y)$ &amp;    -964 &amp; -1018    &amp;  &amp; &amp;   0.298 &amp; 9.139   \\\<br>
+$\rho_a           $ &amp;  0.96 &amp;  0.96    &amp;   153.46 &amp; 1358.87  &amp;  0.002 &amp; 0.005  \\\
+$\rho_b           $ &amp;  0.22 &amp;  0.21    &amp;   325.98 &amp; 4468.10  &amp;  0.018 &amp; 0.068  \\\
+$\rho_g           $ &amp;  0.97 &amp;  0.97    &amp;    57.08 &amp; 2687.56  &amp;  0.002 &amp; 0.011  \\\
+$\rho_i           $ &amp;  0.71 &amp;  0.70    &amp;   219.11 &amp; 4735.33  &amp;  0.009 &amp; 0.044  \\\
+$\rho_r           $ &amp;  0.54 &amp;  0.54    &amp;   194.73 &amp; 4184.04  &amp;  0.020 &amp; 0.094  \\\
+$\rho_p           $ &amp;  0.80 &amp;  0.81    &amp;   338.69 &amp; 2527.79  &amp;  0.022 &amp; 0.061  \\\
+$\rho_w           $ &amp;  0.94 &amp;  0.94    &amp;   135.83 &amp; 4851.01  &amp;  0.003 &amp; 0.019  \\\
+$\rho_{ga}        $ &amp;  0.41 &amp;  0.37    &amp;   196.38 &amp; 5621.86  &amp;  0.025 &amp; 0.133 \\\
+$\mu_p            $ &amp;  0.66 &amp;  0.66    &amp;   300.29 &amp; 3552.33  &amp;  0.025 &amp; 0.087  \\\
+$\mu_w            $ &amp;  0.82 &amp;  0.81    &amp;   218.43 &amp; 5074.31  &amp;  0.011 &amp; 0.052  \\\
+$\sigma_a         $ &amp;  0.34 &amp;  0.34    &amp;   128.00 &amp; 5096.75  &amp;  0.005 &amp; 0.034  \\\
+$\sigma_b         $ &amp;  0.24 &amp;  0.24    &amp;   186.13 &amp; 3494.71  &amp;  0.004 &amp; 0.016  \\\
+$\sigma_g         $ &amp;  0.51 &amp;  0.49    &amp;   208.14 &amp; 2945.02  &amp;  0.006 &amp; 0.021  \\\
+$\sigma_i         $ &amp;  0.43 &amp;  0.44    &amp;   115.42 &amp; 6093.72  &amp;  0.006 &amp; 0.043  \\\
+$\sigma_r         $ &amp;  0.14 &amp;  0.14    &amp;   193.37 &amp; 3408.01  &amp;  0.004 &amp; 0.016  \\\
+$\sigma_p         $ &amp;  0.13 &amp;  0.13    &amp;   194.22 &amp; 4587.76  &amp;  0.003 &amp; 0.013  \\\
+$\sigma_w         $ &amp;  0.22 &amp;  0.22    &amp;   211.80 &amp; 2256.19  &amp;  0.004 &amp; 0.012  \\\
+$\ln \hat p(Y)$ &amp;    -964 &amp; -1018    &amp;  &amp; &amp;   0.298 &amp; 9.139   \\\
 \hline
 \end{tabular}
 }
@@ -334,7 +334,7 @@ of the likelihood function and conduct simulation experiments to document the ac
 <ul>
 <li>Likelihood evaluation for nonlinear DSGE models requires nonlinear filtering \(\longrightarrow\) sequential  Monte Carlo.
 <br></li>
-<li>For inference about the static parameter \(\theta\), ``standard'' MCMC methods can be
+<li>For inference about the static parameter \(\theta\), ``standard&rsquo;&rsquo; MCMC methods can be
 quite inaccurate. Multimodal posteriors may arise because it is difficult to
 <ul>
 <li>disentangling internal and external propagation mechanisms;</li>
@@ -362,9 +362,9 @@ by the particle filter.</li>
 <p>\begin{center}
 \begin{tabular}{ccccc} \ \hline \hline
 Parameter &amp; \multicolumn{4}{c}{State} \ \hline
-$(\theta_n^1,W_n^1)$  &amp; $(s_{t_n}^{1,1},{\cal W}_{t_n}^{1,1})$ &amp; $(s_{t_n}^{1,2},{\cal W}_{t_n}^{1,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{1,M},{\cal W}_{t_n}^{1,M})$ \\\<br>
-$(\theta_n^2,W_n^2)$  &amp; $(s_{t_n}^{2,1},{\cal W}_{t_n}^{2,1})$ &amp; $(s_{t_n}^{2,2},{\cal W}_{t_n}^{2,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{2,M},{\cal W}_{t_n}^{2,M})$ \\\<br>
-$\vdots$  &amp; $\vdots$ &amp; $\vdots$ &amp; $\ddots$ &amp; $\vdots$ \\\<br>
+$(\theta_n^1,W_n^1)$  &amp; $(s_{t_n}^{1,1},{\cal W}_{t_n}^{1,1})$ &amp; $(s_{t_n}^{1,2},{\cal W}_{t_n}^{1,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{1,M},{\cal W}_{t_n}^{1,M})$ \\\
+$(\theta_n^2,W_n^2)$  &amp; $(s_{t_n}^{2,1},{\cal W}_{t_n}^{2,1})$ &amp; $(s_{t_n}^{2,2},{\cal W}_{t_n}^{2,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{2,M},{\cal W}_{t_n}^{2,M})$ \\\
+$\vdots$  &amp; $\vdots$ &amp; $\vdots$ &amp; $\ddots$ &amp; $\vdots$ \\\
 $(\theta_n^N,W_n^N)$ &amp; $(s_{t_n}^{N,1},{\cal W}_{t_n}^{N,1})$ &amp; $(s_{t_n}^{N,2},{\cal W}_{t_n}^{N,2})$ &amp; $\cdots$ &amp; $(s_{t_n}^{N,M},{\cal W}_{t_n}^{N,M})$ \ \hline
 \end{tabular}
 \end{center}</p>
@@ -449,7 +449,7 @@ W}_{t-1}^{i,j}\}_{j=1}^M\) that represents the distribution
 <li>
 <p>The triplets \(\{ \theta_{t-1}^i,U_{1:t-1}^i,W_{t-1}^i \}_{i=1}^N\) approximate:</p>
 <p>\begin{eqnarray*}
-\lefteqn{\int \int h(\theta,U_{1:t-1}) p(U_{1:t-1}) p(\theta|Y_{1:t-1}) d U_{1:t-1} d\theta} \\\<br>
+\lefteqn{\int \int h(\theta,U_{1:t-1}) p(U_{1:t-1}) p(\theta|Y_{1:t-1}) d U_{1:t-1} d\theta} \\\
 &amp;\approx&amp;  \frac{1}{N} \sum_{i=1}^{N} h(\theta_{t-1}^i,U^i_{1:t-1}) W_{t-1}^i.
 \end{eqnarray*}</p>
 </li>
@@ -469,7 +469,7 @@ h(\theta_{t-1}^i) \tilde{w}_t^iW_{t-1}^i\) approximates the following
 integral</p>
 <p>\begin{eqnarray*}
 \lefteqn{ \int \int h(\theta) g(y_t|Y_{1:t-1},U_{1:t},\theta)
-p(U_{1:t}) p(\theta|Y_{1:t-1}) d U_{1:t} d \theta } \\\<br>
+p(U_{1:t}) p(\theta|Y_{1:t-1}) d U_{1:t} d \theta } \\\
 &amp;=&amp; \int h(\theta) \left[ \int g(y_t|Y_{1:t-1},U_{1:t},\theta) p(U_{1:t}) dU_{1:t} \right] p(\theta|Y_{1:t-1}) d\theta. \nonumber
 \end{eqnarray*}</p>
 </li>
@@ -529,7 +529,7 @@ formula for the acceptance probability
 &amp;=&amp;
 \min ; \left\{ 1,
 \frac{ \frac{ g(Y|\vartheta,U^*)p(U^*) p(\vartheta)}{ q(\vartheta|\theta^{(i-1)}) p(U^*) } }{
-\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\<br>
+\frac{ g(Y|\theta^{(i-1)},U^{(i-1)})p(U^{(i-1)}) p(\theta^{(i-1)})}{ q(\theta^{(i-1)}|\theta^*) p(U^{(i-1)})} } \right\} \\\
 &amp;=&amp;         \min ; \left\{ 1,
 \frac{  \hat{p}(Y|\vartheta)p(\vartheta) \big/ q(\vartheta|\theta^{(i-1)})  }{
 \hat{p}(Y|\theta^{(i-1)})p(\theta^{(i-1)}) \big/ q(\theta^{(i-1)}|\vartheta) } \right\}.
@@ -549,21 +549,21 @@ with \(N=4,000\) particles.
 <p>\begin{center}
 \scalebox{0.55}{
 \begin{tabular}{lcccc@{\hspace*{1cm}}cccc@{\hspace*{1cm}}cccc} \hline \hline
-&amp; \multicolumn{4}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{4}{c}{Inefficiency Factors} &amp; \multicolumn{4}{c}{Std Dev of Means} \\\<br>
+&amp; \multicolumn{4}{c}{Posterior Mean (Pooled)} &amp; \multicolumn{4}{c}{Inefficiency Factors} &amp; \multicolumn{4}{c}{Std Dev of Means} \\\
 &amp; KF(L)     &amp; KF(D)     &amp;  CO-PF    &amp;  BS-PF &amp; KF(L) &amp; KF(D)  &amp;  CO-PF &amp;  BS-PF &amp; KF(L) &amp; KF(D)  &amp;  CO-PF &amp;  BS-PF \ \hline
-$\tau$               &amp;   2.65 &amp;   2.67 &amp;   2.68 &amp;     2.53 &amp;   1.51 &amp;  10.41 &amp;  47.60 &amp;  6570 &amp;   0.01 &amp;   0.03 &amp;   0.07 &amp;     0.76\\\<br>
-$\kappa$             &amp;   0.81 &amp;   0.81 &amp;   0.81 &amp;     0.70 &amp;   1.40 &amp;   8.36 &amp;  40.60 &amp;  7223 &amp;   0.00 &amp;   0.01 &amp;   0.01 &amp;     0.18\\\<br>
-$\psi_1$             &amp;   1.87 &amp;   1.88 &amp;   1.87 &amp;     1.89 &amp;   3.29 &amp;  18.27 &amp;  22.56 &amp;  4785 &amp;   0.01 &amp;   0.02 &amp;   0.02 &amp;     0.27\\\<br>
-$\psi_2$             &amp;   0.66 &amp;   0.66 &amp;   0.67 &amp;     0.65 &amp;   2.72 &amp;  10.02 &amp;  43.30 &amp;  4197 &amp;   0.01 &amp;   0.02 &amp;   0.03 &amp;     0.34\\\<br>
-$\rho_r$             &amp;   0.75 &amp;   0.75 &amp;   0.75 &amp;     0.72 &amp;   1.31 &amp;  11.39 &amp;  60.18 &amp; 14979 &amp;   0.00 &amp;   0.00 &amp;   0.01 &amp;     0.08\\\<br>
-$\rho_g$             &amp;   0.98 &amp;   0.98 &amp;   0.98 &amp;     0.95 &amp;   1.32 &amp;   4.28 &amp; 250.34 &amp; 21736 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.04\\\<br>
-$\rho_z$             &amp;   0.88 &amp;   0.88 &amp;   0.88 &amp;     0.84 &amp;   3.16 &amp;  15.06 &amp;  35.35 &amp; 10802 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.05\\\<br>
-$r^{(A)}$            &amp;   0.45 &amp;   0.46 &amp;   0.44 &amp;     0.46 &amp;   1.09 &amp;  26.58 &amp;  73.78 &amp;  7971 &amp;   0.00 &amp;   0.02 &amp;   0.04 &amp;     0.42\\\<br>
-$\pi^{(A)}$          &amp;   3.32 &amp;   3.31 &amp;   3.31 &amp;     3.56 &amp;   2.15 &amp;  40.45 &amp; 158.64 &amp;  6529 &amp;   0.01 &amp;   0.03 &amp;   0.06 &amp;     0.40\\\<br>
-$\gamma^{(Q)}$       &amp;   0.59 &amp;   0.59 &amp;   0.59 &amp;     0.64 &amp;   2.35 &amp;  32.35 &amp; 133.25 &amp;  5296 &amp;   0.00 &amp;   0.01 &amp;   0.03 &amp;     0.16\\\<br>
-$\sigma_r$           &amp;   0.24 &amp;   0.24 &amp;   0.24 &amp;     0.26 &amp;   0.75 &amp;   7.29 &amp;  43.96 &amp; 16084 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.06\\\<br>
-$\sigma_g$           &amp;   0.68 &amp;   0.68 &amp;   0.68 &amp;     0.73 &amp;   1.30 &amp;   1.48 &amp;  20.20 &amp;  5098 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.08\\\<br>
-$\sigma_z$           &amp;   0.32 &amp;   0.32 &amp;   0.32 &amp;     0.42 &amp;   2.32 &amp;   3.63 &amp;  26.98 &amp; 41284 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.11\\\<br>
+$\tau$               &amp;   2.65 &amp;   2.67 &amp;   2.68 &amp;     2.53 &amp;   1.51 &amp;  10.41 &amp;  47.60 &amp;  6570 &amp;   0.01 &amp;   0.03 &amp;   0.07 &amp;     0.76\\\
+$\kappa$             &amp;   0.81 &amp;   0.81 &amp;   0.81 &amp;     0.70 &amp;   1.40 &amp;   8.36 &amp;  40.60 &amp;  7223 &amp;   0.00 &amp;   0.01 &amp;   0.01 &amp;     0.18\\\
+$\psi_1$             &amp;   1.87 &amp;   1.88 &amp;   1.87 &amp;     1.89 &amp;   3.29 &amp;  18.27 &amp;  22.56 &amp;  4785 &amp;   0.01 &amp;   0.02 &amp;   0.02 &amp;     0.27\\\
+$\psi_2$             &amp;   0.66 &amp;   0.66 &amp;   0.67 &amp;     0.65 &amp;   2.72 &amp;  10.02 &amp;  43.30 &amp;  4197 &amp;   0.01 &amp;   0.02 &amp;   0.03 &amp;     0.34\\\
+$\rho_r$             &amp;   0.75 &amp;   0.75 &amp;   0.75 &amp;     0.72 &amp;   1.31 &amp;  11.39 &amp;  60.18 &amp; 14979 &amp;   0.00 &amp;   0.00 &amp;   0.01 &amp;     0.08\\\
+$\rho_g$             &amp;   0.98 &amp;   0.98 &amp;   0.98 &amp;     0.95 &amp;   1.32 &amp;   4.28 &amp; 250.34 &amp; 21736 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.04\\\
+$\rho_z$             &amp;   0.88 &amp;   0.88 &amp;   0.88 &amp;     0.84 &amp;   3.16 &amp;  15.06 &amp;  35.35 &amp; 10802 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.05\\\
+$r^{(A)}$            &amp;   0.45 &amp;   0.46 &amp;   0.44 &amp;     0.46 &amp;   1.09 &amp;  26.58 &amp;  73.78 &amp;  7971 &amp;   0.00 &amp;   0.02 &amp;   0.04 &amp;     0.42\\\
+$\pi^{(A)}$          &amp;   3.32 &amp;   3.31 &amp;   3.31 &amp;     3.56 &amp;   2.15 &amp;  40.45 &amp; 158.64 &amp;  6529 &amp;   0.01 &amp;   0.03 &amp;   0.06 &amp;     0.40\\\
+$\gamma^{(Q)}$       &amp;   0.59 &amp;   0.59 &amp;   0.59 &amp;     0.64 &amp;   2.35 &amp;  32.35 &amp; 133.25 &amp;  5296 &amp;   0.00 &amp;   0.01 &amp;   0.03 &amp;     0.16\\\
+$\sigma_r$           &amp;   0.24 &amp;   0.24 &amp;   0.24 &amp;     0.26 &amp;   0.75 &amp;   7.29 &amp;  43.96 &amp; 16084 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.06\\\
+$\sigma_g$           &amp;   0.68 &amp;   0.68 &amp;   0.68 &amp;     0.73 &amp;   1.30 &amp;   1.48 &amp;  20.20 &amp;  5098 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.08\\\
+$\sigma_z$           &amp;   0.32 &amp;   0.32 &amp;   0.32 &amp;     0.42 &amp;   2.32 &amp;   3.63 &amp;  26.98 &amp; 41284 &amp;   0.00 &amp;   0.00 &amp;   0.00 &amp;     0.11\\\
 $\ln p(Y)$  &amp; -358.75 &amp;  -357.34 &amp; -356.33 &amp; -340.47 &amp; &amp; &amp; &amp; &amp; 0.120 &amp; 1.191 &amp; 4.374 &amp; 14.49 \ \hline
 \end{tabular}
 }

@@ -24,10 +24,10 @@
 
 
 <meta name="twitter:title" content="Monte Carlo Simulation"/>
-<meta name="twitter:description" content="Importance Sampling The main event   Inference: Need to characterize posterior \(p(\theta|Y)\).   Unfortunately, for many interesting models it is not possible to evaluate the moments and quantiles of the posterior \(p(\theta|Y)\) analytically.
-  Rules of game: we can only numerically evaluate prior \(p(\theta)\) and likelihood \(p(Y|\theta)\).
-  To evaluate posterior moments of function \(h(\theta)\), we need numerical techniques.
-  Estimating Posterior Moments   We will often abbreviate posterior distributions \(p(\theta|Y)\) by \(\pi(\theta)\) and posterior expectations of \(h(\theta)\) by \[ \mathbb{E}_\pi[h] = \mathbb{E}_\pi[h(\theta)] = \int h(\theta) \pi(\theta) d\theta = \int h(\theta) p(\theta|Y) d\theta."/>
+<meta name="twitter:description" content="Importance Sampling The main event Inference: Need to characterize posterior \(p(\theta|Y)\). Unfortunately, for many interesting models it is not possible to evaluate the moments and quantiles of the posterior \(p(\theta|Y)\) analytically.
+Rules of game: we can only numerically evaluate prior \(p(\theta)\) and likelihood \(p(Y|\theta)\).
+To evaluate posterior moments of function \(h(\theta)\), we need numerical techniques.
+Estimating Posterior Moments We will often abbreviate posterior distributions \(p(\theta|Y)\) by \(\pi(\theta)\) and posterior expectations of \(h(\theta)\) by \[ \mathbb{E}_\pi[h] = \mathbb{E}_\pi[h(\theta)] = \int h(\theta) \pi(\theta) d\theta = \int h(\theta) p(\theta|Y) d\theta."/>
 
 </head>
 <body class="terminal">
@@ -120,7 +120,7 @@ possible to sample directly.
 <p>Provided that \(\mathbb{V}_\pi[h(\theta)] &lt; \infty\) we can deduce
 from Kolmogorov&rsquo;s SLLN and the Lindeberg-Levy CLT that</p>
 <p>\begin{eqnarray}
-\bar{h}_N  &amp;\stackrel{a.s.}{\longrightarrow} &amp; \mathbb{E}_\pi[h]  \nonumber \\\<br>
+\bar{h}_N  &amp;\stackrel{a.s.}{\longrightarrow} &amp; \mathbb{E}_\pi[h]  \nonumber \\\
 \sqrt{N} \left( \bar{h}_N - \mathbb{E}_\pi[h] \right) &amp; \Longrightarrow &amp; N \big( 0, \mathbb{V}_\pi[h(\theta)] \big).
 \end{eqnarray}</p>
 </li>
@@ -221,7 +221,7 @@ W^i = \frac{w^i}{\frac{1}{N} \sum_{i=1}^N w^i}.
 <li>Refer to the collection of pairs \(\{(\theta^{i}, W^i)\}_{i=1}^N\) as a
 <strong>particle approximation</strong> of \(\pi(\theta)\).
 <br></li>
-<li>The accuracy of the approximation is driven by the ``closeness'' of
+<li>The accuracy of the approximation is driven by the ``closeness&rsquo;&rsquo; of
 \(g(\cdot)\) to \(f(\cdot)\) and is reflected in the distribution of the
 weights.
 <br></li>
@@ -257,9 +257,9 @@ and write</p>
 deviations of the numerator from \(\mathbb{E}_\pi[h]\) and deviations of
 the denominator around 1:</p>
 <p>\begin{eqnarray}
-\lefteqn{\sqrt{N}(\bar{h}_N - \mathbb{E}_\pi[h]) } \\\<br>
-&amp;=&amp; \sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N v(\theta^i) h(\theta^i) - \mathbb{E}_\pi[h] \right) \nonumber \\\<br>
-&amp;&amp;  - \mathbb{E}_\pi[h] \sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N  v(\theta^i) - 1 \right) + o_p(1) \nonumber \\\<br>
+\lefteqn{\sqrt{N}(\bar{h}_N - \mathbb{E}_\pi[h]) } \\\
+&amp;=&amp; \sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N v(\theta^i) h(\theta^i) - \mathbb{E}_\pi[h] \right) \nonumber \\\
+&amp;&amp;  - \mathbb{E}_\pi[h] \sqrt{N} \left( \frac{1}{N} \sum_{i=1}^N  v(\theta^i) - 1 \right) + o_p(1) \nonumber \\\
 &amp;=&amp;  (I) - \mathbb{E}_\pi[h] \cdot (II) + o_p(1). \nonumber
 \end{eqnarray}</p>
 <h3 id="central-limit-theorem">Central Limit Theorem</h3>
@@ -268,8 +268,8 @@ extension of the Lindeberg-Levy CLT to the terms \((I)\) and \((II)\).
 <br>
 The variances and covariance of \((I)\) and \((II)\) are given by</p>
 <p>\begin{eqnarray*}
-\mathbb{V}_g[hv] &amp;=&amp; \mathbb{E}_\pi [ (\pi/g) h^2 ] - \mathbb{E}^2_\pi[h],\\\<br>
-\mathbb{V}_g[v]  &amp;=&amp; \mathbb{E}_\pi [ (\pi/g) ]  - 1, \\\<br>
+\mathbb{V}_g[hv] &amp;=&amp; \mathbb{E}_\pi [ (\pi/g) h^2 ] - \mathbb{E}^2_\pi[h],\\\
+\mathbb{V}_g[v]  &amp;=&amp; \mathbb{E}_\pi [ (\pi/g) ]  - 1, \\\
 COV_g(hv,v) &amp;=&amp; \big( \mathbb{E}_\pi [ (\pi/g) h ] - \mathbb{E}_\pi[h] \big).
 \end{eqnarray*}</p>
 <p>In turn we can deduce that</p>

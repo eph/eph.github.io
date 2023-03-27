@@ -13,7 +13,7 @@
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/etc/test/</guid>
-      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]);  $x_t = 1$</description>
+      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]); $x_t = 1$</description>
     </item>
     
     <item>
@@ -24,8 +24,7 @@
       <guid>https://edherbst.net/etc/sw/</guid>
       <description>This file is available as Jupyter Notebook.
 The STOCK_2007 model inflation as an unobserved components models:
-\begin{eqnarray} \pi_t &amp;amp;=&amp;amp; \tau_t + \eta_t \\\
-\tau_t &amp;amp;=&amp;amp; \tau_{t-1} + \epsilon_t \end{eqnarray}
+\begin{eqnarray} \pi_t &amp;amp;=&amp;amp; \tau_t + \eta_t \\\ \tau_t &amp;amp;=&amp;amp; \tau_{t-1} + \epsilon_t \end{eqnarray}
 where \(\eta_t\) and \(\epsilon_t\) are independently and identically distributed with mean 0 and variances \(\sigma_\eta^2\) and \(\sigma_\epsilon^2\).
 A Replication First we start by importing some standard libraries.
 %matplotlib inline import matplotlib.pyplot as plt import numpy as np import pandas as p Next we get the data used and plot it.</description>

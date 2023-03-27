@@ -24,9 +24,9 @@
 
 
 <meta name="twitter:title" content="Sequential Monte Carlo"/>
-<meta name="twitter:description" content="Introduction MCMC: What works and what doesn&rsquo;t, Simple Model   State-space representation:
+<meta name="twitter:description" content="Introduction MCMC: What works and what doesn&rsquo;t, Simple Model State-space representation:
 \begin{align} y_t = [\begin{array}{cc} 1 &amp; 1 \end{array} ] s_t, \quad s_t = \left[ \begin{array}{cc} {\color{blue} \phi_1} &amp; 0 \ {\color{blue} \phi_3} &amp; {\color{blue} \phi_2} \end{array} \right] s_{t-1} &#43; \left[ \begin{array}{c} 1 \ 0 \end{array} \right] \epsilon_t. \label{eq_exss} \end{align}
-  The state-space model can be re-written as ARMA(2,1) process \[ (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t = (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L) \epsilon_t."/>
+The state-space model can be re-written as ARMA(2,1) process \[ (1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t = (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L) \epsilon_t."/>
 
 </head>
 <body class="terminal">
@@ -147,11 +147,11 @@ Relationship of \({\color{blue} \phi}\) and \({\color{red} \theta}\):
 \]</p>
 </li>
 <li>
-<p>``Standard'' approach in DSGE model literature (Schorfheide, 2000; Otrok, 2001): use Markov chain Monte Carlo (MCMC) methods to
+<p>``Standard&rsquo;&rsquo; approach in DSGE model literature (Schorfheide, 2000; Otrok, 2001): use Markov chain Monte Carlo (MCMC) methods to
 generate a sequence of serially correlated draws  \(\{ \theta^i\}_{i=1}^N\).</p>
 </li>
 <li>
-<p>Unfortunately, ``standard'' MCMC can be quite inaccurate, especially in medium and large-scale DSGE models:</p>
+<p>Unfortunately, ``standard&rsquo;&rsquo; MCMC can be quite inaccurate, especially in medium and large-scale DSGE models:</p>
 <ul>
 <li>disentangling importance of internal versus external propagation mechanism;</li>
 <li>determining the relative importance of shocks.</li>
@@ -224,7 +224,7 @@ and iterate, letting \(\phi_n \longrightarrow \phi_N = 1\).</li>
 <p>Our state-space model:
 \[
 y_t = [1~ 1]s_t, \quad s_t = \left[\begin{array}{cc}\theta^2_1 &amp; 0 \ (1-\theta_1^2) - \theta_1 \theta_2 &amp;
-(1-\theta_1^2)\end{array}\right]s_{t-1} + \left[\begin{array}{c} 1 \\\<br>
+(1-\theta_1^2)\end{array}\right]s_{t-1} + \left[\begin{array}{c} 1 \\\
 0\end{array}\right]\epsilon_t.
 \]</p>
 </li>
@@ -238,8 +238,8 @@ y_t = [1~ 1]s_t, \quad s_t = \left[\begin{array}{cc}\theta^2_1 &amp; 0 \ (1-\the
 <p>Simulate \(T = 200\) observations</p>
 </li>
 </ul>
-<p>given \(\theta = [0.45, 0.45]'\), which is observationally equivalent to \(\theta =
-[0.89, 0.22]'\)</p>
+<p>given \(\theta = [0.45, 0.45]&rsquo;\), which is observationally equivalent to \(\theta =
+[0.89, 0.22]&rsquo;\)</p>
 <h3 id="illustration-tempered-posteriors-of--theta-1">Illustration: Tempered Posteriors of \(\theta_1\)</h3>
 <p>\includegraphics[width=.8\linewidth]{static/smc_ss_density.pdf}
 \[
@@ -653,7 +653,7 @@ p(Y_{1:T}|{\cal M}_i) = \int p(Y_{1:T}|\theta_{(i)}, {\cal M}_i) p(\theta_{(i)}|
 <p>\begin{eqnarray*}
 \frac{1}{N} \sum_{i=1}^N \tilde{w}^i_n W_{n-1}^i
 &amp;\approx&amp; \int [p(Y|\theta)]^{\phi_n-\phi_{n-1} }
-\frac{ p^{\phi_{n-1}}(Y|\theta) p(\theta)}{\int p^{\phi_{n-1}}(Y|\theta) p(\theta)d\theta} d\theta \\\<br>
+\frac{ p^{\phi_{n-1}}(Y|\theta) p(\theta)}{\int p^{\phi_{n-1}}(Y|\theta) p(\theta)d\theta} d\theta \\\
 &amp;=&amp; \frac{ \int p(Y|\theta)^{\phi_n} p(\theta) d\theta}{\int p(Y|\theta)^{\phi_{n-1}} p(\theta) d\theta }
 \end{eqnarray*}</p>
 </li>
@@ -669,12 +669,12 @@ p(Y_{1:T}|{\cal M}_i) = \int p(Y_{1:T}|\theta_{(i)}, {\cal M}_i) p(\theta_{(i)}|
 <p>\begin{center}
 \begin{tabular}{l@{\hspace*{0.5cm}}cc@{\hspace*{0.5cm}}cc}
 \hline\hline
-&amp; \multicolumn{2}{c}{$N_{\phi}=100$} &amp;	\multicolumn{2}{c}{$N_{\phi}=400$} \\\<br>
+&amp; \multicolumn{2}{c}{$N_{\phi}=100$} &amp;	\multicolumn{2}{c}{$N_{\phi}=400$} \\\
 $N$	  &amp; Mean($\ln \hat p(Y)$)    &amp; SD($\ln \hat p(Y)$)  &amp; Mean($\ln \hat p(Y)$)    &amp; SD($\ln \hat p(Y)$)\ \hline
-500   &amp; -352.19 &amp;   (3.18)  &amp; -346.12 &amp; (0.20) \\\<br>
-1,000 &amp; -349.19 &amp;   (1.98)  &amp; -346.17 &amp; (0.14) \\\<br>
-2,000 &amp; -348.57 &amp;   (1.65)  &amp; -346.16 &amp; (0.12) \\\<br>
-4,000 &amp; -347.74 &amp;   (0.92)  &amp; -346.16 &amp; (0.07) \\\<br>
+500   &amp; -352.19 &amp;   (3.18)  &amp; -346.12 &amp; (0.20) \\\
+1,000 &amp; -349.19 &amp;   (1.98)  &amp; -346.17 &amp; (0.14) \\\
+2,000 &amp; -348.57 &amp;   (1.65)  &amp; -346.16 &amp; (0.12) \\\
+4,000 &amp; -347.74 &amp;   (0.92)  &amp; -346.16 &amp; (0.07) \\\
 \hline
 \end{tabular}
 \end{center}</p>
@@ -758,7 +758,7 @@ p_n(Y|\theta) = [p(Y|\theta)]^{\phi_n}[\tilde{p}(\tilde{Y}|\theta)]^{1-\phi_n}, 
 <h3 id="an-implementation-of-this">An implementation of this</h3>
 <p>\begin{align*}
 w^i(\phi) = [p(Y|\theta^i_{n-1})]^{\phi - \phi_{n-1}}, \quad
-W^i(\phi) = \frac{w^i(\phi) W^i_{n-1}}{\frac{1}{N}\sum\limits_{i=1}^N w^i(\phi) W^i_{n-1}}, \\\<br>
+W^i(\phi) = \frac{w^i(\phi) W^i_{n-1}}{\frac{1}{N}\sum\limits_{i=1}^N w^i(\phi) W^i_{n-1}}, \\\
 \widehat{ESS}(\phi) = N \big/ \left( \frac{1}{N} \sum_{i=1}^N ({W}_n^i(\phi))^2\right)
 \end{align*}</p>
 <p>We will choose \(\phi\) to target a desired level of ESS:</p>

@@ -24,7 +24,7 @@
 
 
 <meta name="twitter:title" content="Markov Chain Monte Carlo"/>
-<meta name="twitter:description" content="Metropolis-Hastings Algorithm The Metropolis-Hastings Algorithm  Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain Monte Carlo (MCMC) algorithms.  Algorithm constructs a Markov chain such that the stationary distribution associated with this Markov chain is unique and equals the posterior distribution of interest.  First version constructed by Metropolis1953. Later generalized by Hastings1970. Tierney1994 proved important convergence results for MCMC algorithms.  Introduction: Chib1995a. Textbook Robert2004 or Geweke2005.  Markov Chain Monte Carlo  Importance sampler generates a sequence of independent draws from the posterior distribution \(\pi(\theta)\), the MH algorithm generates a sequence of serially correlated draws."/>
+<meta name="twitter:description" content="Metropolis-Hastings Algorithm The Metropolis-Hastings Algorithm Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain Monte Carlo (MCMC) algorithms. Algorithm constructs a Markov chain such that the stationary distribution associated with this Markov chain is unique and equals the posterior distribution of interest. First version constructed by Metropolis1953. Later generalized by Hastings1970. Tierney1994 proved important convergence results for MCMC algorithms. Introduction: Chib1995a. Textbook Robert2004 or Geweke2005. Markov Chain Monte Carlo Importance sampler generates a sequence of independent draws from the posterior distribution \(\pi(\theta)\), the MH algorithm generates a sequence of serially correlated draws."/>
 
 </head>
 <body class="terminal">
@@ -246,7 +246,7 @@ where \(\Omega(h)\) is now the long-run covariance matrix
 \]
 In turn, the asymptotic inefficiency factor is given by \index{inefficiency factor}</p>
 <p>\begin{eqnarray}
-\mbox{InEff}_\infty &amp;=&amp; \frac{\Omega(h)}{\mathbb{V}_\pi[h]} \\\<br>
+\mbox{InEff}_\infty &amp;=&amp; \frac{\Omega(h)}{\mathbb{V}_\pi[h]} \\\
 &amp;=&amp; 1 + 2 \lim_{L \longrightarrow \infty} ; \sum_{l=1}^L \frac{L-l}{L} \left( q - (1-q)\frac{\pi_1}{1-\pi_1} \right)^l. \nonumber
 \end{eqnarray}</p>
 <h3 id="numerical-example">Numerical Example</h3>
@@ -358,9 +358,9 @@ Eliciting prior distributions <sup id="834470fef9441d6d459e3c457e25acdd"><a href
 \(\theta_{(exo)}\) (related to exogenous processes), \(\theta_{(endo)}\) (affects
 mechanisms but not steady state).</p>
 <p>\begin{eqnarray}
-\theta_{(ss)} &amp;=&amp; [r^{(A)},\pi^{(A)},\gamma^{(Q)}]' \nonumber\\\<br>
-\theta_{(exo)} &amp;=&amp; [\rho_g,\rho_z,\sigma_g,\sigma_z,\sigma_R]'\nonumber \\\<br>
-\theta_{(endo)} &amp;=&amp; [\tau,\kappa,\psi_1,\psi_2,\rho_R]' \nonumber
+\theta_{(ss)} &amp;=&amp; [r^{(A)},\pi^{(A)},\gamma^{(Q)}]&rsquo; \nonumber\\\
+\theta_{(exo)} &amp;=&amp; [\rho_g,\rho_z,\sigma_g,\sigma_z,\sigma_R]&rsquo;\nonumber \\\
+\theta_{(endo)} &amp;=&amp; [\tau,\kappa,\psi_1,\psi_2,\rho_R]&rsquo; \nonumber
 \end{eqnarray}</p>
 </li>
 </ul>
@@ -392,23 +392,23 @@ functions or variance decompositions.</p>
 <p>\begin{center}
 \scalebox{0.85}{
 \begin{tabular}{lllcc} \hline\hline
-Name &amp; Domain &amp; \multicolumn{3}{c}{Prior} \\\<br>
+Name &amp; Domain &amp; \multicolumn{3}{c}{Prior} \\\
 &amp;  &amp; Density &amp; Para (1) &amp; Para (2)  \ \hline
 \multicolumn{5}{c}{Steady State Related Parameters $\theta_{(ss)}$} \ \hline
-$r^{(A)}$      &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.50  \\\<br>
-$\pi^{(A)}$    &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  7.00 &amp;  2.00  \\\<br>
+$r^{(A)}$      &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.50  \\\
+$\pi^{(A)}$    &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  7.00 &amp;  2.00  \\\
 $\gamma^{(Q)}$ &amp; $\mathbb{R}$    &amp; Normal   &amp;  0.40 &amp;  0.20  \ \hline
 \multicolumn{5}{c}{Endogenous Propagation Parameters $\theta_{(endo)}$} \ \hline
-$\tau$         &amp;  $\mathbb{R}^+$ &amp; Gamma    &amp;  2.00 &amp;  0.50  \\\<br>
-$\kappa$       &amp;  $[0,1]$ &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
-$\psi_1$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  1.50 &amp;  0.25  \\\<br>
-$\psi_2$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.25  \\\<br>
+$\tau$         &amp;  $\mathbb{R}^+$ &amp; Gamma    &amp;  2.00 &amp;  0.50  \\\
+$\kappa$       &amp;  $[0,1]$ &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\
+$\psi_1$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  1.50 &amp;  0.25  \\\
+$\psi_2$       &amp; $\mathbb{R}^+$  &amp; Gamma    &amp;  0.50 &amp;  0.25  \\\
 $\rho_R$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \ \hline
 \multicolumn{5}{c}{Exogenous Shock Parameters $\theta_{(exo)}$} \ \hline
-$\rho_G$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
-$\rho_Z$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\<br>
-$100 \sigma_R$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.40 &amp;  4.00  \\\<br>
-$100 \sigma_G$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  1.00 &amp;  4.00  \\\<br>
+$\rho_G$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\
+$\rho_Z$       &amp; $[0,1)$         &amp; Uniform  &amp;  0.00 &amp;  1.00  \\\
+$100 \sigma_R$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.40 &amp;  4.00  \\\
+$100 \sigma_G$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  1.00 &amp;  4.00  \\\
 $100 \sigma_Z$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.50 &amp;  4.00  \ \hline \hline
 \end{tabular}
 }
@@ -420,13 +420,13 @@ $100 \sigma_Z$ &amp; $\mathbb{R}^+$  &amp; InvGamma &amp;  0.50 &amp;  4.00  \ \
 \begin{center}
 \begin{tabular}{p{0.8cm}ccp{0.8cm}cc} \hline\hline
 &amp; Mean &amp; [0.05, 0.95] &amp;  &amp; Mean &amp; [0.05,0.95] \ \hline
-$\tau$               &amp;  2.83 &amp; [ 1.95,  3.82]  &amp; $\rho_r$             &amp;  0.77 &amp; [ 0.71,  0.82] \\\<br>
-$\kappa$             &amp;  0.78 &amp; [ 0.51,  0.98]  &amp; $\rho_g$             &amp;  0.98 &amp; [ 0.96,  1.00] \\\<br>
-$\psi_1$             &amp;  1.80 &amp; [ 1.43,  2.20]  &amp; $\rho_z$             &amp;  0.88 &amp; [ 0.84,  0.92] \\\<br>
-$\psi_2$             &amp;  0.63 &amp; [ 0.23,  1.21]  &amp; $\sigma_r$           &amp;  0.22 &amp; [ 0.18,  0.26] \\\<br>
-$r^{(A)}$            &amp;  0.42 &amp; [ 0.04,  0.95]  &amp; $\sigma_g$           &amp;  0.71 &amp; [ 0.61,  0.84] \\\<br>
-$\pi^{(A)}$          &amp;  3.30 &amp; [ 2.78,  3.80]  &amp; $\sigma_z$           &amp;  0.31 &amp; [ 0.26,  0.36] \\\<br>
-$\gamma^{(Q)}$       &amp;  0.52 &amp; [ 0.28,  0.74]  &amp;  &amp; &amp; \\\<br>
+$\tau$               &amp;  2.83 &amp; [ 1.95,  3.82]  &amp; $\rho_r$             &amp;  0.77 &amp; [ 0.71,  0.82] \\\
+$\kappa$             &amp;  0.78 &amp; [ 0.51,  0.98]  &amp; $\rho_g$             &amp;  0.98 &amp; [ 0.96,  1.00] \\\
+$\psi_1$             &amp;  1.80 &amp; [ 1.43,  2.20]  &amp; $\rho_z$             &amp;  0.88 &amp; [ 0.84,  0.92] \\\
+$\psi_2$             &amp;  0.63 &amp; [ 0.23,  1.21]  &amp; $\sigma_r$           &amp;  0.22 &amp; [ 0.18,  0.26] \\\
+$r^{(A)}$            &amp;  0.42 &amp; [ 0.04,  0.95]  &amp; $\sigma_g$           &amp;  0.71 &amp; [ 0.61,  0.84] \\\
+$\pi^{(A)}$          &amp;  3.30 &amp; [ 2.78,  3.80]  &amp; $\sigma_z$           &amp;  0.31 &amp; [ 0.26,  0.36] \\\
+$\gamma^{(Q)}$       &amp;  0.52 &amp; [ 0.28,  0.74]  &amp;  &amp; &amp; \\\
 \hline \hline
 \end{tabular}
 \end{center}
@@ -447,7 +447,7 @@ Based on the remaining draws we approximated the posterior mean and the 5th and 
 <p>\includegraphics[width=4.3in]{static/dsge1_rwmh_acceptance_v_accuracy}</p>
 <h3 id="convergence-of-monte-carlo-average--bar-tau-n-n-0">Convergence of Monte Carlo Average \(\bar{\tau}_{N|N_0}\)</h3>
 <p>\begin{center}
-\includegraphics[width=3.5in]{static/dsge1_recursive_means_tau.pdf} \\\<br>
+\includegraphics[width=3.5in]{static/dsge1_recursive_means_tau.pdf} \\\
 \end{center}</p>
 <p><em>Notes:</em> The $x-$axis indicates the number of draws \(N\). \(N_0\) is set to \(0\), \(25,000\) and \(50,000\), respectively.</p>
 <h3 id="improvements-to-mcmc-blocking">Improvements to MCMC: Blocking</h3>
@@ -459,7 +459,7 @@ highly persistent Markov chains.</p>
 <li>
 <p>What&rsquo;s bad about persistence?</p>
 <p>\begin{eqnarray*}
-\lefteqn{ \sqrt{N}( \bar{h}_N - \mathbb{E}[\bar{h}_N]) } \\\<br>
+\lefteqn{ \sqrt{N}( \bar{h}_N - \mathbb{E}[\bar{h}_N]) } \\\
 &amp; \Longrightarrow &amp; N \bigg( 0, , \frac{1}{N} \sum_{i=1}^n \mathbb{V}[h(\theta^i)]
 + {\color{red} \frac{1}{N} \sum_{i=1}^N \sum_{j \not=i} COV\big[ h(\theta^i),h(\theta^j) \big]} \bigg).
 \end{eqnarray*}</p>
@@ -507,7 +507,7 @@ by \(\theta_b\), \(b=1,\ldots,N_{blocks}\) as follows:</p>
 <ol>
 <li>assign an \(iid U[0,1]\) draw to each element of \(\theta\);</li>
 <li>sort the parameters according to the assigned random number;</li>
-<li>let the \(b\)&lsquo;th block consist of parameters \((b-1)N_{blocks},\ldots,b N_{blocks}\).</li>
+<li>let the \(b\)&rsquo;th block consist of parameters \((b-1)N_{blocks},\ldots,b N_{blocks}\).</li>
 </ol>
  <br>
 </li>
@@ -521,7 +521,7 @@ by \(\theta_b\), \(b=1,\ldots,N_{blocks}\) as follows:</p>
 <p>The proposal distribution of Metropolis-Adjusted Langevin (MAL) algorithm is given by</p>
 <p>\begin{align*}
 \mu(\theta^{i-1}) &amp;= \theta^{i-1} + \frac{c_1}{2} M_1 \frac{\partial}{\partial \theta}
-\ln p(\theta^{i-1}|Y) \bigg|_{\theta = \theta^{i-1}},  \\\<br>
+\ln p(\theta^{i-1}|Y) \bigg|_{\theta = \theta^{i-1}},  \\\
 \Sigma(\theta^{i-1}) &amp;= c_2^2M_2. \nonumber
 \end{align*}</p>
 <p>that is \(\theta^{i-1}\) is adjusted by a step in the direction of the
@@ -547,12 +547,12 @@ mode \(\hat{\theta}\) by the Hessian evaluated at \(\theta^{i-1}\).
 <p>The proposal distribution is given by</p>
 <p>\begin{align*}
 \mu(\theta^{i-1}) &amp;= \theta^{i-1} - s \left[\frac{\partial}{\partial
-\theta \partial \theta'} \ln p(\theta|Y) \bigg|_{\theta =
+\theta \partial \theta&rsquo;} \ln p(\theta|Y) \bigg|_{\theta =
 \theta^{i-1}}\right]^{-1} \ &amp; \times\frac{\partial}{\partial
 \theta} \ln p(\theta^{i-1}|Y) \bigg|_{\theta = \theta^{i-1}}
-\nonumber \\\<br>
+\nonumber \\\
 \hat\Sigma(\theta^{i-1}) &amp;= - c_2^2
-\left[\frac{\partial}{\partial \theta \partial \theta'} \ln
+\left[\frac{\partial}{\partial \theta \partial \theta&rsquo;} \ln
 p(\theta|Y) \bigg|_{\theta = \theta^{i-1}}\right]^{-1}. \nonumber
 \end{align*}</p>
  <br>
@@ -569,15 +569,15 @@ where \(\bar s\) is a tuning parameter.</p>
 <p>\begin{center}
 \begin{tabular}{llll}
 \hline\hline
-Algorithm &amp; Run Time &amp; Accpt. &amp; Tuning\\\<br>
-&amp;  [hh:mm:ss] &amp; Rate  &amp; Constants \\\<br>
+Algorithm &amp; Run Time &amp; Accpt. &amp; Tuning\\\
+&amp;  [hh:mm:ss] &amp; Rate  &amp; Constants \\\
 \hline
-1-Block RWMH-I	&amp; 00:01:13 &amp;  0.28 &amp; $c = 0.015$ \\\<br>
-1-Block RWMH-V	&amp; 00:01:13 &amp;  0.37 &amp; $c = 0.400$  \\\<br>
-3-Block RWMH-I	&amp; 00:03:38 &amp;  0.40 &amp; $c = 0.070$  \\\<br>
-3-Block RWMH-V	&amp; 00:03:36 &amp;  0.43 &amp; $c = 1.200$ \\\<br>
-3-Block MAL	&amp; 00:54:12 &amp;  0.43  &amp; $c_1 = 0.4,  c_2 = 0.750$ \\\<br>
-3-Block Newton MH  &amp; 03:01:40 &amp; 0.53 &amp; $\bar s = 0.7,	 c_2 = 0.600$ \\\<br>
+1-Block RWMH-I	&amp; 00:01:13 &amp;  0.28 &amp; $c = 0.015$ \\\
+1-Block RWMH-V	&amp; 00:01:13 &amp;  0.37 &amp; $c = 0.400$  \\\
+3-Block RWMH-I	&amp; 00:03:38 &amp;  0.40 &amp; $c = 0.070$  \\\
+3-Block RWMH-V	&amp; 00:03:36 &amp;  0.43 &amp; $c = 1.200$ \\\
+3-Block MAL	&amp; 00:54:12 &amp;  0.43  &amp; $c_1 = 0.4,  c_2 = 0.750$ \\\
+3-Block Newton MH  &amp; 03:01:40 &amp; 0.53 &amp; $\bar s = 0.7,	 c_2 = 0.600$ \\\
 \hline
 \end{tabular}
 \end{center}</p>
@@ -604,21 +604,21 @@ based on \(N_{run}=50\) independent runs of each algorithm.</p>
 <p>\begin{center}
 \begin{tabular}{lr} \hline \hline
 Algorithm &amp; Draws Per Second \ \hline
-1-Block RWMH-V &amp; 7.76 \\\<br>
-3-Block RWMH-V &amp; 5.65 \\\<br>
-3-Block MAL    &amp; 1.24 \\\<br>
-3-Block RWMH-I &amp; 0.14 \\\<br>
-3-Block Newton MH &amp; 0.13 \\\<br>
+1-Block RWMH-V &amp; 7.76 \\\
+3-Block RWMH-V &amp; 5.65 \\\
+3-Block MAL    &amp; 1.24 \\\
+3-Block RWMH-I &amp; 0.14 \\\
+3-Block Newton MH &amp; 0.13 \\\
 1-Block RWMH-I &amp; 0.04 \ \hline
 \end{tabular}
 \end{center}</p>
 <h3 id="performance-of-different-mh-algorithms">Performance of Different MH Algorithms</h3>
 <p>\begin{center}
 \begin{tabular}{cc}
-RWMH-V (1 Block) &amp; RWMH-V (3 Blocks) \\\<br>
+RWMH-V (1 Block) &amp; RWMH-V (3 Blocks) \\\
 \includegraphics[width=1.35in]{static/dsge1_rwmh_one_block_hac.pdf} &amp;
-\includegraphics[width=1.35in]{static/dsge1_rwmh_three_block_hac.pdf} \\\<br>
-MAL &amp; Newton \\\<br>
+\includegraphics[width=1.35in]{static/dsge1_rwmh_three_block_hac.pdf} \\\
+MAL &amp; Newton \\\
 \includegraphics[width=1.35in]{static/dsge1_langevin_hac.pdf} &amp;
 \includegraphics[width=1.35in]{static/dsge1_newton_hac.pdf}
 \end{tabular}
@@ -696,9 +696,9 @@ p(Y|{\cal M}) = \int p(Y|\theta,{\cal M}) p(\theta|{\cal M}) d\theta
 <p>Geweke (1999):</p>
 <p>\begin{eqnarray}
 f(\theta) &amp;=&amp; \tau^{-1} (2\pi)^{-d/2} |V_{\theta}|^{-1/2} \exp
-\left[ - 0.5(\theta - \bar{\theta})' V^{-1}_{\theta}
-(\theta - \bar{\theta}) \right] \nonumber \\\<br>
-&amp;&amp; \times \left\{ (\theta - \bar{\theta})' V^{-1}_{\theta}
+\left[ - 0.5(\theta - \bar{\theta})&rsquo; V^{-1}_{\theta}
+(\theta - \bar{\theta}) \right] \nonumber \\\
+&amp;&amp; \times \left\{ (\theta - \bar{\theta})&rsquo; V^{-1}_{\theta}
 (\theta - \bar{\theta}) \le F_{\chi^2_{d}}^{-1}(\tau) \right\}.
 \end{eqnarray}</p>
 </li>
@@ -740,11 +740,11 @@ p(\theta|Y)/q(\tilde{\theta},\theta|Y)} \right\}.
 <li>
 <p>Note that</p>
 <p>\begin{eqnarray*}
-\lefteqn{ \int \alpha(\theta,\tilde{\theta}|Y) q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta } \\\<br>
+\lefteqn{ \int \alpha(\theta,\tilde{\theta}|Y) q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta } \\\
 &amp;=&amp; \int \min ; \left\{ 1, ; \frac{p(\tilde{\theta}|Y)/q(\theta,\tilde{\theta}|Y)}{
-p(\theta|Y)/q(\tilde{\theta},\theta|Y)} \right\} q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta \\\<br>
+p(\theta|Y)/q(\tilde{\theta},\theta|Y)} \right\} q(\theta,\tilde{\theta}|Y) p(\theta|Y) d\theta \\\
 &amp;=&amp; p(\tilde{\theta}|Y) \int \min ; \left\{ \frac{p(\theta|Y)/q(\tilde{\theta},\theta|Y)}{p(\tilde{\theta}|Y)/q(\theta,\tilde{\theta}|Y)}, ; 1  \right\}
-q(\tilde{\theta},\theta|Y) d\theta \\\<br>
+q(\tilde{\theta},\theta|Y) d\theta \\\
 &amp;=&amp; p(\tilde{\theta}|Y) \int \alpha(\tilde{\theta},\theta|Y) q(\tilde{\theta},\theta|Y) d\theta
 \end{eqnarray*}</p>
 </li>
@@ -771,13 +771,13 @@ value \(\tilde{\theta}\).</p>
 <p>\begin{center}
 \begin{tabular}{lcc}
 \hline\hline
-Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\<br>
+Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\
 \hline
-Geweke $(\tau = 0.5)$          &amp; -346.17 &amp;  0.03 \\\<br>
-Geweke $(\tau = 0.9)$          &amp; -346.10 &amp;  0.04 \\\<br>
-SWZ $(q = 0.5)$                &amp; -346.29 &amp;  0.03 \\\<br>
-SWZ $(q = 0.9)$                &amp; -346.31 &amp;  0.02 \\\<br>
-Chib and Jeliazkov             &amp; -346.20 &amp;  0.40 \\\<br>
+Geweke $(\tau = 0.5)$          &amp; -346.17 &amp;  0.03 \\\
+Geweke $(\tau = 0.9)$          &amp; -346.10 &amp;  0.04 \\\
+SWZ $(q = 0.5)$                &amp; -346.29 &amp;  0.03 \\\
+SWZ $(q = 0.9)$                &amp; -346.31 &amp;  0.02 \\\
+Chib and Jeliazkov             &amp; -346.20 &amp;  0.40 \\\
 \hline \hline
 \end{tabular}
 \end{center}</p>

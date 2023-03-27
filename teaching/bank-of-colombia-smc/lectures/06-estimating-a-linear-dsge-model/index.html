@@ -24,11 +24,11 @@
 
 
 <meta name="twitter:title" content="Estimating Three DSGE Models"/>
-<meta name="twitter:description" content="Three DSGE Models Application 1: A New Keynesian Model with Correlated Shocks   The assumption that exogenous shocks evolve according to independent AR(1) is to some extent arbitrary.
-  Trying to generalize this assumption seems natural.
-  However, the more elaborate the exogenous propagation mechanism, the more difficult it becomes to disentangle endogenous from exogenous propagation.
-  This generates identification problems.
-  Application 1: A New Keynesian Model with Correlated Shocks   Technology growth shock \(\hat{z}_t\), government spending shock \index{government!"/>
+<meta name="twitter:description" content="Three DSGE Models Application 1: A New Keynesian Model with Correlated Shocks The assumption that exogenous shocks evolve according to independent AR(1) is to some extent arbitrary.
+Trying to generalize this assumption seems natural.
+However, the more elaborate the exogenous propagation mechanism, the more difficult it becomes to disentangle endogenous from exogenous propagation.
+This generates identification problems.
+Application 1: A New Keynesian Model with Correlated Shocks Technology growth shock \(\hat{z}_t\), government spending shock \index{government!"/>
 
 </head>
 <body class="terminal">
@@ -85,7 +85,7 @@
 &amp;= \left[ \begin{array}{cc} \rho_z &amp;  \rho_{zg}  \  \rho_{gz}  &amp; \rho_g \end{array} \right]
 \left[ \begin{array}{c} \hat{z}_{t-1} \ \hat{g}_{t-1} \end{array} \right]</p>
 <ul>
-<li>\left[ \begin{array}{c} \epsilon_{z,t} \ \epsilon_{g,t} \end{array} \right], \\\<br>
+<li>\left[ \begin{array}{c} \epsilon_{z,t} \ \epsilon_{g,t} \end{array} \right], \\\
 \left[ \begin{array}{c} \epsilon_{z,t} \ \epsilon_{g,t} \end{array} \right]
 &amp;\sim
 N \left( \left[ \begin{array}{c} 0 \ 0 \end{array} \right], ,
@@ -97,9 +97,9 @@ N \left( \left[ \begin{array}{c} 0 \ 0 \end{array} \right], ,
 <p>This VAR process is combined with:</p>
 <p>\begin{eqnarray*}
 \hat y_{t} &amp;=&amp;  \mathbb{E}_t[\hat y_{t+1}]
-- \frac{1}{\tau} \bigg( \hat R_t -  \mathbb{E}_t[\hat\pi_{t+1}] - \mathbb{E}_t[\hat{z}_{t+1}] \bigg)\\\<br>
-&amp;&amp;+ \hat{g}_t - \mathbb{E}_t[\hat{g}_{t+1}], \\\<br>
-\hat \pi_t &amp;=&amp; \beta \mathbb{E}_t[\hat \pi_{t+1}] + \kappa (\hat y_t- \hat g_t), \\\<br>
+- \frac{1}{\tau} \bigg( \hat R_t -  \mathbb{E}_t[\hat\pi_{t+1}] - \mathbb{E}_t[\hat{z}_{t+1}] \bigg)\\\
+&amp;&amp;+ \hat{g}_t - \mathbb{E}_t[\hat{g}_{t+1}], \\\
+\hat \pi_t &amp;=&amp; \beta \mathbb{E}_t[\hat \pi_{t+1}] + \kappa (\hat y_t- \hat g_t), \\\
 \hat R_{t} &amp;=&amp; \rho_R \hat R_{t-1} + (1-\rho_R) \psi_1 \hat \pi_{t} + (1-\rho_R) \psi_2 \left( \hat y_{t} - \hat g_t \right)+ \epsilon_{R,t}.
 \end{eqnarray*}</p>
 </li>
@@ -125,11 +125,11 @@ N \left( \left[ \begin{array}{c} 0 \ 0 \end{array} \right], ,
 \begin{center}
 \begin{tabular}{p{2in}p{2in}} \hline \hline
 RWMH-V &amp; SMC \ \hline
-$N = 100,000$       &amp; $N = 4,800$ \\\<br>
-$N_{burn} = 50,000 $ &amp; $N_\phi = 500$ \\\<br>
-$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\<br>
-$c= 0.125      $    &amp; $\lambda = 2$ \\\<br>
-Run Time: 00:28 (1 core) &amp; Run Time: 05:52 (12 cores) \ \hline \hline\\\<br>
+$N = 100,000$       &amp; $N = 4,800$ \\\
+$N_{burn} = 50,000 $ &amp; $N_\phi = 500$ \\\
+$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\
+$c= 0.125      $    &amp; $\lambda = 2$ \\\
+Run Time: 00:28 (1 core) &amp; Run Time: 05:52 (12 cores) \ \hline \hline\\\
 \end{tabular}
 \end{center}
 \end{table}</p>
@@ -137,8 +137,8 @@ Run Time: 00:28 (1 core) &amp; Run Time: 05:52 (12 cores) \ \hline \hline\\\<br>
 <h3 id="posterior-probability-approximations">Posterior Probability Approximations</h3>
 <p>\begin{center}
 \begin{tabular}{cc}
-$\mathbb{P}_\pi\{\rho_{zg} &gt; 0 \}$ &amp; $\mathbb{P}_\pi\{\partial \hat{\pi}_t / \partial \hat{\epsilon}_{g,t} &gt; 0  \}$ \\\<br>
-\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_rhozg.pdf} &amp;			\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_pi_g_irf.pdf}\\\<br>
+$\mathbb{P}_\pi\{\rho_{zg} &gt; 0 \}$ &amp; $\mathbb{P}_\pi\{\partial \hat{\pi}_t / \partial \hat{\epsilon}_{g,t} &gt; 0  \}$ \\\
+\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_rhozg.pdf} &amp;			\includegraphics[width=0.46\textwidth]{static/dsge1_gen_shock_prob_pi_g_irf.pdf}\\\
 \end{tabular}
 \end{center}</p>
 <p><em>Notes:</em> Each symbol (50 in total) corresponds to one run of the SMC algorithm (dot) or the RWMH algorithm (triangle).</p>
@@ -152,11 +152,11 @@ $\mathbb{P}_\pi\{\rho_{zg} &gt; 0 \}$ &amp; $\mathbb{P}_\pi\{\partial \hat{\pi}_
 \begin{center}
 \begin{tabular}{lcc}
 \hline\hline
-Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\<br>
+Model       &amp; Mean($\ln \hat p(Y)$)    &amp; Std. Dev.($\ln \hat p(Y)$) \\\
 \hline
-AR(1) Shocks  &amp; $-346.16$ &amp;   (0.07) \\\<br>
-VAR(1) Shocks  &amp; $-314.45$ &amp;   (0.05) \\\<br>
-\hline \hline\\\<br>
+AR(1) Shocks  &amp; $-346.16$ &amp;   (0.07) \\\
+VAR(1) Shocks  &amp; $-314.45$ &amp;   (0.05) \\\
+\hline \hline\\\
 \end{tabular}
 \end{center}
 \end{table}</p>
@@ -166,7 +166,7 @@ the log marginal data density, computed over \(N_{run}=50\) runs of the SMC samp
 <ul>
 <li>Benchmark macro model, has been estimated many (many) times.
 <br></li>
-<li>``Core'' of many larger-scale models.
+<li>``Core&rsquo;&rsquo; of many larger-scale models.
 <br></li>
 <li>36 estimated parameters.
 <br></li>
@@ -186,7 +186,7 @@ parameters with Gamma and Normal prior by factor of 3.</li>
 <ol>
 <li>
 <p>Sort the posterior draws \(\{\theta_j^i\}_{i=1}^N\) and select
-the \(\lfloor \tau N \rfloor\)&lsquo;th element.
+the \(\lfloor \tau N \rfloor\)&rsquo;th element.
 <br></p>
 </li>
 <li>
@@ -221,11 +221,11 @@ where \(\pi(\theta)\) is the posterior density.
 \begin{center}
 \begin{tabular}{p{2in}p{2in}} \hline \hline
 RWMH-V &amp; SMC \ \hline
-$N = 10,000,000$       &amp; $N = 12,000$ \\\<br>
-$N_{burn} = 5,000,000 $ &amp; $N_\phi = 500$ \\\<br>
-$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\<br>
-$c= 0.08      $    &amp; $\lambda = 2.1$ \\\<br>
-Run Time: 14:06 (1 core) &amp; Run Time: 02:32 (24 cores) \ \hline \hline\\\<br>
+$N = 10,000,000$       &amp; $N = 12,000$ \\\
+$N_{burn} = 5,000,000 $ &amp; $N_\phi = 500$ \\\
+$N_{blocks} = 1$    &amp; $N_{blocks} = 6$, $N_{MH}=1$ \\\
+$c= 0.08      $    &amp; $\lambda = 2.1$ \\\
+Run Time: 14:06 (1 core) &amp; Run Time: 02:32 (24 cores) \ \hline \hline\\\
 \end{tabular}
 \end{center}
 \end{table}</p>
@@ -258,7 +258,7 @@ The 45-degree line appears in solid.</p>
 <li>
 <p>The budget constraint of the households</p>
 <p>\begin{align*}
-(1+\tau_t^c)c_t &amp;+ i_t + b_t \\\<br>
+(1+\tau_t^c)c_t &amp;+ i_t + b_t \\\
 &amp;= (1-\tau_t^l)w_tl_t + (1-\tau_t^k)R_t^ku_tk_{t-1} + R_{t-1}b_{t-1} + z_t. \nonumber
 \end{align*}</p>
 </li>
@@ -273,9 +273,9 @@ B_t + \tau_t^kR_t^ku_tK_{t-1} + \tau_t^l w_t L_t + \tau_t^cC_t = R_{t-1}B_{t-1} 
 <p>The fiscal policy rules (\(\hat x_t\): log deviation from steady state of \(x_t\))</p>
 <p>\begin{align*}
 \hat\tau_t^k &amp;= \varphi_k\hat Y_t + \gamma_k \hat B_{t-1}
-+ \phi_{kl}\hat u_t^l + \phi_{kc} \hat u_t^c + \hat u_t^k, \\\<br>
++ \phi_{kl}\hat u_t^l + \phi_{kc} \hat u_t^c + \hat u_t^k, \\\
 \hat\tau_t^l &amp;= \varphi_l\hat Y_t + \gamma_l \hat B_{t-1}
-+ \phi_{lk}\hat u_t^k + \phi_{lc} \hat u_t^c + \hat u_t^l, \\\<br>
++ \phi_{lk}\hat u_t^k + \phi_{lc} \hat u_t^c + \hat u_t^l, \\\
 \hat\tau_t^c &amp;= \phi_{ck}\hat u_t^k + \phi_{cl} \hat u_t^l + \hat u_t^c.
 \end{align*}</p>
 </li>
@@ -286,9 +286,9 @@ B_t + \tau_t^kR_t^ku_tK_{t-1} + \tau_t^l w_t L_t + \tau_t^cC_t = R_{t-1}B_{t-1} 
 <p>The exogenous movements in taxes follow AR(1) processes</p>
 <p>\begin{align*}
 \hat u_t^k &amp;= \rho_k \hat u_{t-1}^k + \sigma_k \epsilon_t^k,
-\quad \epsilon_t^k \sim N(0,1), \\\<br>
+\quad \epsilon_t^k \sim N(0,1), \\\
 \hat u_t^l &amp;= \rho_l \hat u_{t-1}^l + \sigma_l \epsilon_t^l,
-\quad \epsilon_t^l \sim N(0,1), \\\<br>
+\quad \epsilon_t^l \sim N(0,1), \\\
 \hat u_t^c &amp;= \rho_c \hat u_{t-1}^c + \sigma_c \epsilon_t^c,
 \quad \epsilon_t^c \sim N(0,1).
 \end{align*}</p>
@@ -296,7 +296,7 @@ B_t + \tau_t^kR_t^ku_tK_{t-1} + \tau_t^l w_t L_t + \tau_t^cC_t = R_{t-1}B_{t-1} 
 <li>
 <p>The government spending rule is given by</p>
 <p>\begin{align*}
-\hat G_t &amp;= -\varphi_g \hat Y_t - \gamma_g \hat B_{t-1} + \hat u_t^g, \\\<br>
+\hat G_t &amp;= -\varphi_g \hat Y_t - \gamma_g \hat B_{t-1} + \hat u_t^g, \\\
 \hat u_t^g &amp;= \rho_g \hat u_{t-1}^g + \sigma_g \epsilon_t^g,
 \quad \epsilon_t^g \sim N(0,1).
 \end{align*}</p>
@@ -305,7 +305,7 @@ B_t + \tau_t^kR_t^ku_tK_{t-1} + \tau_t^l w_t L_t + \tau_t^cC_t = R_{t-1}B_{t-1} 
 <p>The transfer rule is
 given by</p>
 <p>\begin{align*}
-\hat Z_t &amp;= -\varphi_z \hat Y_t - \gamma_z \hat B_{t-1} + \hat u_t^z, \\\<br>
+\hat Z_t &amp;= -\varphi_z \hat Y_t - \gamma_z \hat B_{t-1} + \hat u_t^z, \\\
 \hat u_t^z &amp;= \rho_z \hat u_{t-1}^z + \sigma_z \epsilon_t^z,
 \quad \epsilon_t^z \sim N(0,1).
 \end{align*}</p>
@@ -317,29 +317,29 @@ given by</p>
 \scalebox{0.93}{
 \begin{tabular}{lcccccc}
 \hline\hline
-&amp; \multicolumn{3}{c}{LPT Prior} &amp; \multicolumn{3}{c}{Diffuse Prior} \\\<br>
-&amp; Type &amp; Para (1) &amp; Para (2) &amp; Type &amp; Para (1) &amp; Para (2)\\\<br>
+&amp; \multicolumn{3}{c}{LPT Prior} &amp; \multicolumn{3}{c}{Diffuse Prior} \\\
+&amp; Type &amp; Para (1) &amp; Para (2) &amp; Type &amp; Para (1) &amp; Para (2)\\\
 \hline
-\multicolumn{7}{c}{Debt Response Parameters} \\\<br>
+\multicolumn{7}{c}{Debt Response Parameters} \\\
 \hline
-$\gamma_{g}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
-$\gamma_{tk}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
-$\gamma_{tl}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
-$\gamma_{z}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\<br>
+$\gamma_{g}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\
+$\gamma_{tk}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\
+$\gamma_{tl}$ &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\
+$\gamma_{z}$  &amp; G                &amp;   0.4 &amp;   0.2  &amp; U              &amp;     0 &amp;     5 \\\
 \hline
-\multicolumn{7}{c}{Output Response Parameters} \\\<br>
+\multicolumn{7}{c}{Output Response Parameters} \\\
 \hline
-$\varphi_{tk}$&amp; G                &amp;   1.0 &amp;   0.3  &amp; N               &amp;   1.0 &amp;     1 \\\<br>
-$\varphi_{tl}$&amp; G                &amp;   0.5 &amp;  0.25  &amp; N               &amp;   0.5 &amp;     1 \\\<br>
-$\varphi_{g}$ &amp; G                &amp;  0.07 &amp;  0.05  &amp; N               &amp;  0.07 &amp;     1 \\\<br>
-$\varphi_{z}$ &amp; G                &amp;   0.2 &amp;   0.1  &amp; N               &amp;   0.2 &amp;     1 \\\<br>
+$\varphi_{tk}$&amp; G                &amp;   1.0 &amp;   0.3  &amp; N               &amp;   1.0 &amp;     1 \\\
+$\varphi_{tl}$&amp; G                &amp;   0.5 &amp;  0.25  &amp; N               &amp;   0.5 &amp;     1 \\\
+$\varphi_{g}$ &amp; G                &amp;  0.07 &amp;  0.05  &amp; N               &amp;  0.07 &amp;     1 \\\
+$\varphi_{z}$ &amp; G                &amp;   0.2 &amp;   0.1  &amp; N               &amp;   0.2 &amp;     1 \\\
 \hline
-\multicolumn{7}{c}{Exogenous Tax Comovement Parameters} \\\<br>
+\multicolumn{7}{c}{Exogenous Tax Comovement Parameters} \\\
 \hline
-$\phi_{kl}$   &amp; N               &amp;  0.25 &amp;   0.1  &amp; N               &amp;  0.25 &amp;     1 \\\<br>
-$\phi_{kc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\<br>
-$\phi_{lc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\<br>
-\hline \hline\\\<br>
+$\phi_{kl}$   &amp; N               &amp;  0.25 &amp;   0.1  &amp; N               &amp;  0.25 &amp;     1 \\\
+$\phi_{kc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\
+$\phi_{lc}$   &amp; N               &amp;  0.05 &amp;   0.1  &amp; N               &amp;  0.05 &amp;     1 \\\
+\hline \hline\\\
 \end{tabular}
 }
 \end{center}
@@ -351,24 +351,24 @@ for Uniform (U) distribution.  \end{table}</p>
 \begin{center}
 	\scalebox{0.93}{
 	\begin{tabular}{lccccccc} \hline\hline
-        &amp; Type &amp; Para (1) &amp; Para (2) &amp;  &amp; Type &amp; Para (1) &amp; Para (2)\\ \hline
-        \multicolumn{8}{c}{Endogenous Propagation Parameters} \\ \hline
-        $\gamma$      &amp; G                &amp;  1.75 &amp;   0.5  &amp; $s''$         &amp; G                &amp;     5 &amp;   0.5 \\\\\\
-        $\kappa$      &amp; G                &amp;   2.0 &amp;   0.5  &amp; $\delta\_2$    &amp; G                &amp;   0.7 &amp;   0.5  \\\\\\
-        $h$           &amp; B                 &amp;   0.5 &amp;   0.2  &amp;               &amp;                     &amp;       &amp; \\\\\\
-        \hline
-        \multicolumn{8}{c}{Exogenous Process Parameters} \\\\\\
-        \hline
-        $\rho\_{a}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{a}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{b}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{b}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{l}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{l}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{i}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{i}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{g}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{g}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{tk}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tk}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{tl}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tl}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{tc}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tc}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        $\rho\_{z}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{z}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
-        \hline \hline\\\\\\
+		&amp; Type &amp; Para (1) &amp; Para (2) &amp;  &amp; Type &amp; Para (1) &amp; Para (2)\\ \hline
+		\multicolumn{8}{c}{Endogenous Propagation Parameters} \\ \hline
+		$\gamma$      &amp; G                &amp;  1.75 &amp;   0.5  &amp; $s''$         &amp; G                &amp;     5 &amp;   0.5 \\\\\\
+		$\kappa$      &amp; G                &amp;   2.0 &amp;   0.5  &amp; $\delta\_2$    &amp; G                &amp;   0.7 &amp;   0.5  \\\\\\
+		$h$           &amp; B                 &amp;   0.5 &amp;   0.2  &amp;               &amp;                     &amp;       &amp; \\\\\\
+		\hline
+		\multicolumn{8}{c}{Exogenous Process Parameters} \\\\\\
+		\hline
+		$\rho\_{a}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{a}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{b}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{b}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{l}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{l}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{i}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{i}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{g}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{g}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{tk}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tk}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{tl}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tl}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{tc}$   &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{tc}$ &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		$\rho\_{z}$    &amp; B                 &amp;   0.7 &amp;   0.2  &amp; $\sigma\_{z}$  &amp; IG           &amp;     1 &amp;     4  \\\\\\
+		\hline \hline\\\\\\
 	\end{tabular}
 }
 \end{center}
@@ -380,9 +380,9 @@ $s$ and $\nu$, where $p(\sigma|\nu, s)\propto \sigma^{-\nu-1}e^{-\nu s^2/2\sigma
 <p>\begin{table}[t!]
 \begin{center}
 \begin{tabular}{p{4cm}p{2.5cm}} \hline \hline
-$N = 6,000$       &amp;  $N_\phi = 500$\\\<br>
-$N_{blocks} = 3$ &amp; $N_{MH}=1$ \\\<br>
-$\lambda = 4.0$  &amp; \\\<br>
+$N = 6,000$       &amp;  $N_\phi = 500$\\\
+$N_{blocks} = 3$ &amp; $N_{MH}=1$ \\\
+$\lambda = 4.0$  &amp; \\\
 \multicolumn{2}{l}{Run Time [mm:ss]: 48:00 (12 cores)}  \ \hline \hline
 \end{tabular}
 \end{center}
@@ -392,29 +392,29 @@ $\lambda = 4.0$  &amp; \\\<br>
 \begin{center}
 	\footnotesize
 	\begin{tabular}{l@{\hspace\*{1cm}}cc@{\hspace\*{1cm}}cc} \hline\hline
-        &amp; \multicolumn{2}{c}{Based on LPT Prior} &amp; \multicolumn{2}{c}{Based on Diff. Prior} \\\\\\
-        &amp; Mean &amp; [5\%, 95\%] Int. &amp; Mean &amp; [5\%, 95\%] Int. \\ \hline
-        \multicolumn{5}{c}{Debt Response Parameters} \\ \hline
-        $\gamma\_{g}$         &amp;   0.16 &amp; [  0.07,   0.27]  &amp;   0.10 &amp; [  0.01,   0.23] \\\\\\
-        $\gamma\_{tk}$        &amp;   0.39 &amp; [  0.22,   0.60]  &amp;   0.38 &amp; [  0.16,   0.62] \\\\\\
-        $\gamma\_{tl}$        &amp;   0.11 &amp; [  0.04,   0.21]  &amp;   0.04 &amp; [  0.00,   0.11] \\\\\\
-        $\gamma\_{z}$         &amp;   0.32 &amp; [  0.17,   0.47]  &amp;   0.32 &amp; [  0.14,   0.49] \\\\\\
-        \hline \multicolumn{5}{c}{Output Response Parameters} \\ \hline
-        $\varphi\_{tk}$          &amp;   1.67 &amp; [  1.18,   2.18]  &amp;   2.06 &amp; [  1.44,   2.69] \\\\\\
-        $\varphi\_{tl}$          &amp;   0.29 &amp; [  0.11,   0.53]  &amp;   0.11 &amp; [ -0.34,   0.58] \\\\\\
-        $\varphi\_{g}$           &amp;   0.06 &amp; [  0.01,   0.13]  &amp;  -0.43 &amp; [ -0.87,   0.02] \\\\\\
-        $\varphi\_{z}$           &amp;   0.17 &amp; [  0.06,   0.33]  &amp;  -0.07 &amp; [ -0.56,   0.41] \\\\\\
-        \hline \multicolumn{5}{c}{Exogenous Tax Comovement Parameters} \\ \hline
-        $\phi\_{kl}$          &amp;   0.19 &amp; [  0.14,   0.24]  &amp;   1.57 &amp; [  1.29,   1.87] \\\\\\
-        $\phi\_{kc}$          &amp;   0.03 &amp; [ -0.03,   0.08]  &amp;  -0.33 &amp; [ -2.84,   2.73] \\\\\\
-        $\phi\_{lc}$          &amp;  -0.02 &amp; [ -0.07,   0.04]  &amp;   0.20 &amp; [ -1.23,   1.40] \\\\\\
-        \hline
-        \multicolumn{5}{c}{Innovations to Fiscal Rules} \\ \hline
-        $\sigma\_{g}$         &amp;   3.03 &amp; [  2.79,   3.30]  &amp;   2.91 &amp; [  2.66,   3.19] \\\\\\
-        $\sigma\_{tk}$        &amp;   4.36 &amp; [  4.01,   4.75]  &amp;   1.26 &amp; [  1.08,   1.46] \\\\\\
-        $\sigma\_{tl}$        &amp;   2.95 &amp; [  2.71,   3.22]  &amp;   2.00 &amp; [  1.71,   2.33] \\\\\\
-        $\sigma\_{tc}$        &amp;   3.99 &amp; [  3.67,   4.33]  &amp;   1.14 &amp; [  0.96,   1.35] \\\\\\
-        $\sigma\_{z}$         &amp;   3.34 &amp; [  3.07,   3.63]  &amp;   3.34 &amp; [  3.07,   3.63] \\ \hline \hline
+		&amp; \multicolumn{2}{c}{Based on LPT Prior} &amp; \multicolumn{2}{c}{Based on Diff. Prior} \\\\\\
+		&amp; Mean &amp; [5\%, 95\%] Int. &amp; Mean &amp; [5\%, 95\%] Int. \\ \hline
+		\multicolumn{5}{c}{Debt Response Parameters} \\ \hline
+		$\gamma\_{g}$         &amp;   0.16 &amp; [  0.07,   0.27]  &amp;   0.10 &amp; [  0.01,   0.23] \\\\\\
+		$\gamma\_{tk}$        &amp;   0.39 &amp; [  0.22,   0.60]  &amp;   0.38 &amp; [  0.16,   0.62] \\\\\\
+		$\gamma\_{tl}$        &amp;   0.11 &amp; [  0.04,   0.21]  &amp;   0.04 &amp; [  0.00,   0.11] \\\\\\
+		$\gamma\_{z}$         &amp;   0.32 &amp; [  0.17,   0.47]  &amp;   0.32 &amp; [  0.14,   0.49] \\\\\\
+		\hline \multicolumn{5}{c}{Output Response Parameters} \\ \hline
+		$\varphi\_{tk}$          &amp;   1.67 &amp; [  1.18,   2.18]  &amp;   2.06 &amp; [  1.44,   2.69] \\\\\\
+		$\varphi\_{tl}$          &amp;   0.29 &amp; [  0.11,   0.53]  &amp;   0.11 &amp; [ -0.34,   0.58] \\\\\\
+		$\varphi\_{g}$           &amp;   0.06 &amp; [  0.01,   0.13]  &amp;  -0.43 &amp; [ -0.87,   0.02] \\\\\\
+		$\varphi\_{z}$           &amp;   0.17 &amp; [  0.06,   0.33]  &amp;  -0.07 &amp; [ -0.56,   0.41] \\\\\\
+		\hline \multicolumn{5}{c}{Exogenous Tax Comovement Parameters} \\ \hline
+		$\phi\_{kl}$          &amp;   0.19 &amp; [  0.14,   0.24]  &amp;   1.57 &amp; [  1.29,   1.87] \\\\\\
+		$\phi\_{kc}$          &amp;   0.03 &amp; [ -0.03,   0.08]  &amp;  -0.33 &amp; [ -2.84,   2.73] \\\\\\
+		$\phi\_{lc}$          &amp;  -0.02 &amp; [ -0.07,   0.04]  &amp;   0.20 &amp; [ -1.23,   1.40] \\\\\\
+		\hline
+		\multicolumn{5}{c}{Innovations to Fiscal Rules} \\ \hline
+		$\sigma\_{g}$         &amp;   3.03 &amp; [  2.79,   3.30]  &amp;   2.91 &amp; [  2.66,   3.19] \\\\\\
+		$\sigma\_{tk}$        &amp;   4.36 &amp; [  4.01,   4.75]  &amp;   1.26 &amp; [  1.08,   1.46] \\\\\\
+		$\sigma\_{tl}$        &amp;   2.95 &amp; [  2.71,   3.22]  &amp;   2.00 &amp; [  1.71,   2.33] \\\\\\
+		$\sigma\_{tc}$        &amp;   3.99 &amp; [  3.67,   4.33]  &amp;   1.14 &amp; [  0.96,   1.35] \\\\\\
+		$\sigma\_{z}$         &amp;   3.34 &amp; [  3.07,   3.63]  &amp;   3.34 &amp; [  3.07,   3.63] \\ \hline \hline
 	\end{tabular}
 	\footnotesize
 	\renewcommand{\baselinestretch}{2}
