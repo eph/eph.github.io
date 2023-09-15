@@ -8,6 +8,24 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://edherbst.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Forecasting With DSGE Models</title>
+      <link>https://edherbst.net/research/dsge-forecasting-handbook/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://edherbst.net/research/dsge-forecasting-handbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bias in Local Projections</title>
+      <link>https://edherbst.net/research/bias-in-local-projections/</link>
+      <pubDate>Sat, 24 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
       <link>https://edherbst.net/research/woodford/</link>
       <pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate>
@@ -147,15 +165,6 @@ Modes of Inference Previously, we focussed on frequentist inference (repeated sa
       <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://edherbst.net/research/factor-structure-of-disagreement/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bias in Local Projections</title>
-      <link>https://edherbst.net/research/bias-in-local-projections/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
       <description></description>
     </item>
     
