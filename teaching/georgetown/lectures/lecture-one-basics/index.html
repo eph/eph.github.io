@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/lectures/lecture-one-basics/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="ECON 616: Lecture 1: Time Series Basics" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/lectures/lecture-one-basics/" /><meta property="article:published_time" content="2025-03-13T17:51:12-04:00" />
+
+
+
+<meta name="twitter:title" content="ECON 616: Lecture 1: Time Series Basics"/>
+<meta name="twitter:description" content="Lecture 1: Time Series Basics
+References
+
+
+Overview: Chapters 1-3 from (James Hamilton, 1994).
+
+
+Technical Details: Chapters 2-3 from (Brockwell, Peter J. and Davis, Richard A., 1987).
+
+
+Intuition: Chapters 1-4 from (John Cochrane, 2005).
+
+
+Time Series
+A time series is a family of random variables indexed by time
+\(\{Y_t, t\in T\}\) defined on a probability space \((\Omega, \mathcal
+F, P)\).
+ 
+(Everybody uses &ldquo;time series&rdquo; to mean both the random variables and their realizations)
+ 
+For this class, \(T = \left\{0, \pm 1, \pm 2, \ldots\right\}\).
+  Some examples:"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/georgetown/lectures/lecture-one-basics'>lecture-one-basics</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>ECON 616: Lecture 1: Time Series Basics</h1>
+<h2 id="lecture-1-time-series-basics">Lecture 1: Time Series Basics</h2>
+<h3 id="references">References</h3>
+<ul>
+<li>
+<p><em>Overview:</em> Chapters 1-3 from (James Hamilton, 1994).</p>
+</li>
+<li>
+<p><em>Technical Details:</em> Chapters 2-3 from (Brockwell, Peter J. and Davis, Richard A., 1987).</p>
+</li>
+<li>
+<p><em>Intuition:</em> Chapters 1-4 from (John Cochrane, 2005).</p>
+</li>
+</ul>
+<h3 id="time-series">Time Series</h3>
+<p>A <strong>time series</strong> is a family of random variables indexed by time
+\(\{Y_t, t\in T\}\) defined on a probability space \((\Omega, \mathcal
+F, P)\).
+<br> <br>
+<em>(Everybody uses &ldquo;time series&rdquo; to mean both the random variables and their realizations)</em>
+<br> <br>
+For this class, \(T = \left\{0, \pm 1, \pm 2, \ldots\right\}\).
+<br> <br> Some examples:</p>
+<ol>
+<li>\(y_t = \beta_0 + \beta_1 t + \epsilon_t, \quad \epsilon_t \sim iid N(0, \sigma^2)\).</li>
+<li>\(y_t = \rho y_{t-1} + \epsilon_t, \quad \epsilon_t \sim iid N(0, \sigma^2)\).</li>
+<li>\(y_t = \epsilon_1 \cos(\omega t) + \epsilon_2 \sin (\omega t), \quad \omega \in [0, 2\pi)\).</li>
+</ol>
+<h3 id="time-series-examples">Time Series &ndash; Examples</h3>
+<figure><img src="https://edherbst.net/ox-hugo/8f58b78f928446940c0aca96d2cd3194a8c68d7b.png">
+</figure>
+
+<h3 id="why-time-series-analysis">Why time series analysis?</h3>
+<p>Seems like any area of econometrics, but:</p>
+<ol>
+<li>
+<p>We (often) only have one realization for a given time series probability model (and it&rsquo;s short)!</p>
+<p><em>(A single path of 282 quarterly observations for real GDP since 1948&hellip;)</em></p>
+</li>
+<li>
+<p>Focus (mostly) on <span class="underline">parametric</span> models to describe time series.</p>
+<p><em>(A long time ago, economists noticed that time series
+statistical models could mimic the properties of economic data.)</em></p>
+</li>
+<li>
+<p>More emphasis on prediction than some subfields.</p>
+</li>
+</ol>
+<h3 id="eugen-slutzky-1937">(Eugen Slutzky, 1937)</h3>
+<figure><img src="https://edherbst.net/ox-hugo/slutzky.png">
+</figure>
+
+<h3 id="definitions">Definitions</h3>
+<p>The <span class="underline"><span class="underline">autocovariance function</span></span> of a time series is the set of functions \(\{\gamma_t(\tau), t\in T\}\)
+\[
+\gamma_t(\tau) = \mathbb E\left[ (Y_t - \mathbb EY_t) (Y_{t+\tau} - \mathbb EY_{t+\tau})&rsquo;\right]
+\]
+<br> <br>
+A time series is  <strong>covariance stationary</strong> if</p>
+<ol>
+<li>\(E\left[Y_t^2\right] = \sigma^2 &lt; \infty\) for all \(t\in T\).</li>
+<li>\(E\left[Y_t\right]=\mu\) for all \(t\in T\).</li>
+<li>\(\gamma_t(\tau) = \gamma(\tau)\) for all \(t,\tau \in T\).</li>
+</ol>
+<p><br> <br>
+Note that \(|\gamma(\tau)| \le \gamma(0)\) and \(\gamma(\tau) = \gamma(-\tau)\).</p>
+<h3 id="some-examples">Some Examples</h3>
+<ol>
+<li>\(y_t = \beta t + \epsilon_t, \epsilon\sim iid N(0,\sigma^2)\).
+\(\mathbb E[y_t] = \beta t\), depends on time, not covariance stationary!</li>
+<li>\(y_t = \epsilon_t + 0.5\epsilon_{t-1}, \epsilon\sim iid N(0,\sigma^2)\)
+\(\mathbb E[y_t] = 0, \quad \gamma(0) = 1.25\sigma^2, \quad \gamma(\pm 1) = 0.5\sigma^2, \quad \gamma(\tau) = 0\) \(\implies\) covariance stationary.</li>
+</ol>
+<h3 id="building-blocks-of-stationary-processes">Building Blocks of Stationary Processes</h3>
+<p>A stationary process \(\{Z_t\}\) is called <span class="underline"><span class="underline">white noise</span></span> if it satisfies</p>
+<ol>
+<li>\(E[Z_t] = 0\).</li>
+<li>\(\gamma(0) = \sigma^2\).</li>
+<li>\(\gamma(\tau) = 0\) for \(\tau \ne 0\).</li>
+</ol>
+<p>These processes are kind of boring on their own, but using them we can construct arbitrary stationary processes!
+<br> <br>
+<strong>Special Case:</strong> \(Z_t \sim iid N(0, \sigma^2)\)</p>
+<h3 id="white-noise">White Noise</h3>
+<figure><img src="https://edherbst.net/ox-hugo/0fdbba1b9b5650524021d7e2399d7888812075fc.png">
+</figure>
+
+<h3 id="asymptotics-for-covariance-stationary-ma-pr-dot">Asymptotics for Covariance Stationary MA pr.</h3>
+<p>Covariance Stationarity isn&rsquo;t necessary or sufficient to ensure the convergence of sample averages to population averages.</p>
+<p>We&rsquo;ll talk about a special case now.
+<br> <br>
+Consider the <em>moving average process of order \(q\)</em>
+\[
+y_t = \epsilon_t + \theta_1 \epsilon_{t-1} + \ldots + \theta_q \epsilon_{t-q}
+\]
+where \(\epsilon_t\) is <em>iid</em> \(WN(0,\sigma^2)\).
+<br> <br>
+We&rsquo;ll show a weak law of large numbers and central limit theorem applies to this process using the <span class="underline">Beveridge-Nelson</span> decomposition following Phillips and Solo (1992).
+<br> <br>
+Using the lag operator \(LX_t = X_{t-1}\) we can write
+\[
+y_t = \theta(L)\epsilon_t, \quad \theta(z) = 1 + \theta_1 z + \ldots + \theta_q z^q.
+\]</p>
+<h3 id="deriving-asymptotics">Deriving Asymptotics</h3>
+<p>Write \(\theta(\cdot)\) in Taylor expansion-ish sort of way</p>
+<p>\begin{eqnarray}
+\theta(L) &amp;=&amp; \sum_{j=0}^q \theta_j L^j, \nonumber \\
+&amp;=&amp; \left(\sum_{j=0}^q \theta_j - \sum_{j=1}^q \theta_j\right) +
+\left(\sum_{j=1}^q \theta_j - \sum_{j=2}^q \theta_j\right)L \nonumber \\ &amp;~&amp;+
+\left(\sum_{j=2}^q \theta_j - \sum_{j=3}^q \theta_j\right)L^2 + \ldots \nonumber \\
+&amp;=&amp; \sum_{j=0}^q \theta_j + \left(\sum_{j=1}^q\theta_j\right)(L-1) + \left(\sum_{j=2}^q\theta_j\right)(L^2-L) + \ldots\nonumber\\
+&amp;=&amp; \theta(1) + \hat\theta_1(L-1) + \hat\theta_2 L (L-1) + \ldots \nonumber\\
+&amp;=&amp; \theta(1) + \hat\theta(L)(L-1) \nonumber
+\end{eqnarray}</p>
+<h3 id="wlln-clt">WLLN / CLT</h3>
+<p>We can write \(y_t\) as
+\[
+y_t = \theta(1) \epsilon_t + \hat\theta(L)\epsilon_{t-1} - \hat\theta(L)\epsilon_{t}
+\]
+An average of \(y_t\) cancels most of the second and third term &hellip;
+\[
+\frac1T \sum_{t=1}^T y_t  = \frac{1}{T}\theta(1) \sum_{t=1}^T \epsilon_t +
+\frac1T\left(\hat\theta(L)\epsilon_0 - \hat\theta(L)\epsilon_T\right)
+\]
+We have
+\[
+\frac{1}{\sqrt{T}}\left(\hat\theta(L)\epsilon_0 - \hat\theta(L)\epsilon_T\right) \rightarrow 0.
+\]
+Then we can apply a WLLN / CLT for <span class="underline">iid</span> sequences with Slutzky&rsquo;s Theorem to deduce that
+\[
+\frac1T \sum_{t=1}^T y_t  \rightarrow 0 \mbox{ and }
+\frac{1}{\sqrt{T}}\sum_{t=1}^T y_t  \rightarrow N(0, \sigma^2 \theta(1)^2)
+\]</p>
+<h2 id="arma-processes">ARMA Processes</h2>
+<h3 id="arma-processes">ARMA Processes</h3>
+<p>The processes \(\{Y_t\}\) is said to be an <span class="underline"><span class="underline">ARMA\((p,q)\)</span></span> process if \(\{Y_t\}\) is stationary and if it can be represented by the linear difference equation:</p>
+<p>\[
+Y_t = \phi_1 Y_{t-1} + \ldots \phi_p Y_{t-p} + Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q}
+\]
+with \(\{Z_t\} \sim WN(0,\sigma^2)\). Using the lag operator \(LX_t = X_{t-1}\) we can write:
+\[
+\phi(L)Y_t = \theta(L)Z_t
+\]
+where
+\[
+\phi(z) = 1 - \phi_1 z - \ldots \phi_p z^p \mbox{ and } \theta(z) = 1 + \theta_1 z + \ldots + \theta_q z^q.
+\]
+Special cases:</p>
+<ol>
+<li>\(AR(1) : Y_t = \phi_1 Y_{t-1} + Z_t\).</li>
+<li>\(MA(1) : Y_t = Z_t + \theta_1 Z_{t-1}\).</li>
+<li>\(AR(p)\), \(MA(q)\), \(\ldots\)</li>
+</ol>
+<h3 id="why-are-arma-processes-important">Why are ARMA processes important?</h3>
+<ol>
+<li>Defined in terms of linear difference equations (something we know a lot about!)</li>
+<li>Parametric family \(\implies\) some hope for estimating these things</li>
+<li>It turns out that for any stationary process with autocovariance function \(\gamma_Y(\cdot)\) with \(\lim_{\tau\rightarrow\infty}\gamma(\tau) = 0\), we can, for any integer \(k&gt;0\), find an ARMA process with \(\gamma(\tau) = \gamma_Y(\tau)\) for \(\tau = 0, 1, \ldots, k\).</li>
+</ol>
+<p>They are pretty flexible!</p>
+<h3 id="ma--q--process-revisited">MA(q) Process Revisited</h3>
+<p>\[
+Y_t = Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q}
+\]
+Is it covariance stationary? Well,
+\[
+\mathbb E[Y_t] = \mathbb E[Z_t] + \theta_1 \mathbb E[Z_{t-1}] + \ldots + \theta_q \mathbb E[ Z_{t-q}] = 0
+\]
+and \(\mathbb E[Y_t Y_{t-h} ] =\)
+\[
+\mathbb E[( Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q})
+( Z_{t-h} + \theta_1 Z_{t-h-1} + \ldots + \theta_q Z_{t-h-q})]
+\]</p>
+<p>If \(q\le h\), this equals \(\sigma^2(\theta_h\theta_0 + \ldots +\theta_q\theta_{q-h})\) and 0 otherwise.
+<br> <br>
+This doesn&rsquo;t depend on \(t\), so this process is covariance stationary regardless of values of \(\theta\).</p>
+<h3 id="autocorrelation-function">Autocorrelation Function</h3>
+<figure><img src="https://edherbst.net/ox-hugo/4c173a5419a00e80aa8629d54ab986925fc1225b.png">
+</figure>
+
+<h3 id="ar--1--model">AR(1) Model</h3>
+<p>\[
+Y_t = \phi_1 Y_{t-1} + Z_t
+\]
+From the perspective of a linear difference equation, \(Y_t\) can be solved for as a function \(\{Z_t\}\) via backwards subsitution:</p>
+<p>\begin{eqnarray}
+Y_t &amp;=&amp; \phi_1(\phi_1 Y_{t-2} + Z_{t-1}) + Z_{t}\\
+&amp;=&amp; Z_t +  \phi_1 Z_{t-1} +  \phi_1^2 Z_{t-2} +\ldots \\
+&amp;=&amp; \sum_{j=0}^{\infty} \phi_1^j Z_{t-j}
+\end{eqnarray}</p>
+<p>How do we know whether this is covariance stationary?</p>
+<h3 id="analysis-of-ar--1--continued">Analysis of AR(1), continued</h3>
+<p>We want to know if \(Y_t\) converges to some random variable as we consider the infinite past of innovations.
+<br> <br>
+The relevant concept (assuming that \(E[Y_t^2] &lt; \infty\)) is <span class="underline"><span class="underline">mean square convergence</span></span>.  We say that \(Y_t\) converges in mean square to a random variable \(Y\) if
+\[
+\mathbb E\left[(Y_t - Y)^2\right] \longrightarrow 0 \mbox{ as } t\longrightarrow \infty.
+\]
+It turns out that there is a connection to deterministic sums \(\sum_{j=0}^\infty a_j\).
+<br> <br>
+We can prove mean square convergence by showing that the sequence generated by partial summations satisfies a Cauchy criteria, very similar to the way you would for a deterministic sequence.</p>
+<h3 id="analysis-of-ar--1--continued">Analysis of AR(1), continued</h3>
+<p><strong>What this boils down to</strong>: We need <em>square summability</em>: \(\sum_{j=0}^{\infty} (\phi_1^j)^2 &lt; \infty\).
+<br> <br>
+We&rsquo;ll often work with the stronger condition <em>absolute summability</em> : \(\sum_{j=0}^{\infty} |\phi_1^j| &lt; \infty\).
+<br> <br>
+For the AR(1) model, this means we need \(|\phi_1| &lt; 1\), for covariance stationarity.</p>
+<h3 id="relationship-between-ar-and-ma-processes">Relationship Between AR and MA Processes</h3>
+<p>You may have noticed that we worked with the <span class="underline"><span class="underline">infinite moving average representation</span></span> of the AR(1) model to show convergence.  We got there by doing some lag operator arithmetic:
+\[
+(1-\phi_1L)Y_t = Z_t
+\]
+We <span class="underline">inverted</span> the polynomial \(\phi(z) = (1-\phi_1 z)\) by
+\[
+(1-\phi_1z)^{-1} = 1 + \phi_1 z + \phi_1^2 z^2 + \ldots
+\]
+Note that this is only valid when \(|\phi_1 z|&lt;1 \implies\) we can&rsquo;t always perform inversion!
+<br> <br>
+To think about covariance stationarity in the context of ARMA processes, we always try to use the \(MA(\infty)\) representation of a given series.</p>
+<h3 id="a-general-theorem">A General Theorem</h3>
+<p>If \(\{X_t\}\) is a covariance stationary process with autocovariance function \(\gamma_X(\cdot)\) and if \(\sum_{j=0}^\infty |\theta_j| &lt; \infty\), than the infinite sum
+\[
+Y_t = \theta(L)X_t = \sum_{j=0}^\infty \theta_j X_{t-j}
+\]
+converges in mean square.  The process \(\{Y_t\}\) is covariance stationary with autocovariance function
+\[
+\gamma(h) = \sum_{j=0}^\infty\sum_{k=0}^\infty \theta_j\theta_k \gamma_x(h-j+k)
+\]
+If the autocovariances of \(\{X_t\}\) are absolutely summable, then so are the autocovrainces of \(\{Y_t\}\).</p>
+<h3 id="back-to-ar--1">Back to AR(1)</h3>
+<p>\[
+Y_t = \phi_1 Y_{t-1} + Z_t, \quad Z_t \sim WN(0,\sigma^2),\quad |\phi_1|&lt;1
+\]
+The variance can be found using the MA(∞) representation</p>
+<p>\begin{eqnarray}
+Y_t = \sum_{j=0}^\infty \phi_1^j Z_{t-j} &amp;\implies&amp; \nonumber \\
+\mathbb E[Y_t^2] &amp;=&amp; \mathbb E \left[\left(\sum_{j=0}^\infty \phi_1^j Z_{t-j} \right)
+\left(\sum_{j=0}^\infty \phi_1^j Z_{t-j}\right) \right] \nonumber \\
+&amp;=&amp; \sum_{j=0}^\infty\mathbb E \left[\phi_1^{2j} Z_{t-j}^2\right] = \sum_{j=0}^\infty\phi_1^{2j} \sigma^2
+\end{eqnarray}</p>
+<p>This means that
+\[
+\gamma(0) = \mathbb V[Y_t] = \frac{\sigma^2}{1-\phi_1^2}
+\]</p>
+<h3 id="autocovariance-of-ar--1">Autocovariance of AR(1)</h3>
+<p>To find the autocovariance:
+\[
+Y_t Y_{t-1} = \phi_1 Y_{t-1}^2 + Z_t Y_{t-1} \implies \gamma(1) = \phi_1 \gamma(0)
+\]
+\[
+Y_t Y_{t-2} = \phi_1 Y_{t-1}Y_{t-2} + Z_t Y_{t-2} \implies \gamma(2) = \phi_1 \gamma(1)
+\]
+\[
+Y_t Y_{t-3} = \phi_1 Y_{t-1}Y_{t-3} + Z_t Y_{t-3} \implies \gamma(3) = \phi_1 \gamma(2)
+\]
+<br> <br>
+Let&rsquo;s look at autocorrelation
+\[
+\rho(\tau) = \frac{\gamma(\tau)}{\gamma(0)}
+\]</p>
+<h3 id="autocorrelation-for-ar--1">Autocorrelation for AR(1)</h3>
+<figure><img src="https://edherbst.net/ox-hugo/b4e0e168c171c86ae42357e67772199a9b8e7c94.png">
+</figure>
+
+<h3 id="simulated-paths">Simulated Paths</h3>
+<figure><img src="https://edherbst.net/ox-hugo/5ef1069afb9cbc64b91f3a023839660594bb82e9.png">
+</figure>
+
+<h3 id="analysis-of-ar--2--model">Analysis of AR(2) Model</h3>
+<p>\[
+Y_t = \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \epsilon_t
+\]
+Which means
+\[
+\phi(L) Y_t = \epsilon_t, \quad \phi(z) = 1 - \phi_1 z - \phi_2 z^2
+\]
+Under what conditions can we invert \(\phi(\cdot)\)? Factoring the polynomial
+\[
+1 - \phi_1 z - \phi_2 z^2 = (1-\lambda_1 z) (1-\lambda_2 z)
+\]
+Using the above theorem, if both \(|\lambda_1|\) and \(|\lambda_2|\) are less than one in length (they can be complex!) we can apply the earlier logic succesively to obtain conditions for covariance stationarity.</p>
+<p>Note: \(\lambda_1\lambda_2 = -\phi_2\) and \(\lambda_1 + \lambda_2 = \phi_1\)</p>
+<h3 id="companion-form">Companion Form</h3>
+<p>\begin{eqnarray}\left[\begin{array}{c}Y_t \\ Y_{t-1} \end{array}\right] =
+\left[\begin{array}{cc}\phi_1 &amp; \phi_2 \\ 1 &amp; 0 \end{array}\right]
+\left[\begin{array}{c}Y_{t-1} \\ Y_{t-2} \end{array}\right]
++
+\left[\begin{array}{c}\epsilon_t\\ 0 \end{array}\right]\end{eqnarray}</p>
+<p>\({\mathbf Y}_t = F {\mathbf Y}_{t-1} + {\mathbf \epsilon_t}\)
+<br> <br>
+\(F\) has eigenvalues \(\lambda\) which solve \(\lambda^2 - \phi_1 \lambda - \phi_2 = 0\)</p>
+<h3 id="finding-the-autocovariance-function">Finding the Autocovariance Function</h3>
+<p>Multiplying and using the symmetry of the autocovariance function:</p>
+<p>\begin{eqnarray}
+Y_t &amp;:&amp;\gamma(0) = \phi_1\gamma(1) + \phi_2\gamma(2) + \sigma^2 \\
+Y_{t-1} &amp;:&amp; \gamma(1) = \phi_1\gamma(0) + \phi_2\gamma(1) \\
+Y_{t-2} &amp;:&amp; \gamma(2) = \phi_1\gamma(1) + \phi_2\gamma(0) \\
+&amp;\vdots&amp; \\
+Y_{t-h} &amp;:&amp; \gamma(h) = \phi_1\gamma(h-1) + \phi_2\gamma(h-2)
+\end{eqnarray}</p>
+<p>We can solve for \(\gamma(0), \gamma(1), \gamma(2)\) using the first three equations:
+\[
+\gamma(0) = \frac{(1-\phi_2)\sigma^2}{(1+\phi_2)[(1-\phi_2)^2 - \phi_1^2]}
+\]
+We can solve for the rest using the recursions.</p>
+<p>Note pth order AR(1) have autocovariances / autocorrelations that follow the same pth order difference equations.</p>
+<p>Autocorrelations: call these <span class="underline">Yule-Walker</span> equations.</p>
+<h3 id="why-are-we-so-obsessed-with-autocovariance-correlation-functions">Why are we so obsessed with autocovariance/correlation functions?</h3>
+<ul>
+<li>For covariance stationary processes, we are really only concerned with the first two moments.
+<br> <br></li>
+<li>If, in addition, the white noise is actually IID normal, those two moments characterize everything!
+<br> <br></li>
+<li>So if two processes have the same autocovariance (and mean&hellip;), they&rsquo;re the same.
+<br> <br></li>
+<li>We saw that with the \(AR(1)\) and \(MA(\infty)\) example.
+<br> <br></li>
+<li>How do we distinguish between the different processes yielding an identical series?</li>
+</ul>
+<h3 id="invertibility">Invertibility</h3>
+<p>Recall
+\[
+\phi(L) Y_t = \theta(L) \epsilon_t
+\]
+We already discussed conditions under which we can <span class="underline">invert</span> \(\phi(L)\) for the AR(1) model to represent \(Y_t\) as an \(MA(\infty)\).
+<br> <br>
+What about other direction? An MA process is invertible if \(\theta(L)^{-1}\) exists.
+<br> <br></p>
+<p>so \(MA(1) : |\theta_1|&lt;1, \quad MA(q): \ldots\)</p>
+<h3 id="ma--1--with-theta-1-1">MA(1) with \(|\theta_1| &gt; 1\)</h3>
+<p>Consider
+\[
+Y_t = \epsilon_t + 0.5\epsilon_{t-1}, \quad \epsilon_t \sim WN(0, \sigma^2)
+\]
+\(\gamma(0) = 1.25\sigma^2, \quad \gamma(1) = 0.5\sigma^2\).
+vs.
+\[
+Y_t = \tilde\epsilon_t + 2\tilde\epsilon_{t-1}, \quad \epsilon_t \sim WN(0, \tilde\sigma^2)
+\]
+\(\gamma(0) = 5\tilde\sigma^2, \quad \gamma(1) = 2\tilde\sigma^2\)
+For \(\sigma = 2\tilde\sigma\), these are the same!
+<br> <br>
+Prefer invertible process:</p>
+<ol>
+<li>Mimics AR case.</li>
+<li>Intuitive to think of errors as decaying.</li>
+<li>Noninvertibility pops up in macro: news shocks!</li>
+</ol>
+<h3 id="why-arma-again">Why ARMA, again?</h3>
+<p>ARMA models seem cool, but they are inherently <span class="underline">linear</span>
+<br> <br>
+Many important phenomenom are nonlinear (hello great recession!)
+<br> <br>
+It turns out that <span class="underline">any</span> covariance stationary process has a linear ARMA representation!
+<br> <br>
+This is called the <span class="underline"><span class="underline">Wold Theorem</span></span>; it&rsquo;s a big deal.</p>
+<h3 id="wold-decomposition">Wold Decomposition</h3>
+<p><strong>Theorem</strong> Any zero mean covariance stationary process \(\{Y_t\}\) can be represented as
+\[
+Y_t = \sum_{j=0}^\infty \psi_j \epsilon_{t-j} + \kappa_t
+\]
+where \(\psi_0=1\) and \(\sum_{j=0}^\infty \psi_j^2 &lt; \infty\).  The term \(\epsilon_t\) is white noise are represents the error made in forecasting \(Y_t\) on the basis of a linear function of lagged \(Y\) (denoted by \(\hat {\mathbb E}[\cdot|\cdot]\)):
+\[
+\epsilon_t = y_t - \hat {\mathbb E}[Y_t|y_{t-1}, y_{t-2},\cdot]
+\]
+The value of \(\kappa_t\) is uncorrelated with \(\epsilon_{t-j}\) for any value of \(j\), and can be predicted arbitrary well from a linear function of past values of \(Y\):
+\[
+\kappa_t = \hat {\mathbb E}[\kappa_t|y_{t-1}, y_{t-2},\cdot]
+\]</p>
+<h2 id="more-large-sample-stuff">More Large Sample Stuff</h2>
+<h3 id="strict-stationarity">Strict Stationarity</h3>
+<p>A time series is <span class="underline"><span class="underline">strictly stationary</span></span> if for all \(t_1,\ldots,t_k, k, h \in T\) if</p>
+<p>\(Y_{t_1}, \ldots, Y_{t_k} \sim Y_{t_1+h}, \ldots, Y_{t_k+h}\)
+<br> <br>
+What is the relationship between strict and covariance stationarity?
+<br> <br>
+\(\{Y_t\}\) strictly stationary (with finite second moment) \(\implies\) covariance stationarity.
+<br> <br>
+The corollary need not be true!
+<br> <br>
+<span class="underline">Important Exception</span> if \(\{Y_t\}\) is gaussian series covariance stationarity \(\implies\) strict stationarity.</p>
+<h3 id="ergodicity">Ergodicity</h3>
+<p>In earlier econometrics classes, you (might have) examined large sample properties of estimators using LLN and CLT for sums of independent RVs.</p>
+<p>Times series are obviously not independent, so we need some other tools.  Under what conditions do time averages converge to population averages.  One helpful concept:</p>
+<p>A stationary process is said to be <span class="underline"><span class="underline">ergodic</span></span> if, for any two bounded and measurable functions \(f: \mathbb R^k \longrightarrow \mathbb R\) and \(g : {\mathbb R}^l \longrightarrow \mathbb R\),</p>
+<p>\begin{eqnarray}
+\lim_{n\rightarrow\infty} \left|\mathbb{E} \left[ f(y_t,\ldots,y_{t+k})g(y_{t+n},\ldots,g_{t+n+l}\right]\right| \nonumber \- \left|\mathbb{E} \left[ f(y_t,\ldots,y_{t+k})\right]\right|
+\left|\mathbb{E}\left[g(y_{t+n},\ldots,y_{t+n+l}\right]\right| = 0 \nonumber
+\end{eqnarray}</p>
+<p>Ergodicity is a tedious concept.  At an intuitive level, a process if ergodic if the dependence between an event today and event at some horizon in the future vanishes as the horizon increases.</p>
+<h3 id="the-ergodic-theorem">The Ergodic Theorem</h3>
+<p>If \(\{y_t\}\) is strictly stationary and ergodic with \(\mathbb E[y_1] &lt; \infty\), then
+\[
+\frac1T \sum_{t=1}^T y_t\longrightarrow E[y_1]
+\]</p>
+<p><strong>CLT for strictly stationary and ergodic processes_</strong></p>
+<p>If \(\{y_t\}\) is strictly stationary and ergodic with \(\mathbb E[y_1] &lt; \infty\), \(E[y_1^2] &lt; \infty\), and \(\bar\sigma^2 = var(T^{-1/2} \sum y_t) \rightarrow \bar\sigma^2 &lt; \infty\), then
+\[
+\frac{1}{\sqrt{T}\bar\sigma_T}\sum_{t=1}^T y_t \rightarrow N(0,1)
+\]</p>
+<h3 id="facts-about-ergodic-theorem">Facts About Ergodic Theorem</h3>
+<ol>
+<li>iid sequences are stationary and ergodic</li>
+<li>If \(\{Y_t\}\) is strictly stationary and ergodic, and \(f: \mathbb R^\infty \rightarrow \mathbb R\) is a measurable function:</li>
+</ol>
+<p>\[
+Z_t = f(\{Y_t\})
+\]
+Then \(Z_t\) is strictly stationary and ergodic.</p>
+<p>(Note this is for strictly stationary processes!)</p>
+<h3 id="example">Example</h3>
+<p>Example: an \(MA(\infty)\) with iid Gaussian white noise.
+\[
+Y_t = \sum_{j=0}^\infty \theta_j\epsilon_{t-j}, \quad \sum_{j=0}^\infty| \theta_j| &lt; \infty.
+\]
+This means that \(\{Y_t\}, \{Y_t^2\}, \mbox { and } \{Y_tY_{t-h}\}\) are ergodic!
+\[
+\frac1T \sum_{t=0}^\infty Y_t \rightarrow \mathbb E[Y_0], \quad
+\frac1T \sum_{t=0}^\infty Y_t^2 \rightarrow \mathbb E[Y_0^2], \quad
+\]
+\[
+\frac1T \sum_{t=0}^\infty Y_tY_{t-h} \rightarrow \mathbb E[Y_0Y_{-h}],
+\]</p>
+<h3 id="martingale-difference-sequences">Martingale Difference Sequences</h3>
+<p>\(\{Z_t \}\) is
+a Martingale Difference Sequence (with respect to the information sets \(\{ {\cal F}_t \}\))
+if
+\[
+E[Z_t|{\cal F}_{t-1}] = 0 \quad \mbox{for all} \;\; t
+\]
+<strong>LLN and CLT for MDS</strong>
+Let \(\{Y_t, {\cal F}_t\}\) be a martingale difference sequence
+such that \(E[|Y_t|^{2r}] &lt; \Delta &lt; \infty\) for some \(r &gt; 1\), and all \(t\).</p>
+<ul>
+<li>Then \(\bar{Y}_T = T^{-1} \sum_{t=1}^T Y_t \stackrel{p}{\longrightarrow} 0\).</li>
+<li>Moreover, if \(var(\sqrt{T} \bar{Y}_T) = \bar{\sigma}_T^2 \rightarrow \sigma^2 &gt; 0\),
+then \(\sqrt{T} \bar{Y}_T / \bar{\sigma}_T \Longrightarrow {\cal N}(0,1)\). \(\Box\)</li>
+</ul>
+<h3 id="an-example-of-an-mds">An Example of an MDS</h3>
+<p>An investor faces a choice between a stock which generates real
+return \(r_t\), and a nominal bond with guaranteed return,
+\(R_{t-1}\) which is subject to inflation risk, \(\pi_t\).
+<br> <br>
+The investor is risk neutral; no arbitrage implies that:
+\[
+\mathbb E_{t-1}[r_t] = \mathbb E_{t-1}[R_{t-1} - \pi_t].
+\]
+We can rewrite this as:
+\[
+0 = r_t + \pi_t - R_{t-1} - \underbrace{\left((r_t - \mathbb E_{t-1}[r_t]) + (\pi_t - \mathbb E_{t-1}[\pi_t])\right)}_{\eta_t}.
+\]
+\(\eta_t\) is an expectation error.  In rational expectations models, \(\mathbb E_{t-1}[\eta_t] = 0\).
+<br> <br>
+Thus \(\eta_t\) is an MDS! Will use this in GMM estimation later in the course.</p>
+<h2 id="some-empirics">Some Empirics</h2>
+<h3 id="the-most-iconic-trio-in-macroeconomics">The Most Iconic Trio in Macroeconomics</h3>
+<figure><img src="https://edherbst.net/ox-hugo/bd0ac6213b9d58679f2e31794c5515f0dda3f903.png">
+</figure>
+
+<h3 id="autocorrelation">Autocorrelation</h3>
+<figure><img src="https://edherbst.net/ox-hugo/b9b5ab75603cf6504d3a7a7452ea150a7047bbe8.png">
+</figure>
+
+<h2 id="bibliography">Bibliography</h2>
+<h2 id="references-1">References</h2>
+<p>Brockwell, Peter J. and Davis, Richard A. (1987). <em>Time Series: Theory and Methods</em>, Springer New York.</p>
+<p>Eugen Slutzky (1937). <em>The Summation of Random Causes as the Source of Cyclic Processes</em>, [Wiley, Econometric Society].</p>
+<p>James Hamilton (1994). <em>Time Series Analysis</em>, Princeton University Press.</p>
+<p>John Cochrane (2005). <em>Time Series Analysis for Macroeconomics and Finance</em>, Mimeo.</p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

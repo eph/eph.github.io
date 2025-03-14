@@ -4,7 +4,8 @@
     <title>Minicourse on Sequential Monte Carlo Methods on Ed Herbst</title>
     <link>https://edherbst.net/teaching/indiana-minicourse/</link>
     <description>Recent content in Minicourse on Sequential Monte Carlo Methods on Ed Herbst</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://edherbst.net/teaching/indiana-minicourse/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://edherbst.net/teaching/indiana-minicourse/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

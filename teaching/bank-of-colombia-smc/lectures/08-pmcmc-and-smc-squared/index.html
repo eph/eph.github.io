@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
     
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,7 +30,33 @@
 
 
 <meta name="twitter:title" content="Particle MCMC and SMC^2"/>
-<meta name="twitter:description" content="Introduction Embedding PF Likelihoods into Posterior Samplers Likelihood functions for nonlinear DSGE models can be approximated by the PF. We will now embed the likelihood approximation into a posterior sampler: PFMH Algorithm (a special case of PMCMC). Embedding PF Likelihoods into Posterior Samplers Distinguish between: \(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to: \[ p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta \] \(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to: \[ \hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta."/>
+<meta name="twitter:description" content="Introduction
+Embedding PF Likelihoods into Posterior Samplers
+
+Likelihood functions for nonlinear DSGE models can be approximated by the PF.
+
+We will now embed the likelihood approximation into a posterior sampler:
+PFMH Algorithm (a special case of PMCMC).
+
+
+Embedding PF Likelihoods into Posterior Samplers
+
+Distinguish between:
+
+\(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to:
+\[
+p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta
+\]
+\(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to:
+\[
+\hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta.
+\]
+
+
+Surprising result from Andrieu_2010: under certain conditions we can replace \(p(Y|\theta)\) by \(\hat{p}(Y|\theta)\) and still obtain draws from \(p(\theta|Y)\).
+
+PFMH Algorithm
+For \(i=1\) to \(N\):"/>
 
 </head>
 <body class="terminal">

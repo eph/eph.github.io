@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
     
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,8 +30,25 @@
 
 
 <meta name="twitter:title" content="A Crash Course In Bayesian Inference"/>
-<meta name="twitter:description" content="Introduction These notes are available as slides and a Jupyter notebook.
-Modes of Inference Previously, we focussed on frequentist inference (repeated sampling prodecures) measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental However, many statisticians and econometricians believed that post-experimental reasoning should be used to assess inference procedures wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed Example Suppose \(Y_1\) and \(Y_2\) are independently and identically distributed and \[ P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad P_\theta \{ Y_i = \theta&#43;1 \} = \frac{1}{2} \] Consider the following confidence set"/>
+<meta name="twitter:description" content="Introduction
+These notes are available as slides and a Jupyter notebook.
+Modes of Inference
+
+Previously, we focussed on frequentist inference (repeated sampling prodecures)
+measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental
+However, many statisticians and econometricians believed that
+post-experimental reasoning should be used to assess inference
+procedures
+wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed
+
+Example
+Suppose \(Y_1\) and \(Y_2\) are independently and identically
+distributed and
+\[
+P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad
+P_\theta \{ Y_i = \theta&#43;1 \} = \frac{1}{2}
+\]
+Consider the following confidence set"/>
 
 </head>
 <body class="terminal">
@@ -173,34 +196,34 @@ beliefs and very sceptical of Bayesian methods.</p>
 <p>The parameter space is \(\Theta = \{ 0,1\}\),</p>
 <p>the sample space is \({\cal Y}=\{0,1,2,3,4\}\).</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\(P_{\theta=0}(Y)\)</td>
-<td>.75</td>
-<td>.140</td>
-<td>.04</td>
-<td>.037</td>
-<td>.033</td>
-</tr>
-<tr>
-<td>\(P_{\theta=1}(Y)\)</td>
-<td>.70</td>
-<td>.251</td>
-<td>.04</td>
-<td>.005</td>
-<td>.004</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th></th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>\(P_{\theta=0}(Y)\)</td>
+          <td>.75</td>
+          <td>.140</td>
+          <td>.04</td>
+          <td>.037</td>
+          <td>.033</td>
+      </tr>
+      <tr>
+          <td>\(P_{\theta=1}(Y)\)</td>
+          <td>.70</td>
+          <td>.251</td>
+          <td>.04</td>
+          <td>.005</td>
+          <td>.004</td>
+      </tr>
+  </tbody>
 </table>
 <p>Suppose we consider \(\theta = 0\) and \(\theta=1\) as equally
 likely <em>a priori</em>. Moreover, suppose that the observed

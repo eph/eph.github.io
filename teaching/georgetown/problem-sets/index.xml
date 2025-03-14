@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Problem Sets on Ed Herbst</title>
+    <link>https://edherbst.net/teaching/georgetown/problem-sets/</link>
+    <description>Recent content in Problem Sets on Ed Herbst</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Mar 2025 05:27:25 -0400</lastBuildDate>
+    <atom:link href="https://edherbst.net/teaching/georgetown/problem-sets/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Econ 616: Problem Set 1</title>
+      <link>https://edherbst.net/teaching/georgetown/problem-sets/ps1_solutions/</link>
+      <pubDate>Fri, 14 Mar 2025 05:27:25 -0400</pubDate>
+      <guid>https://edherbst.net/teaching/georgetown/problem-sets/ps1_solutions/</guid>
+      <description>&lt;h2 id=&#34;problem-1&#34;&gt;Problem 1&lt;/h2&gt;&#xA;&lt;p&gt;Let \(\phi (z) \equiv 1 - \phi_1 z - \phi_2 z^2\). What we need to&#xA;show is the solution of the equation \(\phi ( z) =0\) lies outside of&#xA;unit circle. Let \(z_1\) and \(z_2\) be the solutions of \(\phi (z)&#xA;=0\).&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Case 1:&lt;/strong&gt; Suppose \(\phi _{1}^{2}+4\phi _{2}\leq 0\). Then we have&#xA;either \(z_{1}=z_{2}\) or that \(z_{1}\) and \(z_{2}\) are complex&#xA;numbers and conjugate of each other. In any case the norm of the&#xA;solution is given by \(\sqrt{\left\vert \frac{1}{\phi&#xA;_{2}}\right\vert }\). Hence the condition is \(|\phi_{2}|&amp;lt;1\).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Econ 6016: Problem Set 1</title>
+      <link>https://edherbst.net/teaching/georgetown/problem-sets/ps1/</link>
+      <pubDate>Fri, 14 Mar 2025 05:26:28 -0400</pubDate>
+      <guid>https://edherbst.net/teaching/georgetown/problem-sets/ps1/</guid>
+      <description>&lt;p&gt;*Due in class on Tuesday, February 18th.&lt;/p&gt;&#xA;&lt;h2 id=&#34;problem-1&#34;&gt;Problem 1&lt;/h2&gt;&#xA;&lt;p&gt;Consider the AR(2) process&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray}&#xA;y_t = \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t.&#xA;\end{eqnarray}&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Show that a necessary condition for stationarity is that the coefficients lie inside the triangle&#xA;\[&#xA;\phi_1 + \phi_2 &amp;lt; 1, \quad \phi_2 - \phi_1 &amp;lt; 1, \quad \mbox{and} \; \phi_2 &amp;gt; -1.&#xA;\]&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Now re-parameterize the AR(2) model in terms of partial autocorrelations \(\psi_1\) and \(\psi_2\):&#xA;\[&#xA;\phi_1 = \psi_1(1-\psi_2), \quad \phi_2 = \psi_2.&#xA;\]&#xA;Show that the AR(2) process is stationary if and only if \(\psi_1 \in (-1,1)\) and \(\psi_2 \in (-1,1)\).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

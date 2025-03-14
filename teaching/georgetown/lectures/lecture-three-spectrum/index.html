@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/lectures/lecture-three-spectrum/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="ECON 616: Lecture Three: The Spectrum" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/lectures/lecture-three-spectrum/" /><meta property="article:published_time" content="2025-03-13T17:51:55-04:00" />
+
+
+
+<meta name="twitter:title" content="ECON 616: Lecture Three: The Spectrum"/>
+<meta name="twitter:description" content="Intro
+Background
+
+
+Overview: Chapters 6 from Hamilton (1994).
+
+
+Technical Details: Chapter 4 from Brockwell and Davis (1987).
+
+
+Other stuff: You might want to look at a digital signals processing textbook, for example: here.
+
+
+Cycles as Frequencies
+Starting In the 19th Century, economists and others recognized cyclical patterns in economic activity.
+Schmupeter distinguished between cycles at different frequencies
+
+Kondratieff Cycles &ndash; Longwave cycles lasting 50 years (caused by fundamental innovations.)
+Juglar Cycles &ndash; medium cycle (8 years) associated with changes in credit condition.
+Kitchin Cycles &ndash; short run cycles (40 months) associated with information diffusion.
+
+=&gt; model economic activity as a linear combination of periodic function with different frequencies."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/georgetown/lectures/lecture-three-spectrum'>lecture-three-spectrum</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>ECON 616: Lecture Three: The Spectrum</h1>
+<h2 id="intro">Intro</h2>
+<h3 id="background">Background</h3>
+<ul>
+<li>
+<p><em>Overview:</em> Chapters 6 from <a href="#citeproc_bib_item_3">Hamilton (1994)</a>.</p>
+</li>
+<li>
+<p><em>Technical Details</em>: Chapter 4 from <a href="#citeproc_bib_item_2">Brockwell and Davis (1987)</a>.</p>
+</li>
+<li>
+<p><em>Other stuff</em>: You might want to look at a digital signals processing textbook, for example: <a href="http://www.sp4comm.org/docs/sp4comm_corrected.pdf">here</a>.</p>
+</li>
+</ul>
+<h3 id="cycles-as-frequencies">Cycles as Frequencies</h3>
+<p>Starting In the 19th Century, economists and others recognized <span class="underline"><span class="underline">cyclical</span></span> patterns in economic activity.</p>
+<p>Schmupeter distinguished between cycles at different <span class="underline"><span class="underline">frequencies</span></span></p>
+<ul>
+<li><em>Kondratieff Cycles</em> &ndash; Longwave cycles lasting 50 years (caused by fundamental innovations.)</li>
+<li><em>Juglar Cycles</em> &ndash; medium cycle (8 years) associated with changes in credit condition.</li>
+<li><em>Kitchin Cycles</em> &ndash; short run cycles (40 months) associated with information diffusion.</li>
+</ul>
+<p>=&gt; model economic activity as a linear combination of periodic function with different frequencies.</p>
+<h3 id="a-model-of-frequencies">A model of frequencies</h3>
+<p>Consider the following model for quarterly observations
+\[
+X_t = 2 \sum_{j=1}^m a_j cos( \omega_j t + \theta_j)
+\]
+where \(\theta_j\) is \(\sim iidU[-\pi,\pi]\) and \(-\pi \le \omega_j &lt; \omega_{j+1} \le \pi\).
+The random variables \(\theta_j\) are determined in the infinite past and simply
+cause a phase shift. According to Schumpeter&rsquo;s hypothesis \(m\) should be equal
+to three. The frequencies \(\omega_j\) can be determined as follows.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Cycle</th>
+          <th>Duration</th>
+          <th>Frequency</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Kondratieff</td>
+          <td>200 quarters</td>
+          <td>\(\omega_1 = (2 \pi)/200 = 0.03\)</td>
+      </tr>
+      <tr>
+          <td>Juglar</td>
+          <td>32 quarters</td>
+          <td>\(\omega_2 = (2\pi)/32   = 0.20\)</td>
+      </tr>
+      <tr>
+          <td>Kitchin</td>
+          <td>13.3 quarters</td>
+          <td>\(\omega_3 = (2 \pi)/13.3 = 0.47\)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="a-time-series-of-this-process">A Time Series of this process</h3>
+<p>\(a = [5,2,1], \quad \omega = [0.03,0.20,047]\).</p>
+<figure><img src="https://edherbst.net/ox-hugo/738655edb593cc65c1d415da04419bc1be0860ac.png">
+</figure>
+
+<h3 id="the-spectrum">The Spectrum</h3>
+<ul>
+<li>
+<p>The coefficients \(a_1\) to \(a_3\) are the amplitudes of the different cycles</p>
+</li>
+<li>
+<p>If \(a_1\) and \(a_2\) are small then most of the variation in \(X_t\) is due to the Kitchin cycles.</p>
+</li>
+<li>
+<p>The plot of \(a_j^2\) versus \(\omega\) is called the <span class="underline">spectrum</span> of \(X_t\).</p>
+</li>
+</ul>
+<h3 id="some-math">Some math</h3>
+<p>\begin{eqnarray}
+\cos(x+y) &amp; = &amp; \cos x \cos y - \sin x \sin y \\
+\sin x \sin y &amp; = &amp; \frac{1}{2} [ \cos(x-y) - \cos(x+y)] \\
+\cos x \cos y &amp; = &amp; \frac{1}{2} [ \cos(x-y) + \cos(x+y)] \\
+2 \sin^2 x &amp; = &amp; 1 - \cos (2x) \\
+\sin x \cos x &amp; = &amp; \frac{1}{2} \sin (2x)
+\end{eqnarray}</p>
+<p>Moreover, \(\sin^2 x + \cos^2 x = 1\).</p>
+<p>We consider real-valued stochastic processes \(X_t\), complex numbers
+will help us summarize sine and cosine expressions using exponential
+functions.</p>
+<h3 id="more-math">More Math</h3>
+<p>Let \(i = \sqrt{-1}\).</p>
+<p><strong>Euler&rsquo;s formula</strong>: \[
+e^{i \varphi} = \cos \varphi + i \sin \varphi
+\]
+The formula becomes less mysterious if you rewrite \(e^{i\varphi}\), \(\sin \varphi\), and
+\(\cos \varphi\) as power series.</p>
+<h3 id="the-plan">The Plan</h3>
+<ul>
+<li>
+<p>Rewrite Schumpeter Model</p>
+</li>
+<li>
+<p>Define spectral distribution / density function</p>
+</li>
+<li>
+<p>Examine relationship between autocovariances \(\{\gamma_h\}_{h=-\infty}^\infty\) and the spectrum.</p>
+</li>
+<li>
+<p>Discuss very general spectral representation for a stationary stochastic process \(X_t\).</p>
+</li>
+</ul>
+<h3 id="schumpeter-model">Schumpeter Model</h3>
+<p>\[
+X_t = 2 \sum_{j=1}^m a_j \cos \theta_j \cos(\omega_j t) - a_j \sin \theta_j \sin(\omega_j t)
+\]</p>
+<p>where \(a_j \cos \theta_j\) and \(a_j \sin \theta_j\) can be regarded
+as random coefficients.</p>
+<p>Eulers formula implies</p>
+<p>\[
+X_t = \sum_{j=-m}^m A(\omega_j) e^{i \omega_j t}
+\]</p>
+<p>where \(\omega_{-j} = -\omega_j\). Let \(a_{-j} = a_j\) and</p>
+<h3 id="this-means-that">This means that</h3>
+<p>\[
+A(\omega_j) =
+\left\{ \begin{array}{ll}
+a_j( \cos \theta_{|j|} + i \sin \theta_{|j|} ) &amp; \mbox{if} \; j &gt; 0 \\
+a_j( \cos \theta_{|j|} - i \sin \theta_{|j|} ) &amp; \mbox{if} \; j &lt; 0 \\
+\end{array}
+\right.
+\]</p>
+<p>We can verify that:</p>
+<p>\[
+A(\omega_j) e^{i \omega_j t} + A(\omega_{-j}) e^{- i \omega_j t} = 2 \left[ a_j \cos \theta_j \cos(\omega_j t) - a_j \sin \theta_j \sin(\omega_j t) \right]
+\]</p>
+<h3 id="moments-of-linear-cyclical-models">Moments of Linear Cyclical Models</h3>
+<p>\begin{eqnarray}
+\mathbb E[\cos \theta_j]  &amp;=&amp; \frac{1}{2\pi} \int_{-\pi}^\pi \cos \theta_j d\theta_j = 0 \\
+\mathbb E[\sin \theta_j]  &amp;=&amp; \frac{1}{2\pi} \int_{-\pi}^\pi \sin \theta_j d\theta_j = 0
+\end{eqnarray}</p>
+<p><strong>Result</strong>: The expectation of \(X_t\) in the linear cyclical model is equal to zero. \(\Box\)</p>
+<h3 id="autocovariances">Autocovariances</h3>
+<p>To obtain the autocovariances \(\gamma_h = \mathbb E[X_tX_{t-h}]\) we have
+to calculate the  moments \(\mathbb E[ A(\omega_j) A(\omega_k)]\).</p>
+<p>Let \(j \not=k\), \(j \not=-k\). Suppose that \(j,k &gt; 0\).</p>
+<p>\begin{eqnarray}
+\mathbb E[A(\omega_j) A(\omega_k)]
+&amp; = &amp; a_ja_k\mathbb E[ (\cos \theta_j + i \sin \theta_j)(\cos \theta_k + i \sin \theta_k)] \nonumber \\
+&amp; = &amp; a_ja_k\mathbb E[ \cos \theta_j \cos \theta_k + i \cos \theta_j \sin \theta_k
+i\cos \theta_k \sin \theta_j - \sin \theta_j \sin \theta_k ] \nonumber \\
+&amp; = &amp; 0
+\end{eqnarray}</p>
+<p>Since \(\theta_j\) and \(\theta_k\) are independent.  Similar arguments can be made if \(j\) and \(k\) have different signs.</p>
+<h3 id="covariance">Covariance</h3>
+<p>Let \(j=k\). Suppose that \(j,k &gt; 0\).</p>
+<p>\begin{eqnarray}
+\mathbb E[A(\omega_j) A(\omega_k)]
+&amp; = &amp; a_j^2 \mathbb E[ (\cos \theta_j + i \sin \theta_j)^2] \nonumber \\
+&amp; = &amp; a_j^2 \mathbb E[ (\cos^2 \theta_j - \sin^2 \theta_j + i 2 \cos \theta_j \sin \theta_j ] \nonumber \\
+&amp; = &amp; a_j^2 \mathbb E[ 1 - 2\sin^2 \theta_j + i2 \cos \theta_j \sin \theta_j ] \nonumber \\
+&amp; = &amp; a_j^2 \mathbb E[ \cos (2\theta_j) + i \sin (2 \theta_j) ] \nonumber \\
+&amp; = &amp; 0
+\end{eqnarray}</p>
+<p>In the last step we use the fact that sine and cosine integrate
+to zero over two cycles. A similar argument can be made for the case \(j,k &lt; 0\)</p>
+<p>Let \(j=-k\). Now \(A(\omega_j)\) and \(A(\omega_{k})\) are complex conjugates.
+\[
+\mathbb E[A(\omega_j) A(\omega_{-j})]
+= a_j^2 \mathbb E[ \cos^2 \theta_j + \sin^2 \theta_j] = a_j^2
+\]</p>
+<h3 id="the-upshot">The upshot</h3>
+<p><strong>Result</strong>: The autocovariances of the process \(X_t\) generated by
+the linear cyclical model are given by</p>
+<p>\begin{eqnarray}
+\gamma_h &amp; = &amp; \mathbb E[X_t X_{t-h}] \nonumber \\
+&amp; = &amp; \sum_{j=-m}^m \sum_{k=-m}^m \mathbb E[ A(\omega_j)A(\omega_k)] e^{i\omega_j t} e^{i \omega_k(t-h)} \nonumber \\
+&amp; = &amp; \sum_{j=-m}^m \mathbb E[A(\omega_j) \overline{A(\omega_j)}] e^{i \omega_j h} = \sum_{j=-m}^m  a_j^2 e^{i \omega_j h}
+\end{eqnarray}</p>
+<p>Since \(X_t\) is a real valued process the autocovariances can
+also be written as
+\[
+\gamma_h = 2 \sum_{j=1}^m a_j^2 \cos(\omega_j h) \quad \Box
+\]</p>
+<h3 id="the-spectral-distribution">The Spectral Distribution</h3>
+<p>The spectral distribution function for the
+process \(X_t\), defined on the interval \(\omega \in (-\pi,\pi)\), is
+\[
+S(\omega) = \sum_{j=-m}^m \mathbb E[A(\omega_j) \overline{A(\omega_j)} ] \{\omega_j \le \omega\}
+\]
+where \(\{ \omega_j \le \omega\}\) denotes the indicator function that is one
+if \(\omega_j \le \omega\). \(\Box\)</p>
+<h3 id="remarks">Remarks</h3>
+<p>The spectral distribution is non-negative and continuous from the right.</p>
+<p>If the spectral distribution function is evaluated at \(\omega=\pi\) we obtain</p>
+<p>\begin{eqnarray}
+S(\pi) = \sum_{j=-m}^m  \mathbb E[A(\omega_j) \overline{A(\omega_j)} ] = \sum_{j=-m}^m a_j^2 = \mathbb E[X_t^2]
+\end{eqnarray}</p>
+<p>The spectral distribution function is symmetric in the sense that for \(\omega &gt;0\)</p>
+<p>\begin{eqnarray}
+S(-\omega) = S(\pi) - \lim_{n \rightarrow \infty} S( (\omega - 1/n))
+\end{eqnarray}</p>
+<h3 id="autocovariances-again">Autocovariances, again</h3>
+<p>The representation of the autocovariances
+can be expressed as a Riemann-Stieltjes integral. Define a sequence of grids
+\[
+[\omega]^{(n)} =\{ \omega_k^{(n)} =  2 \pi k/n - \pi \}
+\]
+and \(\Delta_n \omega = \omega_{k+1}^{(n)} - \omega_k^{(n)} = 2\pi /n\).
+Moreover, let
+\[
+\Delta_n S(\omega) = S(\omega) - S(\omega  - \Delta_n \omega)
+\]
+Roughly,
+\[
+\sum_{k=0}^n e^{i\omega_k^{(n)}h} \Delta_n S(\omega_k^{(n)})
+\longrightarrow \sum_{j=-m}^m a_j^2 e^{i\omega_jh}
+\]
+as \(n \rightarrow \infty\).</p>
+<h3 id="the-upshot">The Upshot</h3>
+<p>Thus, we can express the autocovariance \(\gamma_h\)
+as the following integral
+\[
+\gamma_h =  \int_{(-\pi,\pi]} e^{i\omega h} dS(\omega)
+\]</p>
+<p>By using a similar argument, we can also obtain a integral representation
+for the stochastic process \(X_t\). Define the stochastic process
+\[
+Z(\omega) = \sum_{j=-m}^m A(\omega_j) \{\omega_j \le \omega \}
+\]
+with orthogonal increments \(\Delta_n Z(\omega) = Z(\omega) - Z(\omega - \Delta_n \omega)\).
+Note that the increments are now random variables.</p>
+<h3 id="d41d8c"></h3>
+<p>Very roughly,
+\[
+\sum_{k=0}^n e^{i\omega_k^{(n)} t} \Delta_n Z(\omega_k^{(n)})
+\longrightarrow \sum_{j=-m}^m A(\omega_j) e^{i\omega_j t}
+\]
+almost surely as \(n \rightarrow \infty\). Thus, we can express the stochastic process \(X_t\),
+generated from the linear cyclical model, as the stochastic integral
+\[
+X_t = \int_{(-\pi,\pi]} e^{i\omega t} dZ(\omega)
+\]</p>
+<h3 id="spectral-representation-for-stationary-processes">Spectral Representation for Stationary Processes</h3>
+<p>Every zero-mean stationary process has a
+representation of the form
+\[
+X_t = \int_{(-\pi,\pi]} e^{i\omega h} dZ(\omega)
+\]
+where \(Z(\omega)\) is a orthogonal increment process. Correspondingly,
+its autocovariance function \(\gamma_h\) can be expressed as
+\[
+\gamma_h =  \int_{(-\pi,\pi]} e^{i\omega h} dS(\omega)
+\]
+where \(S(\omega)\) is a non-decreasing right continuous function
+with \(S(\pi) = \mathbb E[X_t^2] = \gamma_0\).</p>
+<h3 id="spectral-density-function">Spectral Density Function</h3>
+<p>Suppose the spectral distribution function is
+differentiable with respect to \(\omega\) on the interval \((-\pi,\pi]\).
+The spectral density function is defined as
+\[
+s(\omega) = dS(\omega)/d\omega
+\]
+If a process has a spectral density function \(s(\omega)\) then the
+covariances can be expressed as
+\[
+\gamma_h = \int_{(-\pi,\pi]} e^{ih\omega} s(\omega)d\omega
+\]
+The spectral density uniquely determines the entire sequence
+of autocovariances. Moreover, the converse is also true.</p>
+<h3 id="d41d8c"></h3>
+<p>Consider the sum</p>
+<p>\begin{eqnarray}
+s_n(\omega)^* &amp; = &amp; \frac{1}{2\pi}\sum_{h = -n}^n \gamma_h e^{- i \omega h} \nonumber \\
+&amp; = &amp; \frac{1}{2\pi} \sum_{h = -n}^n \left[ \int_{(-\pi,\pi]} e^{i\tau h} s(\tau) d\tau \right] e^{-i\omega h}
+\end{eqnarray}</p>
+<p>The sum \(s_n^*(\omega)\) is a Fourier series. If the spectral density \(s(\omega)\)
+is piecewise smooth then
+\[
+s_n^*(\omega) \longrightarrow s(\omega)
+\]
+Thus, the <strong>spectral density</strong> can be obtained by evaluating the
+<strong>autocovariance generating function</strong> of \(X_t\) at \(z=e^{-i\omega}\).
+\[
+s (\omega) = \frac{1}{2 \pi} \gamma(e^{-i\omega} )
+= \frac{1}{2 \pi} \sum_{h=-\infty}^\infty \gamma_h e^{-i\omega h}
+\]
+where
+\[
+\gamma(z) = \sum_{j=-\infty}^\infty \gamma_j z^j \]</p>
+<h3 id="filter">Filter</h3>
+<p>Suppose \(s_{X}(\omega)\) is the spectral density function of a process
+\(X_t\).  Filters are used to dampen or amplify the spectral density at
+certain frequencies.  The spectrum of the filtered series \(Y_t\) is
+given by</p>
+<p>\[ s_{Y}(\omega) = f(\omega) s_{X}(\omega).  \]</p>
+<p>where \(f(\omega)\) is the filter function.</p>
+<p><strong>Frequency domain trend/cycle analogue</strong></p>
+<p>\(X_t =\) low frequency component + high frequency component</p>
+<p><span class="underline">Example</span>: For Schumpeter, Kitchin cycle was shortest with \(\omega =
+0.47\).  To remove the effects of other cycles from data, we could use
+the filter
+\[
+f(\omega) = \left\{ \begin{array}{ll}
+0 &amp; \mbox{if} \; \omega &lt; 0.4 \\
+1 &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</p>
+<h3 id="hodrick-prescott-filter">Hodrick Prescott filter</h3>
+<p>A popular filter in the real business cycle literature in macro-economics
+is the so-called Hodrick Prescott filter.</p>
+<p>\[
+f^{HP}(\omega) = \left[\frac{16\sin^4(\omega/2)}{1/1600 + 16\sin^4(\omega/2)}\right]^2.
+\]</p>
+<p>This filter basically kills long cycles and attenuates medium term ones.</p>
+<p>(See Soderlind, 1994.)</p>
+<h3 id="hp-filter">HP Filter</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>f(2pi/64) =  0.016697846612617945 f(2pi/32) =  0.4937014515264561 f(2pi/16) =  0.9481735523836959
+</span></span></code></pre></div><figure><img src="https://edherbst.net/ox-hugo/bd0d18f6dea9a692c3cc81e24026cd34d67102e0.png">
+</figure>
+
+<h3 id="more-on-filters">More on Filters</h3>
+<p>Subsquently we will consider filters that are linear in the time domain, namely, filters of the form,
+\[
+Y_t = \sum_{h=1}^J c_h X_{t-h} = C(L) X_t
+\]
+where \(C(z)\) is the polynomial function \(\sum_{h=1}^J c_h z^h\). Recall that
+\[
+X_t = \sum_{j=-m}^m A(\omega_j) e^{i\omega_j t}
+\]</p>
+<h3 id="this-means-that">This means that</h3>
+<p>Hence,
+\[
+X_{t-h} = \sum_{j=-m}^m A(\omega_j) e^{i\omega_j t} e^{-i\omega_j h}
+\]</p>
+<p>\begin{eqnarray}
+Y_t  =  C(L)X_t
+&amp; = &amp; \sum_{h=1}^J c_h X_{t-h} \nonumber \\
+&amp; = &amp; \sum_{j=-m}^m \left[ A(\omega_j) e^{i\omega_j t}  \sum_{h=1}^J c_h e^{-i\omega_j h} \right] \nonumber \\
+&amp; = &amp; \sum_{j=-m}^m  A(\omega_j) C(e^{-i\omega_j}) e^{i\omega_j t} \nonumber \\
+&amp; = &amp; \sum_{j=-m}^m \tilde{A}(\omega_j) e^{i\omega_j t}
+\end{eqnarray}</p>
+<h3 id="autocovariance">Autocovariance</h3>
+<p>The autocovariances of \(Y_t\) can therefore be expressed as
+\[
+\mathbb E[Y_t Y_{t-h}] = \sum_{j=-m}^m a_j^2 C(e^{-i\omega_j}) C(e^{i\omega_j})  e^{i \omega_j h}
+\]
+Thus, we can define the spectral distribution function of \(Y_t\) as
+\[
+S_Y (\omega) = \sum_{j=-m}^m a_j^2 C(e^{-i\omega_j}) C(e^{i\omega_j})
+\]
+with increments
+\[
+\Delta S_Y (\omega_j) = \Delta S_X C(e^{-i\omega_j}) C(e^{i\omega_j})
+\]</p>
+<h3 id="generalization">Generalization</h3>
+<p><strong>Result</strong>: Suppose that \(X_t\) has a spectral density function \(s_X(\omega)\)
+and \(Y_t = C(L)X_t\), then the spectral density of the filtered process \(Y_t\)
+is given by</p>
+<p>\[
+s_Y (\omega) = | C(e^{-i\omega}) |^2 s_X(\omega)
+\]</p>
+<p>The function \(C(e^{-i\omega})\) is called transfer function of the filter,
+and the filter function \(f(\omega) = | C(e^{-i\omega}) |^2\) is often called
+power transfer function. \(\Box\)</p>
+<h3 id="examples-of-spectrum">Examples of Spectrum</h3>
+<p><strong>White Noise</strong>
+\[
+s(\omega) = \frac{1}{2\pi}\sum_{h=-\infty}^\infty \gamma_h e^{-i\omega h} = \frac{\gamma_0}{2\pi}
+\]
+<strong>An AR(1)</strong>: \(Y_t = \phi Y_{t-1} + X_t\)</p>
+<p>Interpret as a linear filter with \(MA(\infty)\) rep: \(Y_t = \sum_{h=0}^\infty \phi^h X_{t-h}\).  Thus:</p>
+<p>\begin{eqnarray}
+| C(e^{-i\omega}) |^2
+&amp; = &amp; \left| [ 1 - \phi e^{-i\omega}]^{-1} \right|^2 \nonumber \\
+&amp; = &amp; \left[  | 1 - \phi \cos \omega + i \phi \sin \omega |^2 \right]^{-1} \nonumber \\
+&amp; = &amp; \left[  (1 - \phi \cos \omega)^2 + \phi^2 \sin^2 \omega \right]^{-1} \nonumber \\
+&amp; = &amp; \left[  1 - 2 \phi \cos \omega + \phi^2( \cos \omega^2 + \sin^2 \omega ) \right]^{-1}.
+\end{eqnarray}</p>
+<p>which means \(s_Y(\omega) = \frac{\sigma^2 / 2\pi }{1 + \phi^2 - 2\phi \cos \omega}\). Note
+\(s_Y(0) \longrightarrow \infty \; \mbox{as} \; \phi \longrightarrow 1\)</p>
+<h3 id="more-examples">More Examples</h3>
+<p>Stationary ARMA process*: \(\phi(L)Y_t = \theta(L)X_t\) with \(X_t \sim WN\).
+The spectral density is given by
+\[
+s_Y(\omega) = \left| \frac{ \theta(e^{-i\omega}) }{ \phi(e^{-i\omega}) } \right|^2 \sigma^2
+\]
+<strong>Sums of processes</strong>. Suppose that \(W_t = Y_t + X_t\). The spectrum of the process \(W_t\)
+is simply the sum
+\[
+s_W(\omega) = s_Y(\omega) + s_X(\omega)
+\]</p>
+<h3 id="visual">Visual</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;matplotlib.legend.Legend at 0x7fb821cf9f10&gt;
+</span></span></code></pre></div><figure><img src="https://edherbst.net/ox-hugo/cb2c466d8994a9da78ee429b0a06457c942dbfca.png">
+</figure>
+
+<h3 id="estimation">Estimation</h3>
+<ol>
+<li>
+<p><strong>Parametric</strong> &ndash; Pick an ARMA process, estimate in time domain, use filtering results to get spectrum.</p>
+</li>
+<li>
+<p><strong>Nonparametric</strong> &ndash; Estimate autocovariances \(\{\hat \gamma_h\}\), directly write down spectral density.
+Let&rsquo;s look at this.</p>
+</li>
+</ol>
+<h3 id="d41d8c"></h3>
+<p>Let \(\bar{y} = \frac{1}{T} \sum y_t\) and define the sample covariances
+\[
+\hat{\gamma}_h = \frac{1}{T} \sum_{t=h+1}^T (y_t - \bar{y})(y_{t-h} - \bar{y})
+\]
+An intuitively plausible estimate of the spectrum is the sample
+periodogram</p>
+<p>\begin{eqnarray}
+I_T(\omega) &amp; = &amp; \frac{1}{2\pi} \sum_{j=-T+1}^{T-1} \hat{\gamma}_h e^{-i \omega h} \nonumber \\
+&amp; = &amp; \frac{1}{2\pi} \left( \hat{\gamma}_0 + 2 \sum_{h=1}^{T-1} \hat{\gamma}_{h} \cos(\omega h) \right)
+\end{eqnarray}</p>
+<p><strong>Result</strong>: The sample periodogram is an asymptotically unbiased estimator
+of the population spectrum, that is,</p>
+<p>\begin{equation}
+\mathbb E[ I_T(\omega)] \stackrel{p}{\longrightarrow} s(\omega)
+\end{equation}</p>
+<p>However, it is inconsistent since the variance \(var[I_T(\omega)]\)
+does not converge to zero as the sample size tends to infinity. \(\Box\)</p>
+<h3 id="smoothed-periodogram">Smoothed Periodogram</h3>
+<p>Smoothing: get non-parametric estimators.</p>
+<p>To obtain a spectral density estimate at the frequency
+\(\omega = \omega_*\) we will compute the sample periodogram \(I_T(\omega)\)
+for some \(\omega_j\)&rsquo;s in the neighborhood of \(\omega_*\) and simply
+average them. Define the following band around \(\omega_*\):</p>
+<p>\begin{equation}
+B (\omega_*|\lambda) = \left\{ \omega: \omega_* - \frac{\lambda}{2} &lt; \omega \le \omega_* + \frac{\lambda}{2} \right\}
+\end{equation}</p>
+<p>The bandwidth is \(\lambda\), where \(\lambda\) is a parameter.
+Moreover, define the ``fundamental
+frequencies&rsquo;&rsquo; (see Hamilton 1994, Chapter 6.2, for a discussion why these
+frequencies are ``fundamental&rsquo;')</p>
+<p>\begin{equation}
+\omega_j = j \frac{2 \pi}{T} \quad j = 1,\ldots, (T-1)/2
+\end{equation}</p>
+<p>iThe number of fundamental frequencies in the band \(B(\omega_*)\)
+is</p>
+<p>\begin{equation}
+m = \lfloor  \lambda T(2\pi)^{-1} \rfloor
+\end{equation}</p>
+<h3 id="smoothed-periodogram">Smoothed Periodogram</h3>
+<p>The smoothed periodogram estimator of \(s(\omega_*)\) is defined as
+the average</p>
+<p>\begin{equation}
+\hat{s}(\omega) = \sum_{j=1}^{(T-1)/2} \frac{1}{m} \{ \omega_j \in B(\omega_*|\lambda) \} I_T(\omega_j)
+\end{equation}</p>
+<p>where \(\{ \omega_j \in B(\omega_*|\lambda) \}\) is the indicator function that is equal
+to one if \(\omega_j \in B(\omega_*|\lambda)\) and zero otherwise.</p>
+<p><strong>Result</strong>: The smoothed periodogram estimator \(\hat{s}(\omega_*)\) of
+\(s(\omega_*)\) is consistent, provided that the bandwidth shrinks to zero,
+that is, \(\lambda \rightarrow 0\) as \(T \rightarrow \infty\) and the
+number of \(\omega_j\)&rsquo;s in the band \(B(\omega_*|\lambda)\) tends
+to infinity, that is $ m = λ T/(2π) → ∞$. \(\Box\)</p>
+<h3 id="remarks">Remarks</h3>
+<ul>
+<li>get smoothed estimates =&gt; need to get \(\lambda\).  Ultimately subective.</li>
+<li>Most non-parameterics approaches are based on &ldquo;Kernel estimates&rdquo;</li>
+</ul>
+<p>The expression \(\{ \omega_j \in B(\omega_*) \}\) can be rewritten as follows</p>
+<p>\begin{eqnarray}
+\{ \omega_j \in B(\omega_*) \}
+&amp; = &amp;  \left\{ \omega_* -  \frac{\lambda}{2} &lt; \omega_j \le \omega_* + \frac{\lambda}{2} \right\} \nonumber \\
+&amp; = &amp;  \left\{ - \frac{1}{2} &lt; \frac{\omega_j - \omega_*}{\lambda } \le \frac{1}{2} \right\}
+\end{eqnarray}</p>
+<p>Define</p>
+<p>\begin{eqnarray}
+K \left( \frac{\omega_j - \omega_*}{\lambda} \right)
+=  \left\{ - \frac{1}{2} &lt; \frac{\omega_j - \omega_*}{\lambda} \le \frac{1}{2} \right\}
+\end{eqnarray}</p>
+<h3 id="d41d8c"></h3>
+<p>It can be easily verified that</p>
+<p>\begin{eqnarray}
+\int K \left( \frac{\omega_j - \omega_*}{\lambda} \right) d\omega_* = 1
+\end{eqnarray}</p>
+<p>The function \(K \left( \frac{\omega_j - \omega_*}{\lambda} \right)\) is an
+example of a Kernel function. In general, a Kernel has the property
+\(\int K(x) dx = 1\). Since \(m \approx \lambda (T-1)/2\),
+the spectral estimator can be rewritten as</p>
+<p>\begin{eqnarray}
+\hat{s}(\omega) = \frac{\pi }{ \lambda (T-1)/2} \sum_{j=1}^{(T-1)/2} K \left( \frac{\omega_j - \omega_*}{\lambda} \right) I_T(\omega_j)
+\end{eqnarray}</p>
+<h3 id="application-ip">Application: IP</h3>
+<figure><img src="https://edherbst.net/ox-hugo/ee00b927d28475835ccdfdadc3968e84f2d06ef4.png">
+</figure>
+
+<h3 id="d41d8c"></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;matplotlib.legend.Legend at 0x7fb80fc883d0&gt;
+</span></span></code></pre></div><figure><img src="https://edherbst.net/ox-hugo/35fe25fb225e18d1f92eb7a17eaedf7483401e55.png">
+</figure>
+
+<h3 id="application-autocorrelation-consistent-standard-errors">Application: Autocorrelation Consistent Standard Errors</h3>
+<p>Consider the model</p>
+<p>\begin{equation}
+y_t = \beta x_t + u_t, \quad u_t = \psi(L)\epsilon_t, \quad \epsilon_t \sim iid(0,\sigma^2)
+\end{equation}</p>
+<p>The OLS estimator is given by</p>
+<p>\begin{equation}
+\hat{\beta} - \beta = \frac{ \sum x_t u_t}{\sum x_t^2}
+\end{equation}</p>
+<p>The conventional standard error estimates for \(\hat{\beta}\) are inconsistent
+if the \(u_t\)&rsquo;s are serially correlated. However, we can construct a consistent
+estimate based on  non-parametric spectral density estimation.
+Define \(z_t = x_t u_t\). We want to obtain an estimate
+of</p>
+<p>\begin{equation}
+\mbox{plim} \; \Lambda_T = \mbox{plim} \;  \frac{1}{T} \sum_{t=1}^T \sum_{h=1}^T E[z_t z_h]
+\end{equation}</p>
+<h3 id="d41d8c"></h3>
+<p>It can be verified that</p>
+<p>\begin{equation}
+\sum_{h=-\infty}^\infty \gamma_{zz,h} - \frac{1}{T} \sum_{t=1}^T \sum_{h=1}^T E[z_t z_h] \stackrel{p}{\longrightarrow} 0
+\end{equation}</p>
+<p>Since</p>
+<p>\begin{equation}
+s(\omega) = \frac{1}{2\pi} \sum_{h=-\infty}^\infty \gamma_{zz,h} e^{-i \omega h}
+\end{equation}</p>
+<p>it follows that a consistent estimator of plim \(\Lambda_T\) is</p>
+<p>\begin{equation}
+\hat{\Lambda}_T = 2 \pi \hat{s}(0)
+\end{equation}</p>
+<p>where \(\hat{s}(0)\) is a non-parametric spectral estimate at frequency zero.</p>
+<h3 id="application">Application: <a href="#citeproc_bib_item_1">Beaudry, Galizia, and Portier (2020)</a></h3>
+<p>Paul Beaudry, Dana Galiza, and Franck Portier (2016): &ldquo;Putting the
+Cycle Back into Business Cycle Analysis,&rdquo; <em>NBER Working Paper</em>.</p>
+<ul>
+<li>Re-examines the spectral properties of several cyclically sensitive variables
+such as  hours  worked,  unemployment  and  capacity  utilization.</li>
+<li>Document the presence of an important peak in the spectral
+density at a periodicity of approximately  36-40  quarters.</li>
+<li>This is cyclical phenomena  at  the  &ldquo;long end&rdquo; of the  business  cycle.</li>
+<li>Suggests a model (&ldquo;limit cycles&rdquo;) to account for this finding.</li>
+</ul>
+<h3 id="the-paper-in-1-picture">The Paper in 1 Picture</h3>
+<figure><img src="https://edherbst.net/ox-hugo/beaudry_et_al.png">
+</figure>
+
+<h2 id="bibliography">Bibliography</h2>
+<h3 id="references">References</h3>
+<h2 id="references-1">References</h2>
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><div class="csl-bib-body">
+  <div class="csl-entry"><a id="citeproc_bib_item_1"></a><span style="font-variant:small-caps;">Beaudry, P., D. Galizia, and F. Portier</span>. (2020): “Putting the Cycle Back into Business Cycle Analysis,” <i>American Economic Review</i>, 110, 1–47.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_2"></a><span style="font-variant:small-caps;">Brockwell, P. J., and R. A. Davis</span>. (1987): <a href="https://doi.org/10.1007/978-1-4899-0004-3">“Time Series: Theory and Methods,</a>” <i>Springer Series in Statistics</i>, .</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_3"></a><span style="font-variant:small-caps;">Hamilton, J.</span> (1994): <i>Time Series Analysis</i>, Princeton, New Jersey: Princeton University Press.</div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

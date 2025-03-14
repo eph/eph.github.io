@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
     
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,7 +30,7 @@
 
 
 <meta name="twitter:title" content="USING THE &#34;CHANDRASEKHAR RECURSIONS&#34; FOR LIKELIHOOD EVALUATION OF DSGE MODELS"/>
-<meta name="twitter:description" content="In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System."/>
+<meta name="twitter:description" content="In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System. We show that DSGE models are ideally suited for the use of these recursions, which work best when the number of states is much greater than the number of observables. In several examples, we show that there are substantial benefits to using the recursions, with likelihood evaluation up to five times faster. This gain is especially pronounced in light of the trivial implementation costs—no model modification is required. Moreover, the algorithm is complementary with other approaches."/>
 
 </head>
 <body class="terminal">

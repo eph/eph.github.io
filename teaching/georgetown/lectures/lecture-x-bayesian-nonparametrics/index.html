@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Lecture X Bayesian Nonparametrics" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/" /><meta property="article:published_time" content="2025-03-13T17:49:51-04:00" />
+
+
+
+<meta name="twitter:title" content="Lecture X Bayesian Nonparametrics"/>
+<meta name="twitter:description" content="Introduction
+What are Bayesian Nonparametrics?
+We start with data \(y_1, \ldots, y_n \) drawn from a distribution \(G\).
+A &lsquo;statistical model&rsquo; \(g\) is a pdf of \(G\), where \(g \in \mathcal{G} = \{g_\theta: \theta \in \Theta\}.\)
+If \(\theta\) is finite, we are into the realm of parametric statistics.
+If \(\theta\) is infinite, we are into the realm of nonparametric statistics.
+Bayesian nonparametrics complete the above probability model with a prior
+distribution on the infinite-dimensional parameter \(\theta\)."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics'>lecture-x-bayesian-nonparametrics</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Lecture X Bayesian Nonparametrics</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="what-are-bayesian-nonparametrics">What are Bayesian Nonparametrics?</h3>
+<p>We start with data \(y_1, \ldots, y_n \) drawn from a distribution \(G\).</p>
+<p>A &lsquo;statistical model&rsquo; \(g\) is a pdf of \(G\), where \(g \in \mathcal{G} = \{g_\theta: \theta \in \Theta\}.\)</p>
+<p>If \(\theta\) is finite, we are into the realm of parametric statistics.</p>
+<p>If \(\theta\) is infinite, we are into the realm of nonparametric statistics.</p>
+<p><strong>Bayesian nonparametrics</strong> complete the above probability model with a prior
+distribution on the infinite-dimensional parameter \(\theta\).</p>
+<h2 id="dirichlet-process">Dirichlet Process</h2>
+<h3 id="density-estimation">Density Estimation</h3>
+<p><em>Density estimation</em>: given an observed sample, infer underlying density.
+\[
+y_i | G \overset{iid}{\sim} G, \quad i = 1, \ldots, n.
+\]
+Bayesian inference: complete the model with a prior probability model \(\pi\) for the unknown parameter \(G\).</p>
+<p>We need a probability model for the infinite dimensional parameter \(G\), a BNP prior</p>
+<h3 id="dirichlet-process">Dirichlet Process</h3>
+<p>A <strong>Dirichlet Process</strong> (DP) is a probability distribution over probability distributions, first introduced in (Ferguson, Thomas S., 1973).</p>
+<p>It is parameterized by a base measure \(G_0\) and a concentration parameter \(\alpha\).</p>
+<p>Formally, given a base measure \(G_0\) and a concentration parameter \(\alpha\), a random distribution \(G\) is said to be distributed according to a Dirichlet Process, denoted as \(G \sim DP(\alpha, G_0)\), if for any finite partition \(\{A_i\}\) of the sample space:
+\[
+(G(A_1), &hellip;, G(A_n)) \sim Dir(\alpha G_0(A_1), &hellip;, \alpha G_n(A_n))
+\]
+Kolmogorov&rsquo;s consistency theorem guarantees that there exists a random probability measure \(G\) such that the above property holds.</p>
+<h3 id="definition-of-a-dirichlet-random-variable">Definition of a Dirichlet Random Variable</h3>
+<p>The Dirichlet distribution is a probability distribution over probability distributions in a finite-dimensional simplex.</p>
+<p>Let \(X = (X_1, &hellip;, X_n)\) be a random vector that follows a Dirichlet distribution with parameters \(\alpha_1, &hellip;, \alpha_n\), such that:
+\[
+X \sim Dir(\alpha_1, &hellip;, \alpha_n)
+\]
+Then, the joint probability density function of X is given by:
+\[
+p(X) = \frac{1}{B(\boldsymbol{\alpha})} \prod_{i=1}^{n} X_i^{\alpha_i - 1},
+\]
+where \(B(\boldsymbol{\alpha})\) is the multinomial Beta function, defined as:
+\[
+B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^{n} \Gamma(\alpha_i)}{\Gamma(\sum_{i=1}^{n} \alpha_i)}
+\]
+The Dirichlet Process can be seen as an extension of the Dirichlet distribution to an infinite number of dimensions.</p>
+<h3 id="some-properties-of-the-dirichlet-process">Some Properties of the Dirichlet Process</h3>
+<p>Consider the sample space \(\{B, B^c\}\).  We have:</p>
+<ol>
+<li>G has the same support as \(G_0\).  That is,  \(Pr[G(B)&gt;0] = 1 \iff G_0(B) &gt; 0\). This is because \(G(B) \sim Dir(\alpha G_0(B), \alpha G_0(B^c))\).</li>
+<li>For all \(B\), \(\mathbb E[G(B)] = G_0(B)\).  This is because \(\mathbb E[G(B)] = \frac{\alpha G_0(B)}{\alpha G_0(B) + \alpha G_0(B^c)} = G_0(B)\).</li>
+<li>For all \(B\), \(\mathbb V[G(B)] = \frac{G_0(B)(1-G_0(B))}{1+\alpha}\).</li>
+</ol>
+<h3 id="constructing-dp-stick-breaking">Constructing DP: <em>Stick Breaking</em></h3>
+<p>(Sethuraman, Jayaram, 1994) showed that the Dirichlet Process can be constructed using a <strong>stick-breaking</strong> process.</p>
+<p>Imagine you have a stick of length 1, and you break it at a random point \(V_1\), such that \(V_1 \sim Beta(1, \alpha)\).</p>
+<p>You then take the remaining stick of length \(1 - V_1\) and break it at a random point \(V_2\), such that \(V_2 \sim Beta(1, \alpha)\).</p>
+<p>The total length of the second stick is \(W_2 = (1 - V_1)V_2\) (and the first stick is length \(V_1\)).</p>
+<p>If we repeat this \(n\) times, we&rsquo;re left with a set of realization of random variables \(W_1, W_2, &hellip;\), such that \(\sum_{i=1}^{}^n W_i = 1\).</p>
+<h3 id="more-stick-breaking">More stick breaking:</h3>
+<p>To complete a construction of the DP, we draw \(\theta_i \sim G_0\) for \(i = 1, \ldots, n\).</p>
+<p>We are left with the (discrete) random probability measure:
+\[
+G(\cdot) = \sum^n_{i=1} W_i \delta_{\theta_i}(\cdot), \mbox{  with  } \delta_{\theta_i}(\cdot) \sim G_0.
+\]
+As \(n\) becomes large, \(G \sim DP(\alpha, G_0)\).</p>
+<p>How does this work?</p>
+<h3 id="the-role-of-alpha">The Role of \(\alpha\)</h3>
+<figure><img src="https://edherbst.net/ox-hugo/71822283bc0b010de773bc567db97ef5cb94ce0b.png">
+</figure>
+
+<h3 id="thinking-this-through">Thinking this through</h3>
+<p>The concentration parameter \(\alpha\) controls the amount of mass that is assigned to the atoms \(\theta_i\).</p>
+<p>If \(\alpha\) is very large, then all of the sticks will be small and the resulting distribution will &ldquo;look&rdquo; a lot like the base measure \(G_0\).</p>
+<p>If \(\alpha\) is very small, then the first few sticks will be large, and the resulting distribution will be a mixture of the base measure \(G_0\) and the atoms \(\theta_i\).</p>
+<h3 id="varying-alpha">Varying \(\alpha\)</h3>
+<p>Let&rsquo;s let \(\alpha\) vary in \(\{1, 20, 100\}\) and see how the resulting distributions change.</p>
+<p>We&rsquo;ll use a base measure \(G_0\) that is a normal distribution with mean 0 and variance 1.</p>
+<p>We&rsquo;ll take 1000 draws from the DP and plot density estimates of the resulting distributions.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-2-e320bd606115&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
+</span></span><span style="display:flex;"><span>[1;32m     28[0m     [0max[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m.[0m[0mset_title[0m[0;34m([0m[0;34mr&#39;$\alpha$ = {}&#39;[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0ma[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     29[0m [0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m---&gt; 30[0;31m     [0max[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mx[0m[0;34m,[0m [0mnorm[0m[0;34m.[0m[0mpdf[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m,[0m [0mcolor[0m[0;34m=[0m[0;34m&#39;black&#39;[0m[0;34m,[0m [0mlinewidth[0m[0;34m=[0m[0;36m3[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m     31[0m     [0max[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m.[0m[0mset_title[0m[0;34m([0m[0;34mr&#39;$\alpha$ = {}&#39;[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0ma[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     32[0m     [0max[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m.[0m[0mset_xlim[0m[0;34m([0m[0;34m-[0m[0;36m3[0m[0;34m,[0m [0;36m3[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;norm&#39; is not defined
+</span></span></code></pre></div><figure><img src="https://edherbst.net/ox-hugo/33bae30a2c4a1c778de509ce79e73165c111e395.png">
+</figure>
+
+<h3 id="dp-as-a-prior--and-posterior">DP as a Prior (and Posterior)</h3>
+<p>The DP is used as a prior for the distribution of the data, and the posterior distribution of the DP is also a DP.</p>
+<p>Let \(X_1, \ldots, X_n\) be an (iid) random sample from a distribution \(F\).</p>
+<p>Let \(G\) be a DP prior with base measure \(G_0\) and concentration parameter \(\alpha\).</p>
+<p>Then the posterior distribution of \(G\) given \(X_1, \ldots, X_n\) is:
+\[
+G \mid X_1, \ldots, X_n \sim DP\left(\alpha + n, \frac{\alpha}{\alpha + n} G_0 + \frac{n}{\alpha + n} \frac{1}{n} \sum_{i=1}^n \delta_{X_i} \right).
+\]</p>
+<h3 id="an-example">An Example</h3>
+<p>Let&rsquo;s take a look at an example of the DP as a prior and posterior.</p>
+<p>We&rsquo;ll use a base measure \(G_0\) that is a normal distribution with mean 0 and variance 1.
+We&rsquo;ll set \(\alpha = 10\).</p>
+<p>Suppose we observe 10 data points from a normal distribution with mean \(\mu = -3\) and variance \(\sigma^2 = 0.1\).</p>
+<p>We&rsquo;ll take 100 draws from the DP prior and posterior and plot density estimates of the resulting distributions.</p>
+<h3 id="the-prior-and-posterior">The Prior and Posterior</h3>
+<figure><img src="https://edherbst.net/ox-hugo/1ec4f0efe2af341054ba3e18ef583489434a9063.png">
+</figure>
+
+<h3 id="posterior-predictive-distribution">Posterior Predictive Distribution</h3>
+<p>The posterior predictive distribution is the distribution of a new observation given the data.</p>
+<p>Then the posterior predictive distribution of \(X_{n+1}\) given \(X_1, \ldots, X_n\) is:
+\[
+X_{n+1} \mid X_1, \ldots, X_n \sim \int F(\cdot) \, dG \sim \frac{\alpha}{\alpha + n} G_0 + \frac{n}{\alpha + n} \frac{1}{n} \sum_{i=1}^n \delta_{X_i}.
+\]
+This is the mixture of the prior and the empirical distribution of the data.</p>
+<p>We can draw from this distribution by drawing from the base measure and the empirical distribution and then choosing between them with probability \(\frac{\alpha}{\alpha + n}\) and \(\frac{n}{\alpha + n}\), respectively.</p>
+<h3 id="an-example">An Example</h3>
+<p>Let&rsquo;s take a look at an example of the posterior predictive distribution of the earlier example.</p>
+<figure><img src="https://edherbst.net/ox-hugo/3f8c370bdabd86089e228e1c19bfd43874192807.png">
+</figure>
+
+<h3 id="dirichlet-process-mixtures--dpm">Dirichlet Process Mixtures (DPM)</h3>
+<p>The Dirichlet Process Mixture (DPM) is a Bayesian nonparametric model that uses the DP as a prior on the <strong>mixing distribution</strong>.</p>
+<p>That is, suppose we believe that the data are generated from a mixture of distributions (e.g., a mixture of normals).</p>
+<p>Then we can use the DP as a prior on the mixing distribution.</p>
+<p>We don&rsquo;t need to know the number of components in the mixture!</p>
+<p>Reference: (Antoniak, Charles E, 1974)</p>
+<h3 id="an-example">An example</h3>
+<p>Suppose we have a (possibly infinite) mixture of normals with unknown mean and variance.</p>
+<p>\[
+\{\mu_k, \sigma_k^2\}_{k=1}^\infty \sim G, \quad G \sim \text{DP}(\alpha, G_0)
+\]</p>
+<p>Our data is distributed as:
+\[
+X_i \mid \mu_k, \sigma_k^2 \sim \mathcal{N}(\mu_k, \sigma_k^2)
+\]</p>
+<p>We can estimate this model via a Gibbs sampler, see (Neal, Radford M, 2000) and (Escobar, Michael D and West, Mike, 1995).</p>
+<h3 id="dpm">DPM</h3>
+<figure><img src="https://edherbst.net/ox-hugo/336254c47a17e870ddce356afcdcc383acbfdd59.png">
+</figure>
+
+<h3 id="extension-pitman-yor-process">Extension: Pitman-Yor process</h3>
+<p>The DP is a special case of the Pitman-Yor process (PYP).</p>
+<p>The PYP is parameterized by \(\alpha\), \(G_0\), and an additional parameter \(d \in [0, 1)\).</p>
+<p>\(d\) has the interpretation of a &ldquo;discount&rdquo; parameter.  (DP is the special case where \(d=0\).)</p>
+<p>It&rsquo;s best understood in the context of its stick-breaking construction.</p>
+<h3 id="stick-breaking-for-the-pyp">Stick-breaking for the PYP</h3>
+<p>The stick-breaking construction for the PYP is similar to that of the DP.</p>
+<p>We are going to draw our stick lengths from a beta distribution, but with a twist.</p>
+<p>For \(i=1,2,\ldots\), we draw from  \(V_i \sim \mathcal B(1-d, \alpha + id)\) distribution.</p>
+<p>For larger values of \(d\), the initial \(V_i\) are likely to</p>
+<h3 id="the-role-of-d">The role of \(d\)</h3>
+<figure><img src="https://edherbst.net/ox-hugo/0b925976d917fecb589ad99ac10df326d856a9c2.png">
+</figure>
+
+<h3 id="pyp-vs-dp">PYP vs DP</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Mean weights: 0.0100, std: 0.019
+</span></span><span style="display:flex;"><span>Mean weights: 0.0100, std: 0.007
+</span></span></code></pre></div><figure><img src="https://edherbst.net/ox-hugo/d4efba19efcbbddfa8a84fa391194f31f6aa6d46.png">
+</figure>
+
+<h2 id="gaussian-process">Gaussian Process</h2>
+<h3 id="gaussian-process">Gaussian Process</h3>
+<p>A <strong>Gaussian Process</strong> (GP) is a collection of random variables, any finite number of which have a joint Gaussian distribution.</p>
+<p>It is completely specified by its mean function \(m(x)\) and covariance function \(k(x, x&rsquo;)\).</p>
+<p>Formally: \(GP(m(x), k(x, x&rsquo;))\) which can be used to model a distribution over functions \(f(x)\).</p>
+<p>As long as the covariance function is &ldquo;valid,&rdquo; Kolmogorov&rsquo;s consistency theorem guarantee&rsquo;s such a process exists.</p>
+<h3 id="properties">Properties</h3>
+<p>A GP is completely characterized by its mean and covariance functions.</p>
+<p>The mean function defines the expected value of the function at any point.
+\[
+m(x) = \mathbb{E}[f(x)]
+\]
+The covariance function defines the covariance between the function values at any two points.
+\[
+k(x, x&rsquo;) = \mathbb{E}[(f(x) - m(x))(f(x&rsquo;) - m(x&rsquo;))]
+\]
+A GP is <em>stationary</em> if its mean is constant and covariance function does not depend on the absolute input values but only on the relative distances.</p>
+<p>A GP is isotropic if its covariance function depends only on the Euclidean distance between the input points.</p>
+<h3 id="simulating-from-a-gaussian-process">Simulating From a Gaussian Process</h3>
+<p>For example, we can use a zero mean function and a squared exponential covariance function.
+\[
+m(x) = 0
+\mbox{  and }
+k(x, x&rsquo;) = \sigma^2 \exp\left(-\frac{(x - x&rsquo;)^2}{2l^2}\right)
+\]
+where \(\sigma^2\) is the variance and \(l\) is the length scale.</p>
+<p>Let&rsquo;s set \(\sigma^2 = 1\) and \(l = 1\).  Simulate as follows:</p>
+<ol>
+<li>Make a grid of points \(\{x\}_{i=1}^n\) where we want to sample the function.</li>
+<li>Compute the covariance matrix \(K\) for the grid points.
+\[
+K = \left[k(x_i, x_j)\right]_{i,j=1}^n
+\]</li>
+<li>Sample from a multivariate normal distribution with mean \(\mu = m(x) = 0\) and covariance \(K\).</li>
+</ol>
+<h3 id="example-1000-samples-from-a-gp">Example: 1000 Samples from a GP</h3>
+<figure><img src="https://edherbst.net/ox-hugo/bc727296a3059562c7fd4995756fc1018ce458b4.png">
+</figure>
+
+<h3 id="another-example-with-a-different-covariance-function">Another example with a different covariance function</h3>
+<figure><img src="https://edherbst.net/ox-hugo/3019d77dead24c734765cec1f3f666bb11d6ae60.png">
+</figure>
+
+<h3 id="posterior-inference">Posterior Inference</h3>
+<p>Suppose we have some data \(\{x_i, y_i\}_{i=1}^n\) and we want to infer the function \(f(x)\) that generated the data.  We write:
+\[
+y_i = f(x_i) + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)
+\]
+We can use a GP prior on \(f(x)\) and then use Bayes&rsquo; rule to compute the posterior distribution of \(f(x)\) given the data.  Let \(Y = (y_1, \ldots, y_n)\) and \(X = (x_1, \ldots, x_n)\).</p>
+<p>The posterior distribution of \(f(x)\) is also a GP with mean and covariance:
+\[
+\overline m = m + K[K + \sigma^2 I]^{-1}(Y - m) \mbox{ and }
+\overline K = K - K[K + \sigma^2 I]^{-1}K
+\]</p>
+<h3 id="example-gp-autoregression">Example: GP Autoregression</h3>
+<p>Let \(x_t\) be a time series of year over year inflation rates.</p>
+<figure><img src="https://edherbst.net/ox-hugo/bbc9f062034de86d61b3ad583fa1de70597bb345.png">
+</figure>
+
+<h3 id="example-gp-autoregression">Example: GP Autoregression</h3>
+<p>Let&rsquo;s use a GP to model the time series:
+\[
+x_t = f(x_{t-1}) + \epsilon_t, \quad \epsilon_t \sim N(0, \sigma^2)
+\]
+We&rsquo;ll use a GP prior with a squared exponential covariance function:
+\[
+m(x) = 3 \mbox{  and  }
+k(x, x&rsquo;) = \kappa^2 \exp\left(-\frac{(x - x&rsquo;)^2}{2l^2}\right).
+\]</p>
+<figure><img src="https://edherbst.net/ox-hugo/6b4279bc11658bfb0b5b0f1624b38a8db6346084.png">
+</figure>
+
+<h3 id="classification-gaussian-process-classification">Classification: Gaussian Process Classification</h3>
+<ul>
+<li>Gaussian Process Classification (GPC) is a nonparametric method for modeling the relationship between input variables and a categorical output variable.</li>
+<li>GPC extends the Gaussian Process framework to classification problems using a link function, such as the logistic or probit functions.</li>
+</ul>
+<figure><img src="https://edherbst.net/ox-hugo/gaussian_process_classification.png">
+</figure>
+
+<h2 id="references">References</h2>
+<h3 id="references">References</h3>
+<p>bibliographystyle:econometrica
+bibliography:/home/eherbst/Dropbox/ref/ref.bib</p>
+<h2 id="references">References</h2>
+<h2 id="references-1">References</h2>
+<p>Antoniak, Charles E (1974). <em>Mixtures of Dirichlet processes with applications to Bayesian nonparametric problems</em>, JSTOR.</p>
+<p>Escobar, Michael D and West, Mike (1995). <em>Bayesian density estimation and inference using mixtures</em>, Taylor \&amp; Francis.</p>
+<p>Ferguson, Thomas S. (1973). <em>A Bayesian Analysis of Some Nonparametric Problems</em>, Institute of Mathematical Statistics.</p>
+<p>Neal, Radford M (2000). <em>Markov chain sampling methods for Dirichlet process mixture models</em>, Taylor \&amp; Francis.</p>
+<p>Sethuraman, Jayaram (1994). <em>A constructive definition of Dirichlet priors</em>, JSTOR.</p>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

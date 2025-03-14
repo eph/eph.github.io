@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="ECON 616: Lecture 10: Intro to Nonlinear Times Series Models" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/" /><meta property="article:published_time" content="2025-03-13T21:14:03-04:00" />
+
+
+
+<meta name="twitter:title" content="ECON 616: Lecture 10: Intro to Nonlinear Times Series Models"/>
+<meta name="twitter:description" content="Introduction
+References
+Books:
+
+Hamilton, Chapter 21
+
+Introduction
+This week, we&rsquo;ll focus on a particular kind of nonlinearity &ndash; time-varying volatiltity.
+
+ARCH/GARCH models
+Stochastic Volatility Models
+Markov-Switching Models
+
+ARCH/GARCH Models
+ARCH
+We started the course talking about autoregressive models for
+observables \(y_t\).  Let&rsquo;s allow the variance of \(y_t\) to vary over time.
+
+The p-th order ARCH model, first used in Engle (1982)
+\begin{eqnarray}
+\label{eq:arch}
+y_t &amp;=&amp; \mu &#43; \epsilon_t \\
+\sigma_{\textcolor{red}{t}}^2  &amp;=&amp; \omega &#43; \alpha_1 \epsilon_{t-1}^2 &#43; \ldots &#43; \alpha_p\epsilon_{t-p}^2  \\
+\epsilon_t &amp;=&amp; \sigma_t e_t \quad e_t \sim N(0,1).
+\end{eqnarray}"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series'>lecture-ten-nonlinear-times-series</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>ECON 616: Lecture 10: Intro to Nonlinear Times Series Models</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="references">References</h3>
+<p>Books:</p>
+<ul>
+<li>Hamilton, Chapter 21</li>
+</ul>
+<h3 id="introduction">Introduction</h3>
+<p>This week, we&rsquo;ll focus on a particular kind of nonlinearity &ndash; <strong>time-varying volatiltity</strong>.</p>
+<ol>
+<li>ARCH/GARCH models</li>
+<li>Stochastic Volatility Models</li>
+<li>Markov-Switching Models</li>
+</ol>
+<h2 id="arch-garch-models">ARCH/GARCH Models</h2>
+<h3 id="arch">ARCH</h3>
+<p>We started the course talking about <em>autoregressive models</em> for
+observables \(y_t\).  Let&rsquo;s allow the variance of \(y_t\) to vary over time.
+<br>
+The <strong>p-th order ARCH model</strong>, first used in <a href="#citeproc_bib_item_2">Engle (1982)</a></p>
+<p>\begin{eqnarray}
+\label{eq:arch}
+y_t &amp;=&amp; \mu + \epsilon_t \\
+\sigma_{\textcolor{red}{t}}^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \ldots + \alpha_p\epsilon_{t-p}^2  \\
+\epsilon_t &amp;=&amp; \sigma_t e_t \quad e_t \sim N(0,1).
+\end{eqnarray}</p>
+<p>Key feature: variance of \(\epsilon_t\) is time varying and depends on
+past \(p\) shocks through their squares.
+<br>
+Note: \(\sigma_t\) is known at time \(t-1\)!</p>
+<h3 id="arch">ARCH</h3>
+<p>This means that
+\[
+y_{t|t-1} \sim N(\mu, \sigma_t^2)
+\]
+Since \(E_{t-1}[\epsilon_t^2] = E_{t-1}[e^2_t \sigma_t^2] = \sigma_t^2 E_{t-1}[e_t^2] = \sigma_t^2\).
+<br>
+What about the unconditional expectation: \(E[\sigma^2_t]\)</p>
+<p>\begin{eqnarray*}
+\label{eq:uncond}
+E[\sigma^2_t] &amp;=&amp; E[\omega + \alpha_1 \epsilon_{t-1}^2 + \ldots + \alpha_p\epsilon_{t-p}^2] \\
+&amp;=&amp; \omega + \alpha_1 E[\epsilon_{t-1}^2] + \ldots + \alpha_pE[\epsilon_{t-p}^2] \\
+&amp;=&amp; \omega + \alpha_1 E[\sigma_{t-1}^2]E[e_{t-1}^2]+ \ldots + \alpha_pE[\sigma_{t-p}^2]E[e_{t-p}^2] \\
+&amp;=&amp; \omega + \alpha_1 E[\sigma_{t-1}^2]+ \ldots + \alpha_pE[\sigma_{t-p}^2] \\
+\end{eqnarray*}</p>
+<p>If the unconditonal variance exists, \(\bar \sigma^2 = E[\sigma_{t-j}^2]\) for all \(j\), so
+\[
+\bar \sigma^2 = \frac{\omega}{1 - \alpha_1 - \ldots - \alpha_p}
+\]</p>
+<h3 id="stationarity">Stationarity</h3>
+<p>An ARCH(p) proces is stationary if
+\[
+1 - \alpha_1 - \ldots - \alpha_p &gt; 0
+\]
+We also require \(\alpha_j &gt; 0\) for all \(j\).  Why?
+<br>
+Some more analytics: Consider an ARCH(1)</p>
+<p>\begin{eqnarray*}
+\label{eq:arch}
+y_t &amp;=&amp; \epsilon_t \\
+\sigma_{\textcolor{red}{t}}^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 \\
+\epsilon_t &amp;=&amp; \sigma_t e_t \quad e_t \sim N(0,1).
+\end{eqnarray*}</p>
+<p>Then</p>
+<p>\begin{eqnarray*}
+\sigma_{t}^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 \\
+\sigma_{t}^2+\epsilon_t^2 -\sigma_t^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 +\epsilon_t^2 -\sigma_t^2 \\
+\epsilon_t^2 &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 +\epsilon_t^2 -\sigma_t^2 \\
+\epsilon_t^2 &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 +\sigma_t^2(e^2_t - 1) \\
+\epsilon_t^2 &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 +\nu_t \\
+\end{eqnarray*}</p>
+<h3 id="arch--1">ARCH(1)</h3>
+<p>\(\nu_t = \sigma_t^2(e_t^2-1)\) is the <strong>volatility surprise</strong>:</p>
+<ol>
+<li>\(E[\nu_t] = 0\)</li>
+<li>\(E[\nu_t\nu_{t-j}] = 0\)</li>
+</ol>
+<p>it&rsquo;s white noise!
+<br>
+This means that \(\epsilon_t\) follows an AR(1) like process
+\[
+\epsilon_t^2 - \bar \sigma^2 = \sum_{j=0}^\infty \alpha_1^j \nu_{t-j}
+\]
+What does the autocorrelation function look like?</p>
+<h3 id="kurtosis">Kurtosis</h3>
+<p>Another property of ARCH models is that the kurtosis of shocks \(\epsilon_t\) is strictly greater than the kurtosis of a normal.
+<br>
+This might seem strange because \(\epsilon_t = \sigma_te_t\) is normal by assumption.</p>
+<p>\begin{eqnarray*}
+\kappa &amp;=&amp; \frac{ E[\epsilon_t^4] }{E[\epsilon_t^2]^2} = \frac{ E[\sigma_t^4E_{t-1}[e_t^4]] }{E[\sigma_t^2E_{t-1}[e_t^2]]^2}
+= 3\frac{ E[\sigma_t^4] }{E[\sigma_t^2]^2}
+\end{eqnarray*}</p>
+<p>But we know that \(V[\epsilon_t^2] = E[\epsilon_t^4] - E[\epsilon_t^2] = E[\sigma_t^4] - E[\sigma_t^2]\ge0\).</p>
+<p>This means that
+\[
+\frac{ E[\sigma_t^4] }{E[\sigma_t^2]^2} \ge 1
+\]
+for \(\alpha\ne 0\) we can show this hold strictly.</p>
+<h3 id="garch">GARCH</h3>
+<p>ARCH models typically require many lags to adequately model conditional variance.
+<br>
+Enter <strong>Generalized ARCH (GARCH)</strong>, introduced by <a href="#citeproc_bib_item_1">Bollerslev (1986)</a>, a
+parsimonious way of measuring conditional volatility,</p>
+<p>\begin{eqnarray}
+\label{eq:arch}
+y_t &amp;=&amp; \mu + \epsilon_t \\
+\sigma_{t}^2  &amp;=&amp; \omega + \sum_{j=1}^p\alpha_j \epsilon_{t-j}^2 + \textcolor{blue}{\sum_{j=1}^p\beta_j \sigma_{t-j}^2} \\
+\epsilon_t &amp;=&amp; \sigma_t e_t \quad e_t \sim N(0,1).
+\end{eqnarray}</p>
+<p>GARCH is an ARCH model with \(q\) additional lags of the conditional variance.
+<br>
+Call this a GARCH(p,q) model.</p>
+<h3 id="garch--1-1">GARCH(1,1)</h3>
+<p>\vspace{-0.3in}</p>
+<p>\begin{eqnarray*}
+\label{eq:garch}
+y_t &amp;=&amp;  \epsilon_t \\
+\sigma_{t}^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 \\
+\epsilon_t &amp;=&amp; \sigma_t e_t \quad e_t \sim N(0,1).
+\end{eqnarray*}</p>
+<p>We have</p>
+<p>\begin{eqnarray*}
+\sigma_t^2 &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 (\omega + \alpha_1 \epsilon_{t-2}^2 + \beta_1\sigma_{t-2}^2) \\
+&amp;=&amp; \sum_{j=0}^{\infty}\beta_1^j\omega + \sum_{j=0}^\infty \beta_1^j\alpha_1 \epsilon_{t-j-1}^2 \\
+\end{eqnarray*}</p>
+<p>Conditional variance is a constant plus a weighted average of past squared innovations.
+<br>
+Would need many lags to match this with an ARCH.
+<br>
+Parameter restrictions to ensure variances are uniformly positive?  Gets very difficult for general GARCH(p,q), see <a href="#citeproc_bib_item_9">Nelson and Cao (1992)</a>.</p>
+<h3 id="garch--1-1">GARCH(1,1)</h3>
+<p>Time series model for \(\epsilon_t\)</p>
+<p>\begin{eqnarray*}
+\sigma_{t}^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 \\
+\sigma_{t}^2 + \epsilon_t^2 - \sigma_t^2  &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 + \epsilon_t^2 - \sigma_t^2 \\
+\epsilon_t^2 &amp;=&amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1\epsilon_{t-1}^2 + \beta_1 \nu_{t-1} + \nu_t \\
+\epsilon_t^2 &amp;=&amp; \omega + (\alpha_1+\beta_1) \epsilon_{t-1}^2  + \beta_1 \nu_{t-1} + \nu_t
+\end{eqnarray*}</p>
+<p>Instead of AR(1), GARCH(1,1) is transformed into an ARMA(1,1) where \(\nu_t = \epsilon_t^2 - \sigma_t^2\) is the volatility surprise.
+<br>
+Unconditional Variance
+\[
+\bar\sigma^2 = \frac{\omega}{1-\alpha_1-\beta_1}
+\]
+Autocovariances? Use formulas for autocovariances of ARMA!</p>
+<h3 id="more-flavors-of-arch">More Flavors of ARCH</h3>
+<p><strong>Exponential GARCH:</strong> [Nelson (1991)] model the <em>natural log of variance</em> rather the variance:
+\[
+\ln (\sigma^2) = \omega + \sum_{j=1}\alpha_j\left(\left|\frac{\epsilon_{t-j}}{\sigma_{t-j}}\right|
+-\sqrt{\frac{2}{\pi}}\right) \sum_{j=1}^o\gamma_j \frac{\epsilon_{t-j}}{\sigma_{t-j}} + \sum_{j=1}^{q}\beta_j \ln(\sigma_{t-j}^2)
+\]
+No parameter restrictions!
+<br>
+But, more complicated form
+<br>
+But, possible assymetry.
+<br>
+<em>Many other variants possible!</em></p>
+<h3 id="some-data">Some Data</h3>
+<p>Daily Data: 2001-2011</p>
+<figure><img src="https://edherbst.net/ox-hugo/b8c2e19e93d25c12466063438621f304c6a79875.png">
+</figure>
+
+<h3 id="evidence-of-arch">Evidence of ARCH</h3>
+<figure><img src="https://edherbst.net/ox-hugo/e9fd7e2b7d815be3b53ea27acfde6b5418d3ba77.png">
+</figure>
+
+<h3 id="less-noisy--evidence-of-arch">(Less Noisy) Evidence of ARCH</h3>
+<figure><img src="https://edherbst.net/ox-hugo/ba0db3f2f6fa85c139271d8666ffab32d82b0105.png">
+</figure>
+
+<h3 id="arch--5--for-s-and-p-500">ARCH(5) for S&amp;P 500</h3>
+<table class="simpletable">
+<caption>Constant Mean - ARCH Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>SP 500 Returns</td>   <th>  R-squared:         </th>  <td>   0.000</td>
+</tr>
+<tr>
+  <th>Mean Model:</th>       <td>Constant Mean</td>   <th>  Adj. R-squared:    </th>  <td>   0.000</td>
+</tr>
+<tr>
+  <th>Vol Model:</th>            <td>ARCH</td>        <th>  Log-Likelihood:    </th> <td>  -3796.37</td>
+</tr>
+<tr>
+  <th>Distribution:</th>        <td>Normal</td>       <th>  AIC:               </th> <td>   7606.74</td>
+</tr>
+<tr>
+  <th>Method:</th>        <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>   7647.55</td>
+</tr>
+<tr>
+  <th></th>                        <td></td>          <th>  No. Observations:  </th>    <td>2515</td>
+</tr>
+<tr>
+  <th>Date:</th>           <td>Thu, Mar 13 2025</td>  <th>  Df Residuals:      </th>    <td>2514</td>
+</tr>
+<tr>
+  <th>Time:</th>               <td>21:09:32</td>      <th>  Df Model:          </th>      <td>1</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Mean Model</caption>
+<tr>
+   <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>      <th>95.0% Conf. Int.</th>
+</tr>
+<tr>
+  <th>mu</th> <td>   -0.0379</td> <td>1.862e-02</td> <td>   -2.035</td> <td>4.189e-02</td> <td>[-7.439e-02,-1.390e-03]</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Volatility Model</caption>
+<tr>
+	 <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>      <th>95.0% Conf. Int.</th>
+</tr>
+<tr>
+  <th>omega</th>    <td>    0.3654</td> <td>4.278e-02</td> <td>    8.540</td> <td>1.338e-17</td>    <td>[  0.282,  0.449]</td>
+</tr>
+<tr>
+  <th>alpha[1]</th> <td>    0.0414</td> <td>2.229e-02</td> <td>    1.858</td> <td>6.314e-02</td> <td>[-2.268e-03,8.509e-02]</td>
+</tr>
+<tr>
+  <th>alpha[2]</th> <td>    0.1640</td> <td>3.150e-02</td> <td>    5.205</td> <td>1.940e-07</td>    <td>[  0.102,  0.226]</td>
+</tr>
+<tr>
+  <th>alpha[3]</th> <td>    0.2090</td> <td>3.437e-02</td> <td>    6.083</td> <td>1.183e-09</td>    <td>[  0.142,  0.276]</td>
+</tr>
+<tr>
+  <th>alpha[4]</th> <td>    0.1891</td> <td>3.234e-02</td> <td>    5.848</td> <td>4.987e-09</td>    <td>[  0.126,  0.252]</td>
+</tr>
+<tr>
+  <th>alpha[5]</th> <td>    0.2037</td> <td>3.771e-02</td> <td>    5.401</td> <td>6.617e-08</td>    <td>[  0.130,  0.278]</td>
+</tr>
+</table><br/><br/>Covariance estimator: robust
+<h3 id="garch--1-1--for-s-and-p-500">GARCH(1,1) for S&amp;P 500</h3>
+<table class="simpletable">
+<caption>Constant Mean - GARCH Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>   <td>SP 500 Returns</td>   <th>  R-squared:         </th>  <td>   0.000</td>
+</tr>
+<tr>
+  <th>Mean Model:</th>       <td>Constant Mean</td>   <th>  Adj. R-squared:    </th>  <td>   0.000</td>
+</tr>
+<tr>
+  <th>Vol Model:</th>            <td>GARCH</td>       <th>  Log-Likelihood:    </th> <td>  -3723.31</td>
+</tr>
+<tr>
+  <th>Distribution:</th>        <td>Normal</td>       <th>  AIC:               </th> <td>   7454.63</td>
+</tr>
+<tr>
+  <th>Method:</th>        <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>   7477.95</td>
+</tr>
+<tr>
+  <th></th>                        <td></td>          <th>  No. Observations:  </th>    <td>2515</td>
+</tr>
+<tr>
+  <th>Date:</th>           <td>Thu, Mar 13 2025</td>  <th>  Df Residuals:      </th>    <td>2514</td>
+</tr>
+<tr>
+  <th>Time:</th>               <td>21:09:33</td>      <th>  Df Model:          </th>      <td>1</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Mean Model</caption>
+<tr>
+   <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>      <th>95.0% Conf. Int.</th>
+</tr>
+<tr>
+  <th>mu</th> <td>   -0.0380</td> <td>1.764e-02</td> <td>   -2.153</td> <td>3.131e-02</td> <td>[-7.255e-02,-3.406e-03]</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Volatility Model</caption>
+<tr>
+	 <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>     <th>95.0% Conf. Int.</th>
+</tr>
+<tr>
+  <th>omega</th>    <td>    0.0125</td> <td>5.542e-03</td> <td>    2.253</td> <td>2.429e-02</td> <td>[1.622e-03,2.334e-02]</td>
+</tr>
+<tr>
+  <th>alpha[1]</th> <td>    0.0779</td> <td>1.144e-02</td> <td>    6.808</td> <td>9.877e-12</td>  <td>[5.548e-02,  0.100]</td>
+</tr>
+<tr>
+  <th>beta[1]</th>  <td>    0.9134</td> <td>1.213e-02</td> <td>   75.325</td>   <td>0.000</td>     <td>[  0.890,  0.937]</td>
+</tr>
+</table><br/><br/>Covariance estimator: robust
+<h3 id="egarch--1-1-1--for-s-and-p-500">EGARCH(1,1,1) for S&amp;P 500</h3>
+<h3 id="arch--5--results">ARCH(5) results</h3>
+<p><img src="https://edherbst.net/ox-hugo/a1cb4b1d2b07da1628134f201e16bcb9c54de679.png" alt="">
+<img src="https://edherbst.net/ox-hugo/acb819ddd85d3e425cda5ba7ed550d3d0182bf21.png" alt="">
+<img src="https://edherbst.net/ox-hugo/a1cb4b1d2b07da1628134f201e16bcb9c54de679.png" alt=""></p>
+<h3 id="garch--1-1--results">GARCH(1,1) results</h3>
+<figure><img src="https://edherbst.net/ox-hugo/8872d1e8816c9b47f242ab04170601f5fb2b8910.png">
+</figure>
+
+<h3 id="egarch--1-1-1--results">EGARCH(1,1,1) results</h3>
+<figure><img src="https://edherbst.net/ox-hugo/152da30ed967518cdfd61c1374859a2af1996bd5.png">
+</figure>
+
+<h2 id="stochastic-volatility">Stochastic Volatility</h2>
+<h3 id="stochastic-volatility">Stochastic Volatility</h3>
+<p>Consider the <strong>stochastic volatlity model</strong></p>
+<p>\begin{eqnarray}
+\label{eq:sv}
+y_t &amp;=&amp; \mu + \sigma_t\epsilon_t \\
+\ln(\sigma_t^2)  &amp;=&amp; \omega + \alpha_1\ln(\sigma_{t-1}^2) + \textcolor{blue}{\xi_t} \\
+&amp;~&amp; \epsilon_t \sim N(0,1) \mbox{ and } \xi_t \sim N(0,\sigma_{\xi}^2)
+\end{eqnarray}</p>
+ <br>
+This is different from (G)ARCH: there is _volatility specific_ shock.
+<ol>
+<li>More flexible + link up better to some continuous time asset pricing models.</li>
+<li>Much harder to estimate
+<ol>
+<li>GMM: <a href="#citeproc_bib_item_11">Wiggins (1987)</a>.</li>
+<li>Quasi MLE: <a href="#citeproc_bib_item_5">Harvey, Ruiz, and Shephard (1994)</a>.</li>
+<li>Bayesian Approach: <a href="#citeproc_bib_item_6">Jacquier, Polson, and Rossi (1994)</a>.</li>
+</ol>
+</li>
+</ol>
+<p>Connections to GARCH: see <a href="#citeproc_bib_item_3">Fleming and Kirby (2003)</a>.</p>
+<h3 id="sv-vs-dot-garch">SV vs. GARCH</h3>
+<ol>
+<li>Some studies have found superiority of SV models of GARCH&ndash;<a href="#citeproc_bib_item_8">Kim, Shephard, and Chib (1998)</a>.</li>
+<li>But, of course, GARCH models are much easier to estimate.</li>
+<li>Both are used.</li>
+</ol>
+<p>Let&rsquo;s estimate an SV model for the SP 500 returns.
+<br>
+I&rsquo;m going to do an Bayesian analysis with \(\alpha_1 = 1\) (random walk!)</p>
+<p><strong>Priors:</strong> \(\mu\sim Exp(1), \sigma\sim Exp(1/0.02)\),
+<br>
+I&rsquo;m going to use an MCMC sampler designed for this kind of model.
+<br>
+It takes about 20 minutes to estimate [GARCH is basically instant]</p>
+<h3 id="sv-vs-dot-egarch">SV vs. EGARCH</h3>
+<figure><img src="https://edherbst.net/ox-hugo/57454c9c8b6345a311bf9ce078565abd6e1eda71.png">
+</figure>
+
+<h3 id="sv-vs-dot-egarch--2005">SV vs. EGARCH (2005)</h3>
+<figure><img src="https://edherbst.net/ox-hugo/99bfa7ec8098e398d085e7efef4db96db0bf236f.png">
+</figure>
+
+<h3 id="a-famous-sv-paper-dot-dot-dot">A famous SV paper&hellip;</h3>
+<p><a href="#citeproc_bib_item_10">Stock and Watson (2007)</a>: &ldquo;Why Has Inflation Become Harder to Forecast?&rdquo; <em>Journal of Money, Credit, and Banking</em>.
+<br>
+Has inflation become harder to forecast recently?</p>
+<ol>
+<li>No, MSE of forecasts has gone down.</li>
+<li>Yes, improvement of &ldquo;structural&rdquo; models relative to univariate ones have diminished.</li>
+</ol>
+<p>Propose an <strong>Unobserved Components-Stochastic Volatility</strong> (UC-SV) model for inflation:</p>
+<p>\begin{eqnarray*}
+\pi_t &amp;=&amp; \tau_t + \eta_t, \quad \eta_t \sim N(0,\sigma_{\eta,t}^2) \nonumber \\
+\tau_t &amp;=&amp; \tau_{t-1} + \epsilon_t, \quad \epsilon_t \sim N(0,\sigma_{\epsilon,t}^2) \nonumber \\
+\ln \sigma_{\eta,t}^2 &amp;=&amp; \ln \sigma_{\eta,t-1}^2 + \nu_{\eta,t}, \nu_t \sim N(0,\gamma^2) \nonumber \\
+\ln \sigma_{\epsilon,t}^2 &amp;=&amp; \ln \sigma_{\epsilon,t-1}^2 + \nu_{\epsilon,t},\sim N(0,\gamma^2) \nonumber \\
+\end{eqnarray*}</p>
+<p>\(\tau_t\) = permanent (stochastic) trend inflation</p>
+<p>\(\eta_t\) = transitory component.</p>
+<h3 id="inflation">Inflation</h3>
+<figure><img src="https://edherbst.net/ox-hugo/229f0341ac56c61259271141e699d4b86ac05030.png">
+</figure>
+
+<h3 id="estimation">Estimation</h3>
+<p>There are no parameters to estimate, as SW set \(\gamma=0.2\).
+<br>
+Still have to filter the volatilities \(\{\sigma_{\eta,t}\}_{t=1}^T\) and \(\{\sigma_{\epsilon,t}\}_{t=1}^T\).
+<br>
+SW use a Markov-chain Monte Carlo (MCMC) technique to do this.
+<br>
+Compare this to a time-varying Integrated Moving Average (IMA) model:</p>
+<p>\begin{eqnarray}
+\Delta\pi_t = (1-\theta_t L)e_t, \quad e_t \sim iid(0,\sigma_e^2).
+\end{eqnarray}</p>
+<p>UC-SV model implies that:
+\[
+\theta_t = \frac{1 - \sqrt{1 - 4\alpha_t^2}}{2\alpha}, \quad \alpha_t = \frac{\sigma_{\eta,t}^2}{\sigma_{\eta,t}^2+\sigma_{\epsilon,t}^2}
+\]</p>
+<h3 id="results">Results</h3>
+<figure><img src="https://edherbst.net/ox-hugo/f622d0e123a93156a319b51672168954852ec54d.png">
+</figure>
+
+<h3 id="discussion">Discussion</h3>
+<ul>
+<li>SD of permanent component: 1970s through 1983 = high volatility,
+1950s-1960s = moderate volatility, post-83 = low volatility
+<br></li>
+<li>SD of transitory component: little change
+<br></li>
+<li>IMA estimate: moderate in early sample, falling in the 70s,
+increasing sharply thereafter.</li>
+</ul>
+<h2 id="markov-switching">Markov Switching</h2>
+<h3 id="markov-switching">Markov Switching</h3>
+<p><strong>Markov Switching &ndash; <em>exogenous</em> switching in parameters</strong>
+<br>
+Useful references:</p>
+<ul>
+<li>Hamilton, Chapter 22.</li>
+<li><a href="#citeproc_bib_item_7">Kim and Nelson (1999)</a></li>
+</ul>
+<h3 id="us-gdp-growth">US GDP growth</h3>
+<p>Suppose we want to model U.S. GDP growth as a stationary AR(1):
+\[
+y_t = \mu + \phi y_{t-1} + \epsilon_t, \quad \epsilon_{t} \sim N(0, \sigma^2).
+\]</p>
+<figure><img src="https://edherbst.net/ox-hugo/b9eed9989d1c34eb778cc5378c700f7287348beb.png">
+</figure>
+
+<h3 id="estimation-results">Estimation Results</h3>
+<p>We get point estimates: \((1-\hat\rho)\hat\mu = 0.5\), \(\hat\rho = 0.31\).  How does it fit? Look at residuals.</p>
+<figure><img src="https://edherbst.net/ox-hugo/c90ced0015da825801bf29e0956036a6161a2acf.png">
+</figure>
+
+<h3 id="residuals-pre-and-post-1984">Residuals, pre and post 1984</h3>
+<ol>
+<li>The standard deviation is considerable smaller post 1984 (even with GR!)</li>
+<li>While this is only suggestive, indicates there was a <em>break</em> in series.</li>
+<li>What has broken once, can break again.  How to incorporate?</li>
+</ol>
+<h3 id="markov-switching">Markov Switching</h3>
+<p>Let&rsquo;s consider the following representation:
+\[
+y_t = \mu(s_t) + \rho y_{t-1} + \epsilon_t, \quad \epsilon_t N(0, \sigma^2(s_t))
+\]
+The mean and variance are now functions of an unobserved discrete random variable: \(s_t\).
+<br>
+Call realization of \(s_t\) the <strong>state</strong> (or regime) that discrete random variable takes.</p>
+<p>\begin{itemize}
+\item $s_t = 1$, $\mu(s_t) = \mu_1, \sigma^2(s_t) = \sigma^2_1$
+\item $s_t = 2$, $\mu(s_t) = \mu_2, \sigma^2(s_t) = \sigma^2_2$
+\end{itemize}</p>
+<p>We need an description for time series.  A simple model is a Markov chain!</p>
+<p>Let&rsquo;s also set \(\rho=0\) for now, for simplicity.</p>
+<h3 id="markov-chains-continued">Markov Chains, continued</h3>
+<p>We talked about Markov Chains
+when we talked about Markov Chain Monte Carlo. Let&rsquo;s review.
+<br>
+Suppose \(s_t\) is an RV that takes values in \(\{1,2,\ldots,N\}\). The
+probabilitiy distribution for \(s_t\) depends only one the past
+through it&rsquo;s most recent realization \(s_{t-1}\).
+\[
+P(s_t = j | s_{t-1} = i,s_{t-2}=k,\ldots) = P(s_t = j | s_{t-1} = i) = p_{ij}
+\]
+\(p_{ij}\) is the probability of state \(j\)given state \(i\) last period.
+<br>
+Note that
+\[
+\sum_{j=1}^N p_{ij} = 1, \mbox{ for } i = 1,\ldots,N.
+\]</p>
+<h3 id="markov-chains-continued">Markov Chains, continued</h3>
+<p>Stack these probablity in a matrix.</p>
+<p>\begin{equation}
+\label{eq:P}
+P = \left[
+\begin{array}{cccc}
+p_{11} &amp; p_{21} &amp; \cdots &amp; p_{N1}\\
+p_{12} &amp; p_{22} &amp; \cdots &amp; p_{N2} \\
+\vdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+p_{N1}&amp; p_{N1} &amp; \ldots &amp; p_{NN}
+\end{array}
+\right]
+\end{equation}</p>
+<p>Let \(\xi_t = [1, 0, 0, \ldots, 0]&rsquo;\) when \(s_t=1\),
+\(\xi_t = [0, 1, 0, \ldots, 0]&rsquo;\) when \(s_t=2\), and so on.
+This means that
+\[
+E[\xi_{t+1}|\xi_t] = E[\xi_{t+1}|\xi_t, \xi_{t-1},\ldots] = P\xi_t.
+\]
+We represent our Markov Chain as
+\[
+\xi_{t+1} = P\xi_t + \nu_t, \quad \nu_t = \xi_{t+1}  - E[\xi_{t+1}|\xi_t]
+\]
+\(\nu_t\) is an Martingale Difference Series: mean zero and impossible
+to forecast using previous states.</p>
+<h3 id="forecasting-with-markov-chain">Forecasting with Markov Chain</h3>
+<p>\begin{eqnarray*}
+\xi_{t+m} = \nu_{t+m} + P\nu_{t+m-1} + P^2\nu_{t+m-2} + \ldots + P^m \xi_t
+\end{eqnarray*}</p>
+<p>This means that
+\[
+E[\xi_{t+m}|\xi_t] = P^m\xi_t.
+\]
+The probability that a state from regime \(i\) will be followed \(m\)
+periods later by a realization of state \(j\) is given by the \(j\)th
+row, \(i\)th column element of \(P^m\).
+<br>
+Concepts:</p>
+<ol>
+<li><em>reducibility:</em> if the chain is vanishing, in the sense that once
+you visit a state, you will not return to some other states. Not
+reducible? <em>irreducible</em></li>
+<li><em>ergodicity:</em> An irreducible MC is ergodoc, is ergodic is there
+exists a probability vector \(\pi\) such that \(P\pi = \pi\).</li>
+</ol>
+<h3 id="more-mc">More MC</h3>
+<ol>
+<li>An ergodic Markov Chain is a covariance stationary process,</li>
+<li>But, the VAR has a unit root in it!</li>
+<li>Magic: the variance matrix of \(\nu_t\) is singular.</li>
+</ol>
+ <br>
+Calculating ergodic probabilty:
+\\[
+    P\pi = \pi \mbox{ and } \bf{1}'\pi = 1.
+  \\]
+So
+<p>\begin{equation*}
+\left[
+\begin{array}{c}
+I - P \\ \bf{1}'
+\end{array}
+\right]
+\pi = A\pi = e_{N+1}
+\end{equation*}</p>
+<p>This means that \(\pi = (A&rsquo;A)^{-1}A&rsquo;e_{n+1}\).
+<br>
+Periodic markov chain: there is more than one \(\pi\) s.t. \(P\pi = \pi\).</p>
+<h3 id="analyzing-mixtures-of-normals">Analyzing Mixtures of Normals</h3>
+<p>With \(\rho = 0\), \(y_t\) is normally distributed conditional on \(s_t\).
+\[
+p(y_t | s_t = j; \theta) = \frac{1}{\sqrt{2\pi\sigma_j}}\exp{-\frac{(y_t - \mu_j)^2}{2\sigma^2_j}}
+\]
+We also know that \(P(A \mbox{ and } B)  = P(A|B)p(B)\).  So:
+\[
+p(y_t, s_t=j;\theta) = \frac{1}{\sqrt{2\pi\sigma_j}}\exp{-\frac{(y_t - \mu_j)^2}{2\sigma^2_j}} \times p(s_t = j)
+\]
+If \(p(s_t = j;\theta) = \pi_j\), we have
+\[
+p(y_t;\theta) = \sum_{j=1}^N\frac{1}{\sqrt{2\pi\sigma_j}}\exp{-\frac{(y_t - \mu_j)^2}{2\sigma^2_j}} \times \pi_j, \quad p(Y_{1:T};\theta) = \prod_{t=1}^T p(y_t;\theta)
+\]
+This is a <strong>mixture of normals.</strong></p>
+<h3 id="mixture-of-n--0-1--and-n--2-8--pi-1-0-dot-6-dot">Mixture of \(N(0,1)\) and \(N(2, 8)\), \(\pi_1 = 0.6\).</h3>
+<figure><img src="https://edherbst.net/ox-hugo/ee5148d3bab134a3b32d45fb652b40d03fcdc4e7.png">
+</figure>
+
+<p>you can make some pretty crazy (any) distributions with mixture of normals.</p>
+<h3 id="more-on-mixtures">More on Mixtures</h3>
+<p>How to infer which state I&rsquo;m in?  <em>Bayes Rule!</em>
+\[
+p(s_t = j|y_t;\theta) = \frac{p(y_t|s_t=j;\theta) p(s_t=j;\theta)}{p(y_t;\theta)}
+\]</p>
+<figure><img src="https://edherbst.net/ox-hugo/0b09c6fa6f03cc2a9b2f9f714d725a2604ea7418.png">
+</figure>
+
+<h3 id="how-to-estimate-mixtures">How to estimate Mixtures</h3>
+<p>One can show that the MLE&rsquo;s of \(\theta = [\mu, \sigma, \pi]\) are</p>
+<p>\begin{eqnarray*}
+\hat \mu_j &amp;=&amp; \frac{\sum_{t=1}^T y_t p(s_t = j|y_t,\hat\theta)}{\sum_{t=1}^T p(s_t = j|y_t,\hat\theta)}, \quad j = 1,\ldots, N \\
+\hat \sigma_j^2 &amp;=&amp; \frac{\sum_{t=1}^T (y_t-\hat\mu_j)^2 p(s_t = j|y_t,\hat\theta)}{\sum_{t=1}^T p(s_t = j|y_t,\hat\theta)}, \quad j = 1,\ldots, N \\
+\hat \pi &amp;=&amp; \frac{1}{T} \sum_{t=1}^T p(s_t = j|y_t,\hat\theta)
+\end{eqnarray*}</p>
+<p>Recall, we get \(p(s_t=j|y_t,\theta)\) from applying Bayes rule.
+<br>
+This forms a system of nonlinear equations, which in principal can be solved.
+<br>
+Another way&hellip;</p>
+<h3 id="the-em-algorithm">The EM Algorithm</h3>
+<p>A simple iterative procedure:</p>
+<ol>
+<li>Guess arbitrary \(\hat\theta^0\),</li>
+<li>Plugin in to RHS of above equations, get \(\hat\theta^1\)</li>
+<li>if \(|\hat\theta^1 - \hat\theta^0| &lt; \epsilon\), you&rsquo;ve found a maximum</li>
+<li>otherwise continuing iterating</li>
+</ol>
+ <br>
+This is called the _EM Algorithm._
+<ol>
+<li>Each iteration increases the value of the likelihood function</li>
+<li>Usually works very fast</li>
+<li>Not guaranteed to find a global max, but generally robust.</li>
+</ol>
+<h3 id="issues-in-optimization">Issues in optimization</h3>
+<ol>
+<li>
+<p>if \(\hat\mu_j = y_t\) for some j and \(y_t\), we&rsquo;re in trouble,
+because the max will send \(\sigma_j \rightarrow 0\).</p>
+</li>
+<li>
+<p>This makes the log-likelihood go to infinity</p>
+</li>
+<li>
+<p>More generally: there is a labeling issue: \((\mu_1, \sigma_1^2)\)
+could easily be called \((\mu_2, \sigma_2^2)\) and vice versa.</p>
+</li>
+<li>
+<p>This calls for augmenting the problem with more information.</p>
+<ol>
+<li>Coherent way: Bayesian Approach, see <a href="#citeproc_bib_item_7">Kim and Nelson (1999)</a>.</li>
+<li>Ad hoc way: augment the likliehood with a penalty function to
+enforce priors views and make pathologies less likely. See
+<a href="#citeproc_bib_item_4">Hamilton (1994)</a>.</li>
+</ol>
+</li>
+</ol>
+<h3 id="markov-switching">Markov Switching</h3>
+<p>Markov Switching models are more complicated versions of the mixture model.
+<br>
+Instead of just \(\pi = [\pi_1, \ldots, \pi_N]\) we need to estimate \(P\)</p>
+<p>\begin{equation}
+P = \left[
+\begin{array}{cccc}
+p_{11} &amp; p_{21} &amp; \cdots &amp; p_{N1}\\
+p_{12} &amp; p_{22} &amp; \cdots &amp; p_{N2} \\
+\vdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+p_{N1}&amp; p_{N1} &amp; \ldots &amp; p_{NN}
+\end{array}
+\right]
+\end{equation}</p>
+<p>Key item is again: distribution of states conditional on data.
+<br>
+Now we need to consider entire history of data, because of Markovian structure.
+\[
+\hat\xi_{t|t} = [p(s_t = 1|Y_{1:t};\theta), \ldots, p(s_t = N|Y_{1:t-1};\theta)]'
+\]
+We can also think about the forecast of this probability distribution
+\[
+\hat\xi_{t|t-1}.
+\]</p>
+<h3 id="deriving-the-likelihood">Deriving the likelihood</h3>
+<p>The joint distribution of \(y_t\) and \(s_t\) given \(Y_{1:t-1}\) is given by
+\[
+p(y_t,s_t=j|Y_{1:t-1};\theta) = p(y_t|s_{t}=j,Y_{1:t-1};\theta)p(s_{t}=j|Y_{1:t-1};\theta)
+\]
+Let \(\eta_t = [p(y_t|s_{t}=1,Y_{1:t-1};\theta), \ldots, p(y_t|s_{t}=N,Y_{1:t-1};\theta)]&rsquo;\).
+<br>
+Recall \(\hat\xi_{t|t-1} = [p(s_t = 1|Y_{1:t-1};\theta), \ldots, p(s_t = N|Y_{1:t-1};\theta)]&rsquo;\)
+<br>
+Then \(p(y_t,s_t=j|Y_{1:t-1};\theta) = \hat\xi_{t|t-1}\odot \hat\eta_{t}\).
+<br>
+\[
+p(y_t|Y_{1:t-1};\theta) = \sum_{j=1}^N p(y_t,s_t=j|Y_{1:t-1};\theta) = {\bf 1}&rsquo; (\hat\xi_{t|t-1}\odot \eta_t)
+\]
+The log likelihood is
+\[
+\sum_{j=1}^T log p(y_t|Y_{1:t-1};\theta) = \sum_{t=1}^T log\left({\bf 1}&rsquo; (\hat\xi_{t|t-1}\odot \eta_t)\right)
+\]
+Now to get a recursion for \(\hat\xi_{t|t-1}\)</p>
+<h3 id="recursion-for-hat-xi-t-t-1">Recursion for \(\hat\xi_{t|t-1}\)</h3>
+<p>Use Bayes rule
+\[
+p(s_t=j|Y_{1:T};\theta) = \frac{p(y_t|s_{t}=j;\theta)p(s_t=j|Y_{1:t-1};\theta)}
+{p(y_t|Y_{1:t-1};\theta)}
+\]
+Which is just
+\[
+p(s_t=j|Y_{1:T};\theta) = \hat \xi_{t|t} = \frac{(\hat\xi_{t|t-1}\odot \eta_t)}{{\bf 1}&rsquo; (\hat\xi_{t|t-1}\odot \eta_t)}
+\]
+To get forecast:
+\[
+E_t[\xi_{t+1}|Y_{1:T}] = PE_t[\xi_t|Y_{1:T}] + E_t[\nu_t|Y_{1:T}] = P\hat\xi_{t|t}
+\]
+And we&rsquo;re done!</p>
+<h3 id="smoothed-probabilities">Smoothed Probabilities</h3>
+<p>Kim Algorithm:
+<br>
+Do this stuff ``backwards&rsquo;&rsquo;:
+\[
+\hat\xi_{t|T} = \hat\xi_{t|t} \odot [P&rsquo; [\hat \xi_{t+1} / \hat \xi_{t+1|t}] ]
+\]
+Estimation</p>
+<ol>
+<li>Hamilton: If initial probablities are unrelated
+\[
+\hat p_{ij} = \frac{\sum_{t=2}^T p(s_t = j, s_t = i| Y_{1:T};\theta)}{\sum_{t=2}^Tp(s_{t-1} = i;Y_{1:T}\theta)}
+\]</li>
+<li>Otherwise, a bit more complicated</li>
+<li>either way use EM algorithm.</li>
+</ol>
+<h3 id="back-to-example">Back to Example</h3>
+<table class="simpletable">
+<caption>Markov Switching Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>GDPC1</td>        <th>  No. Observations:  </th>    <td>207</td>
+</tr>
+<tr>
+  <th>Model:</th>           <td>MarkovAutoregression</td> <th>  Log Likelihood     </th> <td>-220.722</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 13 Mar 2025</td>   <th>  AIC                </th>  <td>455.444</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>21:14:01</td>       <th>  BIC                </th>  <td>478.773</td>
+</tr>
+<tr>
+  <th>Sample:</th>               <td>04-01-1964</td>      <th>  HQIC               </th>  <td>464.878</td>
+</tr>
+<tr>
+  <th></th>                     <td>- 01-01-2016</td>     <th>                     </th>     <td> </td>
+</tr>
+<tr>
+  <th>Covariance Type:</th>        <td>approx</td>        <th>                     </th>     <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Regime 0 parameters</caption>
+<tr>
+	<td></td>       <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>const</th>  <td>    0.7393</td> <td>    0.066</td> <td>   11.280</td> <td> 0.000</td> <td>    0.611</td> <td>    0.868</td>
+</tr>
+<tr>
+  <th>sigma2</th> <td>    0.2301</td> <td>    0.035</td> <td>    6.557</td> <td> 0.000</td> <td>    0.161</td> <td>    0.299</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Regime 1 parameters</caption>
+<tr>
+	<td></td>       <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>const</th>  <td>    0.7114</td> <td>    0.168</td> <td>    4.239</td> <td> 0.000</td> <td>    0.382</td> <td>    1.040</td>
+</tr>
+<tr>
+  <th>sigma2</th> <td>    1.1565</td> <td>    0.197</td> <td>    5.862</td> <td> 0.000</td> <td>    0.770</td> <td>    1.543</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Non-switching parameters</caption>
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>ar.L1</th> <td>    0.2834</td> <td>    0.074</td> <td>    3.847</td> <td> 0.000</td> <td>    0.139</td> <td>    0.428</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Regime transition parameters</caption>
+<tr>
+	<td></td>        <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>p[0->0]</th> <td>    0.9792</td> <td>    0.018</td> <td>   53.932</td> <td> 0.000</td> <td>    0.944</td> <td>    1.015</td>
+</tr>
+<tr>
+  <th>p[1->0]</th> <td>    0.0289</td> <td>    0.027</td> <td>    1.071</td> <td> 0.284</td> <td>   -0.024</td> <td>    0.082</td>
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Covariance matrix calculated using numerical (complex-step) differentiation.
+<h3 id="smoothed-probabilities">Smoothed Probabilities</h3>
+<figure><img src="https://edherbst.net/ox-hugo/61499b7b9d78f4e056bb266bb0de7e0a35e85d9e.png">
+</figure>
+
+<h2 id="bibliography">Bibliography</h2>
+<h3 id="references">References</h3>
+<h2 id="references-1">References</h2>
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><div class="csl-bib-body">
+  <div class="csl-entry"><a id="citeproc_bib_item_1"></a><span style="font-variant:small-caps;">Bollerslev, T.</span> (1986): <a href="https://doi.org/10.1016/0304-4076(86)90063-1">“Generalized Autoregressive Conditional Heteroskedasticity,</a>” <i>Journal of Econometrics</i>, 31, 307 327.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_2"></a><span style="font-variant:small-caps;">Engle, R. F.</span> (1982): <a href="https://doi.org/10.2307/1912773">“Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation,</a>” <i>Econometrica</i>, 50, 987.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_3"></a><span style="font-variant:small-caps;">Fleming, J., and C. Kirby</span>. (2003): <a href="https://doi.org/10.1093/jjfinec/nbg016">“A Closer Look at the Relation between Garch and Stochastic Autoregressive Volatility,</a>” <i>Journal of Financial Econometrics</i>, 1, 365 419.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_4"></a><span style="font-variant:small-caps;">Hamilton, J.</span> (1994): <i>Time Series Analysis</i>, Princeton, New Jersey: Princeton University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_5"></a><span style="font-variant:small-caps;">Harvey, A., E. Ruiz, and N. Shephard</span>. (1994): <a href="https://doi.org/10.2307/2297980">“Multivariate Stochastic Variance Models,</a>” <i>The Review of Economic Studies</i>, 61, 247 264.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_6"></a><span style="font-variant:small-caps;">Jacquier, E., N. G. Polson, and P. E. Rossi</span>. (1994): “Bayesian Analysis of Stochastic Volatility Models,” <i>Journal of Business &#38; Economic Statistics</i>, 12, 371–89.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_7"></a><span style="font-variant:small-caps;">Kim, C.-J., and C. Nelson</span>. (1999): <i>State-Space Models with Regime Switching</i>, MIT Press, Cambridge.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_8"></a><span style="font-variant:small-caps;">Kim, S., N. Shephard, and S. Chib</span>. (1998): “Stochastic Volatility: Likelihood Inference and Comparison with Arch Models,” <i>Review of Economic Studies</i>, 65, 361–93.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_9"></a><span style="font-variant:small-caps;">Nelson, D. B., and C. Q. Cao</span>. (1992): <a href="https://doi.org/10.2307/1391681">“Inequality Constraints in the Univariate Garch Model,</a>” <i>Journal of Business &#38; Economic Statistics</i>, 10, 229.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_10"></a><span style="font-variant:small-caps;">Stock, J. H., and M. W. Watson</span>. (2007): <a href="https://doi.org/10.1111/j.1538-4616.2007.00014.x">“Why Has U.S. Inflation Become Harder to Forecast?,</a>” <i>Journal of Money, Credit and Banking</i>, 39, 3 33.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_11"></a><span style="font-variant:small-caps;">Wiggins, J. B.</span> (1987): <a href="https://doi.org/10.1016/0304-405x(87)90009-2">“Option Values under Stochastic Volatility: Theory and Empirical Estimates,</a>” <i>Journal of Financial Economics</i>, 19, 351 372.</div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

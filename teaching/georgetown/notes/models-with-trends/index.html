@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/notes/models-with-trends/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Trends in Time Series" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/notes/models-with-trends/" /><meta property="article:published_time" content="2025-03-13T10:23:17-04:00" />
+
+
+
+<meta name="twitter:title" content="Trends in Time Series"/>
+<meta name="twitter:description" content="
+Lecture Objective: Understand the basic of deterministic and stochastic trends.  Give a heuristic introduction to large sample theory.
+Additional Readings: You can find background in Hamilton (1994) chapters 15-16 and Davidson and MacKinnon (2003).  We&rsquo;ll discuss the results in Nelson and Plosser (1982) in some detail in the lecture.
+
+A common method for analyzing macroeconomic time series is to decompose them into two distinct components: trend and cycle. This approach allows economists to better understand the underlying causes and effects of economic phenomenon at two different frequencies."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/notes'>notes</a>/<a href='https://edherbst.net/teaching/georgetown/notes/models-with-trends'>models-with-trends</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>Trends in Time Series</h1>
+<div class="additional">
+<p><strong>Lecture Objective</strong>: Understand the basic of deterministic and stochastic trends.  Give a heuristic introduction to large sample theory.
+<strong>Additional Readings:</strong> You can find background in <a href="#citeproc_bib_item_7">Hamilton (1994)</a> chapters 15-16 and <a href="#citeproc_bib_item_4">Davidson and MacKinnon (2003)</a>.  We&rsquo;ll discuss the results in <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> in some detail in the lecture.</p>
+</div>
+<p>A common method for analyzing macroeconomic time series is to decompose them into two distinct components: <em>trend</em> and <em>cycle</em>. This approach allows economists to better understand the underlying causes and effects of economic phenomenon at two different frequencies.</p>
+<p>To illustrate, consider the example of real per capita GDP, denoted as \( gdp_t \), which represents the economic output per individual in the United States. In this decomposition framework, we express the natural logarithm of per capita GDP, \( y_t \), as the sum of its trend component and its fluctuations. Mathematically, this can be represented as:
+\[
+y_t = \ln gdp_t = trend_t + fluctuations_t
+\]
+In this equation, \( trend_t \) might represent the &ldquo;underlying&rdquo; growth trajectory of the economy, while \( fluctuations_t \) are short-term variations around this trend, known as cyclical movements.</p>
+<p>Separating trend from cycle is a difficult problem.  Take the case of log GDP: while the total data is compiled by the Bureau of Economic Analysis, the trend and cycle are not observed.  In general, we&rsquo;ll need additional assumptions to identify these two components of a given time series.  In this lecture we&rsquo;ll talk about deterministic and stochastic trends.</p>
+<h2 id="deterministic-trends">Deterministic Trends</h2>
+<p>For much of the 20th century, economists thought the underlying economic growth was largely predictable with temporary business cycles.  An example of this way of thinking was the large scale econometric model of <a href="#citeproc_bib_item_11">Tinbergen (1939), vol. 1</a>.</p>
+<p>We&rsquo;ll focus the linear <em>deterministic trend</em> model.  Consider the model:</p>
+<p>\begin{align}
+y_t = \beta_1 + \beta_2 t + u_t.
+\end{align}</p>
+<p>Let&rsquo;s make some assumptions on \(u_t\):
+\[
+\mathbb E[u_t] = 0 \text{ and } \mathbb V[u_t^2] = \sigma^2.
+\]
+Let&rsquo;s further assume that \(u_t\) is  covariance stationary process.  This kind of model has a few interesting implications.  Under our assumptions on \(u_t\), the future value \( y_{t+h} \), for a large horizon \( h \), can be predicted by extending the trend component:
+\[
+\mathbb E_t[y_{t+h}] \approx \beta_1 + \beta_2 (t+h) \text{ as \(h\) becomes large}.
+\]
+Thus, the long-run forecast of \( y_t \) becomes increasingly determined by the trend, and as \( u_t \) converges to its unconditional expectation.  As \( h \) becomes large, the prediction error variance for \( y_{t+h} \) is bounded (it&rsquo;s simply \(\sigma^2\).)</p>
+<p>To implement this trend-cycle decomposition, we can estimate Equation .  After estimating \(\beta_1\) and \(\beta_2\), we can obtain a decomposition:</p>
+<p>\begin{eqnarray}
+y_t &amp;=&amp; \widehat{trend}_t + \widehat{fluctuations}_t \nonumber \\
+&amp;=&amp; (\hat{\beta}_1 + \hat{\beta}_2 t) + ( y_t - \hat{\beta}_1 - \hat{\beta}_2t).
+\end{eqnarray}</p>
+<p>When \(y_t\) is a logged variable, the coefficient \(\beta_2\) has the interpretation of an average growth rate.  Figure <a href="#org0d88be2">1</a> shows the trend and fluctuations for United States annual log GNP from 1909-1970.  The data come from <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> and the coefficients are estimated using ordinary least squares.</p>
+<p>The estimated coefficient \(\hat{\beta}_2\) is 0.031. This gives an average annual growth rate of about 3.1% over the period from 1909 to 1970. This indicates that, despite the fluctuations typical of economic activity, the underlying long-term trend was one of moderate growth.  The Great Depression is clearly visible in the cycle.</p>
+<figure><img src="https://edherbst.net/ox-hugo/a6b6451f75393c23dd1db17be3c7484cc9b59639.png"
+    alt="Figure 1: GNP: (Linear) Trend and Cycle (1909 - 1970)"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>GNP: (Linear) Trend and Cycle (1909 - 1970)</p>
+    </figcaption>
+</figure>
+
+<p><strong>Econometrics of Deterministic Trend Models.</strong> You&rsquo;ve surely gone through the analysis of this regression model for cross sectional data.  Things are a bit different for the deterministic trend model. In fact, there are several difficulties associated with large sample analysis of the estimators \(\hat{\beta}_{1,T}\) and \(\hat{\beta}_{2,T}\).  Taking \(x_t = \left[1, t\right]&rsquo;\),</p>
+<ol>
+<li>The matrix \(\frac{1}{T} \sum x_t x_t&rsquo;\) does not converge to a non-singular matrix \(Q\) as the time trend grows without bound.</li>
+<li>In a time series model, the disturbances \(u_t\) are in general dependent.  This will change the limiting distribution of quantities such as \(\sqrt{T} \frac{1}{T} \sum x_t u_t\).</li>
+<li>If the \(u_t\)&rsquo;s are serially correlated, then the OLS estimator will in general be inefficient. More sophisticated estimation techniques, like Generalized Least Squares (GLS), might be necessary to achieve efficiency.</li>
+</ol>
+<p>Roughly speaking, convergence rates tell us how fast we can learn the``true&rsquo;&rsquo; value of a parameter in a sampling experiment.  In &ldquo;standard&rdquo; OLS then the variance of the \(\hat\beta\) converges to zero at rate \(1/T\).  This isn&rsquo;t true for models with deterministic trends.  Let&rsquo;s look at the distributions of \(\sqrt{T}(\hat\beta_0 - \beta_0)\) and \(\sqrt{T}(\hat\beta_1 - \beta_1)\).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
+</span></span><span style="display:flex;"><span>[1;32m     14[0m [0mTs[0m [0;34m=[0m [0;34m[[0m[0;36m50[0m[0;34m,[0m [0;36m500[0m[0;34m,[0m [0;36m2000[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     15[0m [0;32mfor[0m [0mT[0m [0;32min[0m [0mTs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m---&gt; 16[0;31m     [0mt_params[0m [0;34m=[0m [0;34m[[0m[0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m [0;32mfor[0m [0m_[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mN[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m     17[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m [0;34m=[0m [0mp[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0mt_params[0m[0;34m,[0m [0mcolumns[0m[0;34m=[0m[0;34m[[0m[0;34m&#39;beta0_hat&#39;[0m[0;34m,[0m [0;34m&#39;beta1_hat&#39;[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     18[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0msqrt[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m*[0m[0;34m([0m[0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m-[0m [0mbeta0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36m&lt;listcomp&gt;[0;34m(.0)[0m
+</span></span><span style="display:flex;"><span>[1;32m     14[0m [0mTs[0m [0;34m=[0m [0;34m[[0m[0;36m50[0m[0;34m,[0m [0;36m500[0m[0;34m,[0m [0;36m2000[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     15[0m [0;32mfor[0m [0mT[0m [0;32min[0m [0mTs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m---&gt; 16[0;31m     [0mt_params[0m [0;34m=[0m [0;34m[[0m[0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m [0;32mfor[0m [0m_[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mN[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m     17[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m [0;34m=[0m [0mp[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0mt_params[0m[0;34m,[0m [0mcolumns[0m[0;34m=[0m[0;34m[[0m[0;34m&#39;beta0_hat&#39;[0m[0;34m,[0m [0;34m&#39;beta1_hat&#39;[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     18[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0msqrt[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m*[0m[0;34m([0m[0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m-[0m [0mbeta0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36mmonte_carlo[0;34m(T)[0m
+</span></span><span style="display:flex;"><span>[1;32m      5[0m [0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m      6[0m [0;32mdef[0m [0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m----&gt; 7[0;31m     [0mt[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marange[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m      8[0m     [0my[0m [0;34m=[0m [0mbeta0[0m [0;34m+[0m [0mbeta1[0m [0;34m*[0m [0mt[0m [0;34m+[0m [0mnp[0m[0;34m.[0m[0mrandom[0m[0;34m.[0m[0mnormal[0m[0;34m([0m[0msize[0m[0;34m=[0m[0mT[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m      9[0m     [0mX[0m [0;34m=[0m [0msm[0m[0;34m.[0m[0madd_constant[0m[0;34m([0m[0mt[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;np&#39; is not defined
+</span></span></code></pre></div><p>Figure <a href="#orge7dd43c">1</a> displays the sampling distributions for \(\widehat \beta_0\) and \(\widehat \beta_1\).  The standardized estimate of \(\widehat\beta_0\) is stabilized at normal dstirbution.  However the estimate \(\sqrt{T}(\widehat\beta_1 - \beta_1)\) is clearly degenerating to a point mass at zero as \(T\) becomes large, as its variance is shrinnking rapidly.  We&rsquo;ll analysis this asymptotic result now.</p>
+<p>We&rsquo;ll begin with some algebraic identities that will be helpful.</p>
+<p>\begin{eqnarray*}
+\sum_{t=1}^T 1 = T,\quad \sum_{t=1}^T t  =  \frac{T(T+1)}{2}, \text{ and } \sum_{t=1}^T t^2 = \frac{T(T+1)(2T+1)}{6}.
+\end{eqnarray*}</p>
+<p>Using these identitites, it&rsquo;s easy to see that the matrix
+\[
+\frac{1}{T} \sum x_t x_t&rsquo;  = \frac{1}{T}
+\left( \begin{array}{cc} \sum 1 &amp; \sum t \\ \sum t &amp; \sum t^2 \end{array} \right)
+\]
+does not converge at \(T\) becomes large.  On the the hand
+\[
+\frac{1}{T^{\textcolor{red}{3}}} \sum x_t x_t&rsquo; \longrightarrow
+\left( \begin{array}{cc} 0 &amp; 0 \\ 0 &amp; 1/3 \end{array} \right)
+\]
+is singular and not invertible!  Thus, deterministic trends change the rate of convergence of estimators. It turns out that \(\hat{\beta}_{1,T}\) and \(\hat{\beta}_{2,T}\) have
+different asymptotic rates of convergence. In particular, we will learn
+faster about the slope of the trend line than the intercept.</p>
+<p>To analyze the asymptotic behavior of the estimators we define the matrix
+\[
+G_T = \left( \begin{array}{cc} 1 &amp; 0 \\ 0 &amp; T \end{array} \right).
+\]
+Note that the matrix is equivalent to its transpose, that is, \(G_T = G_T&rsquo;\).  We will analyze the
+following quantity
+\[
+G_T(\hat{\beta}_T - \beta) = \left( \frac{1}{T} \sum G_T^{-1} x_t x_t&rsquo;G_T^{-1} \right)^{-1} \left(
+\frac{1}{T}\sum G_T^{-1} x_t u_t \right).
+\]
+It can be easily verified that
+\[
+\frac{1}{T} \sum G_T^{-1} x_t x_t&rsquo; G_T^{-1} = \frac{1}{T} \left( \begin{array}{cc} \sum 1 &amp; \sum t/T
+\\ \sum t/T &amp; \sum (t/T)^2 \end{array} \right) \longrightarrow Q,
+= \left( \begin{array}{cc} 1 &amp; 1/2 \\ 1/2 &amp; 1/3 \end{array} \right).
+\]
+The term \(\frac{1}{T} \sum G_T^{-1} x_t u_t\) has the components \(\frac{1}{T} \sum u_t\) and
+\(\frac{1}{T} \sum (t/T) u_t\) which converge in probability to zero based on the weak law of large
+numbers for non-identically distributed random variables.  Note that without the proper standardization \(\frac{1}{T} \sum t u_t\) will not converge to its expected value of zero. The variance of the random variable \(T u_T\) is getting larger and larger with sample size which
+prohibits the convergence of the sample mean to its expectation.</p>
+<p>With this, we can describe some asymptotic results:
+\[
+y_t = \beta_1 + \beta_2 t + u_t, \quad u_t \stackrel{i.i.d.}{\sim} (0,\sigma^2).
+\]
+Let \(\hat{\beta}_{i,T}\), \(i=1,2\) be the OLS estimators of the intercept
+and slope coefficient, respectively. Then</p>
+<p>\begin{eqnarray}
+\hat{\beta}_{1,T} -\beta_1 &amp; \stackrel{p}{\longrightarrow} &amp; 0 \label{eq_rint}\\
+T(\hat{\beta}_{2,T} - \beta_2) &amp; \stackrel{p}{\longrightarrow} &amp; 0 \label{eq_rslp}.
+\end{eqnarray}</p>
+<p>For the sampling distribution, consider the quantity
+\[
+\sqrt{T} G_T (\hat{\beta}_T - \beta) = \left[ \begin{array}{c} \sqrt{T}(\hat{\beta}_{1,T} - \beta) \\ T^{3/2}(\hat{\beta}_{2,T} - \beta_2) \end{array} \right].
+\]
+This is equal to
+\[
+\left( \frac{1}{T} \sum G_T^{-1} x_t x_t&rsquo; G_T^{-1} \right)^{-1} \left( \frac{1}{\sqrt{T}}\sum G_T^{-1} x_t u_t \right).
+\]
+In this setup, the matrix \(\frac{1n}{T} \sum G_T^{-1} x_t x_t&rsquo; G_T^{-1}\) converges to a non-singular matrix \(Q\) as discussed earlier. Consider now:
+\[
+\left( \frac{1}{\sqrt{T}}\sum G_T^{-1} x_t u_t \right) =
+\left[ \begin{array}{c} \frac{1}{\sqrt{T}} \sum u_t \\ \frac{1}{\sqrt{T}} \sum \left(\frac{t}{T}\right) u_t \end{array} \right].
+\]
+The second term is in this is an indepedendent but not identically distributed random variable because the scaling \( \left(\frac{t}{T}\right) \) changes over time.  We can invoke a central limit theorem for these kinds of random variables due to Lyapunov&ndash;see <a href="#citeproc_bib_item_2">Casella and Berger (2002)</a> Theorem 27.3.1.  We deduce that both elements of the vector have a limiting normal distribution.  Next, we can use Cramer-Wold theorem&mdash;for details see <a href="#citeproc_bib_item_2">Casella and Berger (2002)</a>, Theorem 5.5.3&mdash;to conclude that a linear combination of these elements will also have a limiting normal distribution, allowing us to analyze the behavior of the full vector.  Taken together, the sampling distribution of the OLS
+estimators has the following large sample behavior
+\[
+\sqrt{T} G_T (\hat{\beta}_T - \beta) \Longrightarrow {\cal N}(0,\sigma^2Q^{-1}).
+\]
+<em>Having said all this</em>. When we consider the case where the variance is unknown:
+\[
+\hat \sigma^2 = \frac{1}{T-2}\sum(y_t - \hat\beta_1 - \hat\beta_2 t)^2,
+\]
+under standard conditions, \(\hat{\sigma}^2\) will consistently estimate \(\sigma^2\), and the asymptotic normality results still hold, meaning that the scaled estimators, adjusted for unknown variance, converge to a normal distribution with the true variance replaced by \(\hat{\sigma}^2\).
+espite the fact that \(\beta_1\) and \(\beta_2\) have different asymptotic rates of convergence, the <strong>t statistics</strong> still have \(N(0,1)\) limited distribution because the standard error estimates have offsetting behaviour.</p>
+<h3 id="ols-and-serial-dependence">OLS and Serial Dependence</h3>
+<p>Let&rsquo;s ignore the constant term and consider the simplified regression</p>
+<p>\begin{align}
+y_t = \beta t + u_t.
+\end{align}</p>
+<p>In times series models, it&rsquo;s likely that the \(u_t\) are serially correlated, that is, \(\mathbb E[u_{t}u_{t-h}] \not= 0\) for some \(h\).  This means that OLS will be inefficient.  That is,
+the OLS estimator will not achieve the smallest possible variance among unbiased estimators.  Let&rsquo;s look at example with \(MA(1)\) errors.
+\[
+u_t = \epsilon_t + \theta \epsilon_{t-1}, \quad \epsilon_{t} \sim iid(0,\sigma^2_\epsilon).
+\]
+It&rsquo;s easy to verify that:</p>
+<p>\begin{eqnarray}
+\mathbb E[u_t^2] &amp; = &amp; \mathbb E[(\epsilon_t + \theta \epsilon_{t-1})^2] = (1+\theta^2)\sigma^2_\epsilon \\
+\mathbb E[u_tu_{t-1}] &amp; = &amp; \mathbb E[ (\epsilon_t + \theta \epsilon_{t-1})(\epsilon_{t-1} + \theta \epsilon_{t-2})] = \theta \sigma^2_\epsilon \\
+\mathbb E[u_tu_{t-h}] &amp; = &amp; 0 \quad h &gt; 1.
+\end{eqnarray}</p>
+<p>For the regression model , the OLS estimator is given by
+\[
+\hat{\beta}_T - \beta = \frac{\sum tu_t}{\sum t^2}.
+\]
+To find the limiting distribution, note that
+\[
+\frac{1}{T^3} \sum_{t=1}^T t^2 = \frac{T(T+1)(2T+1)}{6T} \longrightarrow \frac{1}{3}.
+\]</p>
+<p>\begin{eqnarray}
+\sum t u_t
+&amp; = &amp; \sum t(\epsilon_t + \theta \epsilon_{t-1}) \nonumber \\
+&amp; = &amp; \begin{array}{ccccc}
+0 &amp; +\epsilon_1 &amp; +2\epsilon_2 &amp; + 3\epsilon_3 &amp; + \ldots  \\
++\theta \epsilon_0 &amp; + 2 \theta \epsilon_1 &amp; + 3 \theta \epsilon_2 &amp; + 4 \theta \epsilon_3 &amp; + \ldots
+\end{array} \nonumber \\
+&amp; = &amp; \sum_{t=1}^{T-1} (t + \theta(t+1)) \epsilon_t \; + \theta \epsilon_0 + T \epsilon_T \nonumber \\
+&amp; = &amp; \sum_{t=1}^{T-1} (1+\theta) t \epsilon_t +  \sum_{t=1}^{T-1} \theta \epsilon_t + \theta \epsilon_0 + T \epsilon_T \nonumber \\
+&amp; = &amp; \sum_{t=1}^T (1+\theta) t \epsilon_t  \underbrace{ - \theta T \epsilon_T + \theta \sum_{t=1}^T \epsilon_{t-1} }_{\mbox{asymp. negligible}}.
+\end{eqnarray}</p>
+<p>After standardization by \(T^{-3/2}\) we obtain</p>
+<p>\begin{eqnarray*}
+T^{-3/2} \sum tu_t = \frac{1}{\sqrt{T}} (1+\theta) \sum_{t=1}^T (t/T) \epsilon_t
+- \frac{1}{\sqrt{T}} \theta \epsilon_T + \frac{\theta}{T} \frac{1}{\sqrt{T}} \sum_{t=1}^T \epsilon_{t-1}.
+\end{eqnarray*}</p>
+<ol>
+<li>First term obeys CLT</li>
+<li>Second Term goes to zero</li>
+<li>Third Term goes to zero</li>
+</ol>
+<p>Thus ,
+\[
+T^{3/2}( \hat{\beta}_T - \beta) \Longrightarrow \big(0,3\sigma^2_\epsilon (1+\theta)^2 \big).
+\]
+Consider the following model with \(iid\) disturbances
+\[
+y_t = \beta t + u_t, \quad u_t \sim iid(0,\sigma_\epsilon^2(1+\theta^2)).
+\]
+The unconditional variance of the disturbances is the same as in the model
+with moving average disturbances. It can be verified that
+\[
+T^{3/2}( \hat{\beta}_T - \beta) \Longrightarrow \big(0,3\sigma^2_\epsilon (1+\theta^2) \big).
+\]
+If \(\theta\) is positive then the limit variance of the OLS estimator in the
+model with $i.i.d.$ disturbances is smaller than in the trend model with moving
+average disturbances.  Thus, Positive serial correlated data are less informative than $i.i.d.$ data.  Figure <a href="#org4e3e6d4">2</a> displays the sampling distribution of the OLS estimator under errors with identical unconditional variance but with serial correlation (blue line) and under \(i.i.d.\) disturbances (orange dashed line).  In this set of simulations, \(\beta = 0.5\), \(\theta = 0.6\), and \(\sigma_\epsilon = 1\).  The sample size is given by \(T = 500\).  Clearly, the estimator under serial correlation exhibits large variance, though both estimators are asymptotically unbiased.</p>
+<figure><img src="https://edherbst.net/ox-hugo/5f194d6b4f80e26b95728e131ab4ff10f711db86.png"
+    alt="Figure 2: OLS is Inefficient Under Serially Correlated Errors"><figcaption>
+      <p><span class="figure-number">Figure 2: </span>OLS is Inefficient Under Serially Correlated Errors</p>
+    </figcaption>
+</figure>
+
+<h2 id="stochastic-trends">Stochastic Trends</h2>
+<p><a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> challenged the idea that economic activity ought to be modeled as temporary (stationary) fluctuations around a deterministic trend.  They proposed that economic time series might instead be better represented by stochastic trends, where shocks have permanent effects, leading to a &ldquo;random walk-like&rdquo; behavior. This implies that the series does not revert to a deterministic path but can drift over time due to accumulated random changes.  Such time series are known as &ldquo;integrated&rdquo; processes because they require differencing to achieve stationarity. Specifically, a time series that follows a stochastic trend can be modeled as an integrated process, often denoted as an \( I(1) \) process, where differencing once will result in a stationary series.</p>
+<div class="ex" id="ex:rw">
+<p>A <strong>random walk with drift</strong> follow the process
+\[
+y_t = \phi_0 + y_{t-1} + \epsilon_t \quad \epsilon_t \sim WN(0,\sigma^2)
+\]
+The variable \(y_t\) is said to be <strong>integrated of order one</strong>.</p>
+</div>
+<p>The applied work of <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> came alongside important technical advances in econometrics and statistics.  In an important contribution, <a href="#citeproc_bib_item_5">Dickey and Fuller (1979)</a> examined the sampling distribution of estimators for autoregressive time series with a unit root and
+provided tables with critical values for unit root tests.  This meant researchers could formally test for the presence of unit roots in time series data, allowing for differentiation between stochastic trends and stationary fluctuations.  Later <a href="#citeproc_bib_item_9">Phillips (1986)</a> and <a href="#citeproc_bib_item_10">Phillips (1987)</a> published two papers on spurious regression and time series regressions with a unit root that employ the mathematical theory of convergence of probability measures for metric spaces. This marked a ``technological breakthrough&rsquo;&rsquo; and the field started to grow at an exponential rate thereafter.</p>
+<p>Let&rsquo;s return the random walk model in Example omitting drift, that is, \(\phi_0 = 0\).
+\[
+y_t = \phi y_{t-1} + \epsilon_t, \quad \epsilon_t WN(0,\sigma^2)
+\]
+There are three cases:</p>
+<ul>
+<li>\(|\phi|&lt;1\): stationarity! we talked about this last week</li>
+<li>\(|\phi|&gt;1\): explosive! We will not analyze explosive processes in this course.</li>
+<li>\(|\phi|=1\). This is the unit root and will be the focus of this part of the lecture.</li>
+</ul>
+<p>If \(\phi=1\) then the AR(1) model simplifies to \(y_t = y_{t-1} + \epsilon_t\) with \(\Delta=1-L\), we have \(\Delta y_t = \epsilon_t\) form a stationary process, and the random walk is integrated of order one, or \(I(1)\).</p>
+<p>It&rsquo;s important to understand the implications of a unit root process relative to those of a persist, but ultimately stationary process.  For now, let&rsquo;s suppose that the AR process is initialized by \(y_0 \sim {\cal N}(0,1)\). Then \(y_t\) can be expressed as
+\[ y_t = \phi^{t} y_0 + \sum_{\tau=1}^t \phi^{\tau -1}
+\epsilon_{t+1-\tau}. \]
+The unconditional mean of this process is given by:
+\[
+\mathbb E[y_t] = \phi^{t-1} \mathbb E[y_0] + \sum_{\tau=1}^t \phi^{\tau -1} \mathbb E[\epsilon_\tau] = 0.
+\]
+This is true regardless of the value of \(\phi_0\).  Consider now the unconditionaly variance:</p>
+<p>\begin{eqnarray}
+\mathbb V[y_t] &amp; = &amp; \phi^{2(t-1)} \mathbb V[y_0] + \sum_{\tau=1}^t \phi^{2(\tau-1)} \mathbb V[\epsilon_\tau]  \\
+&amp; = &amp; \phi^{2(t-1)} \mathbb V[y_0] + \sigma^2 \sum_{\tau=1}^t \phi^{2(\tau-1)}  \nonumber \\
+&amp; = &amp; \left\{
+\begin{array}{lclcl}
+\phi^{2(t-1)} \mathbb V[y_0] + \sigma^2 \frac{1 - \phi^{2t}}{1 - \phi^2}
+&amp; \longrightarrow &amp; \frac{\sigma^2}{1-\phi^2} &amp; \mbox{if} &amp; |\phi| &lt; 1 \\
+\mathbb V[y_0] + \sigma^2 t &amp; \longrightarrow &amp; \infty &amp; \mbox{if} &amp; |\phi| =1
+\end{array}
+\right. \nonumber
+\end{eqnarray}</p>
+<p>as \(t \rightarrow \infty\).  For the random walk process, the variance grows linearly with time, ultimately leading to an infinite variance. This is in contrast to the stationary AR(1) process with \(|\phi| &lt; 1\), where the variance approaches a constant (finite) value over time. This characteristic of a unit root process reflects the permanent effects of shocks on the series.</p>
+<p>Consider next the conditional expectation of \(y_{t}\) given \(y_0\) is</p>
+<p>\begin{eqnarray*}
+\mathbb E[y_{t}|y_0] =  \phi^{\tau-1} y_0
+\longrightarrow  \left\{
+\begin{array}{lcl}
+0 &amp; \mbox{if} &amp; |\phi| &lt; 1 \\
+y_0 &amp; \mbox{if} &amp; \phi = 1
+\end{array}
+\right\}
+\end{eqnarray*}</p>
+<p>as \(t \rightarrow \infty\).  In the unit root case, the best prediction of future \(y_{t}\) is the
+initial \(y_0\) at all horizons, that is, ``no change&rsquo;&rsquo;.  In the stationary case, the conditional expectation converges to the unconditional mean. For this reason, stationary processes are also
+called ``mean reverting&rsquo;&rsquo;.  Stationary and unit root processes differ in their behavior over long time horizons. Suppose that \(\sigma^2=1\), and \(y_0=1\). Then the conditional mean and
+variance of a process \(y_t\) with \(\phi = 0.995\) is given by</p>
+<p><a id="table--tbl:long-run"></a></p>
+<div class="table-caption">
+  <span class="table-number"><a href="#table--tbl:long-run">Table 1</a>:</span>
+  Conditional Expectations and Variances in Statoinary Process
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>Horizon \(t\)</th>
+          <th>1</th>
+          <th>2</th>
+          <th>5</th>
+          <th>10</th>
+          <th>20</th>
+          <th>50</th>
+          <th>100</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>\(\mathbb E[y_t\mid y_0]\)</td>
+          <td>0.995</td>
+          <td>0.990</td>
+          <td>0.975</td>
+          <td>0.951</td>
+          <td>0.905</td>
+          <td>0.778</td>
+          <td>0.606</td>
+      </tr>
+      <tr>
+          <td>\(\mathbb V[y_t \mid y_0]\)</td>
+          <td>1.000</td>
+          <td>1.990</td>
+          <td>4.901</td>
+          <td>9.563</td>
+          <td>18.21</td>
+          <td>39.52</td>
+          <td>63.46</td>
+      </tr>
+  </tbody>
+</table>
+<p>If interestered in long run predictions, very important to distinguish these two cases. But note that long run predictions face serious extrapolation problems.</p>
+<h3 id="heuristic-introduction-to-asymptotics-of-unit-root-processes">Heuristic Introduction to Asymptotics of Unit Root Processes</h3>
+<p>Suppose our data is generated under the random walk of Example , and we regress \(y_t\) on a constant and a lag of itself.  If we&rsquo;re interest in testing the null hypothesis \(H_0: \phi = 1\), we have to find the sampling distribution of a suitable test statistic such as the \(t\) ratio
+\[
+\frac{\hat{\phi}_T -1}{\sqrt{ \sigma^2 / \sum y_{t-1}^2 }}.
+\]
+In the last lecture, we described a variety of WLLN and CLTs for stationary processes. Unfortunately, these don&rsquo;t apply in this case.</p>
+<p>To sketch the asymptotics of the test statisticis, let&rsquo;s simplify our example with  \(\phi_0 = 0\), \(\sigma = 1\), and \(y_0 = 0\). Thus, the process \(y_t\) can be represented as
+\[
+y_T = \sum_{t=1}^T \epsilon_t.
+\]
+The central limit theorem for \(i.i.d.\) random variables implies
+\[
+\frac{y_T}{\sqrt{T} } = \frac{1}{\sqrt{T}} \sum \epsilon_t
+\Longrightarrow {\cal N}(0,1).
+\]
+This suggests that
+\[
+\frac{1}{T} \sum y_t = \frac{1}{\sqrt{T}} \sum \left[ \sqrt{ \frac{t}{T} } \frac{1}{\sqrt{t}} \sum_{\tau =1}^t \epsilon_\tau \right]
+\]
+will not converge to a constant in probability but instead to a random variable.  We&rsquo;ll need some more probably theory to analyze this.</p>
+<p>In our course, We used \(T = \{0, \pm 1, \pm 2, \ldots\}\).  Consider instead the continous time set \(S = [0,1]\).  Let&rsquo;s consider random elements \(W(s)\) that correspond to functions this interval.   We will place some probability \(Q\) on these functions and show that \(Q\) can be helpful in the approximation of the distribution of \(\sum y_t\)  Defining probability distributions on function spaces is a pain!  Let \({\cal C}\) be the space of continuous functions on the interval \([0,1]\). We will define a probability distribution for the function space \({\cal C}\). This probability distribution is called ``Wiener measure&rsquo;&rsquo;. Whenever we draw an element from the probability space weobtain a function \(W(s)\), \(s \in [0,1]\). Let \(Q[ \cdot ]\) denote
+the expectation operator under the Wiener measure.</p>
+<p><em>Properties of \(W(s)\).</em>  The random function has some nice properties:</p>
+<ul>
+<li>\( W(0) = 0 \) almost surely. If we repeatedly draw functions under the Wiener measure and evaluate these functions at a particular value \(s = s&rsquo;\), then \[ Q[ \{ W(s&rsquo;) \le w \} ] = \frac{1}{\sqrt{2\pi s&rsquo;}} \int_{-\infty}^{w} e^{- u^2/2s&rsquo;} du\] that is, \[ W(s&rsquo;) \sim {\cal N}(0,s&rsquo;) \] If \(s&rsquo;=0\) then the equations is interpreted to mean \(Q[\{W(0)=0 \}] =
+1\). Thus \(W(0) = 0\) with probability one.</li>
+<li>\( W(s) \) has independent increments.  If \[ 0 \le
+s_1 \le s_2 \le \ldots \le s_k \le 1 \] Then the random variables \[
+W(s_2) - W(s_1), \; W(s_3) - W(s_2)\; \ldots , \; W(s_k) -
+W(s_{k-1}) \] are independent.</li>
+<li>For \(0 \leq t &lt; s \), the increment \( W(s) - W(t) \) follows a normal distribution with mean 0 and variance \( s - t \).  Note: \(W(1) \sim {\cal N}(0,1)\).</li>
+</ul>
+<p>It can be shown that there indeed exists a probability distribution on \({\cal C}\) with these properties. Roughly speaking, the Wiener measure is to the theory of stochastic processes, what
+the normal distribution is to the theory related to real valued random variables. In the context of unit root processes and econometrics, \( W(s) \) can be thought of as the continuous-time analog of the partial sum of a random walk.   Define the partial sum process
+\[
+Y_T(s) = \frac{1}{\sqrt{T}} \sum \{ t \le \lfloor Ts \rfloor \} \epsilon_t
+\]
+where \(\lfloor x \rfloor\) denotes the integer part of \(x\). Since we assumed
+that \(\epsilon_t \sim iid(0,1)\), the partial sum process is a random step
+function.  We can smooth this out via interpolation.</p>
+<p>\begin{eqnarray*}
+\bar{Y}_T(s) = \frac{1}{\sqrt{T}} \sum \{ t \le \lfloor Ts \rfloor \} \epsilon_t
++ (Ts - \lfloor Ts \rfloor ) \epsilon_{\lfloor Ts \rfloor + 1} / \sqrt{T}
+\end{eqnarray*}</p>
+<p>In theory, there are a couple of ways to randomly generate continuous functions.  In the first case, we could simply draw a function \(W(s)\) from the Wiener distribution. We did not examine how to do the sampling in practice, but since the Wiener distribution is well-defined, it is theoretically possible.  In the second, Generate a sequence \(\epsilon_1, \ldots, \epsilon_T\), where \(\epsilon_t \sim iid(0,1)\) and compute \(\bar{Y}_T(s)\).  It turns out that as \(T\rightarrow \infty\) these are basically the same.  The following functional CLT establishes this connection.</p>
+<p><strong>Functional Central Limit Theorem.</strong> Let \(\epsilon_t \stackrel{i.i.d.}{\sim} (0,\sigma^2)\). Then</p>
+<p>\begin{eqnarray*}
+Y_T(s) = \frac{1}{\sigma \sqrt{T} } \sum_{t=1}^T
+\{ t \le \lfloor Ts \rfloor \} \epsilon_t
+\Longrightarrow W(s) \quad
+\end{eqnarray*}</p>
+<p>More mathematical background can be found in many texts on measure-theoretic probability including <a href="#citeproc_bib_item_1">Billingsley (1999)</a> or <a href="#citeproc_bib_item_6">Dudley (2002)</a>.  <a href="#citeproc_bib_item_3">Davidson (1994)</a> gives a more econometrics-focused introdution to limit theorems.  With this theory in hand, it&rsquo;s easy to now simulation from a Wiener process.  Figure <a href="#org5413f14">3</a> shows on realization of a Wiener process, simulated over the interval \([0, 1]\).</p>
+<figure><img src="https://edherbst.net/ox-hugo/94ae20109db38bdc8b43487380086c06ceccad19.png"
+    alt="Figure 3: A Wiener Process"><figcaption>
+      <p><span class="figure-number">Figure 3: </span>A Wiener Process</p>
+    </figcaption>
+</figure>
+
+<p>The upshot of all this is that the sum
+\[
+\frac{1}{T} \sum_{t=1}^t y_{t-1} \epsilon_t
+\]
+convergences to a <span class="underline">stochastic integral</span>.  Thus, suppose that \(y_t = y_{t-1} + \epsilon_t\), where \(\epsilon_t \stackrel{i.i.d.}{\sim} (0,\sigma^2)\) and \(y_0=0\). Then
+\[
+\frac{1}{\sigma^2 T} \sum y_{t-1} \epsilon_t \Longrightarrow  \int W(s) dW(s).
+\]
+where \(W(s)\) denotes a standard Wiener process.  We can use this to develop tests!</p>
+<p><strong>Asymptotic Theory for Unit Root Process.</strong> Suppose that \(y_t =  \phi y_{t-1} + \epsilon_t\), where \(\epsilon_t \sim iid(0,\sigma^2)\), \(\phi=1\), and \(y_0=0\). The sampling distribution of the OLS estimator \(\hat{\phi}_T\) of the autoregressive parameter \(\phi=1\) and the sampling distribution of the corresponding \(t\)-statistic have the following asymptotic approximations</p>
+<p>\begin{eqnarray}
+z(\hat{\phi}_T) &amp; \Longrightarrow &amp;  \frac{\frac{1}{2} ( W(1)^2 -1 )  }{ \int_0^1 W(s)^2 ds } \\
+t(\hat{\phi}_T) &amp; \Longrightarrow &amp;  \frac{\frac{1}{2} ( W(1)^2 -1 )  }{ \left[ \int_0^1 W(s)^2 ds \right]^{1/2} }
+\end{eqnarray}</p>
+<p>where \(W(s)\) denotes a standard Wiener process.</p>
+<p>To see these asymptotics, consider the simplified model \(y_t = \phi y_{t-1} + u_t\).  We&rsquo;ll try to estimation \(\phi\) by regression \(y_t\) on \(y_{t-1}\) (omitting the constant term.)  Let&rsquo;s consider two cases for the true value of \(\phi \in \{0.95, 1\}\).  For each value of \(\phi\), we simulate many time series of length \(T = 5000\) and estimate \(\phi\) via OLS.</p>
+<figure><img src="https://edherbst.net/ox-hugo/522cb964af3923302e65ddb58d33fb8d8f80a673.png">
+</figure>
+
+<p>In practice, testing for a unit root in time series data uses results along these lines, with the specific critical values tabulated for the way lags of \(y_t\) enters the regression.  You may have heard of Dickey-Fuller and <em>Augmented</em> Dickey-Fuller tests, the &ldquo;augmented&rdquo; refers to the inclusion of lagged differences of the time series as additional regressors to account for higher-order serial correlation, thus improving test performance in the presence of autocorrelated disturbances.</p>
+<h3 id="replicating">Replicating <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a></h3>
+<p><a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> investigate whether a set of key macroeconomic time series exhibited were better described by deterministic or stochastic trend models.  We&rsquo;ll return to the example in Figure <a href="#org0d88be2">1</a> and focus on log Real GNP from 1909-1970.  They first examine the estimated autocorrelation functions of the level and deviations from the time trend, both plotted in Figure <a href="#org0d88be2">1</a>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-5-232fa650db59&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
+</span></span><span style="display:flex;"><span>[1;32m      1[0m [0mautocorr_results[0m [0;34m=[0m [0;34m{[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m----&gt; 2[0;31m [0;32mfor[0m [0mcol[0m [0;32min[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m[0;34m:[0m  [0;31m# Exclude &#39;Year&#39;[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m      3[0m     [0mseries[0m [0;34m=[0m [0mdata[0m[0;34m[[0m[0mcol[0m[0;34m][0m[0;34m.[0m[0mdropna[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m      4[0m [0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m      5[0m     [0mautocorr_values[0m [0;34m=[0m [0macf[0m[0;34m([0m[0mseries[0m[0;34m,[0m [0mnlags[0m[0;34m=[0m[0;36m6[0m[0;34m,[0m [0mfft[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;data&#39; is not defined
+</span></span></code></pre></div><p>These look pretty good, in the sense that the autocorrelations for the fluctuations (after removing the time trend) die out quickly, with a barely positive autocorrelation after the six lag.  Unfortunately, as <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> point out, these estimated autocorrelations are also consistent with an integrated series.  These kinds of statisical calculations often give misleading results (as we have just seen) when the underlying series is integrated.</p>
+<p>To distinguish between the two trend paradigms, <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> decide to run the regression
+\[
+y_t = \mu + \phi_1 y_{t-1} + \gamma t + \sum_{k=1}^K \phi_{\Delta k}\Delta y_{t-k} + u_t.
+\]
+They are interested in testing \(H_0: \phi_1 = 1, \gamma = 0\), and use the results from Dickey-Fuller to construct critical values.  For log Real GNP, they set \(K = 2\).
+The results of the regression can be seen below.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-6-12026d385c3a&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
+</span></span><span style="display:flex;"><span>[1;32m     13[0m [0madf_table_results[0m [0;34m=[0m [0;34m{[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     14[0m [0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m---&gt; 15[0;31m [0;32mfor[0m [0mcol[0m [0;32min[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m     16[0m     [0mseries[0m [0;34m=[0m [0mdata[0m[0;34m[[0m[0mcol[0m[0;34m][0m[0;34m.[0m[0mdropna[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     17[0m [0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;data&#39; is not defined
+</span></span></code></pre></div><p>These results match the first row of Table 5 in <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a>.  The t-stat of \(-2.99\) would indicate that one should <em>reject</em> the marginal hypothesis that \(\phi_1 = 1\) at conventional significane levels.  But these critical values are invalid in the unit root context.  Instead the, say, 5 percent critial value tabulated by Dickey and Fuller is about \(-3.5\).  Thus, one cannot reject the null that real GNP is well described by a unit root process.</p>
+<h3 id="cointegrated-processes">Cointegrated Processes</h3>
+<p>We are often concerned with trending behavior for more than a single time series.
+For example, consider a bivariate model with a common stochastic trend:</p>
+<p>\begin{eqnarray}
+y_{1,t} &amp; = &amp; \gamma y_{2,t} + u_{1,t} \\
+y_{2,t} &amp; = &amp; y_{2,t-1} + u_{2,t}
+\end{eqnarray}</p>
+<p>where \([u_{1,t}, u_{2,t}]&rsquo; \stackrel{i.i.d.}{\sim} iid(0,\Omega)\).  Both \(y_{1,t}\) and \(y_{2,t}\) have a stochastic trend. However, there exists a linear combination of \(y_{1,t}\) and \(y_{2,t}\), namely,
+\[
+y_{1,t} - \gamma y_{2,t} = u_t
+\]
+that is stationary. Therefore, \(y_{1,t}\) and \(y_{2,t}\) are called
+<span class="underline">cointegrated</span>.  These profilerate in macro.  Consider the RBC model:</p>
+<p>\begin{eqnarray}
+\max_{\{c_t,k_t\}} \mathbb E_0\left[\sum_{t=0}^\infty \beta^t \ln c_t \right]
+\end{eqnarray}</p>
+<p>subject to</p>
+<p>\begin{eqnarray*}
+y_t &amp;=&amp; c_t + k_t = A^{1-\alpha} k_{t-1}^\alpha \\
+\ln A_t &amp;=&amp; \gamma + \ln A_{t-1} + \epsilon_t.
+\end{eqnarray*}</p>
+<p>Tedious algebra yields:
+\[
+\ln y_t = -\frac{\alpha\gamma}{1-\alpha} + \ln A_t \text{ and } \ln c_t = \ln\left(1-\beta \alpha) y_t .
+\]
+Thus, \(y_t\) and \(c_t\) both inherit the stochastic trend in \(\ln A_t\).  Back to our statistical framework.  Clearly, \(y_{2,t}\) is
+a random walk. Moreover, it can be easily verified that \(y_{1,t}\) follows
+a unit root process.</p>
+<p>\begin{eqnarray}
+y_{1,t} - y_{1,t-1} = \gamma (y_{2,t} - y_{2,t-1}) + u_{1,t} - u_{1,t-1}
+\end{eqnarray}</p>
+<p>Therefore,</p>
+<p>\begin{eqnarray}
+y_{1,t} = y_{1,t-1} + \gamma u_{2,t} + u_{1,t} - u_{1,t-1}
+\end{eqnarray}</p>
+<p>Thus, both \(y_{1,t}\) and \(y_{2,t}\) are integrated processes.  The vector \([1,-\gamma]&rsquo;\) is called the cointegrating vector.  Note that the cointegrating vector is only unique up to normalization.  We&rsquo;ll talk more about estimating these models once we&rsquo;ve discussed vector autoregressions.</p>
+<h2 id="references">References</h2>
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><div class="csl-bib-body">
+  <div class="csl-entry"><a id="citeproc_bib_item_1"></a><span style="font-variant:small-caps;">Billingsley, P.</span> (1999): <i>Convergence of Probability Measures</i>, 2nd ed. Wiley series in probability and statisticsWiley.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_2"></a><span style="font-variant:small-caps;">Casella, G., and R. L. Berger</span>. (2002): <i>Statistical Inference</i>, 2nd ed.Pacific Grove, CA: Duxbury.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_3"></a><span style="font-variant:small-caps;">Davidson, J.</span> (1994): <i>Stochastic Limit Theory</i>, . Advanced texts in econometricsOxford University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_4"></a><span style="font-variant:small-caps;">Davidson, R., and J. G. MacKinnon</span>. (2003): <i>Econometric Theory and Methods</i>, Oxford University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_5"></a><span style="font-variant:small-caps;">Dickey, D. A., and W. A. Fuller</span>. (1979): <a href="https://doi.org/10.1080/01621459.1979.10482531">“Distribution of the Estimators for Autoregressive Time Series with a Unit Root,</a>” <i>Journal of the American Statistical Association</i>, 74, 427–31.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_6"></a><span style="font-variant:small-caps;">Dudley, R. M.</span> (2002): <i>Real Analysis and Probability</i>, 2nd ed. Cambridge studies in advanced mathematicsCambridge University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_7"></a><span style="font-variant:small-caps;">Hamilton, J.</span> (1994): <i>Time Series Analysis</i>, Princeton, New Jersey: Princeton University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_8"></a><span style="font-variant:small-caps;">Nelson, C. R., and C. R. Plosser</span>. (1982): <a href="https://doi.org/10.1016/0304-3932(82)90012-5">“Trends and Random Walks in Macroeconmic Time Series,</a>” <i>Journal of Monetary Economics</i>, 10, 139 162.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_9"></a><span style="font-variant:small-caps;">Phillips, P.</span> (1986): <a href="https://EconPapers.repec.org/RePEc:eee:econom:v:33:y:1986:i:3:p:311-340">“Understanding Spurious Regressions in Econometrics,</a>” <i>Journal of Econometrics</i>, 33, 311–40.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_10"></a><span style="font-variant:small-caps;">Phillips, P. C. B.</span> (1987): “Time Series Regression with a Unit Root,” <i>Econometrica</i>, 55, 277–301.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_11"></a><span style="font-variant:small-caps;">Tinbergen, J.</span> (1939): <i>Business Cycles in the United States, 1919-1932</i>, . Vol. 1. Statistical testing of business cycle theories: Part iiGeneva: League of Nations.</div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

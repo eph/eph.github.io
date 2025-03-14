@@ -1,0 +1,53 @@
+strong {
+    line-height: inherit; /* Ensures it doesn't change the line spacing */
+}
+
+.additional {
+    background-color: #f8d7da; 
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 5px 20px;
+    font-size: 0.9em;
+    /* By default, full width on narrow screens: */
+    width: auto; 
+    margin: 0 auto 20px;
+}
+
+.ex {
+    background-color: #f3f3f3;
+    border: 2px solid blue;
+    border-radius: 8px;
+    padding: 5px 20px;
+    font-size: 0.9em;
+    line-height: 1; /* Ensures single spacing */
+
+    /* By default, full width on narrow screens: */
+    width: auto; 
+    margin: 0 auto 20px;
+}
+
+body {
+    counter-reset: example-counter;
+}
+
+/* Add numbering before each example block */
+.ex::before {
+    content: "Example " counter(example-counter) ;
+    counter-increment: example-counter;
+    display: block;
+    font-weight: bold;
+    background-color: #f3f3f3;
+    padding: 0px;
+    border-bottom: 0px solid #ccc;
+    font-size: 1.2em;
+}
+
+/* On wider screens, constrain to 60% width: */
+@media (min-width: 768px) {
+    .additional {
+	width: 60%;
+    }
+}
+
+
+

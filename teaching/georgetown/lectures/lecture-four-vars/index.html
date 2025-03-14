@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/lectures/lecture-four-vars/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="ECON 616: Lecture Four: VARs" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/lectures/lecture-four-vars/" /><meta property="article:published_time" content="2025-03-13T17:52:02-04:00" />
+
+
+
+<meta name="twitter:title" content="ECON 616: Lecture Four: VARs"/>
+<meta name="twitter:description" content="Introduction
+Background
+
+Overview: Chapter 10 from cite:Hamilton.
+
+Technical Details: cite:Lutkepohl_1993
+
+Other stuff: There is a new book by cite:kilian_lutkepohl_2017
+&ndash; I haven&rsquo;t read it yet.
+
+Some surveys: cite:Stock2001, cite:Ramey_2016.
+
+VARs
+VARs have become an important tool for empirical macroeconomic research.
+
+
+Reduced Form representations of the data that
+summarize regular features and are suitable to conduct forecasts.
+
+
+Structural economic model can give some
+interpretation to a vector autoregression."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/lectures'>lectures</a>/<a href='https://edherbst.net/teaching/georgetown/lectures/lecture-four-vars'>lecture-four-vars</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>ECON 616: Lecture Four: VARs</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="background">Background</h3>
+<ul>
+<li><em>Overview:</em> Chapter 10 from cite:Hamilton.
+<br></li>
+<li><em>Technical Details</em>: cite:Lutkepohl_1993
+<br></li>
+<li><em>Other stuff</em>: There is a new book by cite:kilian_lutkepohl_2017
+&ndash; I haven&rsquo;t read it yet.
+<br></li>
+<li><em>Some surveys</em>: cite:Stock2001, cite:Ramey_2016.</li>
+</ul>
+<h3 id="vars">VARs</h3>
+<p>VARs have become an important tool for empirical macroeconomic research.</p>
+<ul>
+<li>
+<p><strong>Reduced Form</strong> representations of the data that
+summarize regular features and are suitable to conduct forecasts.</p>
+</li>
+<li>
+<p><strong>Structural</strong> economic model can give some
+interpretation to a vector autoregression.</p>
+</li>
+</ul>
+<p>We&rsquo;ll talk about both today.</p>
+<h3 id="some-theoretical-properties-of-vars">Some Theoretical Properties of VARs</h3>
+<p>A vector autoregression is a generalization of the AR(p) model to the
+multivariate case:</p>
+<p>\begin{eqnarray}
+y_t  = \Phi_0 + \Phi_1 y_{t-1} + \ldots + \Phi_p y_{t-p} + u_t
+\end{eqnarray}</p>
+<p>The random variable \(y_t\) is now a \(n \times 1\) random
+vector that takes values in \(\mathbf{R}^n\).</p>
+<p>For a theoretical analysis, it is often convenient to
+express the VAR(p) in the so-called companion form.</p>
+<p>\begin{eqnarray}
+\hspace*{-0.5in}
+\left[ \begin{array}{c} y_t \\ y_{t-1} \\ \vdots \\ y_{t-p+1} \end{array} \right]
+= \left[ \begin{array}{c} \Phi_0 \\ 0 \\ \vdots \\ 0 \end{array} \right]</p>
+<ul>
+<li>\left[ \begin{array}{ccccc}
+\Phi_1 &amp; \Phi_2 &amp; \cdots &amp; \Phi_{p-1} &amp; \Phi_p \\
+I      &amp;  0     &amp; \cdots &amp;  0         &amp; 0      \\
+\vdots &amp; \vdots &amp; \ddots &amp;  0         &amp; 0      \\
+0      &amp;  0     &amp; \cdots &amp;  I         &amp; 0
+\end{array}
+\right]
+\left[ \begin{array}{c} y_{t-1} \\ y_{t-2} \\ \vdots \\ y_{t-p} \end{array} \right]
++ \left[ \begin{array}{c} u_t \\ 0 \\ \vdots \\ 0 \end{array} \right]
+\label{e_varcomp}
+\nonumber
+\end{eqnarray}</li>
+</ul>
+<h3 id="d41d8c"></h3>
+<p>Let \(\xi_t = [y_t&rsquo;, y_{t-1}&rsquo;, \ldots, y_{t-p+1}&rsquo;]&rsquo;\). The VAR can be
+rewritten as</p>
+<p>\begin{eqnarray}
+\xi_t = F_0 + F_1 \xi_{t-1} + \nu_t
+\end{eqnarray}</p>
+<p>where the definitions of \(F_0\), \(F_1\), and \(\nu_t\) can be deduced
+from the previous slide.</p>
+<p>define the \(n \times np\)
+matrix \(M_n = [I,0]\) where \(I\) is an \(n \times n\) identity matrix.
+<br>
+It can be easily verified that \(y_t = M_n \xi_t\).
+<br>
+The companion form is useful in two respects:</p>
+<ul>
+<li>to define stationarity in the context of a VAR</li>
+<li>to convince ourselves that without loss of much generality we can restrict econometric analyses to VAR(1) specifications.</li>
+</ul>
+<br>
+**Result** For a vector autoregression to be covariance
+stationary it is necessary that all eigenvalues of the matrix
+\\(F\_1\\) are less than one in absolute value. \\(\Box\\)
+<h3 id="example">Example</h3>
+<p>Consider the univariate AR(2) process
+\[
+y_t = \phi_1 y_{t-1} + \phi_2 y_{t-2} + u_t
+\]
+The AR(2) process can be written in companion form as
+a VAR(1) where \(\xi_t = [y_t , y_{t-1}]&rsquo;\) and
+\[
+F_1 = \left[ \begin{array}{cc}
+\phi_1 &amp; \phi_2 \\
+1  &amp; 0
+\end{array}
+\right]
+\]
+The eigenvalues \(\lambda\) of the matrix \(F_1\)
+satisfy the condition
+\[
+det( F_1 - \lambda I) = 0
+\iff
+(\phi_1 - \lambda)(-\lambda) - \phi_2 = 0
+\]
+Provided that \(\lambda \not= 0\) the equation can
+be rewritten as
+\[
+0 = 1 - \phi_1 \frac{1}{\lambda} - \phi_2 \frac{1}{\lambda^2}
+\]
+Thus, the condition \(|\lambda| &lt; 1\) is, at least in this example,
+equivalent to the condition that all the roots of the polynomial
+\(\phi(z)\) are greater than one in absolute value. A generalization
+of this example can be found in Hamilton (1994, Chapter 1). \(\Box\)</p>
+<h3 id="var--p">VAR(p)</h3>
+<p>Consider a VAR(p). The expected value of \(y_t\) has to satisfy
+the vector difference equation</p>
+<p>\begin{eqnarray}
+{\mathbb E}[y_t] = \Phi_0 + \Phi_1 {\mathbb E}[y_{t-1}] + \ldots \Phi_p {\mathbb E}[y_{t-p}] \quad \mbox{for all} \; t
+\end{eqnarray}</p>
+<p>If the eigenvalues of \(F_1\) are all less than one in absolute values
+and the VAR was initialized in the infinite past, then the expected
+value is given by</p>
+<p>\begin{eqnarray}
+{\mathbb E}[y_t] = [ I - \Phi_1 - \ldots \Phi_t]^{-1} \Phi_0
+\end{eqnarray}</p>
+<p>To calculate the autocovariances we will assume that \(\Phi_0 = 0\).
+Consider the companion form</p>
+<p>\begin{eqnarray}
+\xi_t = F_1 \xi_{t-1} + \nu_t
+\end{eqnarray}</p>
+<p>If the eigenvalues of \(F_1\) are all less than one in absolute value
+and the VAR was initialized in the infinite past, than the
+autocovariance matrix of order zero has to satisfy the equation</p>
+<p>\begin{eqnarray}
+\Gamma_{\xi \xi,0} = {\mathbb E}[\xi_t \xi_t&rsquo;] = F_1 \Gamma_{\xi \xi,0} F_1&rsquo; + {\mathbb E}[ \nu_t \nu_t&rsquo;]
+\end{eqnarray}</p>
+<p>Obtaining a closed form solution for \(\Gamma_{\xi \xi,0}\) is
+a bit more complicated than in the univariate AR(1) case.</p>
+<h3 id="some-facts">Some Facts</h3>
+<p>\begin{definition} Let $A$ and $B$ be  $2 \times 2$ matrices with the
+elements
+\[
+A = \left[ \begin{array}{cc}
+a_{11} &amp; a_{12} \\
+a_{21} &amp; a_{22}
+\end{array}
+\right], \quad
+B = \left[ \begin{array}{cc}
+b_{11} &amp; b_{12} \\
+b_{21} &amp; b_{22}
+\end{array}
+\right]
+\]
+The $vec$ operator is defined as the operator that stacks the
+columns of a matrix, that is,
+\[
+vec(A) = [ a_{11}, a_{21}, a_{12}, a_{22} ]'
+\]
+and the Kronecker product is defined as
+\[
+A \otimes B = \left[ \begin{array}{cc}
+a_{11}B &amp; a_{12}B \\
+a_{21}B &amp; a_{22}B
+\end{array}
+\right] \quad \Box
+\]
+\end{definition}</p>
+<p>\begin{lemma} Let $A$, $B$, $C$ be matrices whose dimension
+are such that the product $ABC$ exists. Then
+$vec(ABC) = (C&rsquo; \otimes A)vec(B) \quad \Box$
+\end{lemma}</p>
+<h3 id="var--p--continued">VAR(p), continued</h3>
+<p>A closed form solution for the elements of the covariance
+matrix of \(\xi_t\) can be obtained as follows</p>
+<p>\begin{eqnarray}
+vec(\Gamma_{\xi \xi,0}) &amp; = &amp;(F_1 \otimes F_1) vec(\Gamma_{\xi\xi,0}) + vec( {\mathbb E}[\nu_t \nu_t&rsquo;] ) \nonumber \\
+&amp; = &amp; [ I - (F_1 \otimes F_1)]^{-1} vec( {\mathbb E}[\nu_t \nu_t&rsquo;] )
+\end{eqnarray}</p>
+<p>Since</p>
+<p>\begin{eqnarray}
+{\mathbb E}[ \xi_t \xi_{t-h}&rsquo; ] = F {\mathbb E}[\xi_{t-1} \xi_{t-h}&rsquo;] + {\mathbb E}[\nu_t \xi_{t-h}&rsquo;]
+\end{eqnarray}</p>
+<p>we can deduce that</p>
+<p>\begin{eqnarray}
+\Gamma_{\xi \xi,h} = F^h_1 \Gamma_{\xi \xi,0}
+\end{eqnarray}</p>
+<p>To obtain the autocovariance \(\Gamma_{\xi \xi,-h}\) we have to keep
+track of a transpose in the general matrix case:</p>
+<p>\begin{eqnarray}
+\Gamma_{\xi \xi,-h} = {\mathbb E}[ \xi_{t-h} \xi_t&rsquo; ] = \bigg[ {\mathbb E}[ \xi_t \xi_{t-h}&rsquo;] \bigg]&rsquo; = \Gamma_{\xi \xi,h}'
+\end{eqnarray}</p>
+<h3 id="var--p--continued">VAR(p), continued</h3>
+<p>Once we have calculate that autocovariances for the companion
+form process \(\xi_t\) it is straightforward to obtain the autocovariances
+for the \(y_t\) process. Since \(y_t = M_n \xi_t\) it follows that</p>
+<p>\begin{eqnarray}
+\Gamma_{yy,h} = {\mathbb E}[y_t y_{t-h}&rsquo;] = {\mathbb E}[ M_n \xi_t \xi_{t-h}&rsquo; M_n&rsquo;] = M_n \Gamma_{\xi \xi,h} M_n'
+\end{eqnarray}</p>
+<p><strong>Result</strong>: Consider the vector autoregression
+\[
+y_t = \Phi_0 + \Phi_1 y_{t-1} + \ldots + \Phi_p y_{t-p} + u_t
+\]
+where \(u_t \sim iid {\cal N}(0,\Sigma_u)\) with
+companion form
+\[
+\xi_t = F_0 + F_1 \xi_{t-1} + \nu_t
+\]
+Suppose that the eigenvalues of \(F_1\) are all less than
+one in absolute values and that the vector autoregression was initialized
+in the infinite past. Under these assumptions the vector process
+\(y_t\) is covariance stationary with the moments</p>
+<p>\begin{eqnarray}
+{\mathbb E}[y_t] &amp; = &amp; [ I - \Phi_1 - \ldots \Phi_t]^{-1} \Phi_0 \\
+\Gamma_{yy,h} &amp; = &amp; M_n \Gamma_{\xi \xi,h} M_n&rsquo; \quad \forall h
+\end{eqnarray}</p>
+<p>where</p>
+<p>\begin{eqnarray}
+vec(\Gamma_{\xi\xi,0}) &amp; = &amp; [ I - (F_1 \otimes F_1)]^{-1} vec( {\mathbb E}[\nu_t \nu_t&rsquo;] ) \\
+\Gamma_{\xi \xi,h} &amp; = &amp; F_1^h \Gamma_{\xi \xi,0} \quad h &gt; 0 \quad \Box
+\end{eqnarray}</p>
+<h2 id="the-likelihood-function">The Likelihood Function</h2>
+<h3 id="the-likelihood-function">The Likelihood Function</h3>
+<p>We will now derive the likelihood function for a Gaussian VAR(p), conditional
+on initial observations \(y_0, \ldots, y_{-p+1}\).
+The density of \(y_t\) conditional on \(y_{t-1}, y_{t-2}, \ldots\) and the
+coefficient matrices \(\Phi_0, \Phi_1, \ldots, \Sigma\) is of the form</p>
+<p>\begin{eqnarray}
+\hspace*{-0.5in}
+p(y_t|Y^{t-1}, \Phi_0, \ldots, \Sigma)
+&amp;\propto&amp; |\Sigma|^{-1/2} \exp \bigg\{ - \frac{1}{2}
+( y_t - \Phi_0 - \Phi_1 y_{t-1} - \ldots - \Phi_p y_{t-p} )&rsquo; \nonumber \\
+&amp;~&amp; \times \Sigma^{-1} ( y_t - \Phi_0 - \Phi_1 y_{t-1} - \ldots - \Phi_p y_{t-p} ) \bigg\}
+\end{eqnarray}</p>
+<p>Define the \((np+1) \times 1\) vector \(x_t\) as
+\[
+x_t = [ 1, y_{t-1}&rsquo;, \ldots, y_{t-p}&rsquo;]'
+\]
+Moreover, define the matrixes
+\[
+Y = \left[ \begin{array}{c}
+y_1&rsquo; \\ \vdots \\y_T&rsquo; \end{array} \right], \quad
+X = \left[ \begin{array}{c}
+x_1&rsquo; \\ \vdots \\x_T&rsquo; \end{array} \right], \quad
+\Phi = [ \Phi_0, \Phi_1, \ldots, \Phi_p]'
+\]</p>
+<h3 id="d41d8c"></h3>
+<p>The conditional density of \(y_t\) can be written in more compact
+notation as</p>
+<p>\begin{eqnarray}
+p(y_t| Y^{t-1}, \Phi, \Sigma)
+\propto |\Sigma|^{-1/2} \exp \left\{ - \frac{1}{2}
+( y_t&rsquo; - x_t&rsquo;\Phi )
+\Sigma^{-1} ( y_t&rsquo; - x_t&rsquo;\Phi )&rsquo; \right\}
+\end{eqnarray}</p>
+<p>To manipulate the density we will use some matrix algebra facts.
+<br>
+<strong>Facts</strong>:</p>
+<ol>
+<li>Let \(a\) be a \(n \times 1\) vector, \(B\) be a symmetric positive definite
+\(n \times n\) matrix, and \(tr\) the trace operator that sums the diagonal
+elements of a matrix. Then
+\[
+a&rsquo;Ba = tr[Baa&rsquo;]
+\]</li>
+<li>Let \(A\) and \(B\) be two \(n \times n\) matrices, then
+\[
+tr[A+B] = tr[A] + tr[B]
+\]</li>
+</ol>
+<h3 id="d41d8c"></h3>
+<p>In a first step, we will replace the inner product in the expression for the
+conditional density by the trace of the outer product</p>
+<p>\begin{eqnarray}
+p(y_t| Y^{t-1}, \Phi, \Sigma)
+\propto |\Sigma|^{-1/2} \exp \left\{ - \frac{1}{2}
+tr[ \Sigma^{-1}( y_t&rsquo; - x_t&rsquo;\Phi )&rsquo;( y_t&rsquo; - x_t&rsquo;\Phi )] \right\}
+\end{eqnarray}</p>
+<p>In the second step, we will take the product of the conditional densities
+of \(y_1, \ldots, y_T\) to obtain the joint density. Let \(Y_0\) be a vector
+with initial observations</p>
+<p>\begin{eqnarray}
+p(Y|\Phi,\Sigma, Y_0)
+&amp;=&amp; \prod_{t=1}^T p(y_t|Y^{t-1}, Y_0, \Phi, \Sigma) \nonumber \\
+&amp;\propto&amp; |\Sigma|^{-T/2}  \exp \left\{ -\frac{1}{2} \sum_{t=1}^T
+tr[\Sigma^{-1}( y_t&rsquo; - x_t&rsquo;\Phi )&rsquo;( y_t&rsquo; - x_t&rsquo;\Phi )] \right\} \nonumber \\
+&amp;\propto&amp;  |\Sigma|^{-T/2}  \exp \left\{ -\frac{1}{2}
+tr\left[\Sigma^{-1}\sum_{t=1}^T( y_t&rsquo; - x_t&rsquo;\Phi )&rsquo;( y_t&rsquo; - x_t&rsquo;\Phi )\right] \right\} \nonumber \\
+&amp;\propto&amp; |\Sigma|^{-T/2} \exp \left\{ -\frac{1}{2}
+tr [ \Sigma^{-1} (Y-X\Phi)&rsquo;(Y-X\Phi) ] \right\}
+\end{eqnarray}</p>
+<h3 id="d41d8c"></h3>
+<p>Define the ``OLS&rsquo;&rsquo; estimator</p>
+<p>\begin{eqnarray}
+\hat{\Phi} = (X&rsquo;X)^{-1} X&rsquo;Y
+\end{eqnarray}</p>
+<p>and the sum of squared OLS residual matrix</p>
+<p>\begin{eqnarray}
+S = (Y - X \hat{\Phi})&rsquo;(Y- X \hat{\Phi})
+\end{eqnarray}</p>
+<p>It can be verified that</p>
+<p>\begin{eqnarray}
+(Y - X\Phi)&rsquo;(Y-X\Phi) = S + (\Phi - \hat{\Phi})&lsquo;X&rsquo;X(\Phi- \hat{\Phi})
+\end{eqnarray}</p>
+<p>This leads to the following representation of the likelihood function</p>
+<p>\begin{eqnarray}
+p(Y|\Phi,\Sigma, Y_0)
+&amp;\propto&amp;  |\Sigma|^{-T/2} \exp \left\{ -\frac{1}{2} tr[\Sigma^{-1} S] \right\}\nonumber \\
+&amp;~&amp;\times  \exp \left\{ -\frac{1}{2} tr[ \Sigma^{-1}(\Phi - \hat{\Phi})&lsquo;X&rsquo;X(\Phi- \hat{\Phi})] \right\}
+\end{eqnarray}</p>
+<h3 id="alternative-representation">Alternative Representation</h3>
+<p>Let \(\beta = vec(\Phi)\) and \(\hat{\beta} = vec(\hat{\Phi})\). It can be verified that</p>
+<p>\begin{eqnarray}
+tr[ \Sigma^{-1}(\Phi - \hat{\Phi})&lsquo;X&rsquo;X(\Phi- \hat{\Phi})]
+= (\beta - \hat{\beta})&rsquo;[ \Sigma \otimes (X&rsquo;X)^{-1} ]^{-1} (\beta - \hat{\beta})
+\end{eqnarray}</p>
+<p>and the likelihood function has the alternative representation
+<br></p>
+<p>\begin{eqnarray}
+p(Y|\Phi,\Sigma, Y_0)
+&amp;\propto&amp;  |\Sigma|^{-T/2} \exp \left\{ -\frac{1}{2} tr[\Sigma^{-1} S] \right\} \nonumber \\
+&amp;~&amp;\times \exp \left\{ -\frac{1}{2} (\beta - \hat{\beta})&rsquo;[ \Sigma \otimes (X&rsquo;X)^{-1} ]^{-1} (\beta - \hat{\beta}) \right\} \nonumber
+\end{eqnarray}</p>
+<h2 id="inference">Inference</h2>
+<h3 id="inference">Inference</h3>
+<p>Above suggests we could estimate \(\Phi\) and \(\Sigma\) via LS/MLE.
+<br>
+Consider a VAR(1) on the Output Gap, Inflation, and Interest Rate: [1959:Q1-2004:Q4]</p>
+<p>\includegraphics[width=4in]{../lecture-four-vars/data}</p>
+<h3 id="mle">MLE</h3>
+<p>\[
+\hat\Phi_0 = \left[\begin{array}{c} 0.44 \\ 0.24 \\ 0.24\end{array}\right], \quad
+\hat\Phi_1 =
+\left[\begin{array}{ccc} 0.93 &amp; -0.01 &amp; -0.07 \\
+0.07 &amp; 0.84 &amp; 0.07 \\
+0.08 &amp;  0.09 &amp;  0.91\end{array}\right]
+\]
+<br>
+\[ \hat\Sigma = \left[\begin{array}{ccc}
+0.62 &amp; -0.04 &amp;  0.24 \\
+-0.04 &amp;  1.27 &amp;  0.16 \\
+0.24 &amp;  0.16 &amp;  0.87
+\end{array}\right]
+\]
+<br>
+\(|eig(\hat\Phi_1)| = [0.95, 0.95, 0.78] \implies\) stationary
+<br>
+Unconditional Mean
+\[
+(I - \hat\Phi_1)^{-1}\hat\Phi_0 = [-0.54, 3.75, 6.09]
+\]</p>
+<h3 id="impulse-response-function">Impulse Response Function</h3>
+<p>Let&rsquo;s that \(u_{1,t}\) equals 1 in some period \(t\).  What does that mean for \(t+1, t+2, \ldots\)?</p>
+<p>\includegraphics[width=4in]{../lecture-four-vars/irf}</p>
+<h3 id="formally">Formally</h3>
+<p>IRF(h) = \(\frac{dy{t+h}}{du_t}\)
+<br>
+Can get via \(MA(\infty)\) representation
+<br>
+\(y_t = \Phi_0 + u_t + \Phi_1 u_{t-1} + \Phi^2 u_{t-2} + \ldots\)
+<br>
+Identifies consequences of a 1 unit increase in innovation \(u_{1,t}\)
+on observables holding all innovations fixed.
+<br>
+Causality? Be careful.  We&rsquo;re in reduced-form&hellip;
+<br>
+Still, get a sense of dynamics of system.</p>
+<h3 id="d41d8c"></h3>
+<p>How to pick lags of VAR?
+<br>
+Could use <em>information criteria</em> Akaike, Bayesian, Schwarz, &hellip; just like OLS.
+<br>
+OTOH, hand isn&rsquo;t it nice to use more lags = more complex dynamics, MP ``long and variable&rsquo;&rsquo;
+<br></p>
+<p>\begin{center}
+\begin{tabular}{lcc}
+\hline
+&amp; $p=1$ &amp; $p=6$ \\
+\hline
+$std(\hat u_1)$ &amp; 0.62 &amp; 0.45 \\
+$std(\hat u_2)$ &amp; 1.27 &amp; 1.01 \\
+$std(\hat u_3)$ &amp; 0.87 &amp; 0.61 \\
+\hline
+\end{tabular}
+\end{center}</p>
+<p>How to use more lags without overfitting?</p>
+<h2 id="granger-causality">Granger Causality</h2>
+<h3 id="granger-causality">Granger Causality</h3>
+<p>Economists often use regression results to make statements
+about causal relationships between variables.</p>
+<ul>
+<li>
+<p>Suppose we would like to examine the monetarist hypothesis that a
+contraction of the money supply causes a decrease in aggregate
+output.</p>
+</li>
+<li>
+<p>It is tempting to regress output on a measure of lagged money supply
+and interpret a non-zero coefficient as ``causal&rsquo;&rsquo; relationship.</p>
+</li>
+<li>
+<p>Since this concept of causality is somewhat different from the usual
+notion of causality it gets a new name.</p>
+</li>
+</ul>
+<p><strong>Bivariate Granger Causality</strong> The random variable
+\(y_{2,t}\) fails to Granger cause the random variable \(y_{1,t}\) if for
+all \(s&gt;0\) the mean squared error of a forecast of \(y_{1,t+s}\) based
+on \(y_{1,t}, y_{1,t-1},\ldots\) is the same as the mean squared
+error of a forecast that uses both \(y_{1,t}, y_{1,t-1},\ldots\)
+and \(y_{2,t}, y_{2,t-1},\ldots\). \(\Box\)</p>
+<h3 id="example">Example</h3>
+<p>Consider the bivariate VAR(2)</p>
+<h1 id="left-beginarrayc-y_1t--y_2t-endarray-right">\begin{eqnarray}
+\left[ \begin{array}{c} y_{1,t} \\ y_{2,t} \end{array} \right]</h1>
+<p>\left[ \begin{array}{c} \phi^{(0)}_1 \\ \phi^{(0)}_2 \end{array} \right]
++
+\left[ \begin{array}{cc} \phi^{(1)}_{11} &amp; \phi^{(1)}_{12} \\
+\phi^{(1)}_{21} &amp; \phi^{(1)}_{22} \end{array} \right]
+\left[ \begin{array}{c} y_{1,t-1} \\ y_{2,t-1} \end{array} \right]</p>
+<ul>
+<li>\ldots +
+\left[ \begin{array}{cc} \phi^{(p)}_{11} &amp; \phi^{(p)}_{12} \\
+\phi^{(p)}_{21} &amp; \phi^{(p)}_{22} \end{array} \right]
+\left[ \begin{array}{c} y_{1,t-p} \\ y_{2,t-p} \end{array} \right]</li>
+<li></li>
+</ul>
+<p>\left[ \begin{array}{c} u_{1,t} \\ u_{2,t} \end{array} \right]
+\end{eqnarray}</p>
+<p>If \(y_{2,t}\) fails to Granger cause \(y_{1,t}\), then it must be true that</p>
+<p>\begin{eqnarray}
+\phi_{12}^{(1)} = \phi_{12}^{(2)} = \ldots = \phi_{12}^{(p)} =0
+\label{e_restr}
+\end{eqnarray}</p>
+<p>A discussion of Granger causality in the context of a VAR with more than
+two variables can be found in Hamilton (1994). We will now examine Granger
+causality in the context of forward looking behavior. Roughly speaking:</p>
+<p>\begin{quote}
+The weather forecast Granger causes the weather, but shooting the weatherman
+will not produce a sunny weekend. (Cochrane, 1994).
+\end{quote}</p>
+<h3 id="example">Example</h3>
+<p>Consider a investor who has the choice between a riskless bond that
+yields a return \(r\), and a risky asset that has a price \(p_t\) and
+will pay dividends \(d_{t+1}\) in the next period. In equilibrium under
+the absence of arbitrage</p>
+<p>\begin{eqnarray}
+1 + r = {\mathbb E}_t \left[ \frac{ p_{t+1} + d_{t+1} }{p_{t}} \right]
+\end{eqnarray}</p>
+<p>The forward solution of this difference equation implies that
+the price of the risky asset is</p>
+<p>\begin{eqnarray}
+p_t = {\mathbb E}_t \left[ \sum_{\tau=1}^\infty \left( \frac{1}{1+r} \right)^\tau d_{t+\tau} \right]
+\end{eqnarray}</p>
+<p>Thus, according to the model, the stock price incorporates the
+market&rsquo;s best forecast of the present value of future dividends. If this
+forecast is based on more information than past dividends alone, then stock
+prices will Granger cause dividends, as investors try to anticipate movements
+in dividends.</p>
+<h3 id="example">Example</h3>
+<p>Suppose that</p>
+<p>\begin{eqnarray}
+d_t = d + u_t + \delta u_{t-1} + \nu_t
+\end{eqnarray}</p>
+<p>where \(u_t\) and \(\nu_t\) are independent Gaussian \(iid\) series. Suppose that
+the investor at time \(t\) knows values of current and past \(u_t\) and \(\nu_t\)&rsquo;s.
+The forecast of \(d_{t+\tau}\) based on this information is given by</p>
+<p>\begin{eqnarray}
+{\mathbb E}_t [d_{t+\tau}] =
+\left\{ \begin{array}{ccc}
+d + \delta u_t &amp; &amp; \mbox{for}\; \tau = 1 \\
+d              &amp; &amp; \mbox{for}\; \tau = 2,3,\ldots
+\end{array}
+\right.
+\end{eqnarray}</p>
+<p>Thus, the stock price is given by</p>
+<p>\begin{eqnarray}
+p_t = \frac{d}{r} + \frac{\delta u_t}{1+r}
+\end{eqnarray}</p>
+<p>which implies that</p>
+<p>\begin{eqnarray}
+\delta u_{t-1} = (1+r) p_{t-1} - (1+r) d/r
+\end{eqnarray}</p>
+<p>The system can be written as a bivariate VAR</p>
+<h1 id="left-beginarrayc-p_t--d_t-endarray-right">\begin{eqnarray}
+\left[ \begin{array}{c} p_{t} \\ d_{t} \end{array} \right]</h1>
+<p>\left[ \begin{array}{c} d/r \\ -d/r \end{array} \right]
++
+\left[ \begin{array}{cc}  0 &amp;  0 \\
+1+r &amp; 0 \end{array} \right]
+\left[ \begin{array}{c} p_{t-1} \\ d_{t-1} \end{array} \right]
++
+\left[ \begin{array}{c} \delta u_t /(1+r)  \\ u_t + \nu_t \end{array} \right]
+\end{eqnarray}</p>
+<h3 id="upshot">Upshot</h3>
+<ul>
+<li>In this model, Granger causation runs the opposite direction from
+the true causation.</li>
+<li>Dividends fail to ``Granger-cause&rsquo;&rsquo; prices, even though investors&rsquo;
+perceptions of dividends are the sole determinant of stock prices.</li>
+<li>On the other hand, prices do ``Granger-cause&rsquo;&rsquo; dividends, even
+though the market&rsquo;s evaluation of the stock in reality has no effect
+on the dividend process. (Hamilton, 1994, Chapter 11).</li>
+</ul>
+<br>
+How to think about causation?
+<h2 id="cointegration">Cointegration</h2>
+<h3 id="a-last-word-about-cointegration">A last word about cointegration</h3>
+<p>We will now analyze a simple bivariate system of cointegrated processes.
+Consider the model</p>
+<p>\begin{eqnarray}
+y_{1,t} &amp; = &amp; \gamma y_{2,t} + u_{1,t} \\
+y_{2,t} &amp; = &amp; y_{2,t-1} + u_{2,t}
+\end{eqnarray}</p>
+<p>where \([u_{1,t},u_{2,t}]&rsquo; \sim iid(0,\Omega)\).</p>
+<p>Clearly, \(y_{2,t}\) is
+a random walk. Moreover, it can be easily verified that \(y_{1,t}\) follows
+a unit root process.</p>
+<p>\begin{eqnarray}
+y_{1,t} - y_{1,t-1} = \gamma (y_{2,t} - y_{2,t-1}) + u_{1,t} - u_{1,t-1}
+\end{eqnarray}</p>
+<p>Therefore,</p>
+<p>\begin{eqnarray}
+y_{1,t} = y_{1,t-1} + \gamma u_{2,t} + u_{1,t} - u_{1,t-1}
+\end{eqnarray}</p>
+<p>Thus, both \(y_{1,t}\) and \(y_{2,t}\) are integrated processes.</p>
+<h3 id="model-continued">Model Continued</h3>
+<p>However, the linear combination</p>
+<p>\begin{eqnarray}
+[1,\; -\gamma] \left[ \begin{array}{c} y_{1,t} \\ y_{2,t} \end{array} \right]
+= y_{1,t} - \gamma y_{2,t} = u_{1,t}
+\end{eqnarray}</p>
+<p>is stationary. Therefore, \(y_{1,t}\) and \(y_{2,t}\) are cointegrated.
+<br>
+The vector \([1,-\gamma]&rsquo;\) is called the cointegrating vector.
+<br>
+Note that the cointegrating vector is only unique up to normalization.</p>
+<h3 id="rewriting-the-model">Rewriting the Model</h3>
+<p>The model can be rewritten as a VAR(1)</p>
+<p>\begin{eqnarray}
+y_t = \Phi_1 y_{t-1} + \epsilon_t
+\end{eqnarray}</p>
+<p>The elements of the matrix \(\Phi_1\) and the definition of \(\epsilon_t\)
+is given by</p>
+<p>\begin{eqnarray}
+\left[ \begin{array}{c} y_{1,t} \\ y_{2,t} \end{array} \right]
+=
+\left[ \begin{array}{cc} 0 &amp; \gamma \\ 0 &amp; 1 \end{array} \right]
+\left[ \begin{array}{c} y_{1,t-1} \\ y_{2,t-1} \end{array} \right]
++
+\left[ \begin{array}{c} u_{1,t} + \gamma u_{2,t} \\ u_{2,t} \end{array} \right]
+\end{eqnarray}</p>
+<p>The matrix \(\Phi_1\) is of reduced rank in this example of
+cointegration.  More generally cointegrated system can be casted in
+the form of a vector autoregression in levels of \(y_t\).
+<br>
+Although both \(y_{1,t}\) and \(y_{2,t}\) follow univariate random walks,
+the cointegrated system cannot be expressed as a vector autoregression
+in differences \([ \Delta y_{1,t}, \Delta y_{2,t} ]&rsquo;\). Consider</p>
+<p>\begin{eqnarray}
+\left[ \begin{array}{c} \Delta y_{1,t} \\ \Delta y_{2,t} \end{array} \right]
+=
+\left[ \begin{array}{cc} 1-L &amp; \gamma L \\ 0 &amp; 1 \end{array} \right]
+\left[ \begin{array}{c} u_{1,t} \\ u_{2,t} \end{array} \right]
+=
+\Theta(L) u_t
+\end{eqnarray}</p>
+<p>Since \(|\Theta(1)|=0\) the moving average polynomial is not invertible and
+no finite order VAR could describe \(\Delta y_t\).</p>
+<h3 id="vecm">VECM</h3>
+<p>The cointegrated model can be written in the so-called vector error correction model (VECM)
+form:</p>
+<p>\begin{eqnarray}
+\left[ \begin{array}{c} \Delta y_{1,t} \\ \Delta y_{2,t} \end{array} \right]
+=
+\left[ \begin{array}{c} -1 \\ 0 \end{array} \right]
+\left( \left[ \begin{array}{cc} 1 &amp; - \gamma \end{array} \right]
+\left[ \begin{array}{c} y_{1,t-1} \\ y_{2,t-1} \end{array} \right]
+\right)
++
+\left[ \begin{array}{c} u_{1,t} + \gamma u_{2,t} \\ u_{2,t} \end{array} \right]
+\end{eqnarray}</p>
+<p>The term</p>
+<p>\begin{eqnarray}
+\left( \left[ \begin{array}{cc} 1 &amp; - \gamma \end{array} \right]
+\left[ \begin{array}{c} y_{1,t-1} \\ y_{2,t-1} \end{array} \right]
+\right)
+= y_{1,t-1} - \gamma y_{2,t-1}
+\end{eqnarray}</p>
+<p>is called error correction term. In economic models it often reflects a
+long-run equilibrium relationship such as a constant ratio of consumption and
+output. If the economy is out of equilibrium in period
+\(t-1\), that is, \(y_{1,t-1} - \gamma y_{2,t-1} \not= 0\), then the economy
+adjusts toward its long-run equilibrium and \(\EE_{t-1}[\Delta y_{t}] \not= 0\).
+If the ``true&rsquo;&rsquo; cointegrating vector is known, then both the left-hand-side
+variables and the error correction term are stationary.</p>
+<h3 id="upshot">Upshot</h3>
+<p>In practice, if one would like to model a bivariate vector process \(y_t\), it has to be determined whether to fit</p>
+<ol>
+<li>An unrestricted vector autoregression of the form</li>
+<li>a vector autoregression in differences</li>
+<li>or a vector error correction model (reduced rank regression)</li>
+</ol>
+<p>How to pick:</p>
+<ul>
+<li>A likelihood ratio test or a Bayesian model selection criterion could be used</li>
+<li>if the processes \(y_{1,t}\) and \(y_{2,t}\) are integrated the analysis of the sampling distribution of the likelihood ratio test statistics is complicated</li>
+<li>Johansen (1995) provides a nice summary of the relevant asymptotic distribution theory.</li>
+</ul>
+<h3 id="svars">SVARs</h3>
+<p>So far, we considered reduced form VARs, say,</p>
+<p>\begin{eqnarray}
+y_t = \Phi_1 y_{t-1} + u_t, \quad {\mathbb E}[u_t u_t&rsquo;] = \Sigma_u
+\label{eq_varrf}
+\end{eqnarray}</p>
+<p>in which the error terms \(u_t\) have the interpretation of one-step ahead forecast errors. If the
+eigenvalues of \(\Phi_1\) are inside the unit-circle then \(y_t\) has the following moving-average (MA)
+representation in terms of \(u_t\):</p>
+<p>\begin{eqnarray}
+y_t = (I - \Phi_1 L)^{-1} u_t = \sum_{j=0}^\infty \Phi_1^j u_{t-j} = \sum_{j=0}^\infty C_j u_{t-j}
+\end{eqnarray}</p>
+<p>Modern dynamic macro models suggest that the one-step ahead forecast errors are functions
+of some fundamental shocks, such as technology shocks, preference shocks, or monetary policy shocks.</p>
+<h3 id="d41d8c"></h3>
+<p>Let \(\epsilon_t\) a vector of such fundamental shocks and assume that \({\mathbb E}[\epsilon_t \epsilon_t&rsquo;] = {\cal I}\).
+Moreover, assume that</p>
+<p>\begin{eqnarray}
+u_t = \Phi_\epsilon \epsilon_t.
+\end{eqnarray}</p>
+<p>Then we can express the VAR in structural form as follows</p>
+<p>\begin{eqnarray}
+y_t &amp;=&amp; \Phi_1 y_{t-1} + \Phi_\epsilon \epsilon_t \label{eq_varsf} \\
+\Phi_\epsilon^{-1} y_t &amp;=&amp; \Phi_\epsilon^{-1} \Phi_1 y_{t-1} + \epsilon_t \nonumber
+\end{eqnarray}</p>
+<p>The moving-average representation of \(y_t\) in terms of the structural shocks is given by</p>
+<p>\begin{eqnarray}
+y_t = \sum_{j=0}^\infty \Phi_1^j \Phi_\epsilon \epsilon_{t-j} = \sum_{j=0}^\infty C_j \Phi_\epsilon \epsilon_{t-j}.
+\end{eqnarray}</p>
+<h3 id="d41d8c"></h3>
+<p>The moving-average representation of \(y_t\) in terms of the structural shocks is given by</p>
+<p>\begin{eqnarray}
+y_t = \sum_{j=0}^\infty \Phi_1^j \Phi_\epsilon \epsilon_{t-j} = \sum_{j=0}^\infty C_j \Phi_\epsilon \epsilon_{t-j}.
+\end{eqnarray}</p>
+<p>For~(\ref{eq_varrf}) and~(\ref{eq_varsf}) the matrix \(\Phi_\epsilon\) has to satisfy the restriction</p>
+<p>\begin{eqnarray}
+\Phi_\epsilon \Phi_\epsilon&rsquo; = \Sigma_u.
+\end{eqnarray}</p>
+<p>Notice that the matrix \(\Phi_\epsilon\) has \(n^2\) elements. The covariance relationship, unfortunately, generates
+only \(n(n+1)/2\) restrictions and does not uniquely determine \(\Phi_\epsilon\). This creates an identification
+problem since all we can estimate from the data is \(\Phi_1\) and \(\Sigma_u\).</p>
+<h3 id="d41d8c"></h3>
+<p>In order to make statements about the propagation of structural shocks
+\(\epsilon_t\) we have to make further assumptions. The papers by
+Cochrane (1994), Christiano and Eichenbaum (1999), and Stock and
+Watson (2001) survey such identifying assumptions.  A cynical view of
+this literature is the following:</p>
+<ol>
+<li>Propose an identification scheme, that determines all elements of \(\Phi_\epsilon\).</li>
+<li>Compute impulse response functions.</li>
+<li>If impulse response functions are plausible, then stop; else, declare a ``puzzle&rsquo;&rsquo; and return to 1.</li>
+</ol>
+<p>Here are some famous ``puzzles:&rsquo;'</p>
+<ol>
+<li>``Liquidity Puzzle:&rsquo;&rsquo; When identifying monetary policy shocks as
+surprise changes in the stock of money one often finds that
+interest rates fall when the money stock is lowered.</li>
+<li>``Price Puzzle:&rsquo;&rsquo; When identifying monetary policy shocks as
+surprise changes in the Federal Funds Rate, one often finds that
+prices fall after a drop in interest rates.</li>
+</ol>
+<p>These ``puzzles&rsquo;&rsquo; are typically resolved by considering more elaborate identification schemes.</p>
+<h3 id="impulse-response-functions-and-variance-decompositions">Impulse Response Functions and Variance Decompositions</h3>
+<p>Impulse responses are defined as</p>
+<p>\begin{eqnarray}
+\frac{\partial y_{t+h}}{\partial \epsilon_t&rsquo;} = C_h \Phi_\epsilon
+\end{eqnarray}</p>
+<p>and correspond to the MA coefficient matrices in the moving average representation of \(y_t\) in terms
+of structural shocks.</p>
+<p>The covariance matrix of \(y_t\) is given by</p>
+<p>\begin{eqnarray}
+\Gamma_{yy,0} = \sum_{j=0}^\infty C_j \Phi_\epsilon {\cal I} \Phi_\epsilon&rsquo; C_j'
+\end{eqnarray}</p>
+<p>Let \({\cal I}^{i}\) be matrix for which element \(i,i\) is equal to one and all other elements are equal to zero.
+Then we can define the contribution of the \(i\)&rsquo;th structural shock to the variance of \(y_t\) as</p>
+<p>\begin{eqnarray}
+\Gamma_{yy,0}^{(i)} = \sum_{j=0}^\infty C_j \Phi_\epsilon {\cal I}^{(i)} \Phi_\epsilon&rsquo; C_j'
+\end{eqnarray}</p>
+<p>Thus the fraction of the variance of \(y_{l,t}\) explained by shock \(i\) is
+\[      [ \Gamma_{yy,0}^{(i)} ]_{ll} / [\Gamma_{yy,0}]_{ll} . \]</p>
+<h3 id="d41d8c"></h3>
+<p>We begin by decomposing the covariance matrix into the product of lower triangular matrices (Cholesky Decomposition):</p>
+<p>\begin{eqnarray}
+\Sigma_u = A A&rsquo;,
+\end{eqnarray}</p>
+<p>where \(A\) is lower triangular. If \(\Sigma_u\) is non-singular the decomposition is unique. Let \(\Omega\) be an orthonormal
+matrix, meaning that \(\Omega \Omega&rsquo; = \Omega&rsquo; \Omega = {\cal I}\). We can characterize the relationship
+between the reduced form and the structural shocks as follows</p>
+<p>\begin{eqnarray}
+u_t = A \Omega \epsilon_t
+\end{eqnarray}</p>
+<p>Notice that</p>
+<p>\begin{eqnarray}
+{\mathbb E}[u_t u_t&rsquo;] = {\mathbb E}[ A \Omega \epsilon_t \epsilon_t&rsquo; \Omega&rsquo; A&rsquo;] = A \Omega {\mathbb E}[\epsilon_t \epsilon_t&rsquo;] \Omega&rsquo; A'
+= A \Omega \Omega&rsquo; A&rsquo; = A A&rsquo; = \Sigma_u.
+\end{eqnarray}</p>
+<h3 id="d41d8c"></h3>
+<p>In general, it is quite tedious to characterize the space of orthonormal matrices. Let&rsquo;s try for \(n=2\):</p>
+<p>\begin{eqnarray}
+\Omega(\varphi) = \left[ \begin{array}{cc} \cos \varphi &amp; - \sin \varphi \\ \sin \varphi &amp; \cos \varphi \end{array} \right]
+\end{eqnarray}</p>
+<p>where \(\varphi \in (-\pi,\pi]\). Notice that, for instance,</p>
+<p>\begin{eqnarray}
+\Omega( \pi/2 ) = - \Omega (-\pi/2)
+\end{eqnarray}</p>
+<p>which means that only the signs of the impulse responses change but not the shape.
+<br>
+Let&rsquo;s look at some famous identification schemes</p>
+<h3 id="sims--1980">Sims (1980)</h3>
+<p>Suppose that
+\[
+y_t = \left[ \begin{array}{c} \mbox{Fed Funds Rate} \\ \mbox{Output Growth} \end{array} \right], \quad
+\epsilon_t = \left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right]
+= \left[ \begin{array}{c} \mbox{Monetary Policy Shock} \\ \mbox{Technology Shock} \end{array} \right].
+\]
+Moreover, we assume that the central bank does not react contemporaneously
+to technology shocks because data on aggregate output
+only become available with a one-quarter lag. This assumption can be formalized
+through \(\varphi = 0\). Then</p>
+<p>\begin{eqnarray}
+u_t = \left[ \begin{array}{cc} a_{11} &amp; 0 \\ a_{21} &amp; a_{22} \end{array} \right]
+\left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right].
+\end{eqnarray}</p>
+<p>Further readings: cite:Sims1980.</p>
+<h3 id="d41d8c"></h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/sims_irf_mp}</p>
+<h3 id="d41d8c"></h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/sims_irf_tech}</p>
+<h3 id="blanchard-and-quah--1989">Blanchard and Quah (1989)</h3>
+<p>Now suppose that
+\[
+y_t = \left[ \begin{array}{c} \mbox{Inflation} \\ \mbox{Output Growth} \end{array} \right], \quad
+\epsilon_t = \left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right]
+= \left[ \begin{array}{c} \mbox{Monetary Policy Shock} \\ \mbox{Technology Shock} \end{array} \right]
+\]
+Moreover,</p>
+<p>\begin{eqnarray}
+y_t = ( \sum_{j=0}^\infty C_j L^j ) u_t = C(L) u_t.
+\end{eqnarray}</p>
+<p>Consider the following assumption: monetary policy shocks do not raise output in the long-run.
+Let&rsquo;s examine the moving average representation of \(y_t\) in terms of the structural shocks</p>
+<p>\begin{eqnarray*}
+y_t &amp;=&amp; \left[ \begin{array}{cc} c_{11}(L) &amp; c_{12}(L) \\ c_{21}(L) &amp; c_{22}(L) \end{array} \right]
+\left[ \begin{array}{cc} a_{11} &amp; 0 \\ a_{21} &amp; a_{22} \end{array} \right]
+\left[ \begin{array}{cc} \cos \varphi &amp; - \sin \varphi \\ \sin \varphi &amp; \cos \varphi \end{array} \right]
+\left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right] \\
+&amp;=&amp; \left[ \begin{array}{cc} \cdot &amp; \cdot \\
+a_{11} \cos \varphi c_{21}(L) + (a_{21} \cos \varphi + a_{22} \sin \varphi ) c_{22}(L) &amp; \cdot
+\end{array} \right]
+\left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right] \\
+&amp;=&amp; \left[ \begin{array}{cc} d_{11}(L) &amp; d_{12}(L) \\ d_{21}(L) &amp; d_{22}(L) \end{array} \right]
+\left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right]
+\end{eqnarray*}</p>
+<h3 id="d41d8c"></h3>
+<p>Suppose that in period \(t=0\) log output and log prices are equal to zero. Then the log-level
+of output and prices in period \(t = T &gt; 0\) is given by</p>
+<p>\begin{eqnarray}
+y_T^c = \sum_{t=1}^T y_t = \sum_{t = 1}^T \sum_{j=0}^\infty D_j \epsilon_{t - j}
+\end{eqnarray}</p>
+<p>Now consider the derivative</p>
+<p>\begin{eqnarray}
+\frac{ \partial y_T^c }{\partial \epsilon_1&rsquo;} = \sum_{j=0}^{T-1} D_j
+\end{eqnarray}</p>
+<p>Letting \(T \longrightarrow \infty\) gives us the long-run response of the level of prices and output
+to the shock \(\epsilon_1\):</p>
+<p>\begin{eqnarray}
+\frac{ \partial y_\infty^c }{ \partial \epsilon_1&rsquo;} = \sum_{j=0}^\infty D_j = D(1)
+\end{eqnarray}</p>
+<p>Here, we want to restrict the long-run effect of monetary policy shocks on output:</p>
+<p>\begin{eqnarray}
+d_{21}(1) = 0
+\end{eqnarray}</p>
+<h3 id="d41d8c"></h3>
+<p>This leads us to the equation</p>
+<p>\begin{eqnarray}
+[ a_{11}c_{21}(1) + a_{21} c_{22}(1) ] \cos \varphi + a_{22} c_{22}(1) \sin \varphi = 0.
+\end{eqnarray}</p>
+<p>Notice that the equation has two solutions for \(\varphi \in ( - \pi, \pi]\). Under one solution
+a positive monetary policy shock is contractionary, under the other solution it is expansionary.
+The shape of the responses is, of course, the same.</p>
+<h3 id="d41d8c"></h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/bq1}</p>
+<h3 id="d41d8c"></h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/bq2}</p>
+<h3 id="sign-restrictions">Sign Restrictions</h3>
+<p>Again consider
+\[
+y_t = \left[ \begin{array}{c} \mbox{Inflation} \\ \mbox{Output Growth} \end{array} \right], \quad
+\epsilon_t = \left[ \begin{array}{c} \epsilon_{R,t} \\ \epsilon_{z,t} \end{array} \right]
+= \left[ \begin{array}{c} \mbox{Monetary Policy Shock} \\ \mbox{Technology Shock} \end{array} \right]
+\]
+and our identification assumption is: upon impact, a monetary policy shock raises both prices and
+output. It can be verified that</p>
+<p>\begin{eqnarray}
+\frac{ \partial y_t }{\partial \epsilon_{R,t} }
+= \left[ \begin{array}{c}
+a_{11} \cos \varphi c_{11,1} + (a_{21} \cos \varphi + a_{22} \sin \varphi ) c_{12,1} \\
+a_{11} \cos \varphi c_{21,1} + (a_{21} \cos \varphi + a_{22} \sin \varphi ) c_{22,1}
+\end{array}
+\right].
+\end{eqnarray}</p>
+<p>Thus, we obtain the sign restrictions</p>
+<p>\begin{eqnarray*}
+0 &amp;&lt;&amp; a_{11} \cos \varphi c_{11,1} + (a_{21} \cos \varphi + a_{22} \sin \varphi ) c_{12,1} \\
+0 &amp;&lt;&amp; a_{11} \cos \varphi c_{21,1} + (a_{21} \cos \varphi + a_{22} \sin \varphi ) c_{22,1}
+\end{eqnarray*}</p>
+<p>which restrict \(\varphi\) to be in a certain subset of \((-\pi,\pi]\) and will generate a range of
+responses.</p>
+<p>Further readings: cite:Canova2002, cite:Faust1998, cite:Uhlig2005.</p>
+<h3 id="uhlig-2005">Uhlig, 2005</h3>
+<ul>
+<li>
+<p>What is the effect of MP on Output?</p>
+</li>
+<li>
+<p>Let&rsquo;s assume that after an MP shock \(R_{t+k}\) for \(k = 1, \ldots K\).</p>
+</li>
+<li>
+<p>How does it compare to the standard ordering?</p>
+</li>
+</ul>
+<p>Result: Monetary Policy does not effect output!</p>
+<h3 id="sign-restrictions">Sign Restrictions</h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/uhlig2}</p>
+<h3 id="sign-restrictions">Sign Restrictions</h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/uhliq1}</p>
+<h3 id="cholesky">Cholesky</h3>
+<p>\includegraphics[width=4in]{../lecture-four-vars/uhlig3}</p>
+<h3 id="is-that-the-last-word">Is that the last word?</h3>
+<p>NO</p>
+<ul>
+<li>Can you verify sign restrictions?</li>
+<li>It&rsquo;s hard to get (all) the right Omegas [cite:Arias_2014]</li>
+<li>Other ``reasonable&rsquo;&rsquo; sign restrictions give different results?</li>
+<li>Are we back to ``puzzle&rsquo;'?</li>
+</ul>
+<h2 id="bibliography">Bibliography</h2>
+<h3 id="references">References</h3>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

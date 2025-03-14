@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ed Herbst/teaching/georgetown/notes/introduction-to-time-series/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="A (Very) Brief Primer on Time Series" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series/" /><meta property="article:published_time" content="2025-03-13T10:22:34-04:00" />
+
+
+
+<meta name="twitter:title" content="A (Very) Brief Primer on Time Series"/>
+<meta name="twitter:description" content="
+Lecture Objective: Introduce basic concepts from time series: (covariance) stationarity, ARMA processes, Wold representation.
+
+Additional Readings:
+For an overview, the first three chapters of Hamilton (1994) are a good place to start.  More technically detailed information&mdash;included the Hilbert space machinery used in modern analysis&mdash;can be found Chapters 2 and 3 of Brockwell and Davis (1987).  I&rsquo;ve personally found the first four chapters of Cochrane (2005) helpful for intuition.  Articles referenced in these notes are referenced in the bibliography.  And there&rsquo;s always ChatGPT, though caveat emptor."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/notes'>notes</a>/<a href='https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series'>introduction-to-time-series</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast">
+        
+<h1>A (Very) Brief Primer on Time Series</h1>
+<div class="additional">
+<p><strong>Lecture Objective</strong>: Introduce basic concepts from time series: (covariance) stationarity, ARMA processes, Wold representation.
+<br /><br />
+<strong>Additional Readings:</strong>
+For an overview, the first three chapters of <a href="#citeproc_bib_item_5">Hamilton (1994)</a> are a good place to start.  More technically detailed information&mdash;included the Hilbert space machinery used in modern analysis&mdash;can be found Chapters 2 and 3 of <a href="#citeproc_bib_item_2">Brockwell and Davis (1987)</a>.  I&rsquo;ve personally found the first four chapters of <a href="#citeproc_bib_item_4">Cochrane (2005)</a> helpful for intuition.  Articles referenced in these notes are referenced in the bibliography.  And there&rsquo;s always <a href="http://chatgpt.com">ChatGPT</a>, though caveat emptor.</p>
+</div>
+<p>Let&rsquo;s start with a random variable \(Y\) and let&rsquo;s assume that it has finite mean \(\mu\) and variance \(\sigma^2\). The paradigm you are probably used to in statistics is to have <em>many realizations of the same random variable</em>. What&rsquo;s more, each of these realizations are independent of one another. We could write this as:
+\[
+y_i \stackrel{i.i.d}{\sim} Y, \quad i = 1, \ldots, n.
+\]
+where &ldquo;iid&rdquo; means &ldquo;independent and identically distributed.&rdquo;  As econometricians, given the sample \(\{y_i\}_{i=1}^n\), we might be interested making inference about the characeristics of \(Y\), say its mean or variance to understand an economic phenomenom or to make predictions about \(y_i\)s yet to be realized. There are two important pieces of statistical theory that enable use sample information learn about population parameters. Define
+\[ \overline{y}_n = \frac{1}{n} \sum_{i=1}^n y_i.\]
+The <em>Weak Law of Large Numbers</em> (WLLN) (see, e.g., <a href="#citeproc_bib_item_3">Casella and Berger (2002)</a> Theorem 5.2.1) states that
+\[
+\overline{y}_n \;\xrightarrow{p}\; \mu \quad \text{as} \quad n \to \infty,
+\]
+where \(\xrightarrow{p}\) denotes convergence in probability.  The WLLN says as we collect more observations \(y_1, y_2, \ldots,\), the &ldquo;noise&rdquo; from any one observation averages out.  If each \(y_i\) has mean \(\mu\), then the sample average \(\​overline{y}_n\) eventually reflects the true underlying mean. In practice, this tells us that we can estimate \(\mu\) by \(\​overline{y}_n\)​​, and our estimate will improve with more data.  We can infer the precision of our estimate by looking at appropriately scaled versions of \(\overline{y}_n\).  Specifically, the <em>Lindeberg–Lévy Central Limit Theorem</em> (CLT) (see, e.g., <a href="#citeproc_bib_item_3">Casella and Berger</a>, Theorem 5.5.1) says:
+\[
+\sqrt{n}\,\bigl(\overline{y}_n - \mu\bigr)
+\;\xrightarrow{d}\; \mathcal{N}(0, \sigma^2),
+\]
+where \(\xrightarrow{d}\) denotes convergence in distribution.  Regardless of the original distribution of \(Y\) (as long as it has finite mean and variance), \(\overline{y}_n\) behaves &ldquo;like&rdquo; a normal random variable when \(n\) is large.  The larger the sample size, the more \(\overline{y}_n\) clusters around \(\mu\) in a bell-shaped manner.  This gives us a basis for constructing confidence interval and hypothesis testing.</p>
+<p><strong>What&rsquo;s so special about time series?</strong>  This paradigm gets complicated when we start to study time series.  The first &ldquo;i&rdquo; in &ldquo;i.i.d.&rdquo;&mdash;independent&mdash;is no longer true, and the second &ldquo;i&rdquo; might not be either.  The random variables \(Y_t\) will exhibit dependence across time&mdash;now using a \(t\) subscript to the make this explicit.  This means that we can no longer rely on the above theorems to guide our inference.  And the whole enterprise is somewhat called into question: if the \(Y_t\) are no longer the same distribution, can we use realizations \(y_t\) from different \(t\) to learn about some population characteristics (and what do those even look like?)  Put differently, can we use the past to learn about the future?  In these lecture notes, we&rsquo;ll try to sketch out some answers to these questions and introduce the basics of time series analysis.</p>
+<p>Some practical details also differentiate macroeconomic time series from their microeconomic cousins.  The sample sizes of aggregate macroeconomic time series are often very short.  There&rsquo;s been only <code>282</code> quarterly observations of GDP from 1954 until the end of 2024.  And as we&rsquo;ll see shortly, it&rsquo;s best to think of this entire trajectory of GDP as a single realization of a time series.   This yields a lot of complications in itself: how good are the large sample approximations, anyway?  Given these limitations, time series in macroeconomics has mostly focused on parametric models, and we&rsquo;ll follow the literature in these lecture notes.</p>
+<h2 id="an-introduction-to-time-series-models">An Introduction To Time Series Models</h2>
+<p>A <strong>time series</strong> is a family of random variables indexed by time \(\{Y_t, t\in T\}\) defined on a probability space \((\Omega, \mathcal F, P)\), where a \(\sigma\)-algebra \(\mathcal F\) is on an outcome space \(\Omega\), and \(P\) is a probability measure.  <em>In practive &ldquo;time series&rdquo; is used to mean both the random variables and their realizations.</em> For these notes, we&rsquo;ll require the index set \(\left\{0, \pm 1, \pm 2, \ldots\right\}\), that is, we&rsquo;ll focus on discrete-valued time series rather than continuous ones.  The index set could be finite or (countably) infinite.</p>
+<p>A single (time \(t\)) realization from this time series is denoted \(y_t\) and an entire trajectory denoted \(\{y_t\}_{t=t_o}^{t_1}\), with \(t_0 = 1\) and \(t_1 = T\) most commonly used.  We will sometimes refer to this set as (for instance) \(Y_{1:T}\), abusing the above notation a bit, or simply \(Y\) when the context is clear.  Note that, excepting theoretical analysis, the index set of the realized time series will always be finite.</p>
+<p><em>Some examples of time series models.</em></p>
+<div class="ex" id="ex:trend">
+<p>Let \(\beta_0, \beta_1 \in \mathbb R\) be constants and let \(\epsilon_t \stackrel{i.i.d.}{\sim} \mathcal N(0, \sigma^2)\) for \(t = 1, \ldots, T\).  Then the <strong>deterministic trend model</strong> is generated by</p>
+<p>\begin{align}
+y_t = \beta_0 + \beta_1 t + \epsilon_t, \quad t = 1, \ldots T.
+\end{align}</p>
+</div>
+<div class="ex" id="ex:ar1">
+<p>Let \(\lvert \phi_1 \rvert &lt; 1\) and  \(\epsilon_t \stackrel{i.i.d.}{\sim} \mathcal N(0, \sigma^2)\) for \(t = 1, \ldots, T\).  The <strong>first order autoregressive model</strong> is given by:</p>
+<p>\begin{align}
+y_t = \phi_1 y_{t-1} + \epsilon_t.
+\end{align}</p>
+</div>
+<div class="ex">
+<p>Let \(\epsilon_1\) and \(\epsilon_2\) be independently drawn from a \(N(0,\sigma^2)\) random variable and let \(\omega\in[0, 2\pi)\).  Then the <strong>cyclical model</strong> is given by:</p>
+<p>\begin{align}
+y_t = \epsilon_1 \cos(\omega t) + \epsilon_2 \sin (\omega t).
+\end{align}</p>
+</div>
+<figure><img src="https://edherbst.net/ox-hugo/d6d510ced339eec12487b5d462922d60e4b6e381.png"
+    alt="Figure 1: Three Time Series"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Three Time Series</p>
+    </figcaption>
+</figure>
+
+<p>Figure <a href="#orgb58f298">1</a> illustrates three different time series models.  The deterministic trend model exhibit random disturbances around a linear upward trend determined by the constants \(\beta_0\) and \(\beta_1\).  The first order autoregressive time series model is one that depends on its past value, leading to persistence (random) fluctuations around zero.  The cyclical model has periodic (deterministic) fluctuations around zero.</p>
+<h3 id="characterizing-time-series--up-to-a-point">Characterizing Time Series (up to a point)</h3>
+<p>Characterizing a time series is a challenging task, as it involves describing an entire family of random variables. To make this more tractable, we often focus on the first two moments: the mean and the variance (or the covariance structure). Moments play a key role in describing the properties of random variables, and the first two are particularly significant. In the case of normally distributed random variables, these two moments completely define the distribution, making them especially useful in time series analysis.</p>
+<p>To start, let’s define the mean of our time series. We’ll denote it by \(\mu_t = E[Y_t]\), which captures the expected value of the random variable at each time \(t\). Beyond the mean, random variables typically have covariance, but in the context of time series, we’re particularly interested in how this covariance behaves over <em>time</em>. This brings us to the concept of the autocovariance function, which measures the relationship between the values of a time series at different time points. For a time series \(\{Y_t\}\) the <span class="underline">autocovariance</span> function is defined as:
+\[
+\gamma_t(\tau) = \mathbb E\left[ (Y_t - \mathbb EY_t) (Y_{t+\tau} - \mathbb EY_{t+\tau})&rsquo;\right]
+\]
+where \(\tau\) is the time lag and the subscript \(t\) highlights that the autocovariance may depend on the specific time point.</p>
+<div class="ex" id="ex:nonstationary-acf">
+<p>Let the time series \(Y_t\) be defined as:
+\[
+Y_t = \sqrt{t} \cdot \epsilon_t + \alpha \sqrt{t} \cdot \epsilon_{t-1},
+\]
+where \(\epsilon_t \sim \mathcal{N}(0, \sigma^2)\) are independent, identically distributed noise terms and \(\alpha\in\mathbb R\).</p>
+<p>The mean of this time series is given by \(\mu_t = 0\) for all \(t\).  The autocovariance function is given by:
+\[
+\gamma_t(\tau) =
+\begin{cases}
+t  \sigma^2 (1 + \alpha^2), &amp; \text{if } \tau = 0, \\
+\alpha  \sigma^2  \sqrt{t(t+1)}, &amp; \text{if } |\tau| = 1, \\
+0, &amp; \text{if } |\tau| &gt; 1.
+\end{cases}.
+\]</p>
+</div>
+<p>If the autocovariance function \(\gamma_t(\tau)\) depends on both \(t\) and \(\tau\), as in Example , then the time series exhibits temporal heterogeneity.  The relationship between \(Y_t\) and \(Y_{t+\tau}\) is determined not only by \(\tau\), the &ldquo;distance&rdquo; between the elements in the series, but by the absolute index.  In the example, if \(t&rsquo; &gt; t\), then \(|\gamma_{t&rsquo;}(1)| &gt; |\gamma_{t}(1)|\), that is, the magnitude of the first order autocovariance increasing in time \(t\).  A series exhibiting such behavior is said to be nonstationary.</p>
+<p>We&rsquo;ll begin our analysis by considering only time series that <em>do not</em> exhibit this kind of behavior.</p>
+<div class="definition">
+<p>A time series is <em>covariance stationary</em> if</p>
+<ol>
+<li>\(E\left[Y_t^2\right] = \sigma^2 &lt; \infty\) for all \(t\in T\).</li>
+<li>\(E\left[Y_t\right]=\mu\) for all \(t\in T\).</li>
+<li>\(\gamma_t(\tau) = \gamma(\tau)\) for all \(t,t+\tau \in T\).</li>
+</ol>
+</div>
+<p>Covariance stationary processes have an element of &ldquo;sameness&rdquo; because some of their key statistical properties do not change over time. This consistency makes them important for both theoretical and practical reasons: they simplify modeling and forecasting, provide tractable analytical results, and allow the use of powerful statistical tools. Many economic and financial models require covariance stationarity to ensure meaningful and interpretable relationships between variables.</p>
+<p>We can say a bit more about the autocovariance function.  First, the autocovariance function is symmetric in the sense that \(\gamma(\tau) = \gamma(-\tau)\).  Second the \(\tau\)th autocovariance is bounded by the covariance (or 0th order autocovariance) \(\gamma_t(0)\).  To see this, use the Cauchy-Schwarz inequality:</p>
+<p>\begin{multline}
+\bigl|\gamma(\tau)\bigr|
+= \Bigl|\mathbb{E}\bigl[(Y_t - \mathbb{E}[Y_t]) (Y_{t+\tau} - \mathbb{E}[Y_{t+\tau}])&rsquo;\bigr]\Bigr|
+\;\le\; \sqrt{\mathbb{E}\bigl[|Y_t - \mathbb{E}[Y_t]|^2\bigr]
+\,\mathbb{E}\bigl[|Y_{t+\tau} - \mathbb{E}[Y_{t+\tau}]|^2\bigr]} \\
+= \sqrt{\gamma(0)\gamma(0)} = \gamma(0).
+\end{multline}</p>
+<p>Thus  in a covariance‐stationary process, the autocovariance function “behaves like a normal covariance” in the sense that it depends only on the lag and shares many of the same properties you would expect from a static covariance structure.  In particular, we can define the autocorrelation function:</p>
+<p>\begin{align}
+\rho(\tau) = \frac{\gamma(\tau)}{\gamma(0)}.
+\end{align}</p>
+<p>We know \(\left|\rho(\tau)\right| \le 1\) for all \(\tau\), just like a regular covariance.  Finally, a word about language: covariance-stationarity is sometimes referred to as &ldquo;weak stationarity&rdquo; because this concept only involves the invariance of the first two moments of the series.  Confusingly, this is also sometimes just referred to as &ldquo;stationarity.&rdquo;  We&rsquo;ll talk about another notion of stationarity towards the end of the lecture.</p>
+<p><strong>Building covariance stationary processes.</strong>  Covariance stationarity is an appealing property for a time series.  We&rsquo;ll focus on the construction of such processes, starting from one of the simplest covariance staitonary processes, called white noise.  We&rsquo;ll then build more general covariance stationary processes by taking linear combinations of white noise.  Later we&rsquo;ll show that this set of linear processes can mimic <em>any</em> covariance stationary process using the Wold Representation.</p>
+<div class="definition">
+<p>A covariance stationary process \(\{Z_t\}\) is called <em>white noise</em> if it satisfiess</p>
+<ol>
+<li>\(\mathbb E[Z_t] = 0\).</li>
+<li>\(\gamma(0) = \sigma^2\).</li>
+<li>\(\gamma(\tau) = 0\) for \(\tau \ne 0\).</li>
+</ol>
+</div>
+<p>This process is sometimes written as \(Z_t\sim WN(0,\sigma^2)\). They are kind of boring on their own, but using them we can construct arbitrary stationary processes. A special case is given by \(Z_t \stackrel{i.i.d.}{\sim}N(0,\sigma^2)\).</p>
+<h2 id="arma-processes">ARMA Processes</h2>
+<p>We&rsquo;ll first start with a finite-order <em>moving average</em> process.  This process is simply a (finite) linear combination of white noise random variables:</p>
+<div class="ex" id="ex:ma">
+<p>Let \(Z_t \sim WN(0,\sigma^2)\) and let \(\theta_j \in \mathbb R\) for \(j = 1,\ldots,q\).  The moving order process of order \(q\), or MA(\(q\)), is given by:</p>
+<p>\begin{align}
+Y_t = Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q}.
+\end{align}</p>
+</div>
+<p>Before proceeding with the analysis of the MA(\(q\)) model, we&rsquo;ll introduce some important tools: the <em>lag operator</em> and <em>lag polynomial</em>.  The lag operator \( L \) is a fundamental concept in time series analysis. For any time series \( Y_t \), the lag operator is defined as:
+\[
+L Y_t = Y_{t-1}.
+\]
+Applying the lag operator \( k \) times corresponds to \(L^k Y_t = Y_{t-k}\).  Informally, think of \( L \) as a &ldquo;backward shift&rdquo; in time.  The lag operator provides a compact way to express time series processes like MA(\( q \)).  A lag polynomial extends the idea of the lag operator by forming polynomials in \( L \). For example, consider a polynomial \( \Theta(L) \) of degree \( q \):
+\[
+\theta(L) = 1 + \theta_1 L + \theta_2 L^2 + \ldots + \theta_q L^q.
+\]
+The MA(\( q \)) process can now be expressed succinctly as:
+\[
+y_t = \theta(L) \epsilon_t,
+\]
+where \( \theta(L) \) is applied to \( \epsilon_t \) to generate \( y_t \).  For our purposes, lag polynomials behave similarly to regular polynomials in algebra. Operations like addition, subtraction, multiplication, and factorization apply in much the same way. For example:\( \theta_1(L) + \theta_2(L) \) combines terms as usual and \( \theta_1(L) \theta_2(L) \) expands like a product of ordinary polynomials.</p>
+<p>Now we&rsquo;ll show that the MA(\(q\)) is always covariance stationary.  Consider first the mean
+\[
+\mathbb E[Y_t] = \mathbb E[Z_t] + \theta_1 \mathbb E[Z_{t-1}] + \ldots + \theta_q \mathbb E[ Z_{t-q}] = 0.
+\]
+This clearly does not depend on time.  Next, consider the autocovariance, there are three cases:</p>
+<ol>
+<li>
+<p><strong>Case \(\tau = 0\):</strong> The autocovariance at lag 0, \(\gamma(0)\), is simply the variance of \(Y_t\):
+\[
+\gamma(0) = \text{Var}(Y_t) = \text{Var}\left(Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q}\right).
+\]
+Since the \(Z_t\) terms are white noise:
+\[
+\gamma(0) = \sigma^2 \left(1 + \theta_1^2 + \ldots + \theta_q^2\right).
+\]</p>
+</li>
+<li>
+<p><strong>Case \(0 &lt; \tau \leq q\):</strong>  For \(0 &lt; \tau \leq q\), the autocovariance at lag \(\tau\) is:
+\[
+\gamma(\tau) = \mathbb{E}\left[(Y_t - \mathbb{E}[Y_t])(Y_{t+\tau} - \mathbb{E}[Y_{t+\tau}])\right]
+= \mathbb{E}\left[Z_t (\theta_\tau Z_{t-\tau})\right].
+\]</p>
+</li>
+<li>
+<p><strong>Case \(\tau &gt; q\):</strong> For lags beyond \(q\):
+\[
+\gamma(\tau) = 0, \quad \text{since there is no overlap of terms.}
+\]</p>
+</li>
+</ol>
+<p>In sum,
+\[
+γ(τ) =</p>
+<p>\begin{cases}
+\sigma^2 (\theta_\tau + \theta_1 \theta_{\tau-1} + \ldots + \theta_q \theta_{\tau-q}), &amp; 0 &lt; \tau \le q, \\
+0, &amp; \tau &gt; q.
+\end{cases}</p>
+<p>\]
+The autocovariances depend solely on the lag \(\tau\).  So the process is covariance stationary. The autocovariance is zero beyond \(q\) lags.</p>
+<div class="definition">
+<p>The processes \(\{Y_t\}\) is said to be an <em>ARMA(</em>\(p,q\)/) process if \(\{Y_t\}\) is stationary and if it can be represented by the linear difference equation:
+\[
+Y_t = \phi_1 Y_{t-1} + \ldots \phi_p Y_{t-p} + Z_t + \theta_1 Z_{t-1} + \ldots + \theta_q Z_{t-q}
+\]
+with \(\{Z_t\} \sim WN(0,\sigma^2)\). Using the lag operator \(LX_t = X_{t-1}\) we can write:
+\[
+\phi(L)Y_t = \theta(L)Z_t
+\]
+where
+\[
+\phi(z) = 1 - \phi_1 z - \ldots \phi_p z^p \mbox{ and } \theta(z) = 1 + \theta_1 z + \ldots + \theta_q z^q.
+\]
+Special cases:</p>
+<ol>
+<li>\(AR(1) : Y_t = \phi_1 Y_{t-1} + Z_t\).</li>
+<li>\(MA(1) : Y_t = Z_t + \theta_1 Z_{t-1}\).</li>
+<li>\(AR(p)\), \(MA(q)\), \(\ldots\)</li>
+</ol>
+</div>
+<figure><img src="https://edherbst.net/ox-hugo/a0addae6a8d02003b351aec0cb27928e786c3b8f.png"
+    alt="Figure 2: Autocovariance Functions of Two MA Processes"><figcaption>
+      <p><span class="figure-number">Figure 2: </span>Autocovariance Functions of Two MA Processes</p>
+    </figcaption>
+</figure>
+
+<p>talk about these two ACFs</p>
+<p>The plotted Autocovariance Functions (ACF) for the two Moving Average (MA) processes demonstrate key characteristics of MA models, particularly in their decay patterns:</p>
+<ol>
+<li>
+<p><strong>\(Y_t = Z_t + 0.8Z_{t-1}\):</strong> This is an MA(1) process. The ACF exhibits a spike at \(\tau = 1\), and zero autocovariances for lags greater than one. This is typical for MA(1) processes, where the correlation exists only between adjacent terms and disappears entirely beyond the first lag.</p>
+</li>
+<li>
+<p><strong>\(Y_t = Z_t - 0.3Z_{t-1} + 0.6Z_{t-2}\):</strong> This is an MA(2) process. The ACF shows non-zero values at \(\tau = 1\) and \(\tau = 2\), reflecting the two-period dependency introduced by the lag terms. Beyond lag 2, the autocovariance becomes zero, as there is no third-period memory or influence.</p>
+</li>
+</ol>
+<p>The plots highlight that MA(q) processes have autocovariance functions with non-zero values up to the q-th lag, after which they drop to zero. This sharp cutoff is a defining feature of moving average processes, contrasting with the slow decay often observed in autoregressive (AR) processes.</p>
+<h3 id="ar--1">AR(1)</h3>
+<p>Let&rsquo;s return to Example , substituting the normal disturbances for more general white noise:
+\[
+Y_t = \phi_1 Y_{t-1} + Z_t.
+\]
+This can be viewed as a linear difference equation, and so we can solve backwards for \(y_t\) as a function \(z_t\) via backwards substitution:</p>
+<p>\begin{eqnarray}
+Y_t &amp;=&amp; \phi_1(\phi_1 Y_{t-2} + Z_{t-1}) + Z_{t}\\
+&amp;=&amp; Z_t +  \phi_1 Z_{t-1} +  \phi_1^2 Z_{t-2} +\ldots \\
+&amp;=&amp; \sum_{j=0}^{\infty} \phi_1^j Z_{t-j}.
+\end{eqnarray}</p>
+<p>How do we know whether this is a covariance stationary process?  Things are a little bit trickier than the MA case we have already studied: the AR(1) is a function of infinitely many \(z\)s.
+To determine whether this AR(1) process is covariance stationary, we need to examine if \( y_t \) converges to a random variable given the infinite history of innovations. This requires introducing the concept of <strong>mean square convergence</strong>.</p>
+<p>A sequence of random variables \(\{Y_t\}\) is said to converge in mean square to a random variable \(Y\) if the expectation of the squared differences between them approaches zero as \(t\) tends to infinity. Formally, this is expressed as:
+\[
+\mathbb{E}\left[(Y_t - Y)^2\right] \rightarrow 0 \quad \text{as} \quad t \rightarrow \infty.
+\]
+The idea of mean square convergence is closely related to the convergence of infinite series in the deterministic setting, such as \(\sum_{j=0}^\infty a_j\). To ensure the AR(1) process converges, and thus can be considered covariance stationary, we verify that the infinite sum of the coefficients \(\phi_1^j\) multiplied by the white noise terms \(z_{t-j}\) does not diverge.</p>
+<h3 id="ar--2">AR(2)</h3>
+<p>Consider now the AR(2) model:
+\[
+Y_t = \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + Z_t
+\]
+Which means
+\[
+\phi(L) Y_t = Z_t, \quad \phi(z) = 1 - \phi_1 z - \phi_2 z^2
+\]
+Under what conditions can we invert \(\phi(\cdot)\)? Factoring the polynomial
+\[
+1 - \phi_1 z - \phi_2 z^2 = (1-\lambda_1 z) (1-\lambda_2 z)
+\]
+Using the above theorem, if both \(|\lambda_1|\) and \(|\lambda_2|\) are less than one in length (they can be complex!) we can apply the earlier logic succesively to obtain conditions for covariance stationarity.</p>
+<p>Note: \(\lambda_1\lambda_2 = -\phi_2\) and \(\lambda_1 + \lambda_2 = \phi_1\)</p>
+<p>\begin{eqnarray}\left[\begin{array}{c}Y_t \\ Y_{t-1} \end{array}\right] =
+\left[\begin{array}{cc}\phi_1 &amp; \phi_2 \\ 1 &amp; 0 \end{array}\right]
+\left[\begin{array}{c}Y_{t-1} \\ Y_{t-2} \end{array}\right]
++
+\left[\begin{array}{c}\epsilon_t\\ 0 \end{array}\right]\end{eqnarray}</p>
+<p>\({\mathbf Y}_t = F {\mathbf Y}_{t-1} + {\mathbf \epsilon_t}\)</p>
+<p>\(F\) has eigenvalues \(\lambda\) which solve \(\lambda^2 - \phi_1 \lambda - \phi_2 = 0\)
+Multiplying and using the symmetry of the autocovariance function:</p>
+<p>\begin{eqnarray}
+Y_t &amp;:&amp;\gamma(0) = \phi_1\gamma(1) + \phi_2\gamma(2) + \sigma^2 \\
+Y_{t-1} &amp;:&amp; \gamma(1) = \phi_1\gamma(0) + \phi_2\gamma(1) \\
+Y_{t-2} &amp;:&amp; \gamma(2) = \phi_1\gamma(1) + \phi_2\gamma(0) \\
+&amp;\vdots&amp; \\
+Y_{t-h} &amp;:&amp; \gamma(h) = \phi_1\gamma(h-1) + \phi_2\gamma(h-2)
+\end{eqnarray}</p>
+<p>We can solve for \(\gamma(0), \gamma(1), \gamma(2)\) using the first three equations:
+\[
+\gamma(0) = \frac{(1-\phi_2)\sigma^2}{(1+\phi_2)[(1-\phi_2)^2 - \phi_1^2]}
+\]
+We can solve for the rest using the recursions.</p>
+<p>Note pth order AR(1) have autocovariances / autocorrelations that follow the same pth order difference equations.</p>
+<p>Autocorrelations: call these <span class="underline">Yule-Walker</span> equations following the work of <a href="#citeproc_bib_item_8">Yule (1927)</a> and <a href="#citeproc_bib_item_7">Walker (1931)</a>.</p>
+<h2 id="large-samples-revisited">Large Samples Revisited</h2>
+<p>We&rsquo;ll show a weak law of large numbers and central limit theorem applies to this process using the <a href="#citeproc_bib_item_1">Beveridge and Nelson (1981)</a> decomposition following <a href="#citeproc_bib_item_6">Phillips and Ploberger (1996)</a>.    For the MA(\(q\)), setting \(q_0 = 1\) (a normalization), we can write \(\theta(\cdot)\) in a Taylor expansion-ish sort of way:</p>
+<p>\begin{eqnarray}
+\theta(L) &amp;=&amp; \sum_{j=0}^q \theta_j L^j,
+= \left(\sum_{j=0}^q \theta_j - \sum_{j=1}^q \theta_j\right) +
+\left(\sum_{j=1}^q \theta_j - \sum_{j=2}^q \theta_j\right)L \nonumber \\ &amp;~&amp;+
+\left(\sum_{j=2}^q \theta_j - \sum_{j=3}^q \theta_j\right)L^2 + \ldots \nonumber \\
+&amp;=&amp; \sum_{j=0}^q \theta_j + \left(\sum_{j=1}^q\theta_j\right)(L-1) + \left(\sum_{j=2}^q\theta_j\right)(L^2-L) + \ldots\nonumber\\
+&amp;=&amp; \theta(1) + \widehat\theta_1(L-1) + \widehat\theta_2 L (L-1) + \ldots \nonumber\\
+&amp;=&amp; \theta(1) + \widehat\theta(L)(L-1) \nonumber
+\end{eqnarray}</p>
+<p>Here \(\widehat{\theta}_i = \sum_{j=i}^q \theta_j\).  Thus, we can write \(y_t\) as
+\[
+y_t = \theta(1) \epsilon_t + \hat\theta(L)\epsilon_{t-1} - \hat\theta(L)\epsilon_{t}
+\]
+An average of \(y_t\) cancels most of the second and third term &hellip;
+\[
+\frac1T \sum_{t=1}^T y_t  = \frac{1}{T}\theta(1) \sum_{t=1}^T \epsilon_t +
+\frac1T\left(\hat\theta(L)\epsilon_0 - \hat\theta(L)\epsilon_T\right)
+\]
+We have
+\[
+\frac{1}{\sqrt{T}}\left(\hat\theta(L)\epsilon_0 - \hat\theta(L)\epsilon_T\right) \rightarrow 0.
+\]
+Then we can apply the WLLN / CLT for <span class="underline">iid</span> sequences (from the beginning of the lecture) with Slutzky&rsquo;s Theorem to deduce that
+\[
+\frac1T \sum_{t=1}^T y_t  \rightarrow 0 \mbox{ and }
+\frac{1}{\sqrt{T}}\sum_{t=1}^T y_t  \rightarrow N(0, \sigma^2 \theta(1)^2).
+\]</p>
+<div class="definition">
+<p>A time series is <span class="underline"><span class="underline">strictly stationary</span></span> if for all \(t_1,\ldots,t_k, k, h \in T\) if
+\[
+Y_{t_1}, \ldots, Y_{t_k} \sim Y_{t_1+h}, \ldots, Y_{t_k+h}
+\]</p>
+</div>
+<p>We started this lecture with a refresher on the WLLN and CLT for sums of independent random variables. As emphasized, time series data, however, are often not independent, which necessitates the use of more advanced tools to analyze them effectively. And covariance staionarity is in general not enough.  We instead rely on /ergodicity/—a property that helps us understand under what conditions time averages (i.e., averages calculated over time) converge to population averages (i.e., expected values).  This property is important make inferential statements about the entire process based on a single, sufficiently long observation path. Essentially, for ergodic processes, &ldquo;time averages are equivalent to space averages.&rdquo;</p>
+<div class="definition">
+<p>A stationary process is classified as <strong>ergodic</strong> if, for any two bounded and measurable functions \( f: \mathbb R^k \rightarrow \mathbb R \) and \( g: \mathbb R^l \rightarrow \mathbb R \), the following condition holds:
+\[
+\lim_{n \rightarrow \infty} \left|\mathbb{E} \left[ f(y_t,\ldots,y_{t+k})g(y_{t+n},\ldots,y_{t+n+l})\right]\right| - \left|\mathbb{E} \left[ f(y_t,\ldots,y_{t+k})\right]\right|\left|\mathbb{E}\left[g(y_{t+n},\ldots,y_{t+n+l})\right]\right| = 0
+\]</p>
+</div>
+<p>At an intuitive level, a process is ergodic if the dependency between an event today and an event at some future horizon diminishes as the time horizon increases.  An important result involving ergodic processes is the Ergodic Theorem. If \( \{y_t\} \) is a strictly stationary and ergodic process, and \( \mathbb E[y_1] &lt; \infty \), then the time average of the process converges to the population average:
+\[
+\frac{1}{T} \sum_{t=1}^{T} y_t \longrightarrow \mathbb{E}[y_1]
+\]
+This theorem assures us that time averages are consistent estimators of the population mean for ergodic processes.  The Central Limit Theorem for strictly stationary and ergodic processes provides us with distributional results. If \( \{y_t\} \) is such a process with \( \mathbb{E}[y_1] &lt; \infty \), \( \mathbb{E}[y_1^2] &lt; \infty \), and \( \bar\sigma^2 = \text{Var}(T^{-1/2} \sum y_t) \rightarrow \bar\sigma^2 &lt; \infty \), then:
+\[
+\frac{1}{\sqrt{T} \bar\sigma_T} \sum_{t=1}^{T} y_t \rightarrow N(0,1)
+\]
+Here are some facts about ergodicity:</p>
+<ol>
+<li><strong>IID Sequences</strong>: Independent and identically distributed (IID) sequences are both stationary and ergodic naturally.</li>
+<li><strong>Functions of Ergodic Processes</strong>: If \( \{Y_t\} \) is strictly stationary and ergodic, and \( f: \mathbb R^\infty \rightarrow \mathbb R \) is measurable, then the sequence \( Z_t = f(\{Y_t\}) \) is also strictly stationary and ergodic.</li>
+</ol>
+<p>Consider an \( MA(\infty) \) process with iid Gaussian white noise:
+\[
+Y_t = \sum_{j=0}^{\infty} \theta_j \epsilon_{t-j}, \quad \sum_{j=0}^{\infty} |\theta_j| &lt; \infty
+\]
+For this process, \( \{Y_t\}, \{Y_t^2\}, \text{ and } \{Y_tY_{t-h}\} \) are ergodic. This implies:
+\[
+\frac{1}{T} \sum_{t=0}^{\infty} Y_t \rightarrow \mathbb{E}[Y_0], \quad
+\frac{1}{T} \sum_{t=0}^{\infty} Y_t^2 \rightarrow \mathbb{E}[Y_0^2], \quad
+\frac{1}{T} \sum_{t=0}^{\infty} Y_t Y_{t-h} \rightarrow \mathbb{E}[Y_0 Y_{-h}]
+\]
+A sequence \( \{Z_t\} \) is termed a <em>Martingale Difference Sequence</em> (MDS) with respect to information sets \( \{\mathcal{F}_t\} \) if:
+\[
+E[Z_t | \mathcal{F}_{t-1}] = 0 \quad \text{for all} \; t
+\]
+For a martingale difference sequence \( \{Y_t, \mathcal{F}_t\} \) satisfying \( E[|Y_t|^{2r}] &lt; \Delta &lt; \infty \) for some \( r &gt; 1 \), and all \( t \):</p>
+<ul>
+<li>The sample average \( \bar{Y}_T = T^{-1} \sum_{t=1}^T Y_t \stackrel{p}{\longrightarrow} 0 \).</li>
+<li>If \( \text{Var}(\sqrt{T} \bar{Y}_T) = \bar{\sigma}_T^2 \rightarrow \sigma^2 &gt; 0 \), then:</li>
+</ul>
+<p>\[
+\sqrt{T} \bar{Y}_T / \bar{\sigma}_T \Longrightarrow \mathcal{N}(0,1)
+\]</p>
+<p>Consider an investor making decisions between a stock with real return \( r_t \) and a nominal bond with guaranteed return \( R_{t-1} \) subject to inflation risk \( \pi_t \). Assuming risk neutrality and no arbitrage implies:
+\[
+\mathbb{E}_{t-1}[r_t] = \mathbb{E}_{t-1}[R_{t-1} - \pi_t]
+\]
+This can be rewritten as:
+\[
+0 = r_t + \pi_t - R_{t-1} - \underbrace{\left((r_t - \mathbb{E}_{t-1}[r_t]) + (\pi_t - \mathbb{E}_{t-1}[\pi_t])\right)}_{\eta_t}
+\]
+Here, \( \eta_t \) is an expectation error and, under rational expectations, \( \mathbb{E}_{t-1}[\eta_t] = 0 \). Therefore, \( \eta_t \) forms a Martingale Difference Sequence, a fact we will explore further in Generalized Method of Moments (GMM) estimation later in the course.</p>
+<h2 id="the-trinity-in-macro">The Trinity In Macro</h2>
+<p>Empirical Time Series: Log Real GDP, PCE Inflation, and Federal Funds Rate</p>
+<p>Time series analysis is widely applied in macroeconomics to understand and forecast key economic indicators. In this subsection, we&rsquo;ll briefly discuss three such empirical time series: the logarithm of real Gross Domestic Product (GDP), Personal Consumption Expenditures (PCE) inflation, and the federal funds rate.</p>
+<figure><img src="https://edherbst.net/ox-hugo/f6d69ad7a8584eaed29affc7f20620338b19b2b2.png"
+    alt="Figure 3: Three Macroeconomic Time Series"><figcaption>
+      <p><span class="figure-number">Figure 3: </span>Three Macroeconomic Time Series</p>
+    </figcaption>
+</figure>
+
+<h2 id="references">References</h2>
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><div class="csl-bib-body">
+  <div class="csl-entry"><a id="citeproc_bib_item_1"></a><span style="font-variant:small-caps;">Beveridge, S., and C. R. Nelson</span>. (1981): “A New Approach to the Decomposition of Economic Time Series into Permanent and Transitory Components with Particular Attention to Measurement of the Business Cycle,” <i>Journal of Monetary Economics</i>, 7, 151–74.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_2"></a><span style="font-variant:small-caps;">Brockwell, P. J., and R. A. Davis</span>. (1987): <a href="https://doi.org/10.1007/978-1-4899-0004-3">“Time Series: Theory and Methods,</a>” <i>Springer Series in Statistics</i>, .</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_3"></a><span style="font-variant:small-caps;">Casella, G., and R. L. Berger</span>. (2002): <i>Statistical Inference</i>, 2nd ed.Pacific Grove, CA: Duxbury.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_4"></a><span style="font-variant:small-caps;">Cochrane, J.</span> (2005): <a href="http://econ.lse.ac.uk/staff/wdenhaan/teach/cochrane.pdf">“Time Series Analysis for Macroeconomics and Finance,</a>” <i>Mimeo</i>, .</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_5"></a><span style="font-variant:small-caps;">Hamilton, J.</span> (1994): <i>Time Series Analysis</i>, Princeton, New Jersey: Princeton University Press.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_6"></a><span style="font-variant:small-caps;">Phillips, P. C. B., and W. Ploberger</span>. (1996): “An Asymptotic Theory of Bayesian Inference for Time Series,” <i>Econometrica</i>, 64, 318–412.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_7"></a><span style="font-variant:small-caps;">Walker, G.</span> (1931): <a href="https://doi.org/10.1098/rspa.1931.0069">“On Periodicity in Series of Related Terms,</a>” <i>Proceedings of the Royal Society of London. Series a, Containing Papers of a Mathematical and Physical Character</i>, 131, 518–32.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_8"></a><span style="font-variant:small-caps;">Yule, G. U.</span> (1927): <a href="https://doi.org/10.1098/rsta.1927.0007">“On a Method of Investigating Periodicities in Disturbed Series, with Special Reference to Wolfer’s Sunspot Numbers,</a>” <i>Philosophical Transactions of the Royal Society of London. Series a, Containing Papers of a Mathematical or Physical Character</i>, 226, 267–98.</div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

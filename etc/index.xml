@@ -4,31 +4,23 @@
     <title>etc on Ed Herbst</title>
     <link>https://edherbst.net/etc/</link>
     <description>Recent content in etc on Ed Herbst</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://edherbst.net/etc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Oct 2020 21:40:41 -0400</lastBuildDate>
+    <atom:link href="https://edherbst.net/etc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hey Hey</title>
       <link>https://edherbst.net/etc/test/</link>
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://edherbst.net/etc/test/</guid>
-      <description>Here&amp;rsquo;s a heading %matplotlib inline import matplotlib.pyplot as plt plt.plot([1,2,3,4]); $x_t = 1$</description>
+      <description>&lt;h2 id=&#34;here-s-a-heading&#34;&gt;Here&amp;rsquo;s a heading&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;%&lt;/span&gt;matplotlib inline&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;plt&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;plot([&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;4&lt;/span&gt;]);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;https://edherbst.net/ox-hugo/a92fa8bca02a2fecb37438debfc4a7ced93dad03.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;$x_t = 1$&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Stock and Watson (2007) in pymc3 and Stan</title>
       <link>https://edherbst.net/etc/sw/</link>
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://edherbst.net/etc/sw/</guid>
-      <description>This file is available as Jupyter Notebook.
-The STOCK_2007 model inflation as an unobserved components models:
-\begin{eqnarray} \pi_t &amp;amp;=&amp;amp; \tau_t + \eta_t \\\ \tau_t &amp;amp;=&amp;amp; \tau_{t-1} + \epsilon_t \end{eqnarray}
-where \(\eta_t\) and \(\epsilon_t\) are independently and identically distributed with mean 0 and variances \(\sigma_\eta^2\) and \(\sigma_\epsilon^2\).
-A Replication First we start by importing some standard libraries.
-%matplotlib inline import matplotlib.pyplot as plt import numpy as np import pandas as p Next we get the data used and plot it.</description>
+      <description>&lt;p&gt;&lt;em&gt;This file is available as Jupyter Notebook&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;sup id=&#34;751475a24881d3cf8ff77e5dc432fc83&#34;&gt;&lt;a href=&#34;#STOCK_2007&#34; title=&#34;Stock \&amp;amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, {Journal of Money, Credit and Banking}, v(), 3 33 (2007).&#34;&gt;STOCK_2007&lt;/a&gt;&lt;/sup&gt; model inflation as an unobserved components&#xA;models:&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray}&#xA;\pi_t &amp;amp;=&amp;amp; \tau_t + \eta_t \\\&#xA;\tau_t &amp;amp;=&amp;amp; \tau_{t-1} + \epsilon_t&#xA;\end{eqnarray}&lt;/p&gt;&#xA;&lt;p&gt;where \(\eta_t\) and \(\epsilon_t\) are independently and identically&#xA;distributed with mean 0 and variances \(\sigma_\eta^2\) and&#xA;\(\sigma_\epsilon^2\).&lt;/p&gt;&#xA;&lt;h2 id=&#34;a-replication&#34;&gt;A Replication&lt;/h2&gt;&#xA;&lt;p&gt;First we start by importing some standard libraries.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

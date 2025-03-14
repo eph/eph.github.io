@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
     <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
     
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,7 +30,44 @@
 
 
 <meta name="twitter:title" content="Markov Chain Monte Carlo"/>
-<meta name="twitter:description" content="Metropolis-Hastings Algorithm The Metropolis-Hastings Algorithm Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain Monte Carlo (MCMC) algorithms. Algorithm constructs a Markov chain such that the stationary distribution associated with this Markov chain is unique and equals the posterior distribution of interest. First version constructed by Metropolis1953. Later generalized by Hastings1970. Tierney1994 proved important convergence results for MCMC algorithms. Introduction: Chib1995a. Textbook Robert2004 or Geweke2005. Markov Chain Monte Carlo Importance sampler generates a sequence of independent draws from the posterior distribution \(\pi(\theta)\), the MH algorithm generates a sequence of serially correlated draws."/>
+<meta name="twitter:description" content="Metropolis-Hastings Algorithm
+The Metropolis-Hastings Algorithm
+
+Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain
+Monte Carlo (MCMC) algorithms.
+
+Algorithm constructs a Markov chain such that the stationary distribution
+associated with this Markov chain is unique and equals the posterior
+distribution of interest.
+
+First version constructed by Metropolis1953. Later
+generalized by Hastings1970.  Tierney1994 proved
+important convergence results for MCMC algorithms.
+
+Introduction: Chib1995a. Textbook Robert2004 or
+Geweke2005.
+
+Markov Chain Monte Carlo
+
+Importance sampler generates a sequence of independent draws
+from the posterior distribution \(\pi(\theta)\), the MH algorithm generates
+a sequence of serially correlated draws.
+
+As long as the correlation in the Markov chain is not too strong, Monte
+Carlo averages \index{Monte Carlo average} of these draws can accurately
+approximate posterior means of \(h(\theta)\).
+
+We are going to care a lot about this correlation.  Why?
+\[
+\sqrt{n}( \bar{X} - \mathbb{E}[\bar{X}]) \Longrightarrow N \bigg( 0, \frac{1}{n} \sum_{i=1}^n \mathbb{V}[X_i] &#43;
+{\color{red} \frac{1}{n} \sum_{i=1}^n \sum_{j \not=i} COV(X_i,X_j)} \bigg)
+\]
+
+The Metropolis Hastings Algorithm
+A key ingredient is the proposal distribution \index{proposal density}
+\(q(\vartheta|\theta^{i-1})\), which potentially depends on the draw
+\(\theta^{i-1}\) in iteration \(i-1\) of the algorithm.
+\vspace{0.05in}"/>
 
 </head>
 <body class="terminal">
