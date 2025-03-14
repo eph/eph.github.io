@@ -25,7 +25,7 @@
        <meta property="og:title" content="Trends in Time Series" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://edherbst.net/teaching/georgetown/notes/models-with-trends/" /><meta property="article:published_time" content="2025-03-13T10:23:17-04:00" />
+<meta property="og:url" content="https://edherbst.net/teaching/georgetown/notes/models-with-trends/" /><meta property="article:published_time" content="2025-03-14T09:50:39-04:00" />
 
 
 
@@ -96,46 +96,32 @@ Thus, the long-run forecast of \( y_t \) becomes increasingly determined by the 
 y_t &amp;=&amp; \widehat{trend}_t + \widehat{fluctuations}_t \nonumber \\
 &amp;=&amp; (\hat{\beta}_1 + \hat{\beta}_2 t) + ( y_t - \hat{\beta}_1 - \hat{\beta}_2t).
 \end{eqnarray}</p>
-<p>When \(y_t\) is a logged variable, the coefficient \(\beta_2\) has the interpretation of an average growth rate.  Figure <a href="#org0d88be2">1</a> shows the trend and fluctuations for United States annual log GNP from 1909-1970.  The data come from <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> and the coefficients are estimated using ordinary least squares.</p>
+<p>When \(y_t\) is a logged variable, the coefficient \(\beta_2\) has the interpretation of an average growth rate.  Figure <a href="#org8f753d1">1</a> shows the trend and fluctuations for United States annual log GNP from 1909-1970.  The data come from <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> and the coefficients are estimated using ordinary least squares.</p>
 <p>The estimated coefficient \(\hat{\beta}_2\) is 0.031. This gives an average annual growth rate of about 3.1% over the period from 1909 to 1970. This indicates that, despite the fluctuations typical of economic activity, the underlying long-term trend was one of moderate growth.  The Great Depression is clearly visible in the cycle.</p>
-<figure><img src="https://edherbst.net/ox-hugo/a6b6451f75393c23dd1db17be3c7484cc9b59639.png"
-    alt="Figure 1: GNP: (Linear) Trend and Cycle (1909 - 1970)"><figcaption>
-      <p><span class="figure-number">Figure 1: </span>GNP: (Linear) Trend and Cycle (1909 - 1970)</p>
-    </figcaption>
-</figure>
-
-<p><strong>Econometrics of Deterministic Trend Models.</strong> You&rsquo;ve surely gone through the analysis of this regression model for cross sectional data.  Things are a bit different for the deterministic trend model. In fact, there are several difficulties associated with large sample analysis of the estimators \(\hat{\beta}_{1,T}\) and \(\hat{\beta}_{2,T}\).  Taking \(x_t = \left[1, t\right]&rsquo;\),</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
+</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-bf73901e5db8&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
+</span></span><span style="display:flex;"><span>[1;32m     20[0m [0;31m# Assign the inferred column names[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     21[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m [0;34m=[0m [0mcolumn_names[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0;32m---&gt; 22[0;31m [0mdata[0m[0;34m[[0m[0;34m&#39;Year&#39;[0m[0;34m][0m [0;34m=[0m [0mp[0m[0;34m.[0m[0mto_datetime[0m[0;34m([0m[0mdata[0m[0;34m[[0m[0;34m&#39;Year&#39;[0m[0;34m][0m[0;34m,[0m [0mformat[0m[0;34m=[0m[0;34m&#39;%Y&#39;[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[0m[1;32m     23[0m [0mdata[0m [0;34m=[0m [0mdata[0m[0;34m.[0m[0mreplace[0m[0;34m([0m[0;36m0[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mnan[0m[0;34m)[0m[0;34m.[0m[0mset_index[0m[0;34m([0m[0;34m&#39;Year&#39;[0m[0;34m)[0m[0;34m.[0m[0mto_period[0m[0;34m([0m[0;34m&#39;A&#39;[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>[1;32m     24[0m [0;32mfor[0m [0mc[0m [0;32min[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;p&#39; is not defined
+</span></span></code></pre></div><p><strong>Econometrics of Deterministic Trend Models.</strong> You&rsquo;ve surely gone through the analysis of this regression model for cross sectional data.  Things are a bit different for the deterministic trend model. In fact, there are several difficulties associated with large sample analysis of the estimators \(\hat{\beta}_{1,T}\) and \(\hat{\beta}_{2,T}\).  Taking \(x_t = \left[1, t\right]&rsquo;\),</p>
 <ol>
 <li>The matrix \(\frac{1}{T} \sum x_t x_t&rsquo;\) does not converge to a non-singular matrix \(Q\) as the time trend grows without bound.</li>
 <li>In a time series model, the disturbances \(u_t\) are in general dependent.  This will change the limiting distribution of quantities such as \(\sqrt{T} \frac{1}{T} \sum x_t u_t\).</li>
 <li>If the \(u_t\)&rsquo;s are serially correlated, then the OLS estimator will in general be inefficient. More sophisticated estimation techniques, like Generalized Least Squares (GLS), might be necessary to achieve efficiency.</li>
 </ol>
 <p>Roughly speaking, convergence rates tell us how fast we can learn the``true&rsquo;&rsquo; value of a parameter in a sampling experiment.  In &ldquo;standard&rdquo; OLS then the variance of the \(\hat\beta\) converges to zero at rate \(1/T\).  This isn&rsquo;t true for models with deterministic trends.  Let&rsquo;s look at the distributions of \(\sqrt{T}(\hat\beta_0 - \beta_0)\) and \(\sqrt{T}(\hat\beta_1 - \beta_1)\).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
-</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
-</span></span><span style="display:flex;"><span>[1;32m     14[0m [0mTs[0m [0;34m=[0m [0;34m[[0m[0;36m50[0m[0;34m,[0m [0;36m500[0m[0;34m,[0m [0;36m2000[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     15[0m [0;32mfor[0m [0mT[0m [0;32min[0m [0mTs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0;32m---&gt; 16[0;31m     [0mt_params[0m [0;34m=[0m [0;34m[[0m[0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m [0;32mfor[0m [0m_[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mN[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0m[1;32m     17[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m [0;34m=[0m [0mp[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0mt_params[0m[0;34m,[0m [0mcolumns[0m[0;34m=[0m[0;34m[[0m[0;34m&#39;beta0_hat&#39;[0m[0;34m,[0m [0;34m&#39;beta1_hat&#39;[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     18[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0msqrt[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m*[0m[0;34m([0m[0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m-[0m [0mbeta0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36m&lt;listcomp&gt;[0;34m(.0)[0m
-</span></span><span style="display:flex;"><span>[1;32m     14[0m [0mTs[0m [0;34m=[0m [0;34m[[0m[0;36m50[0m[0;34m,[0m [0;36m500[0m[0;34m,[0m [0;36m2000[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     15[0m [0;32mfor[0m [0mT[0m [0;32min[0m [0mTs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0;32m---&gt; 16[0;31m     [0mt_params[0m [0;34m=[0m [0;34m[[0m[0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m [0;32mfor[0m [0m_[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mN[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0m[1;32m     17[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m [0;34m=[0m [0mp[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0mt_params[0m[0;34m,[0m [0mcolumns[0m[0;34m=[0m[0;34m[[0m[0;34m&#39;beta0_hat&#39;[0m[0;34m,[0m [0;34m&#39;beta1_hat&#39;[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     18[0m     [0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0msqrt[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m*[0m[0;34m([0m[0mres[0m[0;34m[[0m[0mT[0m[0;34m][0m[0;34m.[0m[0mbeta0_hat[0m [0;34m-[0m [0mbeta0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-1-c33a84cbe1c4&gt;[0m in [0;36mmonte_carlo[0;34m(T)[0m
-</span></span><span style="display:flex;"><span>[1;32m      5[0m [0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m      6[0m [0;32mdef[0m [0mmonte_carlo[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0;32m----&gt; 7[0;31m     [0mt[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marange[0m[0;34m([0m[0mT[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0m[1;32m      8[0m     [0my[0m [0;34m=[0m [0mbeta0[0m [0;34m+[0m [0mbeta1[0m [0;34m*[0m [0mt[0m [0;34m+[0m [0mnp[0m[0;34m.[0m[0mrandom[0m[0;34m.[0m[0mnormal[0m[0;34m([0m[0msize[0m[0;34m=[0m[0mT[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m      9[0m     [0mX[0m [0;34m=[0m [0msm[0m[0;34m.[0m[0madd_constant[0m[0;34m([0m[0mt[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;np&#39; is not defined
-</span></span></code></pre></div><p>Figure <a href="#orge7dd43c">1</a> displays the sampling distributions for \(\widehat \beta_0\) and \(\widehat \beta_1\).  The standardized estimate of \(\widehat\beta_0\) is stabilized at normal dstirbution.  However the estimate \(\sqrt{T}(\widehat\beta_1 - \beta_1)\) is clearly degenerating to a point mass at zero as \(T\) becomes large, as its variance is shrinnking rapidly.  We&rsquo;ll analysis this asymptotic result now.</p>
+<figure><img src="https://edherbst.net/ox-hugo/0d78730ed99effca5bcaea06d4559c4b413842c2.png"
+    alt="Figure 1: Sampling Distribution of (widehatbeta)"><figcaption>
+      <p><span class="figure-number">Figure 1: </span>Sampling Distribution of (widehatbeta)</p>
+    </figcaption>
+</figure>
+
+<p>Figure <a href="#org296db8f">1</a> displays the sampling distributions for \(\widehat \beta_0\) and \(\widehat \beta_1\).  The standardized estimate of \(\widehat\beta_0\) is stabilized at normal dstirbution.  However the estimate \(\sqrt{T}(\widehat\beta_1 - \beta_1)\) is clearly degenerating to a point mass at zero as \(T\) becomes large, as its variance is shrinnking rapidly.  We&rsquo;ll analysis this asymptotic result now.</p>
 <p>We&rsquo;ll begin with some algebraic identities that will be helpful.</p>
 <p>\begin{eqnarray*}
 \sum_{t=1}^T 1 = T,\quad \sum_{t=1}^T t  =  \frac{T(T+1)}{2}, \text{ and } \sum_{t=1}^T t^2 = \frac{T(T+1)(2T+1)}{6}.
@@ -267,8 +253,8 @@ T^{3/2}( \hat{\beta}_T - \beta) \Longrightarrow \big(0,3\sigma^2_\epsilon (1+\th
 \]
 If \(\theta\) is positive then the limit variance of the OLS estimator in the
 model with $i.i.d.$ disturbances is smaller than in the trend model with moving
-average disturbances.  Thus, Positive serial correlated data are less informative than $i.i.d.$ data.  Figure <a href="#org4e3e6d4">2</a> displays the sampling distribution of the OLS estimator under errors with identical unconditional variance but with serial correlation (blue line) and under \(i.i.d.\) disturbances (orange dashed line).  In this set of simulations, \(\beta = 0.5\), \(\theta = 0.6\), and \(\sigma_\epsilon = 1\).  The sample size is given by \(T = 500\).  Clearly, the estimator under serial correlation exhibits large variance, though both estimators are asymptotically unbiased.</p>
-<figure><img src="https://edherbst.net/ox-hugo/5f194d6b4f80e26b95728e131ab4ff10f711db86.png"
+average disturbances.  Thus, Positive serial correlated data are less informative than $i.i.d.$ data.  Figure <a href="#org20238e6">2</a> displays the sampling distribution of the OLS estimator under errors with identical unconditional variance but with serial correlation (blue line) and under \(i.i.d.\) disturbances (orange dashed line).  In this set of simulations, \(\beta = 0.5\), \(\theta = 0.6\), and \(\sigma_\epsilon = 1\).  The sample size is given by \(T = 500\).  Clearly, the estimator under serial correlation exhibits large variance, though both estimators are asymptotically unbiased.</p>
+<figure><img src="https://edherbst.net/ox-hugo/c6e16b171543925912f2c5bdd35661cca2c28ad4.png"
     alt="Figure 2: OLS is Inefficient Under Serially Correlated Errors"><figcaption>
       <p><span class="figure-number">Figure 2: </span>OLS is Inefficient Under Serially Correlated Errors</p>
     </figcaption>
@@ -423,8 +409,8 @@ Y_T(s) = \frac{1}{\sigma \sqrt{T} } \sum_{t=1}^T
 \{ t \le \lfloor Ts \rfloor \} \epsilon_t
 \Longrightarrow W(s) \quad
 \end{eqnarray*}</p>
-<p>More mathematical background can be found in many texts on measure-theoretic probability including <a href="#citeproc_bib_item_1">Billingsley (1999)</a> or <a href="#citeproc_bib_item_6">Dudley (2002)</a>.  <a href="#citeproc_bib_item_3">Davidson (1994)</a> gives a more econometrics-focused introdution to limit theorems.  With this theory in hand, it&rsquo;s easy to now simulation from a Wiener process.  Figure <a href="#org5413f14">3</a> shows on realization of a Wiener process, simulated over the interval \([0, 1]\).</p>
-<figure><img src="https://edherbst.net/ox-hugo/94ae20109db38bdc8b43487380086c06ceccad19.png"
+<p>More mathematical background can be found in many texts on measure-theoretic probability including <a href="#citeproc_bib_item_1">Billingsley (1999)</a> or <a href="#citeproc_bib_item_6">Dudley (2002)</a>.  <a href="#citeproc_bib_item_3">Davidson (1994)</a> gives a more econometrics-focused introdution to limit theorems.  With this theory in hand, it&rsquo;s easy to now simulation from a Wiener process.  Figure <a href="#org7317148">3</a> shows on realization of a Wiener process, simulated over the interval \([0, 1]\).</p>
+<figure><img src="https://edherbst.net/ox-hugo/116ee14bad130494a3e25d6b1d6d09fd933d3dce.png"
     alt="Figure 3: A Wiener Process"><figcaption>
       <p><span class="figure-number">Figure 3: </span>A Wiener Process</p>
     </figcaption>
@@ -446,40 +432,20 @@ t(\hat{\phi}_T) &amp; \Longrightarrow &amp;  \frac{\frac{1}{2} ( W(1)^2 -1 )  }{
 \end{eqnarray}</p>
 <p>where \(W(s)\) denotes a standard Wiener process.</p>
 <p>To see these asymptotics, consider the simplified model \(y_t = \phi y_{t-1} + u_t\).  We&rsquo;ll try to estimation \(\phi\) by regression \(y_t\) on \(y_{t-1}\) (omitting the constant term.)  Let&rsquo;s consider two cases for the true value of \(\phi \in \{0.95, 1\}\).  For each value of \(\phi\), we simulate many time series of length \(T = 5000\) and estimate \(\phi\) via OLS.</p>
-<figure><img src="https://edherbst.net/ox-hugo/522cb964af3923302e65ddb58d33fb8d8f80a673.png">
+<figure><img src="https://edherbst.net/ox-hugo/f21378229d497ffd10f310f6f744e2c4a6d33164.png">
 </figure>
 
 <p>In practice, testing for a unit root in time series data uses results along these lines, with the specific critical values tabulated for the way lags of \(y_t\) enters the regression.  You may have heard of Dickey-Fuller and <em>Augmented</em> Dickey-Fuller tests, the &ldquo;augmented&rdquo; refers to the inclusion of lagged differences of the time series as additional regressors to account for higher-order serial correlation, thus improving test performance in the presence of autocorrelated disturbances.</p>
 <h3 id="replicating">Replicating <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a></h3>
-<p><a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> investigate whether a set of key macroeconomic time series exhibited were better described by deterministic or stochastic trend models.  We&rsquo;ll return to the example in Figure <a href="#org0d88be2">1</a> and focus on log Real GNP from 1909-1970.  They first examine the estimated autocorrelation functions of the level and deviations from the time trend, both plotted in Figure <a href="#org0d88be2">1</a>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
-</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-5-232fa650db59&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
-</span></span><span style="display:flex;"><span>[1;32m      1[0m [0mautocorr_results[0m [0;34m=[0m [0;34m{[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0;32m----&gt; 2[0;31m [0;32mfor[0m [0mcol[0m [0;32min[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m[0;34m:[0m  [0;31m# Exclude &#39;Year&#39;[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0m[1;32m      3[0m     [0mseries[0m [0;34m=[0m [0mdata[0m[0;34m[[0m[0mcol[0m[0;34m][0m[0;34m.[0m[0mdropna[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m      4[0m [0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m      5[0m     [0mautocorr_values[0m [0;34m=[0m [0macf[0m[0;34m([0m[0mseries[0m[0;34m,[0m [0mnlags[0m[0;34m=[0m[0;36m6[0m[0;34m,[0m [0mfft[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;data&#39; is not defined
-</span></span></code></pre></div><p>These look pretty good, in the sense that the autocorrelations for the fluctuations (after removing the time trend) die out quickly, with a barely positive autocorrelation after the six lag.  Unfortunately, as <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> point out, these estimated autocorrelations are also consistent with an integrated series.  These kinds of statisical calculations often give misleading results (as we have just seen) when the underlying series is integrated.</p>
+<p><a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> investigate whether a set of key macroeconomic time series exhibited were better described by deterministic or stochastic trend models.  We&rsquo;ll return to the example in Figure <a href="#org8f753d1">1</a> and focus on log Real GNP from 1909-1970.  They first examine the estimated autocorrelation functions of the level and deviations from the time trend, both plotted in Figure <a href="#org8f753d1">1</a>:</p>
+<p>These look pretty good, in the sense that the autocorrelations for the fluctuations (after removing the time trend) die out quickly, with a barely positive autocorrelation after the six lag.  Unfortunately, as <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> point out, these estimated autocorrelations are also consistent with an integrated series.  These kinds of statisical calculations often give misleading results (as we have just seen) when the underlying series is integrated.</p>
 <p>To distinguish between the two trend paradigms, <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a> decide to run the regression
 \[
 y_t = \mu + \phi_1 y_{t-1} + \gamma t + \sum_{k=1}^K \phi_{\Delta k}\Delta y_{t-k} + u_t.
 \]
 They are interested in testing \(H_0: \phi_1 = 1, \gamma = 0\), and use the results from Dickey-Fuller to construct critical values.  For log Real GNP, they set \(K = 2\).
 The results of the regression can be seen below.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[0;31m---------------------------------------------------------------------------[0m
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m                                 Traceback (most recent call last)
-</span></span><span style="display:flex;"><span>[0;32m&lt;ipython-input-6-12026d385c3a&gt;[0m in [0;36m&lt;module&gt;[0;34m[0m
-</span></span><span style="display:flex;"><span>[1;32m     13[0m [0madf_table_results[0m [0;34m=[0m [0;34m{[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     14[0m [0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0;32m---&gt; 15[0;31m [0;32mfor[0m [0mcol[0m [0;32min[0m [0mdata[0m[0;34m.[0m[0mcolumns[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[0m[1;32m     16[0m     [0mseries[0m [0;34m=[0m [0mdata[0m[0;34m[[0m[0mcol[0m[0;34m][0m[0;34m.[0m[0mdropna[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-</span></span><span style="display:flex;"><span>[1;32m     17[0m [0;34m[0m[0m
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[0;31mNameError[0m: name &#39;data&#39; is not defined
-</span></span></code></pre></div><p>These results match the first row of Table 5 in <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a>.  The t-stat of \(-2.99\) would indicate that one should <em>reject</em> the marginal hypothesis that \(\phi_1 = 1\) at conventional significane levels.  But these critical values are invalid in the unit root context.  Instead the, say, 5 percent critial value tabulated by Dickey and Fuller is about \(-3.5\).  Thus, one cannot reject the null that real GNP is well described by a unit root process.</p>
+<p>These results match the first row of Table 5 in <a href="#citeproc_bib_item_8">Nelson and Plosser (1982)</a>.  The t-stat of \(-2.99\) would indicate that one should <em>reject</em> the marginal hypothesis that \(\phi_1 = 1\) at conventional significane levels.  But these critical values are invalid in the unit root context.  Instead the, say, 5 percent critial value tabulated by Dickey and Fuller is about \(-3.5\).  Thus, one cannot reject the null that real GNP is well described by a unit root process.</p>
 <h3 id="cointegrated-processes">Cointegrated Processes</h3>
 <p>We are often concerned with trending behavior for more than a single time series.
 For example, consider a bivariate model with a common stochastic trend:</p>
