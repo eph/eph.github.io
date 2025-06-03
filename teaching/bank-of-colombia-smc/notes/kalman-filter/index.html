@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ed Herbst/teaching/bank-of-colombia-smc/notes/kalman-filter/</title>
@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
-    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.1.min.css">
-    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-3.7.2.min.css">
-    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
 <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
 
@@ -25,7 +25,7 @@
        <meta property="og:title" content="Some Notes on the Kalman Filter" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/teaching/bank-of-colombia-smc/notes/kalman-filter/" /><meta property="article:published_time" content="2020-12-11T00:00:00+00:00" />
+<meta property="og:url" content="https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/" /><meta property="article:published_time" content="2020-12-11T00:00:00+00:00" />
 
 
 
@@ -50,17 +50,17 @@ attention to the case in which both of these equations are linear."/>
               
               
               
-              <a href='http://localhost:1313/teaching'>teaching</a>/<a href='http://localhost:1313/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='http://localhost:1313/teaching/bank-of-colombia-smc/notes'>notes</a>/<a href='http://localhost:1313/teaching/bank-of-colombia-smc/notes/kalman-filter'>kalman-filter</a>/</div></header>
+              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc'>bank-of-colombia-smc</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/notes'>notes</a>/<a href='https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter'>kalman-filter</a>/</div></header>
           <nav class="terminal-menu">
             <ul vocab="https://schema.org/" typeof="BreadcrumbList">
                 
-                <li><a href="http://localhost:1313/" typeof="ListItem">&lt;/&gt;</a></li>
+                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
                 
-                <li><a href="http://localhost:1313/research/" typeof="ListItem">research</a></li>
+                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
                 
-                <li><a href="http://localhost:1313/teaching/" typeof="ListItem">teaching</a></li>
+                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
                 
-                <li><a href="http://localhost:1313/etc/" typeof="ListItem">et cetera</a></li>
+                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
                 
             </ul>
           </nav>
@@ -495,7 +495,7 @@ D = \begin{bmatrix}0 \ 0 \end{bmatrix}, ~~ Z = \begin{bmatrix}1 \ 1 \end{bmatrix
 \right].
 \end{align}</p>
 <p>Here&rsquo;s a look at the data:</p>
-<p><img src="http://localhost:1313/ox-hugo/8f8c7ed886ee0fc55dde9d8e51bd3f65cc2ca7fc.png" alt="">
+<p><img src="https://edherbst.net/ox-hugo/8f8c7ed886ee0fc55dde9d8e51bd3f65cc2ca7fc.png" alt="">
 We can use the Kalman filter to maximize the likelihood function,
 since we haven&rsquo;t quite worked out how to elicit the posterior of
 this model just yet.</p>
@@ -506,11 +506,11 @@ this model just yet.</p>
 \(\{ A_t\}_{t=1}^T\), the filtered means of the &ldquo;true&rdquo; GDP series.
 We&rsquo;ll plot them along with the observables, and the simple average
 of expenditure-side and income-side GDP estimates.</p>
-<figure><img src="http://localhost:1313/ox-hugo/cb6ce1f5d1fa3c6a180eb701c9ed82c3b28b84cb.png">
+<figure><img src="https://edherbst.net/ox-hugo/cb6ce1f5d1fa3c6a180eb701c9ed82c3b28b84cb.png">
 </figure>
 
 <p>To make it a bit easier to see, let&rsquo;s look at the last five or so years.</p>
-<p><img src="http://localhost:1313/ox-hugo/29b3789b20a0fa50d6408b5db6a61177c58f491c.png" alt="">
+<p><img src="https://edherbst.net/ox-hugo/29b3789b20a0fa50d6408b5db6a61177c58f491c.png" alt="">
 You can see the average is different form the filtered estimate.
 Why is that?  The Kalman Gain matrix places different weights on
 the income- and expenditure-side GDP data.</p>

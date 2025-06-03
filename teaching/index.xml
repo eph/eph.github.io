@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>teaching on Ed Herbst</title>
-    <link>http://localhost:1313/teaching/</link>
+    <link>https://edherbst.net/teaching/</link>
     <description>Recent content in teaching on Ed Herbst</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Mar 2025 23:17:27 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/teaching/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://edherbst.net/teaching/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Econ 616: Macroeconometrics – Spring 2025</title>
-      <link>http://localhost:1313/teaching/georgetown/syllabus/</link>
+      <link>https://edherbst.net/teaching/georgetown/syllabus/</link>
       <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/syllabus/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/syllabus/</guid>
       <description>&lt;h2 id=&#34;instructor&#34;&gt;Instructor&lt;/h2&gt;&#xA;&lt;p&gt;Ed Herbst &lt;a href=&#34;mailto:ed.herbst@gmail.com&#34;&gt;ed.herbst@gmail.com&lt;/a&gt; | &lt;a href=&#34;http://edherbst.net/&#34;&gt;website&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;course-time-and-location&#34;&gt;Course Time and Location&lt;/h3&gt;&#xA;&lt;p&gt;Class will meet once a week &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;Tuesdays&lt;/span&gt;&lt;/span&gt; from &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;6:30p-9:00&lt;/span&gt;&lt;/span&gt; for lecture. &lt;em&gt;(That&amp;rsquo;s a long time; we&amp;rsquo;ll take a 5-10 minute break midway through!)&lt;/em&gt; The classroom is &lt;strong&gt;ICC-223A&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h3 id=&#34;course-description&#34;&gt;Course Description&lt;/h3&gt;&#xA;&lt;p&gt;The course is an introduction to univariate and multivariate time series models. Time domain methods, including VAR&amp;rsquo;s, structural VAR&amp;rsquo;s, Bayesian VAR&amp;rsquo;s for linear models and GMM for non-linear stationary models are covered. An introduction to non-stationary time series models is given. Frequency domain methods and their applications to business cycle inference are also covered. The course starts by introducing basic concepts and progresses to more complicated models. The course intends to meet two goals. It provides tools for empirical work with time series data, mostly for macroeconomic applications and provides a heuristic introduction into the theoretical foundation of time series models.&lt;/p&gt;</description>
     </item>
   </channel>

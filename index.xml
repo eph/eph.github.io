@@ -2,360 +2,360 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ED HERBST on Ed Herbst</title>
-    <link>http://localhost:1313/</link>
+    <link>https://edherbst.net/</link>
     <description>Recent content in ED HERBST on Ed Herbst</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://edherbst.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Risk Adjusted Optimal  Policy for Scenario Analysis</title>
-      <link>http://localhost:1313/research/risk-adjusted-oc/</link>
+      <link>https://edherbst.net/research/risk-adjusted-oc/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/risk-adjusted-oc/</guid>
+      <guid>https://edherbst.net/research/risk-adjusted-oc/</guid>
       <description></description>
     </item>
     <item>
       <title>Cranking through Bayesian Calculus, Part III</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/bayes-return-of-the-beta/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/bayes-return-of-the-beta/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:42 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/bayes-return-of-the-beta/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/bayes-return-of-the-beta/</guid>
       <description>&lt;p&gt;Last time we talked about the regression model,&lt;/p&gt;&#xA;&lt;p&gt;\begin{equation}&#xA;\label{eq:regression}&#xA;y_t = x_t&amp;rsquo;\beta + u_t, \quad u_t \sim iid N(0, \sigma^2).&#xA;\end{equation}&lt;/p&gt;&#xA;&lt;p&gt;We focused on the &amp;ldquo;new&amp;rdquo; parameter, \(\sigma^2\), and talked about how to&#xA;construct a prior for it.  We then described a few different&#xA;parameterizations of the prior. Finally, we derived the posterior for&#xA;\(\sigma^2\), under the likelihood defined in (\ref{eq:regression}) with&#xA;the restriction that \(\beta=0\).  Today we&amp;rsquo;re going to focus on jointly&#xA;estimating the two parameters of our regression model:&#xA;\((\beta,\sigma^2)\).  We&amp;rsquo;ll refer to this vector of parameters as&#xA;\(\theta\).  Also, let&amp;rsquo;s make it explicit that \(\beta\) is a \(k \times 1\)&#xA;vector; that is, there are \(k\) explanatory variables in our regression.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Intro to Bayesian Analysis</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/bayes-intro/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/bayes-intro/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:31 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/bayes-intro/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/bayes-intro/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objectives:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Most presentations of econometrics focus on &lt;em&gt;frequentist inference&lt;/em&gt;. That is, the properties of estimators and, more generally, inference procedures were examined from the perspective of repeated sampling experiments. The measures of accuracy and performance used to assess the statistical procedures were pre-experimental. However, many statisticians and econometricians believe that post-experimental reasoning should be used to assess inference procedures, wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed,&lt;/p&gt;</description>
     </item>
     <item>
       <title>Cranking through Bayesian Calculus, Part II</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/some-more-bayesian-questions/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/some-more-bayesian-questions/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:21 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/some-more-bayesian-questions/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/some-more-bayesian-questions/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s get some more practice with the Bayesian machinery in a regression model.&lt;/p&gt;&#xA;&lt;p&gt;\begin{equation}&#xA;y_t = x_t&amp;rsquo;\beta + u_t, \quad u_t \stackrel{i.i.d.}{\sim} N(0, \sigma^2).&#xA;\end{equation}&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve practiced the Bayesian machinery already setting \(\sigma^2=1\). Of course, that&amp;rsquo;s a bad assumption for many problems.  So let&amp;rsquo;s incorporate estimation of \(\sigma^2\) into our analysis.  It is much more common in contempory analysis to use the &lt;em&gt;inverse gamma distribution&lt;/em&gt; for \(\sigma^2\) with parameters \(\alpha\) and \(\beta\).   Specifically, a random variable \(\sigma^2\) follows an inverse gamma distribution if and only if&lt;/p&gt;</description>
     </item>
     <item>
       <title>Some Notes on the Kalman Filter</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/bayesian-state-space-models/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/bayesian-state-space-models/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:12 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/bayesian-state-space-models/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/bayesian-state-space-models/</guid>
       <description>&lt;p&gt;State space models form a very general class of models that encompass many of the specifications that we encountered earlier.  VARMA models, linearized DSGE models, and more can be written in state space form. State space models are particularly popular at the FRB.  For example, the models in the \(r^*\) suite can all be written in state space form.&#xA;(setq line-spacing 0)&#xA;A state space model can be described by two different equations: a&#xA;measurement equation that relates an &lt;em&gt;unobservable&lt;/em&gt; state vector \(s_t\)&#xA;to the &lt;em&gt;observables&lt;/em&gt; \(y_t\), and a transition equation that describes&#xA;the evolution of the state vector \(s_t\).  For now, we&amp;rsquo;ll restrict&#xA;attention to the case in which both of these equations are linear.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bayesian VARs</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/the-bayesian-var/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/the-bayesian-var/</link>
       <pubDate>Fri, 14 Mar 2025 09:50:50 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/the-bayesian-var/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/the-bayesian-var/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Basic Introduction to Bayesian VARs with a short tour of structural identification from a Bayesian perspective.&#xA;&lt;br /&gt;&lt;br /&gt;&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&#xA;The handbook chapter by &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Del Negro and Schorfheide (2011)&lt;/a&gt; is very good; much of these notes are abstracted from that.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Now we&amp;rsquo;re going to start putting things together to learn to estimate a cornerstone (Bayesian) model of macroeconomics, the autoregression (VAR.)  VARs were first introduced to macroeconomics by Christopher A. Sims in &lt;a href=&#34;#citeproc_bib_item_9&#34;&gt;Sims (1980)&lt;/a&gt; in an extremely important paper: &amp;ldquo;Macroeconomics and Reality.&amp;rdquo;  Sims attacked the prevailing macroeconometric models of the day&amp;mdash;including those used at the pFed&amp;mdash;which featured systems of equations with many coefficients imposed, often as a zero.  These models were estimated equation-by-equation, and often gave a (false) impression of both estimation precision and about the importance of particular transmission channels.  Sims instead used a flexible VAR which modeled the contemporaneous and dynamic depedence for a time series of \(n\) variables \(y_t\).  The VAR of order \(p\) follows the set of linear difference equations:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Trends in Time Series</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/models-with-trends/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/models-with-trends/</link>
       <pubDate>Fri, 14 Mar 2025 09:50:39 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/models-with-trends/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/models-with-trends/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Understand the basic of deterministic and stochastic trends.  Give a heuristic introduction to large sample theory.&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt; You can find background in &lt;a href=&#34;#citeproc_bib_item_7&#34;&gt;Hamilton (1994)&lt;/a&gt; chapters 15-16 and &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Davidson and MacKinnon (2003)&lt;/a&gt;.  We&amp;rsquo;ll discuss the results in &lt;a href=&#34;#citeproc_bib_item_8&#34;&gt;Nelson and Plosser (1982)&lt;/a&gt; in some detail in the lecture.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;A common method for analyzing macroeconomic time series is to decompose them into two distinct components: &lt;em&gt;trend&lt;/em&gt; and &lt;em&gt;cycle&lt;/em&gt;. This approach allows economists to better understand the underlying causes and effects of economic phenomenon at two different frequencies.&lt;/p&gt;</description>
     </item>
     <item>
       <title>A (Very) Brief Primer on Time Series</title>
-      <link>http://localhost:1313/teaching/georgetown/notes/introduction-to-time-series/</link>
+      <link>https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series/</link>
       <pubDate>Fri, 14 Mar 2025 09:49:51 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/notes/introduction-to-time-series/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Introduce basic concepts from time series: (covariance) stationarity, ARMA processes, Wold representation.&#xA;&lt;br /&gt;&lt;br /&gt;&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&#xA;For an overview, the first three chapters of &lt;a href=&#34;#citeproc_bib_item_5&#34;&gt;Hamilton (1994)&lt;/a&gt; are a good place to start.  More technically detailed information&amp;mdash;included the Hilbert space machinery used in modern analysis&amp;mdash;can be found Chapters 2 and 3 of &lt;a href=&#34;#citeproc_bib_item_2&#34;&gt;Brockwell and Davis (1987)&lt;/a&gt;.  I&amp;rsquo;ve personally found the first four chapters of &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Cochrane (2005)&lt;/a&gt; helpful for intuition.  Articles referenced in these notes are referenced in the bibliography.  And there&amp;rsquo;s always &lt;a href=&#34;http://chatgpt.com&#34;&gt;ChatGPT&lt;/a&gt;, though caveat emptor.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Econ 616: Problem Set 1</title>
-      <link>http://localhost:1313/teaching/georgetown/problem-sets/ps1_solutions/</link>
+      <link>https://edherbst.net/teaching/georgetown/problem-sets/ps1_solutions/</link>
       <pubDate>Fri, 14 Mar 2025 05:27:25 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/problem-sets/ps1_solutions/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/problem-sets/ps1_solutions/</guid>
       <description>&lt;h2 id=&#34;problem-1&#34;&gt;Problem 1&lt;/h2&gt;&#xA;&lt;p&gt;Let \(\phi (z) \equiv 1 - \phi_1 z - \phi_2 z^2\). What we need to&#xA;show is the solution of the equation \(\phi ( z) =0\) lies outside of&#xA;unit circle. Let \(z_1\) and \(z_2\) be the solutions of \(\phi (z)&#xA;=0\).&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Case 1:&lt;/strong&gt; Suppose \(\phi _{1}^{2}+4\phi _{2}\leq 0\). Then we have&#xA;either \(z_{1}=z_{2}\) or that \(z_{1}\) and \(z_{2}\) are complex&#xA;numbers and conjugate of each other. In any case the norm of the&#xA;solution is given by \(\sqrt{\left\vert \frac{1}{\phi&#xA;_{2}}\right\vert }\). Hence the condition is \(|\phi_{2}|&amp;lt;1\).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Econ 6016: Problem Set 1</title>
-      <link>http://localhost:1313/teaching/georgetown/problem-sets/ps1/</link>
+      <link>https://edherbst.net/teaching/georgetown/problem-sets/ps1/</link>
       <pubDate>Fri, 14 Mar 2025 05:26:28 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/problem-sets/ps1/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/problem-sets/ps1/</guid>
       <description>&lt;p&gt;*Due in class on Tuesday, February 18th.&lt;/p&gt;&#xA;&lt;h2 id=&#34;problem-1&#34;&gt;Problem 1&lt;/h2&gt;&#xA;&lt;p&gt;Consider the AR(2) process&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray}&#xA;y_t = \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t.&#xA;\end{eqnarray}&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Show that a necessary condition for stationarity is that the coefficients lie inside the triangle&#xA;\[&#xA;\phi_1 + \phi_2 &amp;lt; 1, \quad \phi_2 - \phi_1 &amp;lt; 1, \quad \mbox{and} \; \phi_2 &amp;gt; -1.&#xA;\]&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Now re-parameterize the AR(2) model in terms of partial autocorrelations \(\psi_1\) and \(\psi_2\):&#xA;\[&#xA;\phi_1 = \psi_1(1-\psi_2), \quad \phi_2 = \psi_2.&#xA;\]&#xA;Show that the AR(2) process is stationary if and only if \(\psi_1 \in (-1,1)\) and \(\psi_2 \in (-1,1)\).&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Machine Learning</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-machine-learning/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-machine-learning/</link>
       <pubDate>Thu, 13 Mar 2025 21:19:23 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-machine-learning/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-machine-learning/</guid>
       <description>&lt;h2 id=&#34;intro-plus-defintions&#34;&gt;Intro + Defintions&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Stuff written by economists: &lt;a href=&#34;#citeproc_bib_item_8&#34;&gt;Varian (2014)&lt;/a&gt;,&#xA;&lt;a href=&#34;#citeproc_bib_item_6&#34;&gt;Mullainathan and Spiess (2017)&lt;/a&gt;, &lt;a href=&#34;#citeproc_bib_item_1&#34;&gt;Athey (2018)&lt;/a&gt;&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Useful books: &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Hastie, Tibshirani, and Friedman (2009)&lt;/a&gt;,&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Gentle introduction: Machine Learning on &lt;a href=&#34;http://coursera.org&#34;&gt;http://coursera.org&lt;/a&gt;;&#xA;many other things on the internet (of varying quality).&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Computation: &lt;code&gt;scikit-learn&lt;/code&gt; (python).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;machine-learning-definition&#34;&gt;&amp;ldquo;Machine Learning&amp;rdquo; definition&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Hard to define; context dependent;&#xA;&lt;br&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;#citeproc_bib_item_1&#34;&gt;Athey (2018)&lt;/a&gt;:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;hellip; a field that develops algorithms designed to applied to&#xA;datasets with the main areas of focus being prediction&#xA;(regression), classification, and clustering or grouping tasks.&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture 10: Intro to Nonlinear Times Series Models</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/</link>
       <pubDate>Thu, 13 Mar 2025 21:14:03 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-ten-nonlinear-times-series/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;&#xA;&lt;p&gt;Books:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hamilton, Chapter 21&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;This week, we&amp;rsquo;ll focus on a particular kind of nonlinearity &amp;ndash; &lt;strong&gt;time-varying volatiltity&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;ARCH/GARCH models&lt;/li&gt;&#xA;&lt;li&gt;Stochastic Volatility Models&lt;/li&gt;&#xA;&lt;li&gt;Markov-Switching Models&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;arch-garch-models&#34;&gt;ARCH/GARCH Models&lt;/h2&gt;&#xA;&lt;h3 id=&#34;arch&#34;&gt;ARCH&lt;/h3&gt;&#xA;&lt;p&gt;We started the course talking about &lt;em&gt;autoregressive models&lt;/em&gt; for&#xA;observables \(y_t\).  Let&amp;rsquo;s allow the variance of \(y_t\) to vary over time.&#xA;&lt;br&gt;&#xA;The &lt;strong&gt;p-th order ARCH model&lt;/strong&gt;, first used in &lt;a href=&#34;#citeproc_bib_item_2&#34;&gt;Engle (1982)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray}&#xA;\label{eq:arch}&#xA;y_t &amp;amp;=&amp;amp; \mu + \epsilon_t \\&#xA;\sigma_{\textcolor{red}{t}}^2  &amp;amp;=&amp;amp; \omega + \alpha_1 \epsilon_{t-1}^2 + \ldots + \alpha_p\epsilon_{t-p}^2  \\&#xA;\epsilon_t &amp;amp;=&amp;amp; \sigma_t e_t \quad e_t \sim N(0,1).&#xA;\end{eqnarray}&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture Four: VARs</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-four-vars/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-four-vars/</link>
       <pubDate>Thu, 13 Mar 2025 17:52:02 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-four-vars/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-four-vars/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;Overview:&lt;/em&gt; Chapter 10 from cite:Hamilton.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Technical Details&lt;/em&gt;: cite:Lutkepohl_1993&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Other stuff&lt;/em&gt;: There is a new book by cite:kilian_lutkepohl_2017&#xA;&amp;ndash; I haven&amp;rsquo;t read it yet.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Some surveys&lt;/em&gt;: cite:Stock2001, cite:Ramey_2016.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;vars&#34;&gt;VARs&lt;/h3&gt;&#xA;&lt;p&gt;VARs have become an important tool for empirical macroeconomic research.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Reduced Form&lt;/strong&gt; representations of the data that&#xA;summarize regular features and are suitable to conduct forecasts.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Structural&lt;/strong&gt; economic model can give some&#xA;interpretation to a vector autoregression.&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture Three: The Spectrum</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-three-spectrum/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-three-spectrum/</link>
       <pubDate>Thu, 13 Mar 2025 17:51:55 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-three-spectrum/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-three-spectrum/</guid>
       <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Overview:&lt;/em&gt; Chapters 6 from &lt;a href=&#34;#citeproc_bib_item_3&#34;&gt;Hamilton (1994)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Technical Details&lt;/em&gt;: Chapter 4 from &lt;a href=&#34;#citeproc_bib_item_2&#34;&gt;Brockwell and Davis (1987)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Other stuff&lt;/em&gt;: You might want to look at a digital signals processing textbook, for example: &lt;a href=&#34;http://www.sp4comm.org/docs/sp4comm_corrected.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;cycles-as-frequencies&#34;&gt;Cycles as Frequencies&lt;/h3&gt;&#xA;&lt;p&gt;Starting In the 19th Century, economists and others recognized &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;cyclical&lt;/span&gt;&lt;/span&gt; patterns in economic activity.&lt;/p&gt;&#xA;&lt;p&gt;Schmupeter distinguished between cycles at different &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;frequencies&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;Kondratieff Cycles&lt;/em&gt; &amp;ndash; Longwave cycles lasting 50 years (caused by fundamental innovations.)&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Juglar Cycles&lt;/em&gt; &amp;ndash; medium cycle (8 years) associated with changes in credit condition.&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Kitchin Cycles&lt;/em&gt; &amp;ndash; short run cycles (40 months) associated with information diffusion.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;=&amp;gt; model economic activity as a linear combination of periodic function with different frequencies.&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture 1: Time Series Basics</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-one-basics/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-one-basics/</link>
       <pubDate>Thu, 13 Mar 2025 17:51:12 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-one-basics/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-one-basics/</guid>
       <description>&lt;h2 id=&#34;lecture-1-time-series-basics&#34;&gt;Lecture 1: Time Series Basics&lt;/h2&gt;&#xA;&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Overview:&lt;/em&gt; Chapters 1-3 from (James Hamilton, 1994).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Technical Details:&lt;/em&gt; Chapters 2-3 from (Brockwell, Peter J. and Davis, Richard A., 1987).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Intuition:&lt;/em&gt; Chapters 1-4 from (John Cochrane, 2005).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;time-series&#34;&gt;Time Series&lt;/h3&gt;&#xA;&lt;p&gt;A &lt;strong&gt;time series&lt;/strong&gt; is a family of random variables indexed by time&#xA;\(\{Y_t, t\in T\}\) defined on a probability space \((\Omega, \mathcal&#xA;F, P)\).&#xA;&lt;br&gt; &lt;br&gt;&#xA;&lt;em&gt;(Everybody uses &amp;ldquo;time series&amp;rdquo; to mean both the random variables and their realizations)&lt;/em&gt;&#xA;&lt;br&gt; &lt;br&gt;&#xA;For this class, \(T = \left\{0, \pm 1, \pm 2, \ldots\right\}\).&#xA;&lt;br&gt; &lt;br&gt; Some examples:&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture Two: Deterministic Trends, Nonstationary Processes</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-two-trends/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-two-trends/</link>
       <pubDate>Thu, 13 Mar 2025 17:50:57 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-two-trends/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-two-trends/</guid>
       <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;Overview:&lt;/em&gt; Chapters 15-16 from &lt;a href=&#34;#citeproc_bib_item_3&#34;&gt;Hamilton (1994)&lt;/a&gt;.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Technical Details&lt;/em&gt;: &lt;a href=&#34;#citeproc_bib_item_1&#34;&gt;Davidson and MacKinnon (2003)&lt;/a&gt;&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;trends-vs-cycles&#34;&gt;Trends vs Cycles&lt;/h3&gt;&#xA;&lt;p&gt;A commond decomposition of macroeconomic time series is into &lt;strong&gt;trend&lt;/strong&gt; and &lt;strong&gt;cycle&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;If \(Y^T\) corresponds to real per capita GDP \(gdp_t\) of the&#xA;United States. According to this components approach to time&#xA;series, \(y_t\) is expressed as&#xA;\[&#xA;y_t = \ln gdp_t = trend_t + fluctuations_t&#xA;\]&#xA;we will examine regression techniques that decompose \(y_t\) in a trend and a cyclical component.&lt;/p&gt;</description>
     </item>
     <item>
       <title>ECON 616: Lecture Five: Introduction to Bayesian Inference</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-five-bayes/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-five-bayes/</link>
       <pubDate>Thu, 13 Mar 2025 17:50:05 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-five-bayes/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-five-bayes/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;modes-of-interence&#34;&gt;Modes of Interence&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Previously, we focussed on frequentist inference (repeated sampling prodecures)&lt;/li&gt;&#xA;&lt;li&gt;measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental&lt;/li&gt;&#xA;&lt;li&gt;However, many statisticians and econometricians believed that&#xA;post-experimental reasoning should be used to assess inference&#xA;procedures&lt;/li&gt;&#xA;&lt;li&gt;wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;&#xA;&lt;p&gt;Suppose \(Y_1\) and \(Y_2\) are independently and identically&#xA;distributed and&#xA;\[&#xA;P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad&#xA;P_\theta \{ Y_i = \theta+1 \} = \frac{1}{2}&#xA;\]&#xA;Consider the following confidence set&lt;/p&gt;</description>
     </item>
     <item>
       <title>Intro to DSGE &#43; State Space Models</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-seven-dsge-state-space/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-seven-dsge-state-space/</link>
       <pubDate>Thu, 13 Mar 2025 17:49:57 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-seven-dsge-state-space/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-seven-dsge-state-space/</guid>
       <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;Textbook treatments:&lt;/em&gt; &lt;a href=&#34;#citeproc_bib_item_11&#34;&gt;Woodford (2003)&lt;/a&gt;, &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Galí (2008)&lt;/a&gt;&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Key empirical papers&lt;/em&gt;: &lt;a href=&#34;#citeproc_bib_item_8&#34;&gt;Ireland (2004)&lt;/a&gt;,  &lt;a href=&#34;#citeproc_bib_item_2&#34;&gt;Christiano, Eichenbaum, and Evans (2005)&lt;/a&gt;, &lt;a href=&#34;#citeproc_bib_item_10&#34;&gt;Smets and Wouters (2007)&lt;/a&gt;, &lt;a href=&#34;#citeproc_bib_item_1&#34;&gt;An and Schorfheide (2007)&lt;/a&gt;,&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Frequentist estimation:&lt;/em&gt; &lt;a href=&#34;#citeproc_bib_item_6&#34;&gt;Harvey (1991)&lt;/a&gt;, &lt;a href=&#34;#citeproc_bib_item_5&#34;&gt;Hamilton (1994)&lt;/a&gt;,&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Bayesian estimation:&lt;/em&gt; &lt;a href=&#34;#citeproc_bib_item_7&#34;&gt;Herbst and Schorfheide (2015)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;a-dsge-model&#34;&gt;A DSGE Model&lt;/h2&gt;&#xA;&lt;h3 id=&#34;small-scale-dsge-model&#34;&gt;Small-Scale DSGE Model&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Intermediate and final goods producers&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Households&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Monetary and fiscal policy&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Exogenous processes&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Equilibrium Relationships&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;final-goods-producers&#34;&gt;Final Goods Producers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Perfectly competitive firms combine&#xA;a continuum of intermediate goods:&#xA;\[&#xA;Y_t = \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}}.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Firms take input prices \(P_t(j)\) and output prices \(P_t\) as given; maximize profits&#xA;\[&#xA;\Pi_t =  P_t \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}} - \int_{0}^1 P_t(j)Y_t(j)dj.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Demand for intermediate good \(j\):&#xA;\[&#xA;Y_t(j) = \left( \frac{P_t(j)}{P_t} \right)^{-1/\nu} Y_t.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Zero-profit condition implies&#xA;\[&#xA;P_t = \left( \int_0^1 P_t(j)^{\frac{\nu-1}{\nu}} dj \right)^{\frac{\nu}{\nu-1}}.&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;intermediate-goods-producers&#34;&gt;Intermediate Goods Producers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Intermediate good \(j\) is produced by a monopolist according to:&#xA;\[&#xA;Y_t(j) = A_t N_t(j).&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Nominal price stickiness via quadratic price adjustment costs&#xA;\[&#xA;AC_t(j) = \frac{\phi}{2} \left( \frac{ P_t(j) }{ P_{t-1}(j)} - \pi \right)^2 Y_t(j).&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Firm \(j\)&#xA;chooses its labor input \(N_t(j)\) and the price \(P_t(j)\) to maximize&#xA;the present value of future profits:&#xA;\[ \mathbb{E}_t \bigg[&#xA;\sum_{s=0}^\infty \beta^{s} Q_{t+s|t} \bigg(&#xA;\frac{P_{t+s}(j)}{P_{t+s}} Y_{t+s}(j) - W_{t+s} N_{t+s}(j) - AC_{t+s}(j) \bigg) \bigg].&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;households&#34;&gt;Households&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Household derives disutility from hours worked \(H_t\) and maximizes&lt;/p&gt;</description>
     </item>
     <item>
       <title>Lecture X Bayesian Nonparametrics</title>
-      <link>http://localhost:1313/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/</link>
+      <link>https://edherbst.net/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/</link>
       <pubDate>Thu, 13 Mar 2025 17:49:51 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/lectures/lecture-x-bayesian-nonparametrics/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;what-are-bayesian-nonparametrics&#34;&gt;What are Bayesian Nonparametrics?&lt;/h3&gt;&#xA;&lt;p&gt;We start with data \(y_1, \ldots, y_n \) drawn from a distribution \(G\).&lt;/p&gt;&#xA;&lt;p&gt;A &amp;lsquo;statistical model&amp;rsquo; \(g\) is a pdf of \(G\), where \(g \in \mathcal{G} = \{g_\theta: \theta \in \Theta\}.\)&lt;/p&gt;&#xA;&lt;p&gt;If \(\theta\) is finite, we are into the realm of parametric statistics.&lt;/p&gt;&#xA;&lt;p&gt;If \(\theta\) is infinite, we are into the realm of nonparametric statistics.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Bayesian nonparametrics&lt;/strong&gt; complete the above probability model with a prior&#xA;distribution on the infinite-dimensional parameter \(\theta\).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Econ 616: Macroeconometrics – Spring 2025</title>
-      <link>http://localhost:1313/teaching/georgetown/syllabus/</link>
+      <link>https://edherbst.net/teaching/georgetown/syllabus/</link>
       <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/georgetown/syllabus/</guid>
+      <guid>https://edherbst.net/teaching/georgetown/syllabus/</guid>
       <description>&lt;h2 id=&#34;instructor&#34;&gt;Instructor&lt;/h2&gt;&#xA;&lt;p&gt;Ed Herbst &lt;a href=&#34;mailto:ed.herbst@gmail.com&#34;&gt;ed.herbst@gmail.com&lt;/a&gt; | &lt;a href=&#34;http://edherbst.net/&#34;&gt;website&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;course-time-and-location&#34;&gt;Course Time and Location&lt;/h3&gt;&#xA;&lt;p&gt;Class will meet once a week &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;Tuesdays&lt;/span&gt;&lt;/span&gt; from &lt;span class=&#34;underline&#34;&gt;&lt;span class=&#34;underline&#34;&gt;6:30p-9:00&lt;/span&gt;&lt;/span&gt; for lecture. &lt;em&gt;(That&amp;rsquo;s a long time; we&amp;rsquo;ll take a 5-10 minute break midway through!)&lt;/em&gt; The classroom is &lt;strong&gt;ICC-223A&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h3 id=&#34;course-description&#34;&gt;Course Description&lt;/h3&gt;&#xA;&lt;p&gt;The course is an introduction to univariate and multivariate time series models. Time domain methods, including VAR&amp;rsquo;s, structural VAR&amp;rsquo;s, Bayesian VAR&amp;rsquo;s for linear models and GMM for non-linear stationary models are covered. An introduction to non-stationary time series models is given. Frequency domain methods and their applications to business cycle inference are also covered. The course starts by introducing basic concepts and progresses to more complicated models. The course intends to meet two goals. It provides tools for empirical work with time series data, mostly for macroeconomic applications and provides a heuristic introduction into the theoretical foundation of time series models.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Factor Structure of Disagreement</title>
-      <link>http://localhost:1313/research/factor-structure-of-disagreement/</link>
+      <link>https://edherbst.net/research/factor-structure-of-disagreement/</link>
       <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/factor-structure-of-disagreement/</guid>
+      <guid>https://edherbst.net/research/factor-structure-of-disagreement/</guid>
       <description></description>
     </item>
     <item>
       <title>Bias in Local Projections</title>
-      <link>http://localhost:1313/research/bias-in-local-projections/</link>
+      <link>https://edherbst.net/research/bias-in-local-projections/</link>
       <pubDate>Tue, 24 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/bias-in-local-projections/</guid>
+      <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
       <description></description>
     </item>
     <item>
       <title>Forecasting with DSGE Models</title>
-      <link>http://localhost:1313/research/dsge-forecasting-handbook/</link>
+      <link>https://edherbst.net/research/dsge-forecasting-handbook/</link>
       <pubDate>Tue, 26 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/dsge-forecasting-handbook/</guid>
+      <guid>https://edherbst.net/research/dsge-forecasting-handbook/</guid>
       <description></description>
     </item>
     <item>
       <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
-      <link>http://localhost:1313/research/woodford/</link>
+      <link>https://edherbst.net/research/woodford/</link>
       <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/woodford/</guid>
+      <guid>https://edherbst.net/research/woodford/</guid>
       <description></description>
     </item>
     <item>
       <title>Online Estimation of DSGE Models</title>
-      <link>http://localhost:1313/research/online-estimation-of-dsge-models/</link>
+      <link>https://edherbst.net/research/online-estimation-of-dsge-models/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/online-estimation-of-dsge-models/</guid>
+      <guid>https://edherbst.net/research/online-estimation-of-dsge-models/</guid>
       <description></description>
     </item>
     <item>
       <title>The Particle Filter</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/</link>
       <pubDate>Fri, 11 Dec 2020 09:47:16 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/07-nonlinear-dsge-models-and-particle-filters/</guid>
       <description>&lt;h2 id=&#34;nonlinear-dsge-models&#34;&gt;Nonlinear DSGE Models&lt;/h2&gt;&#xA;&lt;h3 id=&#34;from-linear-to-nonlinear-dsge-models&#34;&gt;From Linear to Nonlinear DSGE Models&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;While DSGE models are inherently nonlinear, the nonlinearities are often&#xA;small and decision rules are approximately linear.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;One can add certain features that generate more pronounced nonlinearities:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;stochastic volatility;&lt;/li&gt;&#xA;&lt;li&gt;markov switching coefficients;&lt;/li&gt;&#xA;&lt;li&gt;asymmetric adjustment costs;&lt;/li&gt;&#xA;&lt;li&gt;occasionally binding constraints.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;from-linear-to-nonlinear-dsge-models&#34;&gt;From Linear to Nonlinear DSGE Models&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Linear DSGE model leads to&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray*}&#xA;y_t &amp;amp;=&amp;amp; \Psi_0(\theta) + \Psi_1(\theta)t + \Psi_2(\theta) s_t + u_t, \quad u_t \sim N(0,\Sigma_u) ,\\\&#xA;s_t &amp;amp;=&amp;amp; \Phi_1(\theta)s_{t-1} + \Phi_\epsilon(\theta) \epsilon_t, \quad \epsilon_t \sim N(0,\Sigma_\epsilon).&#xA;\end{eqnarray*}&lt;/p&gt;</description>
     </item>
     <item>
       <title>Particle MCMC and SMC^2</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/</link>
       <pubDate>Fri, 11 Dec 2020 09:47:02 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/08-pmcmc-and-smc-squared/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;embedding-pf-likelihoods-into-posterior-samplers&#34;&gt;Embedding PF Likelihoods into Posterior Samplers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Likelihood functions for nonlinear DSGE models can be approximated by the PF.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;We will now embed the likelihood approximation into a posterior sampler:&#xA;PFMH Algorithm (a special case of PMCMC).&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;embedding-pf-likelihoods-into-posterior-samplers&#34;&gt;Embedding PF Likelihoods into Posterior Samplers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Distinguish between:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;\(\{ p(Y|\theta), p(\theta|Y), p(Y) \}\), which are related according to:&#xA;\[&#xA;p(\theta|Y) = \frac{p(Y|\theta) p(\theta)}{p(Y)} , \quad p(Y) = \int p(Y|\theta) p(\theta) d\theta&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;\(\{ \hat{p}(Y|\theta), \hat{p}(\theta|Y), \hat{p}(Y) \}\), which are related according to:&#xA;\[&#xA;\hat{p}(\theta|Y) = \frac{\hat{p}(Y|\theta) p(\theta)}{\hat{p}(Y)} , \quad \hat{p}(Y) = \int \hat{p}(Y|\theta) p(\theta) d\theta.&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Surprising result from &lt;sup id=&#34;bdbeaec8ecb4a8ea982e4ad765654ea6&#34;&gt;&lt;a href=&#34;#Andrieu_2010&#34; title=&#34;Andrieu, Doucet, \&amp;amp; Holenstein, Particle Markov chain Monte Carlo methods, {Journal of the Royal Statistical Society: Series B&#xA;(Statistical Methodology)}, v(3), 269 342 (2010).&#34;&gt;Andrieu_2010&lt;/a&gt;&lt;/sup&gt;: under certain conditions we can replace \(p(Y|\theta)\) by \(\hat{p}(Y|\theta)\) and still obtain draws from \(p(\theta|Y)\).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;pfmh-algorithm&#34;&gt;PFMH Algorithm&lt;/h3&gt;&#xA;&lt;p&gt;For \(i=1\) to \(N\):&lt;/p&gt;</description>
     </item>
     <item>
       <title>Monte Carlo Simulation</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/03-monte-carlo-simulation/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/03-monte-carlo-simulation/</link>
       <pubDate>Fri, 11 Dec 2020 09:46:48 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/03-monte-carlo-simulation/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/03-monte-carlo-simulation/</guid>
       <description>&lt;h2 id=&#34;importance-sampling&#34;&gt;Importance Sampling&lt;/h2&gt;&#xA;&lt;h3 id=&#34;the-main-event&#34;&gt;The main event&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Inference: Need to characterize posterior \(p(\theta|Y)\).&#xA;&lt;br&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Unfortunately, for many interesting models it is not possible to&#xA;evaluate the moments and quantiles of the posterior \(p(\theta|Y)\)&#xA;analytically.&lt;/p&gt;&#xA; &lt;br&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Rules of game&lt;/strong&gt;: we can only numerically evaluate prior \(p(\theta)\)&#xA;and likelihood \(p(Y|\theta)\).&lt;/p&gt;&#xA; &lt;br&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;To evaluate posterior moments of function \(h(\theta)\), we need numerical&#xA;techniques.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;estimating-posterior-moments&#34;&gt;Estimating Posterior Moments&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;We will often abbreviate posterior distributions&#xA;\(p(\theta|Y)\) by \(\pi(\theta)\) and posterior expectations of \(h(\theta)\) by&#xA;\[&#xA;\mathbb{E}_\pi[h] = \mathbb{E}_\pi[h(\theta)] = \int h(\theta) \pi(\theta) d\theta = \int h(\theta) p(\theta|Y) d\theta.&#xA;\]&lt;/p&gt;</description>
     </item>
     <item>
       <title>Advanced MCMC: Hamiltonian Monte Carlo</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/10-hamiltonian-monte-carlo/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/10-hamiltonian-monte-carlo/</link>
       <pubDate>Fri, 11 Dec 2020 09:46:32 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/10-hamiltonian-monte-carlo/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/10-hamiltonian-monte-carlo/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;hamiltonian-monte-carlo&#34;&gt;Hamiltonian Monte Carlo&lt;/h3&gt;&#xA;&lt;p&gt;We previously spoke about how much the efficacy of MCMC algorithms&#xA;depended on the shape of the posterior.&#xA;&lt;br&gt;&#xA;We&amp;rsquo;re going to talk about posterior simulators that make that idea explicit.&#xA;&lt;br&gt;&#xA;In particular, the Hamiltonian Monte Carlo sampler described in&#xA;\cite{Neal_2011}.&lt;/p&gt;&#xA;&lt;h3 id=&#34;details&#34;&gt;Details&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hamiltonian Monte Carlo adapts methods from the study of molecular&#xA;dynamics: &lt;em&gt;simulate the motion of molecules based on Newton&amp;rsquo;s laws&lt;/em&gt;.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;The systems which describe the evolution of molecules over time exhibit so-called&#xA;&lt;em&gt;Hamiltonian dynamics&lt;/em&gt;&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;The state of the system at any point in&#xA;time is summarized by a pair \((\theta, p)\).  \(\theta\) is the location&#xA;of the molecule, while \(p\) gives its momentum (mass times velocity).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;some-math&#34;&gt;Some Math&lt;/h3&gt;&#xA;&lt;p&gt;The evolution \(\theta\) and \(p\) is governed by set of differential&#xA;equations.  These differential equations are determined by the&#xA;&lt;em&gt;Hamiltonian&lt;/em&gt;, \(H(\theta,p)\):&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/00-introduction/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/00-introduction/</link>
       <pubDate>Fri, 11 Dec 2020 09:46:18 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/00-introduction/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/00-introduction/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;hello&#34;&gt;Hello!&lt;/h3&gt;&#xA;&lt;p&gt;My name is &lt;strong&gt;Ed Herbst.&lt;/strong&gt;  I&amp;rsquo;m currently an economist at the Federal&#xA;Reserve Board.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m interested in (Bayesian) macroeconometrics, and I&amp;rsquo;m excited to&#xA;spend the next two weeks talking about it with you!&lt;/p&gt;&#xA;&lt;h3 id=&#34;the-next-two-weeks&#34;&gt;The next two weeks&lt;/h3&gt;&#xA;&lt;p&gt;The syllabus has a rough plan of where we&amp;rsquo;re going.&lt;/p&gt;&#xA;&lt;p&gt;But, in my experience, there is usually some re-optimization.&lt;/p&gt;&#xA;&lt;p&gt;If there&amp;rsquo;s something you&amp;rsquo;d like to talk about, or spend more (or&#xA;less) time on, just let me know.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Estimating Three DSGE Models</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/</link>
       <pubDate>Fri, 11 Dec 2020 09:46:05 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/06-estimating-a-linear-dsge-model/</guid>
       <description>&lt;h2 id=&#34;three-dsge-models&#34;&gt;Three DSGE Models&lt;/h2&gt;&#xA;&lt;h3 id=&#34;application-1-a-new-keynesian-model-with-correlated-shocks&#34;&gt;Application 1: A New Keynesian Model with Correlated Shocks&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The assumption that exogenous shocks evolve according to independent AR(1) is to some extent arbitrary.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Trying to generalize this assumption seems natural.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;However, the more elaborate the exogenous propagation mechanism, the more difficult it becomes to disentangle endogenous from exogenous propagation.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;This generates identification problems.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;application-1-a-new-keynesian-model-with-correlated-shocks&#34;&gt;Application 1: A New Keynesian Model with Correlated Shocks&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Technology growth shock \(\hat{z}_t\), government spending shock \index{government!spending shock}&#xA;\(\hat{g}_t\) evolve:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Sequential Monte Carlo</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/</link>
       <pubDate>Fri, 11 Dec 2020 09:45:51 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/05-sequential-monte-carlo/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;h3 id=&#34;mcmc-what-works-and-what-doesn-t-simple-model&#34;&gt;MCMC: What works and what doesn&amp;rsquo;t, Simple Model&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;State-space representation:&lt;/p&gt;&#xA;&lt;p&gt;\begin{align}&#xA;y_t = [\begin{array}{cc} 1 &amp;amp; 1 \end{array} ] s_t, \quad&#xA;s_t = \left[ \begin{array}{cc} {\color{blue} \phi_1} &amp;amp; 0 \ {\color{blue} \phi_3} &amp;amp; {\color{blue} \phi_2} \end{array} \right] s_{t-1}&#xA;+ \left[ \begin{array}{c} 1 \ 0 \end{array} \right] \epsilon_t.&#xA;\label{eq_exss}&#xA;\end{align}&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The state-space model can be re-written as ARMA(2,1) process&#xA;\[&#xA;(1- {\color{blue} \phi_1} L)(1-{\color{blue} \phi_2} L) y_t&#xA;= (1-({\color{blue} \phi_2} - {\color{blue} \phi_3} )L)  \epsilon_t.&#xA;\]&lt;/p&gt;</description>
     </item>
     <item>
       <title>Markov Chain Monte Carlo</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/</link>
       <pubDate>Fri, 11 Dec 2020 09:45:35 -0500</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/04-metropolis-hastings/</guid>
       <description>&lt;h2 id=&#34;metropolis-hastings-algorithm&#34;&gt;Metropolis-Hastings Algorithm&lt;/h2&gt;&#xA;&lt;h3 id=&#34;the-metropolis-hastings-algorithm&#34;&gt;The Metropolis-Hastings Algorithm&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Metropolis-Hastings (MH) algorithm belongs to the class of Markov chain&#xA;Monte Carlo (MCMC) algorithms.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Algorithm constructs a Markov chain such that the stationary distribution&#xA;associated with this Markov chain is unique and equals the posterior&#xA;distribution of interest.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;First version constructed by &lt;sup id=&#34;c23d29eb5bdb8bc2fc575e7437b8f907&#34;&gt;&lt;a href=&#34;#Metropolis1953&#34; title=&#34;Metropolis, Rosenbluth, Rosenbluth, Teller \&amp;amp; Teller, Equations of State Calculations by Fast Computing Machines, {Journal of Chemical Physics}, v(), 1087-1091 (1953).&#34;&gt;Metropolis1953&lt;/a&gt;&lt;/sup&gt;. Later&#xA;generalized by &lt;sup id=&#34;694230c3a5e9d6fd8f0276c37355f1da&#34;&gt;&lt;a href=&#34;#Hastings1970&#34; title=&#34;Hastings, Monte Carlo Sampling Methods Using Markov Chains and Their Applications, {Biometrika}, v(), 97-109 (1970).&#34;&gt;Hastings1970&lt;/a&gt;&lt;/sup&gt;.  &lt;sup id=&#34;e841d197fa5fee977a33401116803ab6&#34;&gt;&lt;a href=&#34;#Tierney1994&#34; title=&#34;Tierney, Markov Chains for Exploring Posterior Distributions, {The Annals of Statistics}, v(4), 1701-1728 (1994).&#34;&gt;Tierney1994&lt;/a&gt;&lt;/sup&gt; proved&#xA;important convergence results for MCMC algorithms.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Introduction: &lt;sup id=&#34;a50677fe8b96e99056f5de85b8e1fdf7&#34;&gt;&lt;a href=&#34;#Chib1995a&#34; title=&#34;Chib \&amp;amp; Greenberg, Understanding the Metropolis-Hastings Algorithm, {The American Statistician}, v(), 327-335 (1995).&#34;&gt;Chib1995a&lt;/a&gt;&lt;/sup&gt;. Textbook &lt;sup id=&#34;8af5f7bb8c79b7337d6458aff47c33f6&#34;&gt;&lt;a href=&#34;#Robert2004&#34; title=&#34;Robert \&amp;amp; Casella, Monte Carlo Statistical Methods, Springer (2004).&#34;&gt;Robert2004&lt;/a&gt;&lt;/sup&gt; or&#xA;&lt;sup id=&#34;dfa786895eb8edffb49a91c754a89c01&#34;&gt;&lt;a href=&#34;#Geweke2005&#34; title=&#34;John Geweke, Contemporary Bayesian Econometrics and Statistics, John Wiley \&amp;amp; Sons, Inc. (2005).&#34;&gt;Geweke2005&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;markov-chain-monte-carlo&#34;&gt;Markov Chain Monte Carlo&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Importance sampler generates a sequence of independent draws&#xA;from the posterior distribution \(\pi(\theta)\), the MH algorithm generates&#xA;a sequence of serially correlated draws.&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;As long as the correlation in the Markov chain is not too strong, Monte&#xA;Carlo averages \index{Monte Carlo average} of these draws can accurately&#xA;approximate posterior means of \(h(\theta)\).&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;We are going to care a lot about this correlation.  Why?&#xA;\[&#xA;\sqrt{n}( \bar{X} - \mathbb{E}[\bar{X}]) \Longrightarrow N \bigg( 0, \frac{1}{n} \sum_{i=1}^n \mathbb{V}[X_i] +&#xA;{\color{red} \frac{1}{n} \sum_{i=1}^n \sum_{j \not=i} COV(X_i,X_j)} \bigg)&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;the-metropolis-hastings-algorithm&#34;&gt;The Metropolis Hastings Algorithm&lt;/h3&gt;&#xA;&lt;p&gt;A key ingredient is the proposal distribution \index{proposal density}&#xA;\(q(\vartheta|\theta^{i-1})\), which potentially depends on the draw&#xA;\(\theta^{i-1}\) in iteration \(i-1\) of the algorithm.&#xA;\vspace{0.05in}&lt;/p&gt;</description>
     </item>
     <item>
       <title>Some Notes on the Kalman Filter</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/notes/kalman-filter/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</link>
       <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/notes/kalman-filter/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/notes/kalman-filter/</guid>
       <description>&lt;p&gt;State space models form a very general class of models that encompass&#xA;many of the specifications that we encountered earlier.  VARMA models,&#xA;linearized DSGE models, and more can be written in state space form.&#xA;State space models are particularly popular at the FRB.  For example,&#xA;the models in the \(r^*\) suite can all be written in state space form.&lt;/p&gt;&#xA;&lt;p&gt;A state space model can be described by two different equations: a&#xA;measurement equation that relates an &lt;em&gt;unobservable&lt;/em&gt; state vector \(s_t\)&#xA;to the &lt;em&gt;observables&lt;/em&gt; \(y_t\), and a transition equation that describes&#xA;the evolution of the state vector \(s_t\).  For now, we&amp;rsquo;ll restrict&#xA;attention to the case in which both of these equations are linear.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Introduction Bayes 6: (Linear) State Space Models</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</link>
       <pubDate>Tue, 27 Oct 2020 21:06:35 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/02-linear-dsge-models-and-the-kalman-filter/</guid>
       <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;Textbook treatments:&lt;/em&gt; &lt;sup id=&#34;a387326a2038fd7309392dc655b58018&#34;&gt;&lt;a href=&#34;#woodford_2003&#34; title=&#34;Woodford, Interest and Prices, Princeton University Press (2003).&#34;&gt;woodford_2003&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;e501ccdeda2f0731e31cee0bb583687c&#34;&gt;&lt;a href=&#34;#Gali2008&#34; title=&#34;Jordi Gal\&#39;i, Monetary Policy, Inflation, and the Business Cycle: An Introduction to the New Keynesian Framework, Princeton University Press (2008).&#34;&gt;Gali2008&lt;/a&gt;&lt;/sup&gt;&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Key empirical papers&lt;/em&gt;: &lt;sup id=&#34;29dbe0ba987d7fc6fe70b0eb8b9164a8&#34;&gt;&lt;a href=&#34;#ireland2004&#34; title=&#34;Ireland, A Method for Taking Models to the Data, {Journal of Economic Dynamics and Control}, v(6), 1205-1226 (2004).&#34;&gt;ireland2004&lt;/a&gt;&lt;/sup&gt;,  &lt;sup id=&#34;47048f0095d5c18f125a005804f82697&#34;&gt;&lt;a href=&#34;#christiano2005&#34; title=&#34;Christiano, Eichenbaum, Evans \&amp;amp; , Nominal Rigidities and the Dynamic Effects of a Shock to Monetary  Policy, {Journal of Political Economy}, v(1), 1-45 (2005).&#34;&gt;christiano2005&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;0d8b307a60fe1d0ae3cf2a838eca7a27&#34;&gt;&lt;a href=&#34;#Smets2007&#34; title=&#34;Smets \&amp;amp; Wouters, Shocks and Frictions in US Business Cycles: A Bayesian DSGE Approach, {American Economic Review}, v(), 586-608 (2007).&#34;&gt;Smets2007&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;188111b01398a8806c0a2b9d9be3fd1c&#34;&gt;&lt;a href=&#34;#An2007b&#34; title=&#34;An \&amp;amp; Frank Schorfheide, Bayesian Analysis of DSGE Models, {Econometric Reviews}, v(2-4), 113-172 (2007).&#34;&gt;An2007b&lt;/a&gt;&lt;/sup&gt;,&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Frequentist estimation:&lt;/em&gt; &lt;sup id=&#34;6ca9488bf724ffa1b1742c738fcd1634&#34;&gt;&lt;a href=&#34;#Harvey1991&#34; title=&#34;Andrew Harvey, Forecasting, Structural Time Series Models and the Kalman Filter, University of Cambridge Press (1991).&#34;&gt;Harvey1991&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;adec714ae69bef54c5ee79cfcb41955d&#34;&gt;&lt;a href=&#34;#Hamilton&#34; title=&#34;James Hamilton, Time Series Analysis, Princeton University Press (1994).&#34;&gt;Hamilton&lt;/a&gt;&lt;/sup&gt;,&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;em&gt;Bayesian estimation:&lt;/em&gt; &lt;sup id=&#34;f275eaf93510eb80c8e1a928b194e45f&#34;&gt;&lt;a href=&#34;#HerbstSchorfheide2015&#34; title=&#34;Edward Herbst \&amp;amp; Frank Schorfheide, Bayesian Estimation of DSGE Models, Princeton University Press (2015).&#34;&gt;HerbstSchorfheide2015&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;a-dsge-model&#34;&gt;A DSGE Model&lt;/h2&gt;&#xA;&lt;h3 id=&#34;small-scale-dsge-model&#34;&gt;Small-Scale DSGE Model&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Intermediate and final goods producers&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Households&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Monetary and fiscal policy&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Exogenous processes&#xA;&lt;br&gt;&lt;/li&gt;&#xA;&lt;li&gt;Equilibrium Relationships&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;final-goods-producers&#34;&gt;Final Goods Producers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Perfectly competitive firms combine&#xA;a continuum of intermediate goods:&#xA;\[&#xA;Y_t = \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}}.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Firms take input prices \(P_t(j)\) and output prices \(P_t\) as given; maximize profits&#xA;\[&#xA;\Pi_t =  P_t \left( \int_0^1 Y_t(j)^{1-\nu} dj \right)^{\frac{1}{1-\nu}} - \int_{0}^1 P_t(j)Y_t(j)dj.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Demand for intermediate good \(j\):&#xA;\[&#xA;Y_t(j) = \left( \frac{P_t(j)}{P_t} \right)^{-1/\nu} Y_t.&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Zero-profit condition implies&#xA;\[&#xA;P_t = \left( \int_0^1 P_t(j)^{\frac{\nu-1}{\nu}} dj \right)^{\frac{\nu}{\nu-1}}.&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;intermediate-goods-producers&#34;&gt;Intermediate Goods Producers&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Intermediate good \(j\) is produced by a monopolist according to:&#xA;\[&#xA;Y_t(j) = A_t N_t(j).&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Nominal price stickiness via quadratic price adjustment costs&#xA;\[&#xA;AC_t(j) = \frac{\phi}{2} \left( \frac{ P_t(j) }{ P_{t-1}(j)} - \pi \right)^2 Y_t(j).&#xA;\]&lt;/li&gt;&#xA;&lt;li&gt;Firm \(j\)&#xA;chooses its labor input \(N_t(j)\) and the price \(P_t(j)\) to maximize&#xA;the present value of future profits:&#xA;\[ \mathbb{E}_t \bigg[&#xA;\sum_{s=0}^\infty \beta^{s} Q_{t+s|t} \bigg(&#xA;\frac{P_{t+s}(j)}{P_{t+s}} Y_{t+s}(j) - W_{t+s} N_{t+s}(j) - AC_{t+s}(j) \bigg) \bigg].&#xA;\]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;households&#34;&gt;Households&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Household derives disutility from hours worked \(H_t\) and maximizes&lt;/p&gt;</description>
     </item>
     <item>
       <title>A Crash Course In Bayesian Inference</title>
-      <link>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</link>
+      <link>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</link>
       <pubDate>Tue, 27 Oct 2020 19:22:48 -0400</pubDate>
-      <guid>http://localhost:1313/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</guid>
+      <guid>https://edherbst.net/teaching/bank-of-colombia-smc/lectures/01-a-crash-course-in-bayesian-inference/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;These notes are available as slides and a Jupyter notebook.&lt;/p&gt;&#xA;&lt;h3 id=&#34;modes-of-inference&#34;&gt;Modes of Inference&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Previously, we focussed on frequentist inference (repeated sampling prodecures)&lt;/li&gt;&#xA;&lt;li&gt;measures of accuracy and performance that we used to assess the statistical procedures were pre-experimental&lt;/li&gt;&#xA;&lt;li&gt;However, many statisticians and econometricians believed that&#xA;post-experimental reasoning should be used to assess inference&#xA;procedures&lt;/li&gt;&#xA;&lt;li&gt;wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;&#xA;&lt;p&gt;Suppose \(Y_1\) and \(Y_2\) are independently and identically&#xA;distributed and&#xA;\[&#xA;P_\theta \{ Y_i = \theta-1 \} = \frac{1}{2}, \quad&#xA;P_\theta \{ Y_i = \theta+1 \} = \frac{1}{2}&#xA;\]&#xA;Consider the following confidence set&lt;/p&gt;</description>
     </item>
     <item>
       <title>Forward Guidance with Bayesian Learning and Estimation</title>
-      <link>http://localhost:1313/research/learning/</link>
+      <link>https://edherbst.net/research/learning/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/learning/</guid>
+      <guid>https://edherbst.net/research/learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Tempered Particle Filtering</title>
-      <link>http://localhost:1313/research/tpf/</link>
+      <link>https://edherbst.net/research/tpf/</link>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/tpf/</guid>
+      <guid>https://edherbst.net/research/tpf/</guid>
       <description></description>
     </item>
     <item>
       <title>MONETARY POLICY, REAL ACTIVITY, AND CREDIT SPREADS: EVIDENCE FROM BAYESIAN PROXY SVARS </title>
-      <link>http://localhost:1313/research/bpsvar/</link>
+      <link>https://edherbst.net/research/bpsvar/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/bpsvar/</guid>
+      <guid>https://edherbst.net/research/bpsvar/</guid>
       <description></description>
     </item>
     <item>
       <title>ESTIMATING (MARKOV-SWITCHING) VARS WITHOUT GIBBS SAMPLING</title>
-      <link>http://localhost:1313/research/smc-var/</link>
+      <link>https://edherbst.net/research/smc-var/</link>
       <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/smc-var/</guid>
+      <guid>https://edherbst.net/research/smc-var/</guid>
       <description></description>
     </item>
     <item>
       <title>Hey Hey</title>
-      <link>http://localhost:1313/etc/test/</link>
+      <link>https://edherbst.net/etc/test/</link>
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/etc/test/</guid>
-      <description>&lt;h2 id=&#34;here-s-a-heading&#34;&gt;Here&amp;rsquo;s a heading&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;%&lt;/span&gt;matplotlib inline&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;plt&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;plot([&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;4&lt;/span&gt;]);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/ox-hugo/a92fa8bca02a2fecb37438debfc4a7ced93dad03.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;$x_t = 1$&lt;/p&gt;</description>
+      <guid>https://edherbst.net/etc/test/</guid>
+      <description>&lt;h2 id=&#34;here-s-a-heading&#34;&gt;Here&amp;rsquo;s a heading&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;%&lt;/span&gt;matplotlib inline&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;plt&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;plot([&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#666&#34;&gt;4&lt;/span&gt;]);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;https://edherbst.net/ox-hugo/a92fa8bca02a2fecb37438debfc4a7ced93dad03.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;$x_t = 1$&lt;/p&gt;</description>
     </item>
     <item>
       <title>Stock and Watson (2007) in pymc3 and Stan</title>
-      <link>http://localhost:1313/etc/sw/</link>
+      <link>https://edherbst.net/etc/sw/</link>
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/etc/sw/</guid>
+      <guid>https://edherbst.net/etc/sw/</guid>
       <description>&lt;p&gt;&lt;em&gt;This file is available as Jupyter Notebook&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;sup id=&#34;751475a24881d3cf8ff77e5dc432fc83&#34;&gt;&lt;a href=&#34;#STOCK_2007&#34; title=&#34;Stock \&amp;amp; Watson, Why Has U.S. Inflation Become Harder to Forecast?, {Journal of Money, Credit and Banking}, v(), 3 33 (2007).&#34;&gt;STOCK_2007&lt;/a&gt;&lt;/sup&gt; model inflation as an unobserved components&#xA;models:&lt;/p&gt;&#xA;&lt;p&gt;\begin{eqnarray}&#xA;\pi_t &amp;amp;=&amp;amp; \tau_t + \eta_t \\\&#xA;\tau_t &amp;amp;=&amp;amp; \tau_{t-1} + \epsilon_t&#xA;\end{eqnarray}&lt;/p&gt;&#xA;&lt;p&gt;where \(\eta_t\) and \(\epsilon_t\) are independently and identically&#xA;distributed with mean 0 and variances \(\sigma_\eta^2\) and&#xA;\(\sigma_\epsilon^2\).&lt;/p&gt;&#xA;&lt;h2 id=&#34;a-replication&#34;&gt;A Replication&lt;/h2&gt;&#xA;&lt;p&gt;First we start by importing some standard libraries.&lt;/p&gt;</description>
     </item>
     <item>
       <title>THE EMPIRICAL IMPLICATIONS OF THE INTEREST-RATE LOWER BOUND</title>
-      <link>http://localhost:1313/research/zlb/</link>
+      <link>https://edherbst.net/research/zlb/</link>
       <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/zlb/</guid>
+      <guid>https://edherbst.net/research/zlb/</guid>
       <description></description>
     </item>
     <item>
       <title>BAYESIAN ESTIMATION OF DSGE MODELS</title>
-      <link>http://localhost:1313/research/bayes-book/</link>
+      <link>https://edherbst.net/research/bayes-book/</link>
       <pubDate>Fri, 25 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/bayes-book/</guid>
+      <guid>https://edherbst.net/research/bayes-book/</guid>
       <description></description>
     </item>
     <item>
       <title>EFFECTIVE MONETARY POLICY STRATEGIES IN NEW KEYNESIAN MODELS</title>
-      <link>http://localhost:1313/research/sticky-information/</link>
+      <link>https://edherbst.net/research/sticky-information/</link>
       <pubDate>Mon, 01 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/sticky-information/</guid>
+      <guid>https://edherbst.net/research/sticky-information/</guid>
       <description>&lt;p&gt;See also discussions by &lt;a href=&#34;http://www.nber.org/chapters/c13413.pdf&#34;&gt;Mark Gertler&lt;/a&gt; and &lt;a href=&#34;http://www.nber.org/chapters/c13412.pdf&#34;&gt;Lars Svensson&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Note the Macro Annual is not peer-reviewed.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>USING THE &#34;CHANDRASEKHAR RECURSIONS&#34; FOR LIKELIHOOD EVALUATION OF DSGE MODELS</title>
-      <link>http://localhost:1313/research/chandrasekhar-recursions/</link>
+      <link>https://edherbst.net/research/chandrasekhar-recursions/</link>
       <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/chandrasekhar-recursions/</guid>
+      <guid>https://edherbst.net/research/chandrasekhar-recursions/</guid>
       <description>&lt;p&gt;In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System. We show that DSGE models are ideally suited for the use of these recursions, which work best when the number of states is much greater than the number of observables. In several examples, we show that there are substantial benefits to using the recursions, with likelihood evaluation up to five times faster. This gain is especially pronounced in light of the trivial implementation costs—no model modification is required. Moreover, the algorithm is complementary with other approaches.&lt;/p&gt;</description>
     </item>
     <item>
       <title>SEQUENTIAL MONTE CARLO SAMPLING FOR DSGE MODELS</title>
-      <link>http://localhost:1313/research/smc-dsge/</link>
+      <link>https://edherbst.net/research/smc-dsge/</link>
       <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/smc-dsge/</guid>
+      <guid>https://edherbst.net/research/smc-dsge/</guid>
       <description></description>
     </item>
     <item>
       <title>EVALUATING DSGE MODEL FORECASTS OF COMOVEMENTS</title>
-      <link>http://localhost:1313/research/dsge-forecasting/</link>
+      <link>https://edherbst.net/research/dsge-forecasting/</link>
       <pubDate>Thu, 19 Jan 2012 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/dsge-forecasting/</guid>
+      <guid>https://edherbst.net/research/dsge-forecasting/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:1313/research/software/</link>
+      <link>https://edherbst.net/research/software/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/software/</guid>
+      <guid>https://edherbst.net/research/software/</guid>
       <description>&lt;p&gt;Title: Software&#xA;Coauthor:&#xA;Version:&#xA;Date: 2016-01-06&#xA;url: software/&#xA;save_as: software/index.html&lt;/p&gt;&#xA;&lt;h2 id=&#34;python-packages&#34;&gt;Python Packages&lt;/h2&gt;&#xA;&lt;p&gt;Template: bayes_book&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;dsge&lt;/strong&gt; &amp;ndash; a small python package for solving DSGE models.  More&#xA;information &lt;a href=&#34;http://dsge.edherbst.net&#34;&gt;here&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;smc&lt;/strong&gt; &amp;ndash; a small python package using Sequential Monte Carlo&#xA;methods to estimate Bayesian models.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Installation.&lt;/em&gt; For linux/mac users, at the command line type:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;pip install http://edherbst.net/bookmaterials/dsge-0.0.2.tar.gz&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;For windows users, use&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;pip install http://edherbst.net/bookmaterials/dsge-0.0.2.zip&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>cv</title>
-      <link>http://localhost:1313/herbst_cv/</link>
+      <link>https://edherbst.net/herbst_cv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/herbst_cv/</guid>
+      <guid>https://edherbst.net/herbst_cv/</guid>
       <description>&lt;style&gt;.org-center { margin-left: auto; margin-right: auto; text-align: center; }&lt;/style&gt;&#xA;&lt;div class=&#34;org-center&#34;&gt;&#xA;&lt;p&gt;\Huge Edward P. Herbst&lt;/p&gt;&#xA;&lt;p&gt;\footnotesize \tt  \href{mailto:ed.herbst@gmail.com}{ed.herbst@gmail.com} •  \href{https://edherbst.net}{edherbst.net}  •  \href{https://github.com/eph}{github.com/eph}&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Chief, Monetary Studies Unit&lt;/em&gt;.    Division of Monetary Affairs, Federal Reserve Board, 2023&amp;ndash;Present.  [&lt;a href=&#34;https://www.federalreserve.gov/econres/mams-staff.htm&#34;&gt;FRB site&lt;/a&gt;]&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Chief, Current Macroeconomics Conditions Section&lt;/em&gt;, Division of Research and Statistics, FRB, 2021&amp;ndash;2023.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Economist, /Senior Economist&lt;/em&gt;, and &lt;em&gt;Principal Economist&lt;/em&gt;, Divisions of Research and Statistics and Monetary Affairs, FRB, 2011&amp;ndash;2016.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Associate Editor&lt;/em&gt;, Journal of Econometrics, 2020&amp;ndash;2025&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;Associate Editor&lt;/em&gt;, Journal of Applied Econometrics, 2018&amp;ndash;Present&lt;/p&gt;</description>
     </item>
   </channel>

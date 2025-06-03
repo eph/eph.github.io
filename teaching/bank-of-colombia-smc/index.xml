@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Advanced Monte Carlo for Macroeconometrics  Part 1: Theory on Ed Herbst</title>
-    <link>http://localhost:1313/teaching/bank-of-colombia-smc/</link>
+    <link>https://edherbst.net/teaching/bank-of-colombia-smc/</link>
     <description>Recent content in Advanced Monte Carlo for Macroeconometrics  Part 1: Theory on Ed Herbst</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/teaching/bank-of-colombia-smc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://edherbst.net/teaching/bank-of-colombia-smc/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
