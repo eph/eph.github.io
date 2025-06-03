@@ -2,122 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>research on Ed Herbst</title>
-    <link>https://edherbst.net/research/</link>
+    <link>http://localhost:1313/research/</link>
     <description>Recent content in research on Ed Herbst</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Jul 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://edherbst.net/research/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/research/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Forecasting With DSGE Models</title>
-      <link>https://edherbst.net/research/dsge-forecasting-handbook/</link>
-      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/dsge-forecasting-handbook/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Bias in Local Projections</title>
-      <link>https://edherbst.net/research/bias-in-local-projections/</link>
-      <pubDate>Sat, 24 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/bias-in-local-projections/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
-      <link>https://edherbst.net/research/woodford/</link>
-      <pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/woodford/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Online Estimation of DSGE Models</title>
-      <link>https://edherbst.net/research/online-estimation-of-dsge-models/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/online-estimation-of-dsge-models/</guid>
+      <title>Risk Adjusted Optimal  Policy for Scenario Analysis</title>
+      <link>http://localhost:1313/research/risk-adjusted-oc/</link>
+      <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/risk-adjusted-oc/</guid>
       <description></description>
     </item>
     <item>
       <title>The Factor Structure of Disagreement</title>
-      <link>https://edherbst.net/research/factor-structure-of-disagreement/</link>
-      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/factor-structure-of-disagreement/</guid>
+      <link>http://localhost:1313/research/factor-structure-of-disagreement/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/factor-structure-of-disagreement/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bias in Local Projections</title>
+      <link>http://localhost:1313/research/bias-in-local-projections/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/bias-in-local-projections/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Forecasting with DSGE Models</title>
+      <link>http://localhost:1313/research/dsge-forecasting-handbook/</link>
+      <pubDate>Tue, 26 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/dsge-forecasting-handbook/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Short-term Planning, Monetary Policy, and Macroeconomic Persistence</title>
+      <link>http://localhost:1313/research/woodford/</link>
+      <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/woodford/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Online Estimation of DSGE Models</title>
+      <link>http://localhost:1313/research/online-estimation-of-dsge-models/</link>
+      <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/online-estimation-of-dsge-models/</guid>
       <description></description>
     </item>
     <item>
       <title>Forward Guidance with Bayesian Learning and Estimation</title>
-      <link>https://edherbst.net/research/learning/</link>
+      <link>http://localhost:1313/research/learning/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/learning/</guid>
+      <guid>http://localhost:1313/research/learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Tempered Particle Filtering</title>
-      <link>https://edherbst.net/research/tpf/</link>
+      <link>http://localhost:1313/research/tpf/</link>
       <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/tpf/</guid>
+      <guid>http://localhost:1313/research/tpf/</guid>
       <description></description>
     </item>
     <item>
       <title>MONETARY POLICY, REAL ACTIVITY, AND CREDIT SPREADS: EVIDENCE FROM BAYESIAN PROXY SVARS </title>
-      <link>https://edherbst.net/research/bpsvar/</link>
+      <link>http://localhost:1313/research/bpsvar/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/bpsvar/</guid>
+      <guid>http://localhost:1313/research/bpsvar/</guid>
       <description></description>
     </item>
     <item>
       <title>ESTIMATING (MARKOV-SWITCHING) VARS WITHOUT GIBBS SAMPLING</title>
-      <link>https://edherbst.net/research/smc-var/</link>
+      <link>http://localhost:1313/research/smc-var/</link>
       <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/smc-var/</guid>
+      <guid>http://localhost:1313/research/smc-var/</guid>
       <description></description>
     </item>
     <item>
       <title>THE EMPIRICAL IMPLICATIONS OF THE INTEREST-RATE LOWER BOUND</title>
-      <link>https://edherbst.net/research/zlb/</link>
+      <link>http://localhost:1313/research/zlb/</link>
       <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/zlb/</guid>
+      <guid>http://localhost:1313/research/zlb/</guid>
       <description></description>
     </item>
     <item>
       <title>BAYESIAN ESTIMATION OF DSGE MODELS</title>
-      <link>https://edherbst.net/research/bayes-book/</link>
+      <link>http://localhost:1313/research/bayes-book/</link>
       <pubDate>Fri, 25 Dec 2015 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/bayes-book/</guid>
+      <guid>http://localhost:1313/research/bayes-book/</guid>
       <description></description>
     </item>
     <item>
       <title>EFFECTIVE MONETARY POLICY STRATEGIES IN NEW KEYNESIAN MODELS</title>
-      <link>https://edherbst.net/research/sticky-information/</link>
+      <link>http://localhost:1313/research/sticky-information/</link>
       <pubDate>Mon, 01 Jun 2015 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/sticky-information/</guid>
+      <guid>http://localhost:1313/research/sticky-information/</guid>
       <description>&lt;p&gt;See also discussions by &lt;a href=&#34;http://www.nber.org/chapters/c13413.pdf&#34;&gt;Mark Gertler&lt;/a&gt; and &lt;a href=&#34;http://www.nber.org/chapters/c13412.pdf&#34;&gt;Lars Svensson&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Note the Macro Annual is not peer-reviewed.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>USING THE &#34;CHANDRASEKHAR RECURSIONS&#34; FOR LIKELIHOOD EVALUATION OF DSGE MODELS</title>
-      <link>https://edherbst.net/research/chandrasekhar-recursions/</link>
+      <link>http://localhost:1313/research/chandrasekhar-recursions/</link>
       <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/chandrasekhar-recursions/</guid>
+      <guid>http://localhost:1313/research/chandrasekhar-recursions/</guid>
       <description>&lt;p&gt;In likelihood-based estimation of linearized Dynamic Stochastic General Equilibrium (DSGE) models, the evaluation of the Kalman Filter dominates the running time of the entire algorithm. In this paper, we revisit a set of simple recursions known as the “Chandrasekhar Recursions” developed by Morf (Fast Algorithms for Multivariate Systems, Ph.D. thesis, Stanford University, 1974) and Morf et al. (IEEE Trans Autom Control 19:315–323, 1974) for evaluating the likelihood of a Linear Gaussian State Space System. We show that DSGE models are ideally suited for the use of these recursions, which work best when the number of states is much greater than the number of observables. In several examples, we show that there are substantial benefits to using the recursions, with likelihood evaluation up to five times faster. This gain is especially pronounced in light of the trivial implementation costs—no model modification is required. Moreover, the algorithm is complementary with other approaches.&lt;/p&gt;</description>
     </item>
     <item>
       <title>SEQUENTIAL MONTE CARLO SAMPLING FOR DSGE MODELS</title>
-      <link>https://edherbst.net/research/smc-dsge/</link>
+      <link>http://localhost:1313/research/smc-dsge/</link>
       <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/smc-dsge/</guid>
+      <guid>http://localhost:1313/research/smc-dsge/</guid>
       <description></description>
     </item>
     <item>
       <title>EVALUATING DSGE MODEL FORECASTS OF COMOVEMENTS</title>
-      <link>https://edherbst.net/research/dsge-forecasting/</link>
+      <link>http://localhost:1313/research/dsge-forecasting/</link>
       <pubDate>Thu, 19 Jan 2012 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/dsge-forecasting/</guid>
+      <guid>http://localhost:1313/research/dsge-forecasting/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>https://edherbst.net/research/software/</link>
+      <link>http://localhost:1313/research/software/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://edherbst.net/research/software/</guid>
+      <guid>http://localhost:1313/research/software/</guid>
       <description>&lt;p&gt;Title: Software&#xA;Coauthor:&#xA;Version:&#xA;Date: 2016-01-06&#xA;url: software/&#xA;save_as: software/index.html&lt;/p&gt;&#xA;&lt;h2 id=&#34;python-packages&#34;&gt;Python Packages&lt;/h2&gt;&#xA;&lt;p&gt;Template: bayes_book&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;dsge&lt;/strong&gt; &amp;ndash; a small python package for solving DSGE models.  More&#xA;information &lt;a href=&#34;http://dsge.edherbst.net&#34;&gt;here&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;smc&lt;/strong&gt; &amp;ndash; a small python package using Sequential Monte Carlo&#xA;methods to estimate Bayesian models.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Installation.&lt;/em&gt; For linux/mac users, at the command line type:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;pip install http://edherbst.net/bookmaterials/dsge-0.0.2.tar.gz&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;For windows users, use&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;pip install http://edherbst.net/bookmaterials/dsge-0.0.2.zip&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>

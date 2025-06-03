@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Notes on Time Series on Ed Herbst</title>
-    <link>https://edherbst.net/teaching/georgetown/notes/</link>
+    <link>http://localhost:1313/teaching/georgetown/notes/</link>
     <description>Recent content in Notes on Time Series on Ed Herbst</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 14 Mar 2025 09:51:42 -0400</lastBuildDate>
-    <atom:link href="https://edherbst.net/teaching/georgetown/notes/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/teaching/georgetown/notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cranking through Bayesian Calculus, Part III</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/bayes-return-of-the-beta/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/bayes-return-of-the-beta/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:42 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/bayes-return-of-the-beta/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/bayes-return-of-the-beta/</guid>
       <description>&lt;p&gt;Last time we talked about the regression model,&lt;/p&gt;&#xA;&lt;p&gt;\begin{equation}&#xA;\label{eq:regression}&#xA;y_t = x_t&amp;rsquo;\beta + u_t, \quad u_t \sim iid N(0, \sigma^2).&#xA;\end{equation}&lt;/p&gt;&#xA;&lt;p&gt;We focused on the &amp;ldquo;new&amp;rdquo; parameter, \(\sigma^2\), and talked about how to&#xA;construct a prior for it.  We then described a few different&#xA;parameterizations of the prior. Finally, we derived the posterior for&#xA;\(\sigma^2\), under the likelihood defined in (\ref{eq:regression}) with&#xA;the restriction that \(\beta=0\).  Today we&amp;rsquo;re going to focus on jointly&#xA;estimating the two parameters of our regression model:&#xA;\((\beta,\sigma^2)\).  We&amp;rsquo;ll refer to this vector of parameters as&#xA;\(\theta\).  Also, let&amp;rsquo;s make it explicit that \(\beta\) is a \(k \times 1\)&#xA;vector; that is, there are \(k\) explanatory variables in our regression.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Intro to Bayesian Analysis</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/bayes-intro/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/bayes-intro/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:31 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/bayes-intro/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/bayes-intro/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objectives:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Most presentations of econometrics focus on &lt;em&gt;frequentist inference&lt;/em&gt;. That is, the properties of estimators and, more generally, inference procedures were examined from the perspective of repeated sampling experiments. The measures of accuracy and performance used to assess the statistical procedures were pre-experimental. However, many statisticians and econometricians believe that post-experimental reasoning should be used to assess inference procedures, wherein only the actual observation \(Y^T\) is relevant and not the other observations in the sample space that could have been observed,&lt;/p&gt;</description>
     </item>
     <item>
       <title>Cranking through Bayesian Calculus, Part II</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/some-more-bayesian-questions/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/some-more-bayesian-questions/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:21 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/some-more-bayesian-questions/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/some-more-bayesian-questions/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s get some more practice with the Bayesian machinery in a regression model.&lt;/p&gt;&#xA;&lt;p&gt;\begin{equation}&#xA;y_t = x_t&amp;rsquo;\beta + u_t, \quad u_t \stackrel{i.i.d.}{\sim} N(0, \sigma^2).&#xA;\end{equation}&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve practiced the Bayesian machinery already setting \(\sigma^2=1\). Of course, that&amp;rsquo;s a bad assumption for many problems.  So let&amp;rsquo;s incorporate estimation of \(\sigma^2\) into our analysis.  It is much more common in contempory analysis to use the &lt;em&gt;inverse gamma distribution&lt;/em&gt; for \(\sigma^2\) with parameters \(\alpha\) and \(\beta\).   Specifically, a random variable \(\sigma^2\) follows an inverse gamma distribution if and only if&lt;/p&gt;</description>
     </item>
     <item>
       <title>Some Notes on the Kalman Filter</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/bayesian-state-space-models/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/bayesian-state-space-models/</link>
       <pubDate>Fri, 14 Mar 2025 09:51:12 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/bayesian-state-space-models/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/bayesian-state-space-models/</guid>
       <description>&lt;p&gt;State space models form a very general class of models that encompass many of the specifications that we encountered earlier.  VARMA models, linearized DSGE models, and more can be written in state space form. State space models are particularly popular at the FRB.  For example, the models in the \(r^*\) suite can all be written in state space form.&#xA;(setq line-spacing 0)&#xA;A state space model can be described by two different equations: a&#xA;measurement equation that relates an &lt;em&gt;unobservable&lt;/em&gt; state vector \(s_t\)&#xA;to the &lt;em&gt;observables&lt;/em&gt; \(y_t\), and a transition equation that describes&#xA;the evolution of the state vector \(s_t\).  For now, we&amp;rsquo;ll restrict&#xA;attention to the case in which both of these equations are linear.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bayesian VARs</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/the-bayesian-var/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/the-bayesian-var/</link>
       <pubDate>Fri, 14 Mar 2025 09:50:50 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/the-bayesian-var/</guid>
-      <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Basic Introduction to Bayesian VARs with a short tour of structural identification from a Bayesian perspective.&#xA;&lt;br /&gt;&lt;br /&gt;&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&#xA;The handbook chapter by &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Del Negro and Schorfheide (2011)&lt;/a&gt; is very good; much of these notes are abstracted from that.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Now we&amp;rsquo;re going to start putting things together to learn to estimate a cornerstone (Bayesian) model of macroeconomics, the autoregression (VAR.)  VARs were first introduced to macroeconomics by Christopher A. Sims in &lt;a href=&#34;#citeproc_bib_item_9&#34;&gt;Sims (1980)&lt;/a&gt; in an extremely important paper: &amp;ldquo;Macroeconomics and Reality.&amp;rdquo;  Sims attacked the prevailing macroeconometric models of the day&amp;mdash;including those used at the Fed&amp;mdash;which featured systems of equations with many coefficients imposed, often as a zero.  These models were estimated equation-by-equation, and often gave a (false) impression of both estimation precision and about the importance of particular transmission channels.  Sims instead used a flexible VAR which modeled the contemporaneous and dynamic depedence for a time series of \(n\) variables \(y_t\).  The VAR of order \(p\) follows the set of linear difference equations:&lt;/p&gt;</description>
+      <guid>http://localhost:1313/teaching/georgetown/notes/the-bayesian-var/</guid>
+      <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Basic Introduction to Bayesian VARs with a short tour of structural identification from a Bayesian perspective.&#xA;&lt;br /&gt;&lt;br /&gt;&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&#xA;The handbook chapter by &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Del Negro and Schorfheide (2011)&lt;/a&gt; is very good; much of these notes are abstracted from that.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Now we&amp;rsquo;re going to start putting things together to learn to estimate a cornerstone (Bayesian) model of macroeconomics, the autoregression (VAR.)  VARs were first introduced to macroeconomics by Christopher A. Sims in &lt;a href=&#34;#citeproc_bib_item_9&#34;&gt;Sims (1980)&lt;/a&gt; in an extremely important paper: &amp;ldquo;Macroeconomics and Reality.&amp;rdquo;  Sims attacked the prevailing macroeconometric models of the day&amp;mdash;including those used at the pFed&amp;mdash;which featured systems of equations with many coefficients imposed, often as a zero.  These models were estimated equation-by-equation, and often gave a (false) impression of both estimation precision and about the importance of particular transmission channels.  Sims instead used a flexible VAR which modeled the contemporaneous and dynamic depedence for a time series of \(n\) variables \(y_t\).  The VAR of order \(p\) follows the set of linear difference equations:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Trends in Time Series</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/models-with-trends/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/models-with-trends/</link>
       <pubDate>Fri, 14 Mar 2025 09:50:39 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/models-with-trends/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/models-with-trends/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Understand the basic of deterministic and stochastic trends.  Give a heuristic introduction to large sample theory.&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt; You can find background in &lt;a href=&#34;#citeproc_bib_item_7&#34;&gt;Hamilton (1994)&lt;/a&gt; chapters 15-16 and &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Davidson and MacKinnon (2003)&lt;/a&gt;.  We&amp;rsquo;ll discuss the results in &lt;a href=&#34;#citeproc_bib_item_8&#34;&gt;Nelson and Plosser (1982)&lt;/a&gt; in some detail in the lecture.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;A common method for analyzing macroeconomic time series is to decompose them into two distinct components: &lt;em&gt;trend&lt;/em&gt; and &lt;em&gt;cycle&lt;/em&gt;. This approach allows economists to better understand the underlying causes and effects of economic phenomenon at two different frequencies.&lt;/p&gt;</description>
     </item>
     <item>
       <title>A (Very) Brief Primer on Time Series</title>
-      <link>https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series/</link>
+      <link>http://localhost:1313/teaching/georgetown/notes/introduction-to-time-series/</link>
       <pubDate>Fri, 14 Mar 2025 09:49:51 -0400</pubDate>
-      <guid>https://edherbst.net/teaching/georgetown/notes/introduction-to-time-series/</guid>
+      <guid>http://localhost:1313/teaching/georgetown/notes/introduction-to-time-series/</guid>
       <description>&lt;div class=&#34;additional&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lecture Objective&lt;/strong&gt;: Introduce basic concepts from time series: (covariance) stationarity, ARMA processes, Wold representation.&#xA;&lt;br /&gt;&lt;br /&gt;&#xA;&lt;strong&gt;Additional Readings:&lt;/strong&gt;&#xA;For an overview, the first three chapters of &lt;a href=&#34;#citeproc_bib_item_5&#34;&gt;Hamilton (1994)&lt;/a&gt; are a good place to start.  More technically detailed information&amp;mdash;included the Hilbert space machinery used in modern analysis&amp;mdash;can be found Chapters 2 and 3 of &lt;a href=&#34;#citeproc_bib_item_2&#34;&gt;Brockwell and Davis (1987)&lt;/a&gt;.  I&amp;rsquo;ve personally found the first four chapters of &lt;a href=&#34;#citeproc_bib_item_4&#34;&gt;Cochrane (2005)&lt;/a&gt; helpful for intuition.  Articles referenced in these notes are referenced in the bibliography.  And there&amp;rsquo;s always &lt;a href=&#34;http://chatgpt.com&#34;&gt;ChatGPT&lt;/a&gt;, though caveat emptor.&lt;/p&gt;</description>
     </item>
   </channel>

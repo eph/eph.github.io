@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ed Herbst/teaching/georgetown/notes/models-with-trends/</title>
@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
-    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/terminal-0.7.1.min.css">
-    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/animate-3.7.2.min.css">
-    <link rel="stylesheet" href="https://edherbst.net/hugo-theme-console/css/console.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-3.7.2.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://edherbst.net/css/custom.css">
+    <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
 <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
 
@@ -25,7 +25,7 @@
        <meta property="og:title" content="Trends in Time Series" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://edherbst.net/teaching/georgetown/notes/models-with-trends/" /><meta property="article:published_time" content="2025-03-14T09:50:39-04:00" />
+<meta property="og:url" content="http://localhost:1313/teaching/georgetown/notes/models-with-trends/" /><meta property="article:published_time" content="2025-03-14T09:50:39-04:00" />
 
 
 
@@ -45,17 +45,17 @@ A common method for analyzing macroeconomic time series is to decompose them int
               
               
               
-              <a href='https://edherbst.net/teaching'>teaching</a>/<a href='https://edherbst.net/teaching/georgetown'>georgetown</a>/<a href='https://edherbst.net/teaching/georgetown/notes'>notes</a>/<a href='https://edherbst.net/teaching/georgetown/notes/models-with-trends'>models-with-trends</a>/</div></header>
+              <a href='http://localhost:1313/teaching'>teaching</a>/<a href='http://localhost:1313/teaching/georgetown'>georgetown</a>/<a href='http://localhost:1313/teaching/georgetown/notes'>notes</a>/<a href='http://localhost:1313/teaching/georgetown/notes/models-with-trends'>models-with-trends</a>/</div></header>
           <nav class="terminal-menu">
             <ul vocab="https://schema.org/" typeof="BreadcrumbList">
                 
-                <li><a href="https://edherbst.net/" typeof="ListItem">&lt;/&gt;</a></li>
+                <li><a href="http://localhost:1313/" typeof="ListItem">&lt;/&gt;</a></li>
                 
-                <li><a href="https://edherbst.net/research/" typeof="ListItem">research</a></li>
+                <li><a href="http://localhost:1313/research/" typeof="ListItem">research</a></li>
                 
-                <li><a href="https://edherbst.net/teaching/" typeof="ListItem">teaching</a></li>
+                <li><a href="http://localhost:1313/teaching/" typeof="ListItem">teaching</a></li>
                 
-                <li><a href="https://edherbst.net/etc/" typeof="ListItem">et cetera</a></li>
+                <li><a href="http://localhost:1313/etc/" typeof="ListItem">et cetera</a></li>
                 
             </ul>
           </nav>
@@ -115,7 +115,7 @@ y_t &amp;=&amp; \widehat{trend}_t + \widehat{fluctuations}_t \nonumber \\
 <li>If the \(u_t\)&rsquo;s are serially correlated, then the OLS estimator will in general be inefficient. More sophisticated estimation techniques, like Generalized Least Squares (GLS), might be necessary to achieve efficiency.</li>
 </ol>
 <p>Roughly speaking, convergence rates tell us how fast we can learn the``true&rsquo;&rsquo; value of a parameter in a sampling experiment.  In &ldquo;standard&rdquo; OLS then the variance of the \(\hat\beta\) converges to zero at rate \(1/T\).  This isn&rsquo;t true for models with deterministic trends.  Let&rsquo;s look at the distributions of \(\sqrt{T}(\hat\beta_0 - \beta_0)\) and \(\sqrt{T}(\hat\beta_1 - \beta_1)\).</p>
-<figure><img src="https://edherbst.net/ox-hugo/0d78730ed99effca5bcaea06d4559c4b413842c2.png"
+<figure><img src="http://localhost:1313/ox-hugo/0d78730ed99effca5bcaea06d4559c4b413842c2.png"
     alt="Figure 1: Sampling Distribution of (widehatbeta)"><figcaption>
       <p><span class="figure-number">Figure 1: </span>Sampling Distribution of (widehatbeta)</p>
     </figcaption>
@@ -254,7 +254,7 @@ T^{3/2}( \hat{\beta}_T - \beta) \Longrightarrow \big(0,3\sigma^2_\epsilon (1+\th
 If \(\theta\) is positive then the limit variance of the OLS estimator in the
 model with $i.i.d.$ disturbances is smaller than in the trend model with moving
 average disturbances.  Thus, Positive serial correlated data are less informative than $i.i.d.$ data.  Figure <a href="#org20238e6">2</a> displays the sampling distribution of the OLS estimator under errors with identical unconditional variance but with serial correlation (blue line) and under \(i.i.d.\) disturbances (orange dashed line).  In this set of simulations, \(\beta = 0.5\), \(\theta = 0.6\), and \(\sigma_\epsilon = 1\).  The sample size is given by \(T = 500\).  Clearly, the estimator under serial correlation exhibits large variance, though both estimators are asymptotically unbiased.</p>
-<figure><img src="https://edherbst.net/ox-hugo/c6e16b171543925912f2c5bdd35661cca2c28ad4.png"
+<figure><img src="http://localhost:1313/ox-hugo/c6e16b171543925912f2c5bdd35661cca2c28ad4.png"
     alt="Figure 2: OLS is Inefficient Under Serially Correlated Errors"><figcaption>
       <p><span class="figure-number">Figure 2: </span>OLS is Inefficient Under Serially Correlated Errors</p>
     </figcaption>
@@ -410,7 +410,7 @@ Y_T(s) = \frac{1}{\sigma \sqrt{T} } \sum_{t=1}^T
 \Longrightarrow W(s) \quad
 \end{eqnarray*}</p>
 <p>More mathematical background can be found in many texts on measure-theoretic probability including <a href="#citeproc_bib_item_1">Billingsley (1999)</a> or <a href="#citeproc_bib_item_6">Dudley (2002)</a>.  <a href="#citeproc_bib_item_3">Davidson (1994)</a> gives a more econometrics-focused introdution to limit theorems.  With this theory in hand, it&rsquo;s easy to now simulation from a Wiener process.  Figure <a href="#org7317148">3</a> shows on realization of a Wiener process, simulated over the interval \([0, 1]\).</p>
-<figure><img src="https://edherbst.net/ox-hugo/116ee14bad130494a3e25d6b1d6d09fd933d3dce.png"
+<figure><img src="http://localhost:1313/ox-hugo/116ee14bad130494a3e25d6b1d6d09fd933d3dce.png"
     alt="Figure 3: A Wiener Process"><figcaption>
       <p><span class="figure-number">Figure 3: </span>A Wiener Process</p>
     </figcaption>
@@ -432,7 +432,7 @@ t(\hat{\phi}_T) &amp; \Longrightarrow &amp;  \frac{\frac{1}{2} ( W(1)^2 -1 )  }{
 \end{eqnarray}</p>
 <p>where \(W(s)\) denotes a standard Wiener process.</p>
 <p>To see these asymptotics, consider the simplified model \(y_t = \phi y_{t-1} + u_t\).  We&rsquo;ll try to estimation \(\phi\) by regression \(y_t\) on \(y_{t-1}\) (omitting the constant term.)  Let&rsquo;s consider two cases for the true value of \(\phi \in \{0.95, 1\}\).  For each value of \(\phi\), we simulate many time series of length \(T = 5000\) and estimate \(\phi\) via OLS.</p>
-<figure><img src="https://edherbst.net/ox-hugo/f21378229d497ffd10f310f6f744e2c4a6d33164.png">
+<figure><img src="http://localhost:1313/ox-hugo/f21378229d497ffd10f310f6f744e2c4a6d33164.png">
 </figure>
 
 <p>In practice, testing for a unit root in time series data uses results along these lines, with the specific critical values tabulated for the way lags of \(y_t\) enters the regression.  You may have heard of Dickey-Fuller and <em>Augmented</em> Dickey-Fuller tests, the &ldquo;augmented&rdquo; refers to the inclusion of lagged differences of the time series as additional regressors to account for higher-order serial correlation, thus improving test performance in the presence of autocorrelated disturbances.</p>
